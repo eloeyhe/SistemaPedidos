@@ -13,7 +13,7 @@ Este proyecto tiene como objetivo el diseño orientado a objetos de una aplicaci
 | Nombre y Apellido | Matrícula | Usuario de GitHub |
 | :---------------- | --------: | ----------------: |
 | Ignacio Velesquen | 161695    | nachovelesquen7-rgb |
-| Agustin Ariel Feijo | 164921 | AgustinCalaver   |
+| Agustin Ariel Calaver | 164921 | AgustinCalaver   |
 | Leandro Dominguez | 153062    | Leandro2107       |
 | Eloy Eyheramendy  | 164391    | eloeyhe           |
 
