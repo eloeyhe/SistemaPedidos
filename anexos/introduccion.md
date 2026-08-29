@@ -100,6 +100,8 @@ Representación visual:
 __Descripción breve:__
 Permite al Usuario de Mostrador registrar un nuevo pedido, seleccionando productos o combos, agregando personalizaciones, registrando el medio de pago y confirmando el pedido para enviarlo a la pantalla de cocina.
 
+![Diagramas CU1](/Diagramas/01-Diagrama-Clases/CU1.png)
+
  __Flujo principal de eventos:__
 
 1. El Usuario de Mostrador inicia la creación de un nuevo pedido.
@@ -133,6 +135,8 @@ __Actores involucrados:__ Usuario de Mostrador.
 __Descripción breve:__
 Permite modificar un pedido existente mientras se encuentre en estado RECIBIDO, manteniendo su identificador y registro original.
 
+![Diagramas CU2](/Diagramas/01-Diagrama-Clases/CU2.png)
+
 __Flujo principal de eventos:__
 
 1. El Usuario de Mostrador busca el pedido mediante su número o referencia de retiro.
@@ -165,6 +169,8 @@ __Actores involucrados:__ Usuario de Mostrador / Encargado.
 __Descripción breve:__
 Permite cancelar un pedido que todavía no haya sido entregado, conservando su registro histórico para fines de auditoría.
 
+![Diagramas CU3](/Diagramas/01-Diagrama-Clases/CU3.png)
+
 __Flujo principal de eventos:__
 
 1. El Usuario de Mostrador o Encargado selecciona el pedido que desea cancelar.
@@ -194,6 +200,8 @@ __Actores involucrados:__ Cocina / Usuario de Mostrador.
 __Descripción breve:__
 Permite actualizar el estado de un pedido durante su ciclo de vida, de acuerdo con las transiciones permitidas por el sistema.
 
+![Diagramas CU4](/Diagramas/01-Diagrama-Clases/CU4.png)
+
 __Flujo principal de eventos:__
 
 1. El actor selecciona el pedido correspondiente en la interfaz.
@@ -222,6 +230,8 @@ __Actores involucrados:__ Cocina / Usuario de Mostrador.
 
 __Descripción breve:__
 Permite consultar los pedidos activos y visualizarlos según su estado actual, facilitando el seguimiento y la preparación de los pedidos.
+
+![Diagramas CU5](/Diagramas/01-Diagrama-Clases/CU5.png)
 
 __Flujo principal de eventos:__
 
