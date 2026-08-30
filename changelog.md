@@ -44,3 +44,20 @@ Issue(s): [#28](https://github.com/eloeyhe/SistemaPedidos/issues/28), [#29](http
 
 PR: [#30](https://github.com/eloeyhe/SistemaPedidos/pull/30) - 
 @AgustinCalaver (Analista de requerimientos)
+
+### Added
+- [feature/diseniador-clases-add-boceto-inicial] realizo diagrama de clases .excalidraw y .png asegurandome de que coincide con el cuaderno Notebook LM compartido, se subieron a la carpeta diagramas/ y se crearon y vincularon con las Issues.
+Issue: [[#6](https://github.com/eloeyhe/SistemaPedidos/issues/6)]
+[[#7](https://github.com/eloeyhe/SistemaPedidos/issues/7)]
+[[#8](https://github.com/eloeyhe/SistemaPedidos/issues/8)
+[[#9](https://github.com/eloeyhe/SistemaPedidos/issues/9)]]
+[[#10](https://github.com/eloeyhe/SistemaPedidos/issues/10)]
+  PR: [#18](https://github.com/eloeyhe/SistemaPedidos/pull/18) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
+
+
+  ### Added
+   [feature/diseniador-clases-add-boceto-inicial] Agrego introduccion.md con Boceto inicial del diseño de clases y realizo correccion de ruta.
+   Issue: [[#32](https://github.com/eloeyhe/SistemaPedidos/issues/32)]
+   PR[#34](https://github.com/eloeyhe/SistemaPedidos/pull/34#issue-5294730443)
+
+  
