@@ -145,7 +145,7 @@ Representación visual:
 
 Gracias a los requisitos funcionales, no funcionales y a los casos de uso, podremos realizar un boceto inicial del diseño de clases.
 
-![imagen del diseño](01_boceto_inicial.png)
+![imagen del diseño](../Diagramas/01-Diagrama-Clases/01_boceto_inicial.png)
 
 
 
