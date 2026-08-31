@@ -171,6 +171,7 @@ __Flujos Alternativos__
 1. Sin Stock de Producto/Combo: Si un ítem seleccionado no tiene disponibilidad, el sistema notifica la falta de stock. El Usuario de Mostrador debe remover el ítem o consultar al Cliente por un sustituto para continuar.
 2. Cancelación por parte del Cliente antes del Pago: El Cliente decide no concretar la compra durante la carga. El Usuario de Mostrador cancela la operación y el sistema no registra ningún pedido.
 3. Error o Rechazo en el Pago por Transferencia: Si la transferencia no es aprobada o confirmada, el sistema impide finalizar la transacción hasta seleccionar un medio de pago válido o cancelar la operación.
+
  __Precondiciones:__
 
 - El Usuario de Mostrador debe tener acceso al sistema.
