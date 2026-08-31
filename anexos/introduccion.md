@@ -140,3 +140,14 @@ Representación visual:
 ### Cuaderno de NotebookLM
 [Cuaderno de NotebookLM del análisis de requisitos](https://notebook.google.com/notebook/caeefeff-0269-4c85-af5b-95f379f0f4e4/preview)
 ##
+
+# Boceto incial del diseño de clases
+
+Gracias a los requisitos funcionales, no funcionales y a los casos de uso, podremos realizar un boceto inicial del diseño de clases.
+
+![imagen del diseño](../Diagramas/01-Diagrama-Clases/01_boceto_inicial.png)
+
+
+
+A continuacion se incorpora un [Enlace del diseño](https://excalidraw.com/#json=aTLMEQj61mKRVE8CA3khe,OpnY8c63-PYaq7K8Q71dzg) para observar el mismo en linea.
+
