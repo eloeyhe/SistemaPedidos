@@ -322,3 +322,15 @@ __Postcondiciones:__
 - Los pedidos activos quedan disponibles para su consulta.
 - Cada pedido se muestra en un único estado actual.
 - Los pedidos prioritarios aparecen destacados en el orden correspondiente.
+
+# Boceto incial del diseño de clases
+
+Gracias a los requisitos funcionales, no funcionales y a los casos de uso, podremos realizar un boceto inicial del diseño de clases.
+
+![imagen del diseño](../Diagramas/01-Diagrama-Clases/01_boceto_inicial.png)
+
+
+
+A continuacion se incorpora un [Enlace del diseño](https://excalidraw.com/#json=aTLMEQj61mKRVE8CA3khe,OpnY8c63-PYaq7K8Q71dzg) para observar el mismo en linea.
+
+

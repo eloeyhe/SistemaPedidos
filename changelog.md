@@ -45,6 +45,42 @@ Issue(s): [#28](https://github.com/eloeyhe/SistemaPedidos/issues/28), [#29](http
 PR: [#30](https://github.com/eloeyhe/SistemaPedidos/pull/30) - 
 @AgustinCalaver (Analista de requerimientos)
 
+
+- [feature/diseniador-clases-add-boceto-inicial]
+
+ Realizo diagrama de clases .excalidraw y .png asegurandome de que coincide con el cuaderno Notebook LM compartido, se subieron a la carpeta diagramas/ y se crearon y vincularon con las Issues.
+
+Issue: [#6](https://github.com/eloeyhe/SistemaPedidos/issues/6)
+
+Issue: [#7](https://github.com/eloeyhe/SistemaPedidos/issues/7)
+
+Issue: [#8](https://github.com/eloeyhe/SistemaPedidos/issues/8)
+
+Issue: [#9](https://github.com/eloeyhe/SistemaPedidos/issues/9)
+
+
+  PR: [#18](https://github.com/eloeyhe/SistemaPedidos/pull/18) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
+
+ 
+ ### Added
+- [feature/diseniador-clases-add-boceto-inicial]
+
+Agrego introduccion.md con Boceto inicial del diseño de clases y realizo correccion de ruta.
+
+Issue: [[#32](https://github.com/eloeyhe/SistemaPedidos/issues/32)]
+
+PR: [#34](https://github.com/eloeyhe/SistemaPedidos/pull/34#issue-5294730443)- @nachovelesquen7-rgb (Diseñador de clases iniciales)
+
+
+### Changed
+- [feature/diseniador-clases-add-boceto-inicial]
+
+Se actualizo 01-boceto-inicial.excalidraw y 01_boceto_inicial.png. Se remplazo la entidad Detalle_pedido por Item_Pedido, Se incorporó PersonalizacionItem, fue creada la subentidad Metodo_pago y se actualizaron las relaciones.
+
+Issue(s): [#10](https://github.com/eloeyhe/SistemaPedidos/issues/10)
+
+PR: [#34](https://github.com/eloeyhe/SistemaPedidos/pull/34#issue-5294730443)- @nachovelesquen7-rgb (Diseñador de clases iniciales)
+
 ### Added
 - [feature/modelador-casos-uso-update-use-case-1]
 
@@ -72,3 +108,5 @@ Se corrigio la introduccion.md solucionando los errores de logica en los casos d
 
 
 
+
+  
