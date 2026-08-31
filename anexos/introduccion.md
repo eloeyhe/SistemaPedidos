@@ -92,6 +92,7 @@ Representación visual:
      calcula vuelto en efectivo"      y valida la acreditación online"
 ```
 
+<<<<<<< HEAD
 ## Casos de uso
 
 ### CU01: Tomar Pedido
@@ -255,3 +256,53 @@ __Postcondiciones:__
 - Los pedidos prioritarios aparecen destacados en el orden correspondiente.
 
 
+=======
+
+# Requisitos iniciales del sistema
+## Requisitos funcionales :
+
+
+**RF1: Toma de pedidos con personalizaciones y combos** El sistema debe permitir al personal del mostrador registrar pedidos especificando productos individuales, combos predefinidos (los cuales tienen su propia lógica de precio y no corresponden a la simple suma de sus partes) e ítems con personalizaciones individuales de ingredientes (quitar ingredientes o agregar adicionales con costo extra), reflejando de forma precisa el desglose y el precio total recalculado en pantalla al momento del registro.
+
+**RF2: Envío automático de comandas a la cocina** El sistema debe transmitir de forma automática e inmediata cada pedido confirmado desde el mostrador a la pantalla de la cocina, eliminando el traslado físico de comandas impresas o manuscritas y evitando pérdidas de información en el proceso.
+
+**RF3: Seguimiento y visualización del estado del pedido** El sistema debe permitir al personal visualizar sincronizadamente los pedidos activos y controlar su ciclo de vida mediante un único estado secuencial y restringido: *Recibido*, *En preparación*, *Listo*, *Entregado* y *Cancelado*, garantizando una única fuente de verdad para evitar duplicaciones.
+
+**RF4: Modificación de pedidos activos (antes de preparación)** El sistema debe permitir al usuario modificar los ítems, cantidades y personalizaciones de un pedido activo (manteniendo el mismo identificador y número de pedido original), única y exclusivamente mientras este se encuentre en estado *Recibido*; una vez que la cocina cambia el estado del pedido a *En preparación*, el sistema debe bloquear cualquier intento de modificación.
+
+**RF5: Cancelación completa del pedido** El sistema debe posibilitar la cancelación completa de un pedido activo antes de que sea entregado, asegurando que por razones de auditoría interna de caja el registro nunca se elimine físicamente de la base de datos y que pase de forma definitiva y permanente al estado *Cancelado*.
+
+**RF6: Identificación del pedido para el retiro** El sistema debe generar un identificador numérico único para cada pedido y permitir asociar de manera obligatoria un nombre o referencia de retiro (ej. "Matías", "Carla") en la comanda, facilitando el llamado en el mostrador para su entrega sin necesidad de registrar datos personales del cliente ni crear una ficha de cliente formal.
+
+**RF7: Priorización manual** El sistema debe permitir marcar manualmente un pedido como prioritario (urgente) desde el mostrador al momento de tomarlo, visualizándose de forma destacada en la pantalla de cocina para que el personal altere el orden de preparación según su criterio.
+
+**RF8: Registro de pago** El sistema debe permitir asociar y registrar el cobro de cada pedido utilizando únicamente efectivo o transferencia bancaria (dejando fuera QR y tarjetas en esta fase); asimismo, si un pedido previamente pagado es modificado en estado *Recibido*, el sistema debe recalcular el total y permitir registrar el cobro o ajuste de la diferencia económica generada.
+
+---
+
+## Requisitos NO funcionales
+
+**RNF1: Escalabilidad y Extensibilidad (Soporte Multi-local)** El diseño de la base de datos y la arquitectura del modelo de dominio del sistema deben ser extensibles para permitir en el futuro la incorporación de un esquema multi-local sin requerir la reescritura de su núcleo conceptual, operando el MVP estrictamente para una única sucursal física.
+
+**RNF2: Usabilidad y Simplicidad Operativa** La interfaz del usuario debe diseñarse bajo un estricto criterio de agilidad y máxima simplicidad, permitiendo al operario interactuar rápidamente con el sistema sin requerir flujos de navegación complejos o sobreingeniería visual para adaptarse al ritmo acelerado de atención del local.
+
+**RNF3: Restricción de Tiempo de Entrega (Time-to-Market)** El Producto Mínimo Viable (MVP) que contiene el alcance acordado de los requisitos funcionales (RF1 a RF8) debe estar completamente funcional y desplegado en su entorno operativo para fines de julio.
+
+**RNF4: Integridad de Datos y Consistencia (Fiabilidad)** El sistema debe asegurar la consistencia total del estado de los pedidos y de los cobros previniendo fallos transaccionales ante cortes de energía o de red, garantizando que no se dupliquen visualizaciones ni existan desfases entre lo que muestra el mostrador y la pantalla de la cocina.
+
+**RNF5: Seguridad y Auditoría Básica (Trazabilidad)** El sistema debe garantizar la trazabilidad de la operación mediante el registro inalterable de qué usuario creó o modificó cada pedido, sin imponer restricciones rígidas de acceso o bloqueos basados en roles que entorpezcan la dinámica del negocio donde cualquiera de los operarios puede cobrar o tomar pedidos según la necesidad.
+
+--- 
+
+
+### Información analizada
+
+- Correos electrónicos
+- Audios
+- Imágenes
+- Notas proporcionadas por el cliente
+
+### Cuaderno de NotebookLM
+[Cuaderno de NotebookLM del análisis de requisitos](https://notebook.google.com/notebook/caeefeff-0269-4c85-af5b-95f379f0f4e4/preview)
+##
+>>>>>>> develop
