@@ -44,3 +44,31 @@ Issue(s): [#28](https://github.com/eloeyhe/SistemaPedidos/issues/28), [#29](http
 
 PR: [#30](https://github.com/eloeyhe/SistemaPedidos/pull/30) - 
 @AgustinCalaver (Analista de requerimientos)
+
+### Added
+- [feature/modelador-casos-uso-update-use-case-1]
+
+Analicé la información proporcionada por el equipo para identificar las funcionalidades principales del sistema.
+Identifiqué los actores y los casos de uso correspondientes.
+Elaboré y documenté los casos de uso, definiendo actores, descripción, precondiciones, postcondiciones y flujo principal de eventos.
+Realicé la integración de los cambios de mi rama con la rama de desarrollo, resolviendo los conflictos que surgieron durante el proceso.
+
+  Issue: [#20](https://github.com/eloeyhe/SistemaPedidos/issues/20)
+
+  Issue: [#21](https://github.com/eloeyhe/SistemaPedidos/issues/21)
+
+  Issue: [#22](https://github.com/eloeyhe/SistemaPedidos/issues/22)
+
+  PR: [#33](https://github.com/eloeyhe/SistemaPedidos/pull/33) - @Leandro2107 (Modelador de casos de uso)
+
+### Changed
+- [feature/modelador-casos-uso-update-use-case-1]
+
+Se corrigio la introduccion.md solucionando los errores de logica en los casos de usos.
+
+  Issue: [#20](https://github.com/eloeyhe/SistemaPedidos/issues/20)
+
+  PR: [#33](https://github.com/eloeyhe/SistemaPedidos/pull/33) - @Leandro2107 (Modelador de casos de uso)
+
+
+

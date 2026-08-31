@@ -92,172 +92,6 @@ Representación visual:
      calcula vuelto en efectivo"      y valida la acreditación online"
 ```
 
-<<<<<<< HEAD
-## Casos de uso
-
-### CU01: Tomar Pedido
- __Actores involucrados:__ Usuario de Mostrador.
-
-__Descripción breve:__
-Permite al Usuario de Mostrador registrar un nuevo pedido, seleccionando productos o combos, agregando personalizaciones, registrando el medio de pago y confirmando el pedido para enviarlo a la pantalla de cocina.
-
-![Diagramas CU1](/Diagramas/01-Diagrama-Clases/CU1.png)
-
- __Flujo principal de eventos:__
-
-1. El Usuario de Mostrador inicia la creación de un nuevo pedido.
-2. El sistema genera automáticamente un número de pedido único y registra la fecha y hora actual.
-3. El usuario ingresa un nombre o referencia de retiro para identificar el pedido.
-4. El usuario selecciona los productos o combos y especifica las cantidades.
-5. El usuario agrega, si corresponde, las personalizaciones de cada ítem.
-6. El sistema calcula el total del pedido en tiempo real, considerando extras, eliminaciones y el precio de catálogo de los combos.
-7. El usuario selecciona la forma de pago: Efectivo o Transferencia.
-8. El sistema registra el pago y el usuario confirma el pedido.
-9. El sistema guarda el precio histórico de cada ítem y establece el estado del pedido como RECIBIDO.
-10. El sistema envía automáticamente el pedido a la pantalla de cocina.
-
- __Precondiciones:__
-
-- El Usuario de Mostrador debe tener acceso al sistema.
-- Deben existir productos o combos disponibles para seleccionar.
-
- __Postcondiciones:__
-
-- El pedido queda registrado con un identificador único.
-- El pedido conserva el precio histórico de sus ítems.
-- El pedido queda en estado RECIBIDO.
-- El pedido queda disponible para ser visualizado por Cocina.
-- El pago queda registrado con la forma seleccionada.
-
-### CU02: Modificar Pedido
-
-__Actores involucrados:__ Usuario de Mostrador.
-
-__Descripción breve:__
-Permite modificar un pedido existente mientras se encuentre en estado RECIBIDO, manteniendo su identificador y registro original.
-
-![Diagramas CU2](/Diagramas/01-Diagrama-Clases/CU2.png)
-
-__Flujo principal de eventos:__
-
-1. El Usuario de Mostrador busca el pedido mediante su número o referencia de retiro.
-2. El sistema verifica que el pedido se encuentre en estado RECIBIDO.
-3. El usuario selecciona la opción de modificar el pedido.
-4. El usuario agrega, elimina o modifica productos y cantidades.
-5. El usuario edita las personalizaciones de los ítems cuando sea necesario.
-6. El sistema recalcula el total del pedido.
-7. Si el pedido ya fue pagado, el sistema calcula la diferencia a cobrar o ajustar.
-8. El usuario registra el ajuste del pago, cuando corresponda.
-9. El usuario confirma las modificaciones.
-10. El sistema actualiza el pedido manteniendo su identificador y registro original.
-
-__Precondiciones:__
-
-- El pedido debe existir.
-- El pedido debe encontrarse en estado RECIBIDO.
-
-__Postcondiciones:__
-
-- El pedido queda actualizado con las modificaciones realizadas.
-- El identificador original del pedido se mantiene.
-- El total del pedido queda actualizado.
-- Cualquier ajuste de pago queda registrado.
-
-### CU03: Cancelar Pedido
-
-__Actores involucrados:__ Usuario de Mostrador / Encargado.
-
-__Descripción breve:__
-Permite cancelar un pedido que todavía no haya sido entregado, conservando su registro histórico para fines de auditoría.
-
-![Diagramas CU3](/Diagramas/01-Diagrama-Clases/CU3.png)
-
-__Flujo principal de eventos:__
-
-1. El Usuario de Mostrador o Encargado selecciona el pedido que desea cancelar.
-2. El sistema verifica el estado actual del pedido.
-3. El sistema solicita confirmación de la cancelación.
-4. El usuario confirma la cancelación.
-5. El sistema cambia el estado del pedido a CANCELADO.
-6. El sistema conserva el registro del pedido en la base de datos.
-7. El sistema registra la cancelación como parte del historial del pedido.
-
-__Precondiciones:__
-
-- El pedido debe existir.
-- El pedido no debe haber sido entregado.
-- El usuario debe tener permisos para realizar la cancelación.
-
-__Postcondiciones:__
-
-- El pedido queda en estado CANCELADO.
-- El pedido no es eliminado de la base de datos.
-- El registro histórico del pedido queda disponible para auditoría.
-
-### CU04: Cambiar Estado de Pedido
-
-__Actores involucrados:__ Cocina / Usuario de Mostrador.
-
-__Descripción breve:__
-Permite actualizar el estado de un pedido durante su ciclo de vida, de acuerdo con las transiciones permitidas por el sistema.
-
-![Diagramas CU4](/Diagramas/01-Diagrama-Clases/CU4.png)
-
-__Flujo principal de eventos:__
-
-1. El actor selecciona el pedido correspondiente en la interfaz.
-2. El sistema muestra el estado actual del pedido.
-3. Cocina cambia el estado de RECIBIDO a EN_PREPARACION al comenzar la preparación.
-4. Cocina cambia el estado de EN_PREPARACION a LISTO al finalizar la preparación.
-5. El Usuario de Mostrador cambia el estado de LISTO a ENTREGADO cuando el cliente retira el pedido.
-6. El sistema valida que la transición solicitada sea válida según el ciclo de vida del pedido.
-7. El sistema actualiza el estado único del pedido.
-
-__Precondiciones:__
-
-- El pedido debe existir.
-- El actor debe tener permisos para realizar la transición correspondiente.
-- El pedido debe encontrarse en un estado que permita la transición solicitada.
-
-__Postcondiciones:__
-
-- El pedido queda actualizado con su nuevo estado.
-- El pedido mantiene un único estado vigente.
-- El sistema impide transiciones no permitidas por el ciclo de vida del pedido.
-
-### CU05: Consultar Pedidos Activos
-
-__Actores involucrados:__ Cocina / Usuario de Mostrador.
-
-__Descripción breve:__
-Permite consultar los pedidos activos y visualizarlos según su estado actual, facilitando el seguimiento y la preparación de los pedidos.
-
-![Diagramas CU5](/Diagramas/01-Diagrama-Clases/CU5.png)
-
-__Flujo principal de eventos:__
-
-1. El actor accede a la pantalla de monitoreo de pedidos.
-2. El sistema obtiene los pedidos activos registrados.
-3. El sistema muestra los pedidos agrupados o filtrados según su estado.
-4. El sistema muestra los pedidos en los estados RECIBIDO, EN_PREPARACION y LISTO.
-5. El sistema ordena visualmente los pedidos marcados como Urgentes/Prioritarios para que aparezcan primero.
-6. El actor consulta la información de los pedidos según sus necesidades.
-7. El sistema garantiza que cada pedido figure en un único estado a la vez.
-
-__Precondiciones:__
-
-- El actor debe tener acceso al sistema.
-- Deben existir pedidos activos para consultar.
-
-__Postcondiciones:__
-
-- Los pedidos activos quedan disponibles para su consulta.
-- Cada pedido se muestra en un único estado actual.
-- Los pedidos prioritarios aparecen destacados en el orden correspondiente.
-
-
-=======
-
 # Requisitos iniciales del sistema
 ## Requisitos funcionales :
 
@@ -305,4 +139,185 @@ __Postcondiciones:__
 ### Cuaderno de NotebookLM
 [Cuaderno de NotebookLM del análisis de requisitos](https://notebook.google.com/notebook/caeefeff-0269-4c85-af5b-95f379f0f4e4/preview)
 ##
->>>>>>> develop
+
+## Casos de uso
+
+### Actores del Sistema
+- **Cliente:** Persona que solicita los productos, realiza el pago y recibe el pedido.
+- **Usuario de Mostrador:** Personal encargado de registrar, modificar y entregar los pedidos al cliente.
+- **Cocina:** Personal de producción encargado de visualizar y preparar los pedidos.
+- **Encargado:** Personal con permisos administrativos para gestionar cancelaciones especiales y supervisar la operación.
+
+### CU01: Tomar Pedido
+ __Actores involucrados:__ Usuario de Mostrador, cliente.
+
+__Descripción breve:__
+Permite al Usuario de Mostrador registrar un nuevo pedido, seleccionando productos o combos, agregando personalizaciones, registrando el medio de pago y confirmando el pedido para enviarlo a la pantalla de cocina.
+
+ __Flujo principal de eventos:__
+
+1. El Usuario de Mostrador inicia la creación de un nuevo pedido.
+2. El sistema genera automáticamente un número de pedido único y registra la fecha y hora actual.
+3. El usuario ingresa los datos del Cliente (nombre o referencia de retiro) para identificar el pedido.
+4. El usuario selecciona los productos o combos y especifica las cantidades.
+5. El usuario agrega, si corresponde, las personalizaciones de cada ítem.
+6. El sistema calcula el total del pedido en tiempo real, considerando extras, eliminaciones y el precio de catálogo de los combos.
+7. El Cliente selecciona y efectúa el medio de pago (Efectivo o Transferencia), y el usuario lo registra en el sistema.
+8. El sistema registra el pago y el usuario confirma el pedido.
+9. El sistema guarda el precio histórico de cada ítem y establece el estado del pedido como RECIBIDO.
+10. El sistema envía automáticamente el pedido a la pantalla de cocina.
+
+__Flujos Alternativos__
+1. Sin Stock de Producto/Combo: Si un ítem seleccionado no tiene disponibilidad, el sistema notifica la falta de stock. El Usuario de Mostrador debe remover el ítem o consultar al Cliente por un sustituto para continuar.
+2. Cancelación por parte del Cliente antes del Pago: El Cliente decide no concretar la compra durante la carga. El Usuario de Mostrador cancela la operación y el sistema no registra ningún pedido.
+3. Error o Rechazo en el Pago por Transferencia: Si la transferencia no es aprobada o confirmada, el sistema impide finalizar la transacción hasta seleccionar un medio de pago válido o cancelar la operación.
+ __Precondiciones:__
+
+- El Usuario de Mostrador debe tener acceso al sistema.
+- Deben existir productos o combos disponibles para seleccionar.
+
+ __Postcondiciones:__
+
+- El pedido queda registrado con un identificador único.
+- El pedido conserva el precio histórico de sus ítems.
+- El pedido queda en estado RECIBIDO.
+- El pedido queda disponible para ser visualizado por Cocina.
+- El pago queda registrado con la forma seleccionada.
+
+### CU02: Modificar Pedido
+
+__Actores involucrados:__ Usuario de Mostrador, cliente.
+
+__Descripción breve:__
+Permite modificar un pedido existente a solicitud del Cliente mientras este se encuentre en estado RECIBIDO, manteniendo su identificador y registro original.
+
+__Flujo principal de eventos:__
+
+1. El Usuario de Mostrador busca el pedido mediante su número o referencia de retiro.
+2. El sistema verifica que el pedido se encuentre en estado RECIBIDO.
+3. El usuario selecciona la opción de modificar el pedido.
+4. El usuario agrega, elimina o modifica productos y cantidades.
+5. El usuario edita las personalizaciones de los ítems cuando sea necesario.
+6. El sistema recalcula el total del pedido.
+7. Si el pedido ya fue pagado, el sistema calcula la diferencia a cobrar o ajustar.
+8. El usuario registra el ajuste del pago, cuando corresponda.
+9. El usuario confirma las modificaciones.
+10. El sistema actualiza el pedido manteniendo su identificador y registro original.
+
+__Flujos Alternativos__
+1. Pedido en Preparación o posterior: Si el pedido ya cambió de estado (EN_PREPARACION, LISTO o ENTREGADO), el sistema bloquea cualquier intento de modificación.
+2. Pedido No Encontrado: Si el número o referencia ingresada no existe en el sistema, se muestra un mensaje de error notificando la invalidez del parámetro de búsqueda.
+3. Modificación deja el Pedido en Total $0 o Sin Ítems: Si el usuario elimina todos los ítems durante la modificación, el sistema impide guardar los cambios y sugiere cancelar el pedido mediante el CU03.
+
+
+__Precondiciones:__
+
+- El pedido debe existir.
+- El pedido debe encontrarse en estado RECIBIDO.
+
+__Postcondiciones:__
+
+- El pedido queda actualizado con las modificaciones realizadas.
+- El identificador original del pedido se mantiene.
+- El total del pedido queda actualizado.
+- Cualquier ajuste de pago queda registrado.
+
+### CU03: Cancelar Pedido
+
+__Actores involucrados:__ Usuario de Mostrador / Encargado.
+
+__Descripción breve:__
+Permite cancelar un pedido que todavía no haya sido entregado, conservando su registro histórico para fines de auditoría.
+
+__Flujo principal de eventos:__
+
+1. El Usuario de Mostrador o Encargado selecciona el pedido que desea cancelar.
+2. El sistema verifica el estado actual del pedido.
+3. El sistema solicita confirmación de la cancelación.
+4. El usuario confirma la cancelación.
+5. El sistema cambia el estado del pedido a CANCELADO.
+6. El sistema conserva el registro del pedido en la base de datos.
+7. El sistema registra la cancelación como parte del historial del pedido.
+
+__Flujos Alternativos:__
+1. Pedido en Preparación: Si Cocina ya inició la preparación (estado EN_PREPARACION), la cancelación se bloquea para el Usuario de Mostrador y requiere la autorización/intervención del Encargado.
+2. Pedido Listo o Entregado: El sistema impide la cancelación automática en los estados LISTO o ENTREGADO, requiriendo intervención y registro de devolución manual por parte del Encargado.
+3. Desistimiento de Cancelación: Si el usuario o Encargado cancela la solicitud en el paso de confirmación, el sistema mantiene el pedido en su estado original sin aplicar cambios.
+
+
+__Precondiciones:__
+
+- El pedido debe existir.
+- El pedido no debe haber sido entregado.
+- El usuario debe tener permisos para realizar la cancelación.
+
+__Postcondiciones:__
+
+- El pedido queda en estado CANCELADO.
+- El pedido no es eliminado de la base de datos.
+- El registro histórico del pedido queda disponible para auditoría.
+
+### CU04: Cambiar Estado de Pedido
+
+__Actores involucrados:__ Cocina / Usuario de Mostrador.
+
+__Descripción breve:__
+Permite actualizar el estado de un pedido durante su ciclo de vida, de acuerdo con las transiciones permitidas por el sistema.
+
+__Flujo principal de eventos:__
+
+1. El actor selecciona el pedido correspondiente en la interfaz.
+2. El sistema muestra el estado actual del pedido.
+3. Cocina cambia el estado de RECIBIDO a EN_PREPARACION al comenzar la preparación.
+4. Cocina cambia el estado de EN_PREPARACION a LISTO al finalizar la preparación.
+5. El Usuario de Mostrador cambia el estado de LISTO a ENTREGADO al momento de hacer la entrega efectiva al Cliente.
+6. El sistema valida que la transición solicitada sea válida según el ciclo de vida del pedido.
+7. El sistema actualiza el estado único del pedido.
+
+__Flujos Alternativos:__
+1. Transición de Estado Inválida: Si un actor intenta saltarse una etapa del ciclo de vida (por ejemplo, pasar directamente de RECIBIDO a ENTREGADO), el sistema rechaza la operación y muestra un mensaje de error.
+2. Permisos Insuficientes: Si un actor intenta realizar una transición para la cual no tiene rol asignado (ej. Usuario de Mostrador intentando pasar a EN_PREPARACION), el sistema deniega el acceso.
+
+__Precondiciones:__
+
+- El pedido debe existir.
+- El actor debe tener permisos para realizar la transición correspondiente.
+- El pedido debe encontrarse en un estado que permita la transición solicitada.
+
+__Postcondiciones:__
+
+- El pedido queda actualizado con su nuevo estado.
+- El pedido mantiene un único estado vigente.
+- El sistema impide transiciones no permitidas por el ciclo de vida del pedido.
+
+### CU05: Consultar Pedidos Activos
+
+__Actores involucrados:__ Cocina / Usuario de Mostrador.
+
+__Descripción breve:__
+Permite consultar los pedidos activos y visualizarlos según su estado actual, facilitando el seguimiento y la preparación de los pedidos.
+
+__Flujo principal de eventos:__
+
+1. El actor accede a la pantalla de monitoreo de pedidos.
+2. El sistema obtiene los pedidos activos registrados.
+3. El sistema muestra los pedidos agrupados o filtrados según su estado.
+4. El sistema muestra los pedidos en los estados RECIBIDO, EN_PREPARACION y LISTO.
+5. El sistema ordena visualmente los pedidos marcados como Urgentes/Prioritarios para que aparezcan primero.
+6. El actor consulta la información de los pedidos según sus necesidades.
+7. El sistema garantiza que cada pedido figure en un único estado a la vez.
+
+__Flujos Alternativos:__
+1. Sin Pedidos Activos Registrados: Si no hay pedidos en estado RECIBIDO, EN_PREPARACION o LISTO, el sistema muestra la pantalla de monitoreo vacía con un mensaje indicando la ausencia de pedidos en curso.
+2. Fallo de Conexión/Actualización en Pantalla: Si se interrumpe la comunicación con la base de datos durante el monitoreo, el sistema despliega una alerta visual indicando que los datos mostrados no están actualizados.
+
+__Precondiciones:__
+
+- El actor debe tener acceso al sistema.
+- Deben existir pedidos activos para consultar.
+
+__Postcondiciones:__
+
+- Los pedidos activos quedan disponibles para su consulta.
+- Cada pedido se muestra en un único estado actual.
+- Los pedidos prioritarios aparecen destacados en el orden correspondiente.
