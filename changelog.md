@@ -107,6 +107,17 @@ Se corrigio la introduccion.md solucionando los errores de logica en los casos d
   PR: [#33](https://github.com/eloeyhe/SistemaPedidos/pull/33) - @Leandro2107 (Modelador de casos de uso)
 
 
+  ### Changed
+- [feature/diseniador-clases-add-boceto-inicial]
+
+Se actualizo 01-boceto-inicial.excalidraw y 01_boceto_inicial.png.
+
+Issue(s): [#10](https://github.com/eloeyhe/SistemaPedidos/issues/10)
+
+PR: [#35](https://github.com/eloeyhe/SistemaPedidos/pull/35)- @nachovelesquen7-rgb (Diseñador de clases iniciales)
+
+
+
 
 
   
