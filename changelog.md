@@ -106,6 +106,14 @@ Se corrigio la introduccion.md solucionando los errores de logica en los casos d
 
   PR: [#33](https://github.com/eloeyhe/SistemaPedidos/pull/33) - @Leandro2107 (Modelador de casos de uso)
 
+### Changed 
+- [feature/modelador-casos-uso-update-use-case-1]
+
+Se corriguieron los problemas de los casos de uso en relacion a los requisitos iniciales del sistema.
+
+  Issue: [#22](https://github.com/eloeyhe/SistemaPedidos/issues/22)
+
+  PR: [#33](https://github.com/eloeyhe/SistemaPedidos/pull/33) - @Leandro2107 (Modelador de casos de uso)
 
   ### Changed
 - [feature/diseniador-clases-add-boceto-inicial]
