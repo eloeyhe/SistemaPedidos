@@ -334,6 +334,6 @@ Gracias a los requisitos funcionales, no funcionales y a los casos de uso, podre
 
 
 
-A continuacion se incorpora un [Enlace del diseño](https://excalidraw.com/#json=aTLMEQj61mKRVE8CA3khe,OpnY8c63-PYaq7K8Q71dzg) para observar el mismo en linea.
+A continuacion se incorpora un [Enlace del diseño](https://excalidraw.com/#json=AukHHNFl8vIMlU3DJAHpp,5IedKxpFxf8sMripg2CMLA) para observar el mismo en linea.
 
 
