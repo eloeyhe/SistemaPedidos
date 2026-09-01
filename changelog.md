@@ -4,6 +4,10 @@
 
 Configuré la estructura base de carpetas y archivos en el repositorio. También creé las plantillas de PR (feature-template.md y release-template.md)
 
+Issue: [#11](https://github.com/eloeyhe/SistemaPedidos/issues/11)
+
+Issue: [#12](https://github.com/eloeyhe/SistemaPedidos/issues/12)
+
   PR: [#2](https://github.com/eloeyhe/SistemaPedidos/pull/2) - @eloeyhe (Documentador y Coordinador de Repositorio:)
 
   ### Added
@@ -11,12 +15,28 @@ Configuré la estructura base de carpetas y archivos en el repositorio. También
 
 completé la carátula e información del equipo en readme, anexos e introduccion de POO para Sabor Kiosco. Ademas actualicé el changelog.
 
+Issue: [#13](https://github.com/eloeyhe/SistemaPedidos/issues/13)
+
+Issue: [#14](https://github.com/eloeyhe/SistemaPedidos/issues/14)
+
+Issue: [#15](https://github.com/eloeyhe/SistemaPedidos/issues/15)
+
   PR: [#31](https://github.com/eloeyhe/SistemaPedidos/pull/31)- @eloeyhe (Documentador y Coordinador de Repositorio:)
 
 ### Fixed
 - [feature/fix-rutas] fix: eliminar archivo feature-template.md duplicado  
   PR: [#31](https://github.com/eloeyhe/SistemaPedidos/pull/31) - @eloeyhe (Documentador y Coordinador de Repositorio:)
   
+### Added
+- [feature/doc-coord-repo-update-readme-md] 
+
+Registro aportes en el changelog y termino de revisar y coordinar las Pull Requests del equipo
+
+Issue: [#16](https://github.com/eloeyhe/SistemaPedidos/issues/11)
+
+Issue: [#17](https://github.com/eloeyhe/SistemaPedidos/issues/12)
+
+PR: [#36](https://github.com/eloeyhe/SistemaPedidos/pull/36) - @eloeyhe (Documentador y Coordinador de Repositorio:)
 
 ### Added
 - [feature/analista-requerimentos-add-introduccion-md] 
@@ -106,6 +126,14 @@ Se corrigio la introduccion.md solucionando los errores de logica en los casos d
 
   PR: [#33](https://github.com/eloeyhe/SistemaPedidos/pull/33) - @Leandro2107 (Modelador de casos de uso)
 
+### Changed 
+- [feature/modelador-casos-uso-update-use-case-1]
+
+Se corriguieron los problemas de los casos de uso en relacion a los requisitos iniciales del sistema.
+
+  Issue: [#22](https://github.com/eloeyhe/SistemaPedidos/issues/22)
+
+  PR: [#33](https://github.com/eloeyhe/SistemaPedidos/pull/33) - @Leandro2107 (Modelador de casos de uso)
 
   ### Changed
 - [feature/diseniador-clases-add-boceto-inicial]
