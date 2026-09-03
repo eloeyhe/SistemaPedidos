@@ -121,3 +121,5 @@ PR: [#35](https://github.com/eloeyhe/SistemaPedidos/pull/35)- @nachovelesquen7-r
 - [feature/fix-rutas] fix: eliminar archivo feature-template.md duplicado  
   PR: [#31](https://github.com/eloeyhe/SistemaPedidos/pull/31) - @eloeyhe (Documentador y Coordinador de Repositorio:)
 
+- [feature/fix-rutas] fix: Reorganizo el Changelog  
+  PR: [#37](https://github.com/eloeyhe/SistemaPedidos/pull/37) - @eloeyhe (Documentador y Coordinador de Repositorio:)
