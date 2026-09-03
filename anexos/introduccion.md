@@ -1,0 +1,339 @@
+# Anexo - Introducción al Diseño Orientado Objetos 
+El __Paradigma Orientado a Objetos (POO)__ es un enfoque de ingeniería de software que organiza el diseño en torno a modelos de objetos físicos o simulados del mundo real, en lugar de estructurarlo como una secuencia de tareas o funciones secuenciales.
+
+Mientras que el enfoque procedimental o estructurado separa los datos de los procesos, el paradigma orientado a objetos une ambos mundos. Su principio fundamental es combinar o encapsular en una sola unidad (el objeto) tanto los datos (atributos) como el comportamiento (métodos) que opera sobre esos datos.
+
+En el software, cada objeto posee 3 caracteristicas esenciales: 
+
+- __Estado:__ El conjunto de valores que toman sus atributos en un instante específico de tiempo.
+- __Comportamiento:__ El conjunto de operaciones o métodos que el objeto puede realizar y a los cuales responde mediante el envío de mensajes.
+- __Identidad:__ Lo que permite diferenciar a un objeto de otro de forma no ambigua, incluso si todos sus atributos son idénticos, ya que cada uno ocupa su propia posición en la memoria
+
+__¿Por qué es importante?__
+
+La importancia de adoptar este paradigma radica en las ventajas técnicas que aporta para el desarrollo de software moderno y complejo:
+
+1. __Estructura sólida para los sistemas complejos:__ Permite modelar problemas grandes y complejos dividiendo el software en unidades cohesivas, autónomas y fáciles de comprender.
+2. __Reutilización de codigo (Reusabilidad):__ Al definir clases (que funcionan como plantillas o moldes de construcción) y utilizar la herencia, se pueden crear nuevos objetos basados en clases existentes sin necesidad de reescribir código desde cero.
+3. __Ocultamiento y seguridad de datos (Encapsulamiento):__ El estado interno de un objeto está protegido de accesos externos no autorizados. Si un agente externo quiere leer o modificar un dato, está obligado a hacerlo exclusivamente a través de los métodos públicos definidos por el objeto, garantizando que las reglas del negocio se cumplan siempre.
+4. __Mantenimiento ágil ante cambios continuos:__ En sistemas complejos, los requerimientos cambian constantemente. Al encapsular los datos y comportamientos dentro de objetos aislados, un cambio en el diseño de un objeto específico tiene un impacto mínimo en el resto del sistema, evitando tener que reescribir o dañar todo el software.
+
+## Los cuatro fundamentos de POO
+
+### Abstracción
+Se aíslan únicamente las propiedades críticas de una comanda para el negocio, ignorando detalles físicos innecesarios del cliente en el mostrador.
+
+Representación visual: 
+```plaintext
++------------------------------------+
+|               Pedido               |
++------------------------------------+
+| - estado: String                   |
+| - estaPagado: boolean              |
++------------------------------------+
+| + registrarPago()                  |
+| + actualizarEstado(nuevoEstado)    |
++------------------------------------+
+```
+
+### 2. Encapsulamiento
+El estado del pago está protegido de modificaciones externas directas. Solo se puede alterar de manera segura invocando el método público de registro de cobro.
+
+Representación visual: 
+```plaintext
++------------------------------------+
+|               Pedido               |
++------------------------------------+
+| - estado: String                   | <--- Atributos ocultos (Privados)
+| - estaPagado: boolean              |
++------------------------------------+
+| + registrarPago()                  | <--- Interfaz de control (Pública)
+| + actualizarEstado(nuevoEstado)    |
++------------------------------------+
+```
+
+### 3. Herencia
+Se extraen los atributos comunes a una superclase general ("Producto") y se extienden comportamientos especializados para los alimentos de cocina y los artículos de góndola.
+
+Representación visual: 
+```plaintext
++------------------------------------+
+            |              Producto              | <--- Superclase (General)
+            +------------------------------------+
+            | - codigo: String                   |
+            | - nombre: String                   |
+            | - precio: double                   |
+            +------------------------------------+
+                              ^
+                              | (hereda de / es un)
+             +----------------+----------------+
+             |                                 |
++-------------------------+       +-------------------------+
+|    ProductoPreparado    |       |    ProductoEnvasado     | <--- Subclases
++-------------------------+       +-------------------------+      (Especializadas)
+| - tiempoPreparacion: int|       | - codigoBarras: String  |
++-------------------------+       +-------------------------+
+```
+
+### 4. Polimorfismo
+Un mismo mensaje de cobro se ejecuta de manera completamente diferente según el canal de pago seleccionado por el cliente en el mostrador.
+
+Representación visual: 
+```plaintext
+[ Mensaje común enviado: pago.procesarCobro() ]
+                                 |
+                 +---------------+---------------+
+                 |                               |
+                 v                               v
+          [ PagoEfectivo ]               [ PagoDigital ]
+                 |                               |
+                 v                               v
+     "Registra ingreso en caja y      "Sincroniza con pasarela QR
+     calcula vuelto en efectivo"      y valida la acreditación online"
+```
+
+# Requisitos iniciales del sistema
+## Requisitos funcionales :
+
+
+**RF1: Toma de pedidos con personalizaciones y combos** El sistema debe permitir al personal del mostrador registrar pedidos especificando productos individuales, combos predefinidos (los cuales tienen su propia lógica de precio y no corresponden a la simple suma de sus partes) e ítems con personalizaciones individuales de ingredientes (quitar ingredientes o agregar adicionales con costo extra), reflejando de forma precisa el desglose y el precio total recalculado en pantalla al momento del registro.
+
+**RF2: Envío automático de comandas a la cocina** El sistema debe transmitir de forma automática e inmediata cada pedido confirmado desde el mostrador a la pantalla de la cocina, eliminando el traslado físico de comandas impresas o manuscritas y evitando pérdidas de información en el proceso.
+
+**RF3: Seguimiento y visualización del estado del pedido** El sistema debe permitir al personal visualizar sincronizadamente los pedidos activos y controlar su ciclo de vida mediante un único estado secuencial y restringido: *Recibido*, *En preparación*, *Listo*, *Entregado* y *Cancelado*, garantizando una única fuente de verdad para evitar duplicaciones.
+
+**RF4: Modificación de pedidos activos (antes de preparación)** El sistema debe permitir al usuario modificar los ítems, cantidades y personalizaciones de un pedido activo (manteniendo el mismo identificador y número de pedido original), única y exclusivamente mientras este se encuentre en estado *Recibido*; una vez que la cocina cambia el estado del pedido a *En preparación*, el sistema debe bloquear cualquier intento de modificación.
+
+**RF5: Cancelación completa del pedido** El sistema debe posibilitar la cancelación completa de un pedido activo antes de que sea entregado, asegurando que por razones de auditoría interna de caja el registro nunca se elimine físicamente de la base de datos y que pase de forma definitiva y permanente al estado *Cancelado*.
+
+**RF6: Identificación del pedido para el retiro** El sistema debe generar un identificador numérico único para cada pedido y permitir asociar de manera obligatoria un nombre o referencia de retiro (ej. "Matías", "Carla") en la comanda, facilitando el llamado en el mostrador para su entrega sin necesidad de registrar datos personales del cliente ni crear una ficha de cliente formal.
+
+**RF7: Priorización manual** El sistema debe permitir marcar manualmente un pedido como prioritario (urgente) desde el mostrador al momento de tomarlo, visualizándose de forma destacada en la pantalla de cocina para que el personal altere el orden de preparación según su criterio.
+
+**RF8: Registro de pago** El sistema debe permitir asociar y registrar el cobro de cada pedido utilizando únicamente efectivo o transferencia bancaria (dejando fuera QR y tarjetas en esta fase); asimismo, si un pedido previamente pagado es modificado en estado *Recibido*, el sistema debe recalcular el total y permitir registrar el cobro o ajuste de la diferencia económica generada.
+
+---
+
+## Requisitos NO funcionales
+
+**RNF1: Escalabilidad y Extensibilidad (Soporte Multi-local)** El diseño de la base de datos y la arquitectura del modelo de dominio del sistema deben ser extensibles para permitir en el futuro la incorporación de un esquema multi-local sin requerir la reescritura de su núcleo conceptual, operando el MVP estrictamente para una única sucursal física.
+
+**RNF2: Usabilidad y Simplicidad Operativa** La interfaz del usuario debe diseñarse bajo un estricto criterio de agilidad y máxima simplicidad, permitiendo al operario interactuar rápidamente con el sistema sin requerir flujos de navegación complejos o sobreingeniería visual para adaptarse al ritmo acelerado de atención del local.
+
+**RNF3: Restricción de Tiempo de Entrega (Time-to-Market)** El Producto Mínimo Viable (MVP) que contiene el alcance acordado de los requisitos funcionales (RF1 a RF8) debe estar completamente funcional y desplegado en su entorno operativo para fines de julio.
+
+**RNF4: Integridad de Datos y Consistencia (Fiabilidad)** El sistema debe asegurar la consistencia total del estado de los pedidos y de los cobros previniendo fallos transaccionales ante cortes de energía o de red, garantizando que no se dupliquen visualizaciones ni existan desfases entre lo que muestra el mostrador y la pantalla de la cocina.
+
+**RNF5: Seguridad y Auditoría Básica (Trazabilidad)** El sistema debe garantizar la trazabilidad de la operación mediante el registro inalterable de qué usuario creó o modificó cada pedido, sin imponer restricciones rígidas de acceso o bloqueos basados en roles que entorpezcan la dinámica del negocio donde cualquiera de los operarios puede cobrar o tomar pedidos según la necesidad.
+
+--- 
+
+
+### Información analizada
+
+- Correos electrónicos
+- Audios
+- Imágenes
+- Notas proporcionadas por el cliente
+
+### Cuaderno de NotebookLM
+[Cuaderno de NotebookLM del análisis de requisitos](https://notebook.google.com/notebook/caeefeff-0269-4c85-af5b-95f379f0f4e4/preview)
+##
+
+## Casos de uso
+
+### Actores del Sistema
+- **Cliente:** Actor externo del negocio que interactúa de manera indirecta solicitando productos y realizando el pago a través del Usuario de Mostrador (no posee cuenta ni usuario en el sistema).
+- **Usuario de Mostrador:** Personal encargado de registrar, modificar y entregar los pedidos al cliente.
+- **Cocina:** Personal de producción encargado de visualizar y preparar los pedidos.
+- **Encargado:** Personal con permisos administrativos para gestionar cancelaciones especiales y supervisar la operación.
+
+### CU01: Tomar Pedido
+ __Actores involucrados:__ Usuario de Mostrador (interacción con Cliente externo)
+
+__Descripción breve:__
+Permite al Usuario de Mostrador registrar un nuevo pedido, seleccionando productos o combos, agregando personalizaciones, registrando el medio de pago y confirmando el pedido para enviarlo a la pantalla de cocina.
+
+ __Flujo principal de eventos:__
+
+1. El Usuario de Mostrador inicia la creación de un nuevo pedido.
+2. El sistema genera automáticamente un número de pedido único y registra la fecha y hora actual.
+3. El usuario ingresa una referencia o nombre para el retiro (ej. "Matías") para identificar la comanda del pedido.
+4. El usuario selecciona ítems de catálogo (Producto individual o Combo predefinido con su precio propio) y especifica las cantidades, agregándolos al pedido como ítems de línea (ItemPedido).
+5. El usuario agrega las personalizaciones (PersonalizacionItem) a cada ItemPedido, indicando ingredientes a quitar o adicionales a agregar con su costo extra.
+6. El sistema calcula en tiempo real el subtotal de cada ItemPedido (precio base de catálogo del Producto/Combo + suma de adicionales de personalización) por su cantidad, y obtiene el total general del pedido derivado de la suma de dichos subtotales.
+7. El usuario selecciona y valida el medio de pago permitido (EFECTIVO o TRANSFERENCIA) ingresado para abonar el monto total.
+8. El sistema crea y asocia la entidad Pago (monto, método de pago y fecha/hora) al pedido, manteniendo la relación 1 a 1 para la auditoría de caja.
+9. El sistema congela y guarda el precio histórico unitario de cada ItemPedido y sus personalizaciones, y establece el estado del pedido como RECIBIDO.
+10. El sistema envía automáticamente el pedido a la pantalla de cocina.
+
+__Flujos Alternativos__
+1. Sin Stock de Producto/Combo: Si un ítem seleccionado no tiene disponibilidad, el sistema notifica la falta de stock. El Usuario de Mostrador debe remover el ítem o consultar al Cliente por un sustituto para continuar.
+2. Cancelación por parte del Cliente antes del Pago: El Cliente decide no concretar la compra durante la carga. El Usuario de Mostrador cancela la operación y el sistema no registra ningún pedido.
+3. Error o Rechazo en el Pago por Transferencia: Si la transferencia no es aprobada o confirmada, el sistema impide la creación del registro de Pago y bloquea la confirmación del pedido hasta seleccionar un medio de pago válido (EFECTIVO o TRANSFERENCIA) o cancelar la operación.
+
+ __Precondiciones:__
+
+- El Usuario de Mostrador debe tener acceso al sistema.
+- Deben existir productos o combos disponibles para seleccionar.
+
+ __Postcondiciones:__
+
+- El pedido queda registrado con un identificador único.
+- El pedido conserva el precio histórico de sus ítems.
+- El pedido queda en estado RECIBIDO.
+- El pedido queda disponible para ser visualizado por Cocina.
+- El Pago queda registrado y vinculado inalterablemente al pedido con su correspondiente medio de pago (EFECTIVO o TRANSFERENCIA) para fines de auditoría financiera.
+- Cada ítem del pedido conserva su precio unitario histórico y el desglose de sus personalizaciones de forma independiente del catálogo general.
+
+### CU02: Modificar Pedido
+
+__Actores involucrados:__ Usuario de Mostrador, cliente.
+
+__Descripción breve:__
+Permite modificar un pedido existente a solicitud del Cliente mientras este se encuentre en estado RECIBIDO, manteniendo su identificador y registro original.
+
+__Flujo principal de eventos:__
+
+1. El Usuario de Mostrador busca el pedido mediante su número o referencia de retiro.
+2. El dominio/modelo valida que el pedido se encuentre estrictamente en el estado RECIBIDO del enum EstadoPedido; si el pedido avanzó de estado, la modificación queda bloqueada.
+3. El usuario selecciona la opción de modificar el pedido.
+4. El usuario agrega, elimina o modifica productos y cantidades.
+5. El usuario edita las personalizaciones de los ítems cuando sea necesario.
+6. El sistema recalcula el total del pedido.
+7. Si el pedido ya posee un Pago registrado, el sistema calcula la diferencia económica entre el monto previo y el nuevo total recalculado.
+8. Si existe diferencia, el Usuario de Mostrador selecciona el medio de pago (EFECTIVO o TRANSFERENCIA) para registrar el ajuste económico (cobro de adicional o devolución) asociándolo al historial del pedido.
+9. El usuario confirma las modificaciones.
+10. El sistema actualiza el pedido manteniendo su identificador y registro original.
+
+__Flujos Alternativos__
+1. Pedido en Preparación o posterior: Si el pedido ya cambió de estado (EN_PREPARACION, LISTO o ENTREGADO), el sistema bloquea cualquier intento de modificación.
+2. Pedido No Encontrado: Si el número o referencia ingresada no existe en el sistema, se muestra un mensaje de error notificando la invalidez del parámetro de búsqueda.
+3. Modificación deja el Pedido en Total $0 o Sin Ítems: Si el usuario elimina todos los ítems durante la modificación, el sistema impide guardar los cambios y sugiere cancelar el pedido mediante el CU03.
+
+
+__Precondiciones:__
+
+- El pedido debe existir.
+- El pedido debe encontrarse en estado RECIBIDO.
+
+__Postcondiciones:__
+
+- El pedido queda actualizado con las modificaciones realizadas.
+- El identificador original del pedido se mantiene.
+- El total del pedido queda actualizado.
+- Cualquier ajuste de pago queda registrado.
+- El registro del pago original y su correspondiente ajuste económico quedan vinculados al pedido para garantizar la trazabilidad financiera y auditoría de caja.
+
+### CU03: Cancelar Pedido
+
+__Actores involucrados:__ Usuario de Mostrador / Encargado.
+
+__Descripción breve:__
+Permite cancelar un pedido que todavía no haya sido entregado, conservando su registro histórico para fines de auditoría.
+
+__Flujo principal de eventos:__
+
+1. El Usuario de Mostrador o Encargado selecciona el pedido que desea cancelar.
+2. El sistema verifica el estado actual del pedido.
+3. El sistema solicita confirmación de la cancelación.
+4. El usuario confirma la cancelación.
+5. El sistema actualiza el estado del pedido a CANCELADO como su estado final e irreversible en la máquina de estados.
+6. El sistema preserva la clave primaria (PK) e identificador único del pedido en la base de datos, garantizando que el registro y sus transacciones asociadas no sufran un borrado físico ni pierdan su identidad.
+7. El sistema registra el evento de cancelación, junto con el usuario responsable y la fecha/hora, en el historial inalterable de auditoría del pedido.
+
+__Flujos Alternativos:__
+1. Pedido en Preparación: Si Cocina ya inició la preparación (estado EN_PREPARACION), la cancelación se bloquea para el Usuario de Mostrador y requiere la autorización/intervención del Encargado.
+2. Pedido Listo o Entregado: El sistema impide la cancelación automática en los estados LISTO o ENTREGADO, requiriendo intervención y registro de devolución manual por parte del Encargado.
+3. Desistimiento de Cancelación: Si el usuario o Encargado cancela la solicitud en el paso de confirmación, el sistema mantiene el pedido en su estado original sin aplicar cambios.
+
+
+__Precondiciones:__
+
+- El pedido debe existir.
+- El pedido no debe haber sido entregado.
+- El usuario debe tener permisos para realizar la cancelación.
+
+__Postcondiciones:__
+
+- El pedido pasa a estado CANCELADO de forma definitiva e irreversible.
+- El pedido no es eliminado de la base de datos.
+- El registro histórico del pedido queda disponible para auditoría.
+- Se mantiene intacta la clave primaria (PK) del pedido, sus ítems, sus registros de pago y todo el historial de modificaciones para garantizar la trazabilidad total en las auditorías internas de caja
+
+### CU04: Cambiar Estado de Pedido
+
+__Actores involucrados:__ Cocina / Usuario de Mostrador.
+
+__Descripción breve:__
+Permite actualizar el estado de un pedido durante su ciclo de vida, de acuerdo con las transiciones permitidas por el sistema.
+
+__Flujo principal de eventos:__
+
+1. El actor selecciona el pedido correspondiente en la interfaz.
+2. El sistema muestra el estado actual del pedido.
+3. Cocina cambia el estado de RECIBIDO a EN_PREPARACION al comenzar la preparación.
+4. Cocina cambia el estado de EN_PREPARACION a LISTO al finalizar la preparación.
+5. El Usuario de Mostrador cambia el estado de LISTO a ENTREGADO al momento de hacer la entrega efectiva al Cliente.
+6. El agregado Pedido valida en la capa de dominio la máquina de estados (RECIBIDO -> EN_PREPARACION -> LISTO -> ENTREGADO, o la transición autorizada a CANCELADO). Si la transición no cumple con la secuencia legal definida en EstadoPedido, el sistema rechaza la operación.
+7. El sistema actualiza el estado único del pedido.
+
+__Flujos Alternativos:__
+1. Transición de Estado Inválida: Si un actor intenta saltarse una etapa del ciclo de vida (por ejemplo, pasar directamente de RECIBIDO a ENTREGADO), el sistema rechaza la operación y muestra un mensaje de error.
+2. Permisos Insuficientes: Si un actor intenta realizar una transición para la cual no tiene rol asignado (ej. Usuario de Mostrador intentando pasar a EN_PREPARACION), el sistema deniega el acceso.
+
+__Precondiciones:__
+
+- El pedido debe existir.
+- El actor debe tener permisos para realizar la transición correspondiente.
+- El pedido debe encontrarse en un estado que permita la transición solicitada.
+
+__Postcondiciones:__
+
+- El pedido queda actualizado con su nuevo estado.
+- El pedido mantiene un único estado vigente.
+- El objeto Pedido centraliza la máquina de estados, garantizando que el estado sea único, inalterable fuera del flujo permitido y consistente en todas las vistas (Mostrador y Cocina).
+
+### CU05: Consultar Pedidos Activos
+
+__Actores involucrados:__ Cocina / Usuario de Mostrador.
+
+__Descripción breve:__
+Permite consultar los pedidos activos y visualizarlos según su estado actual, facilitando el seguimiento y la preparación de los pedidos.
+
+__Flujo principal de eventos:__
+
+1. El actor accede a la pantalla de monitoreo de pedidos.
+2. El sistema obtiene los pedidos activos registrados.
+3. El sistema muestra los pedidos agrupados o filtrados según su estado.
+4. El sistema obtiene los pedidos en los estados activos (RECIBIDO, EN_PREPARACION y LISTO), diferenciando la vista según el actor (Cocina visualiza RECIBIDO y EN_PREPARACION; Mostrador visualiza todos los activos para el seguimiento y entrega).
+5. El sistema lee el atributo de dominio de prioridad del pedido (prioritario = true) y ordena la lista anteponiendo los pedidos urgentes sobre el resto dentro de su mismo estado, garantizando que el orden de atención en cocina cambie sin alterar la máquina de estados del pedido.
+6. El actor consulta la información de los pedidos según sus necesidades.
+7. El sistema garantiza que cada pedido figure en un único estado a la vez.
+
+__Flujos Alternativos:__
+1. Sin Pedidos Activos Registrados: Si no hay pedidos en estado RECIBIDO, EN_PREPARACION o LISTO, el sistema muestra la pantalla de monitoreo vacía con un mensaje indicando la ausencia de pedidos en curso.
+2. Fallo de Conexión/Actualización en Pantalla: Si se interrumpe la comunicación con la base de datos durante el monitoreo, el sistema despliega una alerta visual indicando que los datos mostrados no están actualizados.
+
+__Precondiciones:__
+
+- El actor debe tener acceso al sistema.
+- Deben existir pedidos activos para consultar.
+
+__Postcondiciones:__
+
+- Los pedidos activos quedan disponibles para su consulta.
+- Cada pedido se muestra en un único estado actual.
+- La marca de prioridad se persiste como un atributo del Pedido, permitiendo su correcta ordenación y visualización sincronizada en el monitor de Cocina y Mostrador sin modificar la secuencia de estados.
+
+# Boceto incial del diseño de clases
+
+Gracias a los requisitos funcionales, no funcionales y a los casos de uso, podremos realizar un boceto inicial del diseño de clases.
+
+![imagen del diseño](../Diagramas/01-Diagrama-Clases/01_boceto_inicial.png)
+
+
+
+A continuacion se incorpora un [Enlace del diseño](https://excalidraw.com/#json=AukHHNFl8vIMlU3DJAHpp,5IedKxpFxf8sMripg2CMLA) para observar el mismo en linea.
+
+
