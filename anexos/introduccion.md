@@ -28,27 +28,36 @@ Representación visual:
 +------------------------------------+
 |               Pedido               |
 +------------------------------------+
+| - fecha: Date                      |
 | - estado: String                   |
-| - estaPagado: boolean              |
+| - prioridad: String                |
 +------------------------------------+
-| + registrarPago()                  |
-| + actualizarEstado(nuevoEstado)    |
+| + agregar()                        |
+| + modificar()                      |
+| + cancelar ()                      |
+| + cambiarEstado()                  |
+| + priorizar ()                     |
 +------------------------------------+
 ```
 
 ### 2. Encapsulamiento
-El estado del pago está protegido de modificaciones externas directas. Solo se puede alterar de manera segura invocando el método público de registro de cobro.
+El estado del pedido está protegido de modificaciones externas directas. Solo se puede alterar de manera segura invocando el método público de estado de pedido.
 
 Representación visual: 
 ```plaintext
 +------------------------------------+
 |               Pedido               |
 +------------------------------------+
-| - estado: String                   | <--- Atributos ocultos (Privados)
-| - estaPagado: boolean              |
+| 
+| - fecha: Date                      |
+| - estado: String                   | <---- Atributos ocultos (Privados)     
+| - prioridad: String                |
 +------------------------------------+
-| + registrarPago()                  | <--- Interfaz de control (Pública)
-| + actualizarEstado(nuevoEstado)    |
+| + agregar ()                       |
+| + modificar ()                     |
+| + cancelar ()                      |
+| + cambiarEstado()                  | <--- Interfaz de control (Pública)
+| + priorizar ()                     |
 +------------------------------------+
 ```
 
