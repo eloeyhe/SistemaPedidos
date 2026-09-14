@@ -126,3 +126,7 @@ PR: [#35](https://github.com/eloeyhe/SistemaPedidos/pull/35)- @nachovelesquen7-r
 
 - [fix/correccion-diagramas-de-clases] Se actualiza el diagramas de clases con los cambios requeridos por el profesor
   PR: [#58](https://github.com/eloeyhe/SistemaPedidos/pull/58) - @eloeyhe (Modelador de diagramas de Casos de Uso)
+
+- [fix/correccion-introduccion-ruta-diagramas] fix: Se actualiza el archivo introduccion.md y correccion de ruta de carpeta diagramas.
+Issue(s): [#47](https://github.com/eloeyhe/SistemaPedidos/issues/47)
+PR: [#59](https://github.com/eloeyhe/SistemaPedidos/pull/59)
