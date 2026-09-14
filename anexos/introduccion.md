@@ -28,27 +28,40 @@ Representación visual:
 +------------------------------------+
 |               Pedido               |
 +------------------------------------+
-| - estado: String                   |
-| - estaPagado: boolean              |
+| - fecha: Date                      |
+| - estado: Estado_pedido            |
+| - prioritario: boolean
+| - numeroPedido: int   
+| - referenciaRetiro: String         |
 +------------------------------------+
-| + registrarPago()                  |
-| + actualizarEstado(nuevoEstado)    |
+| + agregar()                        |
+| + modificar()                      |
+| + cancelar ()                      |
+| + cambiarEstado()                  |
+| + priorizar ()                     |
 +------------------------------------+
 ```
 
 ### 2. Encapsulamiento
-El estado del pago está protegido de modificaciones externas directas. Solo se puede alterar de manera segura invocando el método público de registro de cobro.
+El estado del pedido está protegido de modificaciones externas directas. Solo se puede alterar de manera segura invocando el método público de estado de pedido.
 
 Representación visual: 
 ```plaintext
 +------------------------------------+
 |               Pedido               |
 +------------------------------------+
-| - estado: String                   | <--- Atributos ocultos (Privados)
-| - estaPagado: boolean              |
+| 
+| - fecha: Date                      |
+| - estado: Estado_pedio             | <---- Atributos ocultos (Privados)     
+| - proritario: boolean
+| - numeroPedido: int  
+| - referenciaRetiro: string         |
 +------------------------------------+
-| + registrarPago()                  | <--- Interfaz de control (Pública)
-| + actualizarEstado(nuevoEstado)    |
+| + agregar ()                       |
+| + modificar ()                     |
+| + cancelar ()                      |
+| + cambiarEstado()                  | <--- Interfaz de control (Pública)
+| + priorizar ()                     |
 +------------------------------------+
 ```
 
@@ -57,10 +70,9 @@ Se extraen los atributos comunes a una superclase general ("Producto") y se exti
 
 Representación visual: 
 ```plaintext
-+------------------------------------+
+            +------------------------------------+
             |              Producto              | <--- Superclase (General)
             +------------------------------------+
-            | - codigo: String                   |
             | - nombre: String                   |
             | - precio: double                   |
             +------------------------------------+
@@ -71,8 +83,9 @@ Representación visual:
 +-------------------------+       +-------------------------+
 |    ProductoPreparado    |       |    ProductoEnvasado     | <--- Subclases
 +-------------------------+       +-------------------------+      (Especializadas)
-| - tiempoPreparacion: int|       | - codigoBarras: String  |
-+-------------------------+       +-------------------------+
+| - tiempoPreparacion: int|       | - FechaElaboracion: Date |
+|                         |       | - FechaVencimiento: Date |
++-------------------------+       +--------------------------+
 ```
 
 ### 4. Polimorfismo
