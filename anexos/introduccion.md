@@ -29,8 +29,10 @@ Representación visual:
 |               Pedido               |
 +------------------------------------+
 | - fecha: Date                      |
-| - estado: String                   |
-| - prioridad: String                |
+| - estado: Estado_pedido            |
+| - prioritario: boolean
+| - numeroPedido: int   
+| - referenciaRetiro: String         |
 +------------------------------------+
 | + agregar()                        |
 | + modificar()                      |
@@ -50,8 +52,10 @@ Representación visual:
 +------------------------------------+
 | 
 | - fecha: Date                      |
-| - estado: String                   | <---- Atributos ocultos (Privados)     
-| - prioridad: String                |
+| - estado: Estado_pedio             | <---- Atributos ocultos (Privados)     
+| - proritario: boolean
+| - numeroPedido: int  
+| - referenciaRetiro: string         |
 +------------------------------------+
 | + agregar ()                       |
 | + modificar ()                     |
@@ -66,10 +70,9 @@ Se extraen los atributos comunes a una superclase general ("Producto") y se exti
 
 Representación visual: 
 ```plaintext
-+------------------------------------+
+            +------------------------------------+
             |              Producto              | <--- Superclase (General)
             +------------------------------------+
-            | - codigo: String                   |
             | - nombre: String                   |
             | - precio: double                   |
             +------------------------------------+
@@ -80,8 +83,9 @@ Representación visual:
 +-------------------------+       +-------------------------+
 |    ProductoPreparado    |       |    ProductoEnvasado     | <--- Subclases
 +-------------------------+       +-------------------------+      (Especializadas)
-| - tiempoPreparacion: int|       | - codigoBarras: String  |
-+-------------------------+       +-------------------------+
+| - tiempoPreparacion: int|       | - FechaElaboracion: Date |
+|                         |       | - FechaVencimiento: Date |
++-------------------------+       +--------------------------+
 ```
 
 ### 4. Polimorfismo
@@ -339,10 +343,10 @@ __Postcondiciones:__
 
 Gracias a los requisitos funcionales, no funcionales y a los casos de uso, podremos realizar un boceto inicial del diseño de clases.
 
-![imagen del diseño](../Diagramas/01-Diagrama-Clases/01_boceto_inicial.png)
+![imagen del diseño](../diagramas/01-diagrama-clases/01_boceto_inicial.png)
 
 
 
-A continuacion se incorpora un [Enlace del diseño](https://excalidraw.com/#json=AukHHNFl8vIMlU3DJAHpp,5IedKxpFxf8sMripg2CMLA) para observar el mismo en linea.
+A continuacion se incorpora un [Enlace del diseño](https://excalidraw.com/#json=0_t7Vl162PcDKWLld_4o8,oFIHB8ShSEo5t6ZaKccXDQ) para observar el mismo en linea.
 
 
