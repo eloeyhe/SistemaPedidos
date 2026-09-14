@@ -330,10 +330,10 @@ __Postcondiciones:__
 
 Gracias a los requisitos funcionales, no funcionales y a los casos de uso, podremos realizar un boceto inicial del diseño de clases.
 
-![imagen del diseño](../Diagramas/01-Diagrama-Clases/01_boceto_inicial.png)
+![imagen del diseño](../diagramas/01-diagrama-clases/01_boceto_inicial.png)
 
 
 
-A continuacion se incorpora un [Enlace del diseño](https://excalidraw.com/#json=AukHHNFl8vIMlU3DJAHpp,5IedKxpFxf8sMripg2CMLA) para observar el mismo en linea.
+A continuacion se incorpora un [Enlace del diseño](https://excalidraw.com/#json=0_t7Vl162PcDKWLld_4o8,oFIHB8ShSEo5t6ZaKccXDQ) para observar el mismo en linea.
 
 

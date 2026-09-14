@@ -123,3 +123,6 @@ PR: [#35](https://github.com/eloeyhe/SistemaPedidos/pull/35)- @nachovelesquen7-r
 
 - [feature/fix-rutas] fix: Reorganizo el Changelog  
   PR: [#37](https://github.com/eloeyhe/SistemaPedidos/pull/37) - @eloeyhe (Documentador y Coordinador de Repositorio:)
+
+- [fix/correccion-diagramas-de-clases] Se actualiza el diagramas de clases con los cambios requeridos por el profesor
+  PR: [#58](https://github.com/eloeyhe/SistemaPedidos/pull/58) - @eloeyhe (Modelador de diagramas de Casos de Uso)
