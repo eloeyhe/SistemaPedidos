@@ -6,7 +6,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+
+## [Release Actividad Obligatoria N°1] - 2026-09-17
+
 ### Added
+
 - [feature/doc-coord-repo-update-readme-md] Creo estructura inicial de carpetas y archivos plantilla
   Issue: [#11](https://github.com/eloeyhe/SistemaPedidos/issues/11)
   Issue: [#12](https://github.com/eloeyhe/SistemaPedidos/issues/12)
