@@ -91,3 +91,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/correccion-introduccion-ruta-diagramas] Fix: correcciones en changelog
   Issue: [#47](https://github.com/eloeyhe/SistemaPedidos/issues/47)
   PR: [#60](https://github.com/eloeyhe/SistemaPedidos/pull/60) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
+
+- [fix/correccion-introduccion-ruta-diagramas] Fix: cerrar release de Actividad Obligatoria 1 en changelog
+  Issue: [#47](https://github.com/eloeyhe/SistemaPedidos/issues/47)
+  PR: [#61](https://github.com/eloeyhe/SistemaPedidos/pull/61) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
