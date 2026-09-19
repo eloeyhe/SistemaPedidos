@@ -6,6 +6,18 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+## [Release Actividad Obligatoria N°2] - 2026-09-19
+
+### Added
+
+- [feature/doc-coord-repo-update-readme-md] se creo la rama backport y se gestionó el backport hacia develop, creo rama future y creo carpeta ia, tambien realice las issue
+  Issue: [#48](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C48)
+  Issue: [#54](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C54)
+  Issue: [#56](https://github.com/eloeyhe/SistemaPedidos/issues/56)](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C56)
+  Issue: [[#57](https://github.com/eloeyhe/SistemaPedidos/issues/57)](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C57)
+  PR: [#2](https://github.com/eloeyhe/SistemaPedidos/pull/2) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
 
