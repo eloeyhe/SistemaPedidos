@@ -15,7 +15,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#54](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C54)
   Issue: [#56](https://github.com/eloeyhe/SistemaPedidos/issues/56)](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C56)
   Issue: [[#57](https://github.com/eloeyhe/SistemaPedidos/issues/57)](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C57)
-  PR: [#2](https://github.com/eloeyhe/SistemaPedidos/pull/2) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+  PR: [#68](https://github.com/eloeyhe/SistemaPedidos/pull/68)
 
 
 
