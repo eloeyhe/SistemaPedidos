@@ -75,6 +75,18 @@ Issue: [#9](https://github.com/eloeyhe/SistemaPedidos/issues/9)
 
   PR: [#18](https://github.com/eloeyhe/SistemaPedidos/pull/18) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
 
+- [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego agrego las 5 tarjetas CRC y la estructura de archivos correspondiente
+
+  Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
+  
+  Issue: [#43](https://github.com/eloeyhe/SistemaPedidos/issues/43)
+
+  Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
+
+  Issue: [#45](https://github.com/eloeyhe/SistemaPedidos/issues/45)
+
+  PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
+
 ### Changed
 - [feature/analista-requerimentos-add-introduccion-md] 
 
