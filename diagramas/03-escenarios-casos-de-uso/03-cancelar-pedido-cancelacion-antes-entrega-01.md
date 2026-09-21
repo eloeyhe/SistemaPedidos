@@ -25,7 +25,7 @@
 | **Precondiciones:**                       | El pedido existe, todavía no fue entregado y el actor posee permisos para realizar la cancelación.                                                       |
 | **Poscondiciones:**                       | El pedido queda en estado `CANCELADO`, el estado es final e irreversible y se conserva su registro histórico.                                            |
 | **Suposiciones:**                         | El pedido puede ser identificado mediante su número o referencia. El sistema permite conservar el historial de las operaciones realizadas.               |
-| **Reunir requerimentos:**                 | RF3, RF5, RNF5                                                                                                                                           |
-| **Aspectos sobresalientes:**              | ¿Qué ocurre cuando el pedido ya se encuentra `EN_PREPARACION`? ¿Qué permisos adicionales necesita el Encargado? ¿Cómo se gestiona un eventual reembolso? |
+| **Requerimientos:**                        | RF3, RF5, RF8, RNF4, RNF5                                                                                                                                      |
+| **Aspectos sobresalientes:**              | La cancelación de un pedido `EN_PREPARACION` requiere intervención del Encargado; un pedido `LISTO` o `ENTREGADO` no se cancela por el flujo automático. No existe borrado físico: se conservan pedido, ítems, pagos e historial, y cualquier devolución debe quedar registrada. |
 | **Prioridad:**                            | Alta                                                                                                                                                     |
 | **Riesgo:**                               | Medio                                                                                                                                                    |
