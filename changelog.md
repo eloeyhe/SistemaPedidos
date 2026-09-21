@@ -6,6 +6,26 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+## [Release Actividad Obligatoria N°2] - 2026-09-19
+
+### Added
+
+- [feature/doc-coord-repo-update-readme-md] se creo la rama backport y se gestionó el backport hacia develop, creo rama future y creo carpeta ia, tambien realice las issue
+  Issue: [#48](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C48)
+  Issue: [#54](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C54)
+  Issue: [#56](https://github.com/eloeyhe/SistemaPedidos/issues/56)](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C56)
+  Issue: [[#57](https://github.com/eloeyhe/SistemaPedidos/issues/57)](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C57)
+  PR: [#68](https://github.com/eloeyhe/SistemaPedidos/pull/68)
+
+- [feature/espec-escenarios-casos-uso-add-escenario-1] Se agregaron los escenarios en casos de uso y la plantilla soicitada en ia/a2
+  Issue: [#65](https://github.com/eloeyhe/SistemaPedidos/issues/65)
+  Issue: [#66](https://github.com/eloeyhe/SistemaPedidos/issues/66)
+  Issue: [#67](https://github.com/eloeyhe/SistemaPedidos/issues/67)
+  PR: [#33](https://github.com/eloeyhe/SistemaPedidos/pull/33) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)  
+
+  
+
+
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
 
