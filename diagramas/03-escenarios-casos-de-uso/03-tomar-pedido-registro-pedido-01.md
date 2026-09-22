@@ -16,7 +16,7 @@
 | 3. El Usuario de Mostrador ingresa el nombre o referencia para el retiro                   | Datos del pedido                    |
 | 4. Se seleccionan los productos o combos y sus cantidades                                  | Catálogo de productos y combos      |
 | 5. Se agregan las personalizaciones correspondientes a los productos                       | Personalizaciones del pedido        |
-| 6. El sistema calcula los subtotales y el total del pedido                                 | Precios históricos de los productos |
+| 6. El sistema calcula los subtotales y el total del pedido | Catálogo de productos y adicionales por personalizaciones |
 | 7. Se selecciona y valida el medio de pago: efectivo o transferencia                       | Medio de pago permitido             |
 | 8. El sistema registra el pago asociado al pedido                                          | Registro de Pago                    |
 | 9. El sistema registra el pedido con estado `RECIBIDO`, conservando los precios históricos | Pedido y detalle del pedido         |
