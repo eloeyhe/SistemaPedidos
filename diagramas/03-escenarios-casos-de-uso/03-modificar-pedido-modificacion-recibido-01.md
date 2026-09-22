@@ -17,7 +17,7 @@
 | 4. Se agregan, eliminan o modifican productos y cantidades                              | Productos y cantidades del pedido |
 | 5. Se modifican las personalizaciones necesarias                                        | Personalizaciones                 |
 | 6. El sistema recalcula el total del pedido                                             | Total actualizado                 |
-| 7. Si el pedido ya fue pagado, el sistema calcula la diferencia correspondiente         | Pago registrado y diferencia      |
+| 7. Si el pedido ya fue pagado, el sistema conserva el pago original y calcula la diferencia, registrando cada cobro adicional o devolución por separado | Pago registrado y diferencia de pago |
 | 8. Se registra el ajuste del pago mediante efectivo o transferencia cuando corresponde  | Medio de pago                     |
 | 9. El Usuario de Mostrador confirma la modificación                                     | Confirmación de modificación      |
 | 10. El sistema actualiza el pedido conservando el mismo identificador                   | Pedido actualizado                |
