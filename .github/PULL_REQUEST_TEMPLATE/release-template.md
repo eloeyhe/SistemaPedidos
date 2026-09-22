@@ -1,4 +1,4 @@
-# 📦 [GRUPO N°X][Actividad Obligatoria N°1] Entrega Final - Release a master
+# 📦 [GRUPO N°1][Actividad Obligatoria N°2] Entrega Final - Release a master
 
 > ⚠️ GitHub permite utilizar diferentes plantillas de Pull Request dependiendo del tipo de rama.
 > Por ejemplo:
@@ -11,7 +11,7 @@
 
 ## 🧾 Descripción General de la Entrega
 
-Esta Pull Request representa la **entrega final de la Actividad Obligatoria N°1**. Incluye la integración de los aportes realizados por todos los integrantes del grupo, previamente mergeados en `develop`.
+Esta Pull Request representa la **entrega final de la Actividad Obligatoria N°2**. Incluye la integración de los aportes realizados por todos los integrantes del grupo, previamente mergeados en `develop`.
 
 ---
 
