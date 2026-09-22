@@ -1,6 +1,6 @@
 # Registro de Code Reviews asistidas con IA - Diseñador de Tarjetas CRC
 ## Code Review 1: PR #69 - [Diseñador de Tarjetas CRC /diseniador-tarjetas-crc-add-tarjeta-clase-1]
-* **Rama trabajada:** `future/diseniador-tarjetas-crc-add-tarjeta-clase-1`
+* **Rama trabajada:** `feature/diseniador-tarjetas-crc-add-tarjeta-clase-1`
 * **Autor:** Eloy Eyheramendy
 
 ### 1. Prompt utilizado
