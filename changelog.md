@@ -17,6 +17,13 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [[#57](https://github.com/eloeyhe/SistemaPedidos/issues/57)](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C57)
   PR: [#68](https://github.com/eloeyhe/SistemaPedidos/pull/68)
 
+- [feature/espec-escenarios-casos-uso-add-escenario-1] Se agregaron los escenarios en casos de uso y la plantilla soicitada en ia/a2
+  Issue: [#65](https://github.com/eloeyhe/SistemaPedidos/issues/65)
+  Issue: [#66](https://github.com/eloeyhe/SistemaPedidos/issues/66)
+  Issue: [#67](https://github.com/eloeyhe/SistemaPedidos/issues/67)
+  PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)  
+
+  
 
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
