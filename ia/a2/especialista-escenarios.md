@@ -46,7 +46,7 @@ Durante la elaboración de los escenarios se realizaron los siguientes ajustes:
 
 Se generaron cinco archivos individuales dentro de:
 
-`diagramas/03-escenarios-caso-de-uso/`
+`diagramas/03-escenarios-casos-de-uso/`
 
 Los archivos corresponden a:
 
