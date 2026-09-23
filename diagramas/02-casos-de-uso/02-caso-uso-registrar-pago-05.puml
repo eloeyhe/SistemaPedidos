@@ -1,0 +1,29 @@
+@startuml CU05_Registrar_Pago
+left to right direction
+
+actor Cliente
+actor "Usuario de Mostrador" as Mostrador
+
+rectangle "Sistema de Pedidos" {
+    usecase "Registrar Pago" as Registrar
+    usecase "Seleccionar pedido" as Seleccionar
+    usecase "Calcular importe a cobrar" as Calcular
+    usecase "Validar medio de pago" as Validar
+    usecase "Registrar pago en efectivo" as Efectivo
+    usecase "Validar transferencia bancaria" as Transferencia
+    usecase "Registrar ajuste o devolución" as Ajuste
+    usecase "Rechazar pago" as Rechazar
+}
+
+Cliente -- Registrar
+Mostrador -- Registrar
+
+Registrar .> Seleccionar : <<include>>
+Registrar .> Calcular : <<include>>
+Registrar .> Validar : <<include>>
+
+Efectivo .> Registrar : <<extend>>
+Transferencia .> Registrar : <<extend>>
+Ajuste .> Registrar : <<extend>>
+Rechazar .> Registrar : <<extend>>
+@enduml

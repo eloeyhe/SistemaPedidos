@@ -1,0 +1,26 @@
+@startuml CU03_Priorizar_Pedido
+left to right direction
+
+actor Cliente
+actor "Usuario de Mostrador" as Mostrador
+actor "Personal de Cocina" as Cocina
+
+rectangle "Sistema de Pedidos" {
+    usecase "Priorizar Pedido" as Priorizar
+    usecase "Identificar pedido activo" as Identificar
+    usecase "Validar factibilidad de prioridad" as Validar
+    usecase "Marcar pedido como urgente" as Marcar
+    usecase "Mostrar prioridad en pantalla" as Mostrar
+    usecase "Solicitar prioridad" as Solicitar
+}
+
+Cliente -- Solicitar
+Mostrador -- Priorizar
+Cocina -- Mostrar
+
+Priorizar .> Identificar : <<include>>
+Priorizar .> Validar : <<include>>
+Priorizar .> Marcar : <<include>>
+Priorizar .> Mostrar : <<include>>
+Solicitar .> Priorizar : <<extend>>
+@enduml
