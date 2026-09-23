@@ -23,7 +23,24 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#67](https://github.com/eloeyhe/SistemaPedidos/issues/67)
   PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)  
 
+- [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego agrego las 5 tarjetas CRC y la estructura de archivos correspondiente
+
+  Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
   
+  Issue: [#43](https://github.com/eloeyhe/SistemaPedidos/issues/43)
+
+  Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
+
+  Issue: [#45](https://github.com/eloeyhe/SistemaPedidos/issues/45)
+
+  PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
+
+### Changed
+
+- [feature/diseniador-tarjetas-add-tarjeta-clase-1] Se realizaron los cambios adecuados a las clases adecuadas.
+  Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
+  Issue: [#44] (https://github.com/eloeyhe/SistemaPedidos/issues/44)
+  PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
 
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
