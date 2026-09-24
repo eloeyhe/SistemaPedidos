@@ -4,7 +4,7 @@ Este documento agrupa la navegación hacia los distintos artefactos UML del proy
 
 ## 📁 Secciones de Diagramas
 
-1. **[Diagrama de Clases y Tarjetas CRC](./01-diagrama-clases/)**
+1. **[Diagrama de Clases](./01-diagrama-clases/)**
    - Modelado conceptual de entidades y tarjetas CRC.
 
 2. **[Diagramas de Casos de Uso](./02-casos-de-uso/diagramas_de_casos_de_uso.md)**

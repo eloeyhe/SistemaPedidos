@@ -17,12 +17,13 @@ rectangle "Sistema de Pedidos" {
     usecase "Registrar cobro" as Cobrar
     usecase "Validar medio de pago" as ValidarPago
     usecase "Confirmar y enviar a cocina" as Confirmar
+    usecase "Visualizar/Recibir pedido" as Recibir
     usecase "Resolver falta de stock" as FaltaStock
     usecase "Resolver rechazo de transferencia" as RechazoTransferencia
 }
 
 Mostrador -- Tomar
-Cocina -- Confirmar
+Cocina -- Recibir
 
 Tomar .> Identificar : <<include>>
 Tomar .> Seleccionar : <<include>>

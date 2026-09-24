@@ -16,8 +16,6 @@ rectangle "Sistema de Pedidos" {
     usecase "Rechazar transicion invalida" as Rechazar
 }
 
-Mostrador -- Cambiar
-Cocina -- Cambiar
 Cocina -- IniciarPreparacion
 Cocina -- FinalizarPreparacion
 Mostrador -- RegistrarEntrega
