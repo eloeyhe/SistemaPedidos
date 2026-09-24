@@ -1,0 +1,24 @@
+@startuml CU05_Consultar_Pedidos_Activos
+left to right direction
+
+actor "Usuario de Mostrador" as Mostrador
+actor Cocina
+
+rectangle "Sistema de Pedidos" {
+    usecase "Consultar Pedidos Activos" as Consultar
+    usecase "Obtener pedidos activos" as Obtener
+    usecase "Mostrar estados RECIBIDO, EN_PREPARACION y LISTO" as MostrarEstados
+    usecase "Ordenar por prioridad" as OrdenarPrioridad
+    usecase "Mostrar prioridad destacada" as MostrarPrioridad
+    usecase "Informar datos no actualizados" as SinConexion
+}
+
+Mostrador -- Consultar
+Cocina -- Consultar
+
+Consultar .> Obtener : <<include>>
+Consultar .> MostrarEstados : <<include>>
+Consultar .> OrdenarPrioridad : <<include>>
+MostrarPrioridad .> OrdenarPrioridad : <<include>>
+SinConexion .> Consultar : <<extend>>
+@enduml

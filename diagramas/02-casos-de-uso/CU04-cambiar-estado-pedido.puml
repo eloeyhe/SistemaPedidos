@@ -1,0 +1,33 @@
+@startuml CU04_Cambiar_Estado_Pedido
+left to right direction
+
+actor "Usuario de Mostrador" as Mostrador
+actor Cocina
+
+rectangle "Sistema de Pedidos" {
+    usecase "Cambiar Estado de Pedido" as Cambiar
+    usecase "Seleccionar pedido" as Seleccionar
+    usecase "Consultar estado actual" as Consultar
+    usecase "Validar transicion permitida" as Validar
+    usecase "RECIBIDO a EN_PREPARACION" as IniciarPreparacion
+    usecase "EN_PREPARACION a LISTO" as FinalizarPreparacion
+    usecase "LISTO a ENTREGADO" as RegistrarEntrega
+    usecase "Actualizar estado unico" as Actualizar
+    usecase "Rechazar transicion invalida" as Rechazar
+}
+
+Mostrador -- Cambiar
+Cocina -- Cambiar
+Cocina -- IniciarPreparacion
+Cocina -- FinalizarPreparacion
+Mostrador -- RegistrarEntrega
+
+Cambiar .> Seleccionar : <<include>>
+Cambiar .> Consultar : <<include>>
+Cambiar .> Validar : <<include>>
+Cambiar .> Actualizar : <<include>>
+IniciarPreparacion .> Cambiar : <<extend>>
+FinalizarPreparacion .> Cambiar : <<extend>>
+RegistrarEntrega .> Cambiar : <<extend>>
+Rechazar .> Validar : <<extend>>
+@enduml
