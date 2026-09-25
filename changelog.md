@@ -43,12 +43,14 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#76](https://github.com/eloeyhe/SistemaPedidos/issues/76)
   PR: [#72](https://github.com/eloeyhe/SistemaPedidos/pull/72) - @AgustinCalaver (Modelador de Diagramas de Casos de Uso)
 
-- [feature/doc-coord-repo-update-readme-md] se completo documentador-coordinador.md, README.md, 
-  Issue: [#48](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C48)
-  Issue: [#54](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C54)
-  Issue: [#56](https://github.com/eloeyhe/SistemaPedidos/issues/56)(https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C56)
-  Issue: [[#57](https://github.com/eloeyhe/SistemaPedidos/issues/57)](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C57)
-  PR: [#68](https://github.com/eloeyhe/SistemaPedidos/pull/68) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+- [feature/doc-coord-repo-update-readme-md] se completo documentador-coordinador.md, README.md 
+  Issue: [#49](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C49)
+  Issue: [#50](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C50)
+  Issue: [#51](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C51)
+  Issue: [#52](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C52)
+  Issue: [#53](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C53)
+  Issue: [#55](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C55)
+  PR: [#77](https://github.com/eloeyhe/SistemaPedidos/pull/77) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
 ### Changed
 
