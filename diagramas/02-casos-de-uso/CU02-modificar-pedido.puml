@@ -1,0 +1,36 @@
+@startuml CU02_Modificar_Pedido
+left to right direction
+actor Cliente
+actor "Usuario de Mostrador" as Mostrador
+
+Cliente .. Mostrador : solicita la modificacion
+
+rectangle "Sistema de Pedidos" {
+	usecase "Modificar Pedido" as Modificar
+	usecase "Buscar pedido" as Buscar
+	usecase "Validar estado RECIBIDO" as ValidarEstado
+	usecase "Editar items y personalizaciones" as Editar
+	usecase "Recalcular total" as Recalcular
+	usecase "Registrar ajuste de cobro" as AjusteCobro
+	usecase "Seleccionar medio de pago" as MedioPago
+	usecase "Validar medio de pago" as ValidarPago
+	usecase "Confirmar modificacion" as Confirmar
+	usecase "Rechazar modificacion por estado" as RechazarEstado
+	usecase "Impedir pedido sin items" as SinItems
+}
+
+Mostrador -- Modificar
+
+Modificar .> Buscar : <<include>>
+Modificar .> ValidarEstado : <<include>>
+Modificar .> Editar : <<include>>
+Modificar .> Recalcular : <<include>>
+Modificar .> Confirmar : <<include>>
+
+AjusteCobro .> Modificar : <<extend>>
+AjusteCobro .> MedioPago : <<include>>
+AjusteCobro .> ValidarPago : <<include>>
+
+RechazarEstado .> ValidarEstado : <<extend>>
+SinItems .> Editar : <<extend>>
+@enduml

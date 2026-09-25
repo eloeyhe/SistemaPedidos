@@ -1,0 +1,33 @@
+@startuml CU03_Cancelar_Pedido
+left to right direction
+actor Cliente
+actor "Usuario de Mostrador" as Mostrador
+actor Encargado
+
+Cliente .. Mostrador : solicita la cancelacion
+
+rectangle "Sistema de Pedidos" {
+	usecase "Cancelar Pedido" as Cancelar
+	usecase "Buscar pedido por identificador/referencia" as Buscar
+	usecase "Validar estado del pedido" as ValidarEstado
+	usecase "Solicitar y registrar motivo de cancelacion" as RegistrarMotivo
+	usecase "Procesar reembolso/devolucion" as Reembolsar
+	usecase "Confirmar cancelacion y liberar comanda" as Confirmar
+	usecase "Autorizar cancelacion en preparacion" as Autorizar
+	usecase "Bloquear cancelacion (LISTO/ENTREGADO)" as Bloquear
+	usecase "Resolver rechazo de reembolso" as RechazoReembolso
+}
+
+Mostrador -- Cancelar
+Encargado -- Autorizar
+
+Cancelar .> Buscar : <<include>>
+Cancelar .> ValidarEstado : <<include>>
+Cancelar .> RegistrarMotivo : <<include>>
+Cancelar .> Reembolsar : <<include>>
+Cancelar .> Confirmar : <<include>>
+
+Autorizar .> Cancelar : <<extend>>
+Bloquear .> ValidarEstado : <<extend>>
+RechazoReembolso .> Reembolsar : <<extend>>
+@enduml
