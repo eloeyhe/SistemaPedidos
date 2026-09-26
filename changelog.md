@@ -11,10 +11,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ### Added
 
 - [feature/doc-coord-repo-update-readme-md] se creo la rama backport y se gestionó el backport hacia develop, creo rama future y creo carpeta ia, tambien realice las issue
-  Issue: [#48](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C48)
-  Issue: [#54](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C54)
-  Issue: [#56](https://github.com/eloeyhe/SistemaPedidos/issues/56)(https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C56)
-  Issue: [[#57](https://github.com/eloeyhe/SistemaPedidos/issues/57)](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C57)
+  Issue: [#48](https://github.com/eloeyhe/SistemaPedidos/issues/48)
+  Issue: [#54](https://github.com/eloeyhe/SistemaPedidos/issues/54)
+  Issue: [#56](https://github.com/eloeyhe/SistemaPedidos/issues/56)
+  Issue: [#57](https://github.com/eloeyhe/SistemaPedidos/issues/57)
   PR: [#68](https://github.com/eloeyhe/SistemaPedidos/pull/68) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
 - [feature/espec-escenarios-casos-uso-add-escenario-1] Se agregaron los escenarios en casos de uso y la plantilla soicitada en ia/a2
@@ -26,13 +26,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego agrego las 5 tarjetas CRC y la estructura de archivos correspondiente
 
   Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
-  
   Issue: [#43](https://github.com/eloeyhe/SistemaPedidos/issues/43)
-
   Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
-
   Issue: [#45](https://github.com/eloeyhe/SistemaPedidos/issues/45)
-
   PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
 
   - [feature/modelador-diagramas-casos-uso] Se realizaron las tareas de modelado PlantUML, renderización de imágenes PNG e indexación de los diagramas UML de casos de uso (CU01-CU05) para la A2.
@@ -44,19 +40,19 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#72](https://github.com/eloeyhe/SistemaPedidos/pull/72) - @AgustinCalaver (Modelador de Diagramas de Casos de Uso)
 
 - [feature/doc-coord-repo-update-readme-md] se completo documentador-coordinador.md, README.md 
-  Issue: [#49](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C49)
-  Issue: [#50](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C50)
-  Issue: [#51](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C51)
-  Issue: [#52](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C52)
-  Issue: [#53](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C53)
-  Issue: [#55](https://github.com/eloeyhe/SistemaPedidos/issues/46?issue=eloeyhe%7CSistemaPedidos%7C55)
+  Issue: [#49](https://github.com/eloeyhe/SistemaPedidos/issues/49)
+  Issue: [#50](https://github.com/eloeyhe/SistemaPedidos/issues/50)
+  Issue: [#51](https://github.com/eloeyhe/SistemaPedidos/issues/51)
+  Issue: [#52](https://github.com/eloeyhe/SistemaPedidos/issues/52)
+  Issue: [#53](https://github.com/eloeyhe/SistemaPedidos/issues/53)
+  Issue: [#55](https://github.com/eloeyhe/SistemaPedidos/issues/55)
   PR: [#77](https://github.com/eloeyhe/SistemaPedidos/pull/77) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
 ### Changed
 
 - [feature/diseniador-tarjetas-add-tarjeta-clase-1] Se realizaron los cambios adecuados a las clases adecuadas.
   Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
-  Issue: [#44] (https://github.com/eloeyhe/SistemaPedidos/issues/44)
+  Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
   PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
 
 - [feature/modelador-diagramas-casos-uso] Se aplicaron las correcciones solicitadas en los diagramas de casos de uso (CU01-CU05): inclusión de Recibir en CU01, validación de pago en CU02, intervención del Encargado en CU03 y diferenciación de vistas Cocina/Mostrador en CU05.
