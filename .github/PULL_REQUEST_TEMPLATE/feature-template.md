@@ -1,4 +1,4 @@
-# 🟣 PULL REQUEST – Actividad Obligatoria N.º 1 – Diseño Orientado a Objetos
+# 🟣 PULL REQUEST – Actividad Obligatoria N.º 2 – Diseño Orientado a Objetos
 
 ---
 
@@ -63,7 +63,7 @@ _(Opcional – Dejar aclaraciones, dificultades encontradas, o sugerencias)_
 
 ## 🧾 Enlace a la consigna
 
-[📄 Consigna Actividad Obligatoria N.º 1 - GitHub](https://github.com/TuUsuario/SistemaProductoraVideos/blob/main/anexos/introduccion.md)
+[📄 Consigna Actividad Obligatoria N.º 2 - GitHub](https://github.com/TuUsuario/SistemaProductoraVideos/blob/main/anexos/introduccion.md)
 
 ---
 
