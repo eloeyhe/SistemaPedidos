@@ -31,7 +31,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#45](https://github.com/eloeyhe/SistemaPedidos/issues/45)
   PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
 
-  - [feature/modelador-diagramas-casos-uso] Se realizaron las tareas de modelado PlantUML, renderización de imágenes PNG e indexación de los diagramas UML de casos de uso (CU01-CU05) para la A2.
+- [feature/modelador-diagramas-casos-uso] Se realizaron las tareas de modelado PlantUML, renderización de imágenes PNG e indexación de los diagramas UML de casos de uso (CU01-CU05) para la A2.
   Issue: [#71](https://github.com/eloeyhe/SistemaPedidos/issues/71)
   Issue: [#73](https://github.com/eloeyhe/SistemaPedidos/issues/73)
   Issue: [#74](https://github.com/eloeyhe/SistemaPedidos/issues/74)
