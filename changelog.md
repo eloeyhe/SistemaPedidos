@@ -64,6 +64,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   - [fix/doc-coord-fix-changelog-and-naming] envio correcciones en changelog, hambas template y actualizo README
   PR: [#79](https://github.com/eloeyhe/SistemaPedidos/pull/79) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
+  - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Se crearon las Tarjeas CRC faltantes y se corrigieron los errores en las existentes indicadas por el docente
+  PR: [#82](https://github.com/eloeyhe/SistemaPedidos/pull/82) - @eloeyhe (Diseñador de Tarjetas CRC)
 
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
