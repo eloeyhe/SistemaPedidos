@@ -17,21 +17,20 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#57](https://github.com/eloeyhe/SistemaPedidos/issues/57)
   PR: [#68](https://github.com/eloeyhe/SistemaPedidos/pull/68) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-- [feature/espec-escenarios-casos-uso-add-escenario-1] Se agregaron los escenarios en casos de uso y la plantilla soicitada en ia/a2
+- [feature/espec-escenarios-casos-uso-add-escenario-1] Feature/espec escenarios casos uso add escenario 1
   Issue: [#65](https://github.com/eloeyhe/SistemaPedidos/issues/65)
   Issue: [#66](https://github.com/eloeyhe/SistemaPedidos/issues/66)
   Issue: [#67](https://github.com/eloeyhe/SistemaPedidos/issues/67)
   PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)
 
-- [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego agrego las 5 tarjetas CRC y la estructura de archivos correspondiente
-
+- [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego tarjetas CRC
   Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
   Issue: [#43](https://github.com/eloeyhe/SistemaPedidos/issues/43)
   Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
   Issue: [#45](https://github.com/eloeyhe/SistemaPedidos/issues/45)
   PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
 
-- [feature/modelador-diagramas-casos-uso] Se realizaron las tareas de modelado PlantUML, renderización de imágenes PNG e indexación de los diagramas UML de casos de uso (CU01-CU05) para la A2.
+- [feature/modelador-diagramas-casos-uso] feat: agregar diagramas de casos de uso e indices UML para A2
   Issue: [#71](https://github.com/eloeyhe/SistemaPedidos/issues/71)
   Issue: [#73](https://github.com/eloeyhe/SistemaPedidos/issues/73)
   Issue: [#74](https://github.com/eloeyhe/SistemaPedidos/issues/74)
@@ -39,7 +38,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#76](https://github.com/eloeyhe/SistemaPedidos/issues/76)
   PR: [#72](https://github.com/eloeyhe/SistemaPedidos/pull/72) - @AgustinCalaver (Modelador de Diagramas de Casos de Uso)
 
-- [feature/doc-coord-repo-update-readme-md] se completo documentador-coordinador.md, README.md
+- [feature/doc-coord-repo-update-readme-md] completo documentador-coordinador.md, README.md
   Issue: [#49](https://github.com/eloeyhe/SistemaPedidos/issues/49)
   Issue: [#50](https://github.com/eloeyhe/SistemaPedidos/issues/50)
   Issue: [#51](https://github.com/eloeyhe/SistemaPedidos/issues/51)
@@ -50,12 +49,12 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Changed
 
-- [feature/diseniador-tarjetas-add-tarjeta-clase-1] Se realizaron los cambios adecuados a las clases adecuadas.
+- [feature/diseniador-tarjetas-add-tarjeta-clase-1] Agrego cambios en tarjetas CRC
   Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
   Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
   PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
 
-- [feature/modelador-diagramas-casos-uso] Se aplicaron las correcciones solicitadas en los diagramas de casos de uso (CU01-CU05): inclusión de Recibir en CU01, validación de pago en CU02, intervención del Encargado en CU03 y diferenciación de vistas Cocina/Mostrador en CU05.
+- [feature/modelador-diagramas-casos-uso] agregar cambios en diagramas de casos de uso e indices UML para A2
   Issue: [#71](https://github.com/eloeyhe/SistemaPedidos/issues/71)
   PR: [#72](https://github.com/eloeyhe/SistemaPedidos/pull/72) - @AgustinCalaver (Modelador de Diagramas de Casos de Uso)
 
@@ -67,7 +66,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/modelador-diag-casos-uso-corregir-actividad-2] Fix: Correcciones en diagramas e índices de Casos de Uso
   Issue: [#80](https://github.com/eloeyhe/SistemaPedidos/issues/80)
   PR: [#81](https://github.com/eloeyhe/SistemaPedidos/pull/81) - @cmariano93-netizen (Modelador de Diagramas de Casos de Uso)
-  - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Se crearon las Tarjeas CRC faltantes y se corrigieron los errores en las existentes indicadas por el docente
+- [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Aplico correcciones solicitadas sobre las Tarjetas CRC
   PR: [#82](https://github.com/eloeyhe/SistemaPedidos/pull/82) - @eloeyhe (Diseñador de Tarjetas CRC)
 
 
