@@ -1,6 +1,6 @@
 # Registro de uso de Copilot Agent Mode - Modelador de Diagramas de Casos de Uso
 
-**Rol:** Modelador de Diagramas de Casos de Uso UML  
+**Rol:** Modelador de Diagramas de Casos de Uso UML
 **Autor:** Feijo Agustin
 
 ## 1. Contexto utilizado
@@ -25,17 +25,16 @@ Se utilizo `anexos/introduccion.md` como Anexo A1. El documento contiene los act
 
 Los cinco bloques completos se encuentran en sus archivos fuente versionados y se reproducen a continuacion.
 
-- [CU01-tomar-pedido.puml](../../diagramas/02-casos-de-uso/CU01-tomar-pedido.puml)
-- [CU02-modificar-pedido.puml](../../diagramas/02-casos-de-uso/CU02-modificar-pedido.puml)
-- [CU03-cancelar-pedido.puml](../../diagramas/02-casos-de-uso/CU03-cancelar-pedido.puml)
-- [CU04-cambiar-estado-pedido.puml](../../diagramas/02-casos-de-uso/CU04-cambiar-estado-pedido.puml)
-- [CU05-consultar-pedidos-activos.puml](../../diagramas/02-casos-de-uso/CU05-consultar-pedidos-activos.puml)
-
+- [02-caso-uso-tomar-pedido-01.puml](../../diagramas/02-casos-de-uso/02-caso-uso-tomar-pedido-01.puml)
+- [02-caso-uso-modificar-pedido-02.puml](../../diagramas/02-casos-de-uso/02-caso-uso-modificar-pedido-02.puml)
+- [02-caso-uso-cancelar-pedido-03.puml](../../diagramas/02-casos-de-uso/02-caso-uso-cancelar-pedido-03.puml)
+- [02-caso-uso-cambiar-estado-pedido-04.puml](../../diagramas/02-casos-de-uso/02-caso-uso-cambiar-estado-pedido-04.puml)
+- [02-caso-uso-consultar-pedidos-activos-05.puml](../../diagramas/02-casos-de-uso/02-caso-uso-consultar-pedidos-activos-05.puml)
 
 - Se conservaron los actores aprobados y sus responsabilidades: Usuario de Mostrador, Cocina y Encargado como actores del sistema, y Cliente como actor externo indirecto.
 - Se mantuvieron los cinco casos de uso del alcance A1 y los estados RECIBIDO, EN_PREPARACION, LISTO, ENTREGADO y CANCELADO.
 - Se conservaron las relaciones `<<include>>` para pasos obligatorios y `<<extend>>` para alternativas, errores o condiciones opcionales.
-- Se mantuvieron los flujos de seleccion de productos, personalizaciones, recalculo, validacion de estado, auditoria y falta de stock.
+- Se mantuvieron los flujos de seleccion de productos, personalizaciones, recalculo y validacion de estado.
 
 ### Se adapto o cambio
 
@@ -53,3 +52,17 @@ Los cinco bloques completos se encuentran en sus archivos fuente versionados y s
 - Se descartaron las asociaciones del Cliente a `Tomar Pedido`, `Modificar Pedido` y cualquier otro caso de uso.
 - Se descarto el actor generico `Admin`, que no forma parte de los actores aprobados.
 - Los cinco fuentes PlantUML anteriores quedaron reemplazados para que no permanezcan diagramas obsoletos con nombres y responsabilidades contradictorias.
+
+### Correspondencia entre actor, clase y escenario (RC5)
+
+En CU01 y CU02 se documenta la correspondencia sin equiparar los conceptos:
+
+- **Actor (casos de uso):** `Cliente` es una persona externa que pide cambios a traves de Mostrador, sin acceso directo al sistema ni asociacion a casos de uso. El actor representa un rol de interaccion, no una clase.
+- **Clase (boceto inicial):** `Cliente` **si existe** en `01-boceto-inicial.excalidraw`, con `nombre` y operaciones `crearPedido()`, `cancelarPedido()` y `modificarPedido()`. Ese boceto de diseno no convierte al Cliente en usuario del sistema: RF6 indica que el MVP identifica el pedido por referencia de retiro y no exige una ficha persistida ni datos personales del cliente. La correspondencia entre la clase y la implementacion MVP queda sujeta a la evolucion del diseno; no se infiere persistencia por el solo hecho de figurar en el boceto.
+- **Escenarios:** CU01 y CU02 indican que el Cliente solicita la operacion indirectamente y que Mostrador es quien interactua con el sistema.
+
+La nota junto a `Cliente` en CU01 y CU02 resume esta distincion en las imagenes.
+
+### Autorizacion de cancelacion especial (RC7)
+
+En CU03, el actor `Encargado` representa al personal cuya responsabilidad `autorizarCancelacion()` figura en la clase `UsuarioEncargado` del boceto. Mostrador inicia la cancelacion; si el estado es `EN_PREPARACION`, solo el Encargado autoriza continuar antes de confirmar y registrar `CANCELADO`. Si deniega, no se modifica el pedido. Los estados `LISTO` y `ENTREGADO` no se cancelan por el flujo automatico; una devolucion manual del Encargado es un proceso separado. El escenario CU03-01 explicita esta secuencia y el diagrama anota la condicion de la extension.

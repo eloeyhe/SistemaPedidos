@@ -1,0 +1,64 @@
+@startuml 02-caso-uso-cambiar-estado-pedido-04
+top to bottom direction
+skinparam dpi 150
+skinparam nodesep 45
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam ArrowFontSize 11
+hide empty members
+
+actor "Usuario de Mostrador" as Mostrador
+actor Cocina
+
+rectangle "Sistema de Pedidos" {
+    usecase "Cambiar Estado de Pedido" as Cambiar
+    usecase "Seleccionar pedido" as Seleccionar
+    usecase "Consultar estado actual" as Consultar
+    usecase "Validar transicion permitida" as Validar
+    usecase "RECIBIDO a EN_PREPARACION" as IniciarPreparacion
+    usecase "EN_PREPARACION a LISTO" as FinalizarPreparacion
+    usecase "LISTO a ENTREGADO" as RegistrarEntrega
+    usecase "Actualizar estado unico" as Actualizar
+    usecase "Rechazar transicion invalida" as Rechazar
+}
+
+Cocina -- IniciarPreparacion
+Cocina -- FinalizarPreparacion
+Mostrador -- RegistrarEntrega
+
+Cambiar .> Seleccionar : <<include>>
+Cambiar .> Consultar : <<include>>
+Cambiar .> Validar : <<include>>
+Cambiar .> Actualizar : <<include>>
+
+' Cada transicion valida del ciclo de vida es una extension del caso base.
+IniciarPreparacion .> Cambiar : <<extend>>
+FinalizarPreparacion .> Cambiar : <<extend>>
+RegistrarEntrega .> Cambiar : <<extend>>
+Rechazar .> Validar : <<extend>>
+
+' Control visual: caso base en el centro; transiciones de estado arriba
+' y casos incluidos en fila debajo, sin cruces con los actores.
+Cambiar -[hidden]down- Seleccionar
+Cambiar -[hidden]down- Consultar
+Cambiar -[hidden]down- Validar
+Cambiar -[hidden]down- Actualizar
+Seleccionar -[hidden]right- Consultar
+Consultar -[hidden]right- Validar
+Validar -[hidden]right- Actualizar
+
+' Fila intermedia de transiciones del ciclo de vida.
+IniciarPreparacion -[hidden]right- FinalizarPreparacion
+FinalizarPreparacion -[hidden]right- RegistrarEntrega
+IniciarPreparacion -[hidden]down- Cambiar
+FinalizarPreparacion -[hidden]down- Cambiar
+RegistrarEntrega -[hidden]down- Cambiar
+
+' Actores en la fila superior, alineados con sus transiciones.
+Cocina -[hidden]down- IniciarPreparacion
+Cocina -[hidden]right- Mostrador
+Mostrador -[hidden]down- RegistrarEntrega
+
+' La transicion invalida se cuelga de la validacion.
+Rechazar -[hidden]down- Validar
+@enduml

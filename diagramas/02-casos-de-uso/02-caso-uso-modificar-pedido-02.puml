@@ -1,6 +1,18 @@
-@startuml CU02_Modificar_Pedido
-left to right direction
+@startuml 02-caso-uso-modificar-pedido-02
+top to bottom direction
+skinparam dpi 150
+skinparam nodesep 45
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam ArrowFontSize 11
+hide empty members
 actor Cliente
+note right of Cliente
+	Actor externo: solicita al Mostrador,
+	sin acceso directo al sistema.
+	El boceto tambien dibuja una clase Cliente;
+	RF6 no exige ficha de cliente en el MVP.
+end note
 actor "Usuario de Mostrador" as Mostrador
 
 Cliente .. Mostrador : solicita la modificacion
@@ -33,4 +45,20 @@ AjusteCobro .> ValidarPago : <<include>>
 
 RechazarEstado .> ValidarEstado : <<extend>>
 SinItems .> Editar : <<extend>>
+
+' --- Control de ranks: caso base arriba, incluidos en fila propia debajo ---
+Modificar -[hidden]down- Buscar
+Modificar -[hidden]down- ValidarEstado
+Modificar -[hidden]down- Editar
+Modificar -[hidden]down- Recalcular
+Modificar -[hidden]down- Confirmar
+Buscar -[hidden]right- ValidarEstado
+ValidarEstado -[hidden]right- Editar
+Editar -[hidden]right- Recalcular
+Recalcular -[hidden]right- Confirmar
+AjusteCobro -[hidden]down- Modificar
+AjusteCobro -[hidden]down- MedioPago
+MedioPago -[hidden]right- ValidarPago
+RechazarEstado -[hidden]down- ValidarEstado
+SinItems -[hidden]down- Editar
 @enduml

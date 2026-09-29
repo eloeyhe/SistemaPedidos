@@ -1,5 +1,12 @@
-@startuml CU05_Consultar_Pedidos_Activos
-left to right direction
+@startuml 02-caso-uso-consultar-pedidos-activos-05
+top to bottom direction
+skinparam dpi 150
+skinparam nodesep 45
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam ArrowFontSize 11
+hide empty members
+
 actor "Usuario de Mostrador" as Mostrador
 actor Cocina
 
@@ -19,9 +26,20 @@ Mostrador -- ConsultarMostrador
 ConsultarCocina .> Consultar : <<extend>>
 ConsultarMostrador .> Consultar : <<extend>>
 
+' Vistas diferenciadas por actor (A1, CU05).
 Consultar .> Obtener : <<include>>
 Consultar .> Ordenar : <<include>>
 
+' La falta de conexion y el listado vacio son flujos alternativos.
 Destacar .> Ordenar : <<extend>>
 SinConexion .> Consultar : <<extend>>
+
+' Control visual: listado y ordenamiento debajo del caso base; vistas separadas.
+Consultar -[hidden]down- Obtener
+Consultar -[hidden]down- Ordenar
+Obtener -[hidden]right- Ordenar
+ConsultarCocina -[hidden]down- Consultar
+ConsultarMostrador -[hidden]down- Consultar
+SinConexion -[hidden]down- Consultar
+Destacar -[hidden]down- Ordenar
 @enduml
