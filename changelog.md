@@ -67,6 +67,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/modelador-diag-casos-uso-corregir-actividad-2] Fix: Correcciones en diagramas e índices de Casos de Uso
   Issue: [#80](https://github.com/eloeyhe/SistemaPedidos/issues/80)
   PR: [#81](https://github.com/eloeyhe/SistemaPedidos/pull/81) - @cmariano93-netizen (Modelador de Diagramas de Casos de Uso)
+  - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Se crearon las Tarjeas CRC faltantes y se corrigieron los errores en las existentes indicadas por el docente
+  PR: [#82](https://github.com/eloeyhe/SistemaPedidos/pull/82) - @eloeyhe (Diseñador de Tarjetas CRC)
+
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
 
