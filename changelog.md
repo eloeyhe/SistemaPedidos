@@ -67,6 +67,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Se crearon las Tarjeas CRC faltantes y se corrigieron los errores en las existentes indicadas por el docente
   PR: [#82](https://github.com/eloeyhe/SistemaPedidos/pull/82) - @eloeyhe (Diseñador de Tarjetas CRC)
 
+  - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Busco cada ItemPedido y PersonalizacionItem y lo reemplazo por Item_pedido y Personalizacion_item
+  PR: [#85](https://github.com/eloeyhe/SistemaPedidos/pull/85) - @eloeyhe (Diseñador de Tarjetas CRC)
+
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
 
