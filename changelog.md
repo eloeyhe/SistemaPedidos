@@ -87,7 +87,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 - [fix/doc-coord-fix-changelog-and-naming] hago correcciones en changelog.md solicitadas por el docente
  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
-  PR: [#]() - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+  PR: [#87](https://github.com/eloeyhe/SistemaPedidos/pull/87) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
