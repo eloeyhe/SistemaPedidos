@@ -17,20 +17,21 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#57](https://github.com/eloeyhe/SistemaPedidos/issues/57)
   PR: [#68](https://github.com/eloeyhe/SistemaPedidos/pull/68) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-- [feature/espec-escenarios-casos-uso-add-escenario-1] Feature/espec escenarios casos uso add escenario 1
+- [feature/espec-escenarios-casos-uso-add-escenario-1] Se agregaron los escenarios en casos de uso y la plantilla soicitada en ia/a2
   Issue: [#65](https://github.com/eloeyhe/SistemaPedidos/issues/65)
   Issue: [#66](https://github.com/eloeyhe/SistemaPedidos/issues/66)
   Issue: [#67](https://github.com/eloeyhe/SistemaPedidos/issues/67)
-  PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)
+  PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)  
 
-- [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego tarjetas CRC
+- [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego agrego las 5 tarjetas CRC y la estructura de archivos correspondiente
+
   Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
   Issue: [#43](https://github.com/eloeyhe/SistemaPedidos/issues/43)
   Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
   Issue: [#45](https://github.com/eloeyhe/SistemaPedidos/issues/45)
   PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
 
-- [feature/modelador-diagramas-casos-uso] feat: agregar diagramas de casos de uso e indices UML para A2
+- [feature/modelador-diagramas-casos-uso] Se realizaron las tareas de modelado PlantUML, renderización de imágenes PNG e indexación de los diagramas UML de casos de uso (CU01-CU05) para la A2.
   Issue: [#71](https://github.com/eloeyhe/SistemaPedidos/issues/71)
   Issue: [#73](https://github.com/eloeyhe/SistemaPedidos/issues/73)
   Issue: [#74](https://github.com/eloeyhe/SistemaPedidos/issues/74)
@@ -38,7 +39,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#76](https://github.com/eloeyhe/SistemaPedidos/issues/76)
   PR: [#72](https://github.com/eloeyhe/SistemaPedidos/pull/72) - @AgustinCalaver (Modelador de Diagramas de Casos de Uso)
 
-- [feature/doc-coord-repo-update-readme-md] completo documentador-coordinador.md, README.md
+- [feature/doc-coord-repo-update-readme-md] se completo documentador-coordinador.md, README.md 
   Issue: [#49](https://github.com/eloeyhe/SistemaPedidos/issues/49)
   Issue: [#50](https://github.com/eloeyhe/SistemaPedidos/issues/50)
   Issue: [#51](https://github.com/eloeyhe/SistemaPedidos/issues/51)
@@ -49,31 +50,25 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Changed
 
-- [feature/diseniador-tarjetas-add-tarjeta-clase-1] Agrego cambios en tarjetas CRC
+  - [feature/diseniador-tarjetas-add-tarjeta-clase-1] Se realizaron los cambios adecuados a las clases adecuadas.
   Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
   Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
   PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
 
-- [feature/modelador-diagramas-casos-uso] agregar cambios en diagramas de casos de uso e indices UML para A2
+  - [feature/modelador-diagramas-casos-uso] Se aplicaron las correcciones solicitadas en los diagramas de casos de uso (CU01-CU05): inclusión de Recibir en CU01, validación de pago en CU02, intervención del Encargado en CU03 y diferenciación de vistas Cocina/Mostrador en CU05.
   Issue: [#71](https://github.com/eloeyhe/SistemaPedidos/issues/71)
   PR: [#72](https://github.com/eloeyhe/SistemaPedidos/pull/72) - @AgustinCalaver (Modelador de Diagramas de Casos de Uso)
-
+  
 ### Fixed
 
-- [fix/doc-coord-fix-changelog-and-naming] envio correcciones en changelog, ambas template y actualizo README
+  - [fix/doc-coord-fix-changelog-and-naming] envio correcciones en changelog, hambas template y actualizo README
   PR: [#79](https://github.com/eloeyhe/SistemaPedidos/pull/79) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-- [fix/modelador-diag-casos-uso-corregir-actividad-2] Fix: Correcciones en diagramas e índices de Casos de Uso
-  Issue: [#80](https://github.com/eloeyhe/SistemaPedidos/issues/80)
-  PR: [#81](https://github.com/eloeyhe/SistemaPedidos/pull/81) - @cmariano93-netizen (Modelador de Diagramas de Casos de Uso)
-- [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Aplico correcciones solicitadas sobre las Tarjetas CRC
+  - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Se crearon las Tarjeas CRC faltantes y se corrigieron los errores en las existentes indicadas por el docente
   PR: [#82](https://github.com/eloeyhe/SistemaPedidos/pull/82) - @eloeyhe (Diseñador de Tarjetas CRC)
 
-- [fix/correccion-RC6-escenarios-casos-de-uso] Se enviaron las correcciones solicitadas del RC6
-  PR: [#83](https://github.com/eloeyhe/SistemaPedidos/pull/83) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)
-
-- [fix/doc-coord-fix-changelog-and-naming] actualizo y realizo correcciones en changelog
-  PR: [#79](https://github.com/eloeyhe/SistemaPedidos/pull/79) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+  - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Busco cada ItemPedido y PersonalizacionItem y lo reemplazo por Item_pedido y Personalizacion_item
+  PR: [#85](https://github.com/eloeyhe/SistemaPedidos/pull/85) - @eloeyhe (Diseñador de Tarjetas CRC)
 
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
@@ -90,6 +85,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#14](https://github.com/eloeyhe/SistemaPedidos/issues/14)
   Issue: [#15](https://github.com/eloeyhe/SistemaPedidos/issues/15)
   PR: [#31](https://github.com/eloeyhe/SistemaPedidos/pull/31) - @eloeyhe (Documentador y Coordinador de Repositorio:)
+  
 - [feature/doc-coord-repo-update-readme-md] Realizo los ultimos correcciones al trabajo
   Issue: [#16](https://github.com/eloeyhe/SistemaPedidos/issues/11)
   Issue: [#17](https://github.com/eloeyhe/SistemaPedidos/issues/12)
@@ -121,13 +117,12 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#18](https://github.com/eloeyhe/SistemaPedidos/pull/18) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
 
 ### Changed
-
 - [feature/analista-requerimentos-add-introduccion-md] Ampliación de las descripciones de "RF" y "RNF", eliminación de encabezado y corrección del link de NotebookLM
   Issue: [#28](https://github.com/eloeyhe/SistemaPedidos/issues/28)
   Issue: [#29](https://github.com/eloeyhe/SistemaPedidos/issues/29)
   PR: [#30](https://github.com/eloeyhe/SistemaPedidos/pull/30) - @AgustinCalaver (Analista de requerimientos)
 
-- [feature/diseniador-clases-add-boceto-inicial] Se actualizo 01-boceto-inicial.excalidraw y 01_boceto_inicial.png. Se remplazo la entidad Detalle_pedido por Item_Pedido, Se incorporó PersonalizacionItem, fue creada la subentidad Metodo_pago y se actualizaron las relaciones.
+- [feature/diseniador-clases-add-boceto-inicial] Se actualizo 01-boceto-inicial.excalidraw y 01_boceto_inicial.png. Se remplazo la entidad Detalle_pedido por Item_Pedido, Se incorporó Personalizacion_item, fue creada la subentidad Metodo_pago y se actualizaron las relaciones.
   Issue: [#10](https://github.com/eloeyhe/SistemaPedidos/issues/10)
   PR: [#34](https://github.com/eloeyhe/SistemaPedidos/pull/34#issue-5294730443) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
 
@@ -144,8 +139,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#35](https://github.com/eloeyhe/SistemaPedidos/pull/35) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
 
 ### Fixed
-
-- [feature/doc-coord-repo-update-readme-md] Tareas realizadas: completo readme, anexos e introduccion de POO para Sabor Kiosco. Ademas completo changelog.
+- [feature/doc-coord-repo-update-readme-md] Tareas realizadas: completo readme, anexos e introduccion de POO para Sabor Kiosco. Ademas completo changelog. 
   PR: [#31](https://github.com/eloeyhe/SistemaPedidos/pull/31) - @eloeyhe (Documentador y Coordinador de Repositorio:)
 
 - [feature/doc-coord-repo-update-readme-md] fix: Reorganizo el Changelog

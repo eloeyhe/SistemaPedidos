@@ -35,9 +35,9 @@ Errores e inconsistencias detectados, indicando archivo y sección específica.
 
 * Combo no está alineado entre el diagrama y la tarjeta: `04-tarjeta-crc-producto.md\` declara `Combo\` como subclase de `Producto\`, pero el diagrama UML lo muestra separado sin una generalización explícita hacia `Producto\`, violando el RF1\. 
 
-* Colaborador incorrecto en `PersonalizacionItem\`: En `05-tarjeta-crc-personalizacion-item.md\`, `Pago\` figura como colaborador del cálculo del costo adicional, cuando la personalización afecta a `ItemPedido\` y `Pago\` interviene posteriormente en el cobro del `Pedido\` completo (RF1, CU01).
+* Colaborador incorrecto en `Personalizacion_item\`: En `05-tarjeta-crc-personalizacion-item.md\`, `Pago\` figura como colaborador del cálculo del costo adicional, cuando la personalización afecta a `Item_pedido\` y `Pago\` interviene posteriormente en el cobro del `Pedido\` completo (RF1, CU01).
 
-* Relación directa entre `ItemPedido\` y `Pago\` sin justificación:`03-tarjeta-crc-item-pedido.md\` incluye a `Pago\` como colaborador de `ItemPedido\`, mientras que el dominio establece una relación 1 a 1 entre `Pago\` y el `Pedido\` completo.
+* Relación directa entre `Item_pedido\` y `Pago\` sin justificación:`03-tarjeta-crc-item-pedido.md\` incluye a `Pago\` como colaborador de `Item_pedido\`, mientras que el dominio establece una relación 1 a 1 entre `Pago\` y el `Pedido\` completo.
 
 ### 4. Ajustes críticos realizados
 * **Sugerencias aceptadas:**  
@@ -46,11 +46,11 @@ Errores e inconsistencias detectados, indicando archivo y sección específica.
 * Combo no está alineado entre el diagrama y la tarjeta: `04-tarjeta-crc-producto.md\` declara `Combo\` como subclase de `Producto\`, pero el diagrama UML lo muestra separado sin una generalización explícita hacia `Producto\`, violando el RF1\. 
     + se la descarto debido a que si se la declara a `Combo\` como subclase.
 
-* Relación directa entre `ItemPedido\` y `Pago\` sin justificación:`03-tarjeta-crc-item-pedido.md\` incluye a `Pago\` como colaborador de `ItemPedido\`, mientras que el dominio establece una relación 1 a 1 entre `Pago\` y el `Pedido\` completo.
-    + se mantuvo la eliminacion de `Pago\` de los colaboradores de `ItemPedido\`, pero se modifico el argumento ya que `Pago\` no establece una realcion 1 a 1 con `Pedido\` ni con `ItemPedido\`
+* Relación directa entre `Item_pedido\` y `Pago\` sin justificación:`03-tarjeta-crc-item-pedido.md\` incluye a `Pago\` como colaborador de `Item_pedido\`, mientras que el dominio establece una relación 1 a 1 entre `Pago\` y el `Pedido\` completo.
+    + se mantuvo la eliminacion de `Pago\` de los colaboradores de `Item_pedido\`, pero se modifico el argumento ya que `Pago\` no establece una realcion 1 a 1 con `Pedido\` ni con `Item_pedido\`
 
-* Colaborador incorrecto en `PersonalizacionItem\`: En `05-tarjeta-crc-personalizacion-item.md\`, `Pago\` figura como colaborador del cálculo del costo adicional, cuando la personalización afecta a `ItemPedido\` y `Pago\` interviene posteriormente en el cobro del `Pedido\` completo (RF1, CU01).
-    + se sugirio removér a Pago de la lista de colaboradores. ya que, PersonalizacionItem, se relaciona unicamente con item_pedido
+* Colaborador incorrecto en `Personalizacion_item\`: En `05-tarjeta-crc-personalizacion-item.md\`, `Pago\` figura como colaborador del cálculo del costo adicional, cuando la personalización afecta a `Item_pedido\` y `Pago\` interviene posteriormente en el cobro del `Pedido\` completo (RF1, CU01).
+    + se sugirio removér a Pago de la lista de colaboradores. ya que, Personalizacion_item, se relaciona unicamente con item_pedido
 
 
 

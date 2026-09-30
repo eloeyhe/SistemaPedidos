@@ -39,9 +39,9 @@ Tras ejecutar el prompt, Copilot identificó las clases principales del sistema 
 ### 4. Ajustes críticos realizados
 * **Sugerencias aceptadas:** 
 - eliminar la duplicación de la tarjeta Pedido donde también 02-tarjeta-crc-pedido.md:3, aparece Pedido. Clase faltante del dominio para completar las 5 clases clave exigidas por la consigna
-- elimina a Pago de los colaboradores de ItemPedido. El pago se relación únicamente con Historial_pago y tiene como clase hija metodo_pago, no tiene relacion con ItemPedido
-- Pago incorrectamente asociado a PersonalizacionItem:
-remové a Pago de la lista de colaboradores. Pago se relaciona únicamente con Historial_pago . PersonalizacionItem, se relaciona unicamente con item_pedido
+- elimina a Pago de los colaboradores de Item_pedido. El pago se relación únicamente con Historial_pago y tiene como clase hija metodo_pago, no tiene relacion con Item_pedido
+- Pago incorrectamente asociado a Personalizacion_item:
+remové a Pago de la lista de colaboradores. Pago se relaciona únicamente con Historial_pago . Personalizacion_item, se relaciona unicamente con item_pedido
 * **Sugerencias descartadas o modificadas:** Las únicas sugerencias descartadas fueron los datos mezclados que utilizó la ia al momento de generar las estructuras (explicado anteriormente).
 
 ---
