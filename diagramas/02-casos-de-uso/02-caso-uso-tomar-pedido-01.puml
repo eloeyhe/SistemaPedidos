@@ -1,0 +1,66 @@
+@startuml 02-caso-uso-tomar-pedido-01
+top to bottom direction
+skinparam dpi 150
+skinparam nodesep 45
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam ArrowFontSize 11
+hide empty members
+
+actor Cliente
+note right of Cliente
+  Actor externo: solicita al Mostrador,
+  sin acceso directo al sistema.
+  El boceto tambien dibuja una clase Cliente;
+  RF6 no exige ficha de cliente en el MVP.
+end note
+actor "Usuario de Mostrador" as Mostrador
+actor Cocina
+
+Cliente .. Mostrador : solicita el pedido
+
+rectangle "Sistema de Pedidos" {
+  usecase "Tomar Pedido" as Tomar
+  usecase "Identificar pedido y referencia de retiro" as Identificar
+  usecase "Seleccionar productos o combos" as Seleccionar
+  usecase "Agregar personalizaciones" as Personalizar
+  usecase "Recalcular total" as Calcular
+  usecase "Marcar pedido como prioritario" as Priorizar
+  usecase "Registrar cobro" as Cobrar
+  usecase "Validar medio de pago" as ValidarPago
+  usecase "Confirmar y enviar a cocina" as Confirmar
+  usecase "Visualizar/Recibir pedido" as Recibir
+  usecase "Resolver rechazo de transferencia" as RechazoTransferencia
+}
+
+Mostrador -- Tomar
+Cocina -- Recibir
+
+Tomar .> Identificar : <<include>>
+Tomar .> Seleccionar : <<include>>
+Tomar .> Personalizar : <<include>>
+Tomar .> Calcular : <<include>>
+Tomar .> Cobrar : <<include>>
+Tomar .> Confirmar : <<include>>
+
+Priorizar .> Tomar : <<extend>>
+Cobrar .> ValidarPago : <<include>>
+RechazoTransferencia .> Cobrar : <<extend>>
+
+' --- Control de ranks: caso base arriba, incluidos en fila propia debajo ---
+Tomar -[hidden]down- Identificar
+Tomar -[hidden]down- Seleccionar
+Tomar -[hidden]down- Personalizar
+Tomar -[hidden]down- Calcular
+Tomar -[hidden]down- Cobrar
+Tomar -[hidden]down- Confirmar
+Identificar -[hidden]right- Seleccionar
+Seleccionar -[hidden]right- Personalizar
+Personalizar -[hidden]right- Calcular
+Calcular -[hidden]right- Cobrar
+Cobrar -[hidden]right- ValidarPago
+ValidarPago -[hidden]right- Confirmar
+Priorizar -[hidden]down- Tomar
+RechazoTransferencia -[hidden]down- Cobrar
+Cocina -[hidden]down- Recibir
+@enduml
