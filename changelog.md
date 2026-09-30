@@ -69,8 +69,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Aplico correcciones solicitadas sobre las Tarjetas CRC
   PR: [#82](https://github.com/eloeyhe/SistemaPedidos/pull/82) - @eloeyhe (Diseñador de Tarjetas CRC)
 
-  - [fix/correccion-RC6-escenarios-casos-de-uso] Se enviaron las correcciones solicitadas del RC6
+- [fix/correccion-RC6-escenarios-casos-de-uso] Se enviaron las correcciones solicitadas del RC6
   PR: [#83](https://github.com/eloeyhe/SistemaPedidos/pull/83) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)
+
+- [fix/doc-coord-fix-changelog-and-naming] actualizo y realizo correcciones en changelog
+  PR: [#79](https://github.com/eloeyhe/SistemaPedidos/pull/79) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
