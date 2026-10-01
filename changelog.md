@@ -90,7 +90,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
   PR: [#91](https://github.com/eloeyhe/SistemaPedidos/pull/91) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-
+  - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Realizo las correcciones sobre el indice de tarjetas crc y el apartado de ia
+  PR: [#90](https://github.com/eloeyhe/SistemaPedidos/pull/90) - @eloeyhe (Diseñador de Tarjetas CRC)
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
 

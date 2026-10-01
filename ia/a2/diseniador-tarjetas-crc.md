@@ -6,6 +6,7 @@
 ### 1. Prompt utilizado
 ```text
  "Actúa como un Arquitecto de Software experto en Diseño Orientado a Objetos. Necesito que analices nuestro sistema leyendo los archivos de contexto: `anexos/introduccion.md` y `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`.
+>>>>>>> release/actividad-obligatoria-2
 
 A partir de este análisis, crea las Tarjetas CRC para las 5 clases principales del sistema siguiendo estas REGLAS ESTRICTAS:
 
