@@ -72,7 +72,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#64](https://github.com/eloeyhe/SistemaPedidos/issues/64)
   PR: [#83](https://github.com/eloeyhe/SistemaPedidos/pull/83) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)  
 
-- [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Corrijo errores RC3
+- [fix/correcciones-y-creacion-de-tarjetas-crc-restantes] Corrijo errores RC3
  Issue: [#41](https://github.com/eloeyhe/SistemaPedidos/issues/41)
   PR: [#85](https://github.com/eloeyhe/SistemaPedidos/pull/85) - @eloeyhe (Diseñador de Tarjetas CRC)
 
@@ -88,6 +88,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/doc-coord-fix-changelog-and-naming] hago correcciones en changelog.md solicitadas por el docente
  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
   PR: [#87](https://github.com/eloeyhe/SistemaPedidos/pull/87) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+- [fix/doc-coord-fix-changelog-and-naming] realizo nuevas correcciones asignadas por el docente en el changelog
+ Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  PR: [#88](https://github.com/eloeyhe/SistemaPedidos/pull/88) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
