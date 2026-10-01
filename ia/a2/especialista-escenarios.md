@@ -9,9 +9,9 @@ Especialista en Escenarios de Casos de Uso.
 Elaborar los escenarios correspondientes a los casos de uso definidos para el MVP de Sabor Kiosco, respetando los requisitos funcionales y no funcionales establecidos en la Actividad Obligatoria N°1.
 
 ## Prompt utilizado
-
+```text
 Necesito que leas en introduccion.md y la plantilla de escenarios para completar los campos de cada escenario (ID, área, actores, descripción, evento activador, tipo de señal, flujo principal, pre/postcondiciones, suposiciones, requerimientos, aspectos sobresalientes, prioridad y riesgo) para cada caso de uso.
-
+```
 ## Archivos utilizados como contexto
 
 - `anexos/introduccion.md`
