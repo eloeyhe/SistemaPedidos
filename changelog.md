@@ -48,15 +48,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Changed
 
-- [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego tarjetas CRC
 
-  Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
-  Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
-  PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
-
-- [feature/modelador-diag-casos-uso-update-use-case-1] feat: agregar diagramas de casos de uso e indices UML para A2
-  Issue: [#73](https://github.com/eloeyhe/SistemaPedidos/issues/73)
-  PR: [#72](https://github.com/eloeyhe/SistemaPedidos/pull/72) - @AgustinCalaver (Modelador de Diagramas de Casos de Uso)
   
 ### Fixed
 
@@ -64,8 +56,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
   PR: [#79](https://github.com/eloeyhe/SistemaPedidos/pull/79) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-- [fix/correciones-y-creacion-de-tarjetas-crc-restantes]Aplico correcciones solicitadas sobre las Tarjetas CRC
- Issue: [#41] (https://github.com/eloeyhe/SistemaPedidos/issues/41)
+- [fix/correcciones-y-creacion-de-tarjetas-crc-restantes]Aplico correcciones solicitadas sobre las Tarjetas CRC
+ Issue: [#41](https://github.com/eloeyhe/SistemaPedidos/issues/41)
   PR: [#82](https://github.com/eloeyhe/SistemaPedidos/pull/82) - @eloeyhe (Diseñador de Tarjetas CRC)
 
 - [fix/correccion-RC6-escenarios-casos-de-uso] corregir introducción de escenarios casos de uso
@@ -92,6 +84,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/doc-coord-fix-changelog-and-naming] realizo nuevas correcciones asignadas por el docente en el changelog
  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
   PR: [#88](https://github.com/eloeyhe/SistemaPedidos/pull/88) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+- [fix/doc-coord-fix-changelog-and-naming] resuevlo PC 17 y RC16
+ Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  PR: [#89](https://github.com/eloeyhe/SistemaPedidos/pull/89) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
