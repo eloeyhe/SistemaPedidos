@@ -4,7 +4,8 @@
 * **Autor:** Eloy Eyheramendy
 
 ### 1. Prompt utilizado
-&gt; "Actúa como un Arquitecto de Software experto en Diseño Orientado a Objetos. Necesito que analices nuestro sistema leyendo los archivos de contexto: `anexos/introduccion.md` y `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`.
+```
+"Actúa como un Arquitecto de Software experto en Diseño Orientado a Objetos. Necesito que analices nuestro sistema leyendo los archivos de contexto: `anexos/introduccion.md` y `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`.
 
 A partir de este análisis, crea las Tarjetas CRC para las 5 clases principales del sistema siguiendo estas REGLAS ESTRICTAS:
 
@@ -28,6 +29,7 @@ Plantilla a utilizar:
 | | | | |
 
 Genera las 5 tablas por separado para que pueda copiarlas a sus archivos individuales."
+```
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
