@@ -85,6 +85,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
   PR: [#88](https://github.com/eloeyhe/SistemaPedidos/pull/88) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
+- [fix/doc-coord-fix-changelog-and-naming] resuevlo PC 17 y RC16
+ Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  PR: [#89](https://github.com/eloeyhe/SistemaPedidos/pull/89) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
 
