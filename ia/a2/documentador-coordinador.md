@@ -5,7 +5,9 @@
 * **Autor:** Eloy Eyheramendy
 
  ### 1. Prompt utilizado
-&gt; Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos:
+
+```text
+ Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos:
 Leé de forma obligatoria el archivo #file:anexos/introduccion.md como contexto general del proyecto y analizá los archivos modificados en esta Pull Request.
 
 Realizá las siguientes verificaciones:
@@ -23,7 +25,7 @@ No modifiques ningún archivo.
 Entregá un reporte estructurado con:
 
 Errores e inconsistencias detectados, indicando archivo y sección específica.
-
+```
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
@@ -62,7 +64,8 @@ Errores e inconsistencias detectados, indicando archivo y sección específica.
 * **Autor:** Leandro Dominguez
 
 ### 1. Prompt utilizado
-&gt; Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos.
+```text
+ Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos.
 
 Leé de forma obligatoria el archivo #file:anexos/introduccion.md como contexto general del proyecto y analizá los archivos modificados en esta Pull Request.
 
@@ -81,7 +84,7 @@ Casos de uso:
 Verificá específicamente que los casos de uso y escenarios incluidos en esta PR tengan actores, flujo principal, flujos alternativos y pasos coherentes con el modelo del proyecto y entre sí.
 
 No modifiques ningún archivo.
-
+```
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
@@ -123,7 +126,8 @@ No modifiques ningún archivo.
 * **Autor:** Eloy Eyheramendy
 
 ### 1. Prompt utilizado
- &gt; Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos:
+```text
+Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos:
 
 Leé de forma obligatoria el archivo #file:anexos/introduccion.md como contexto general del proyecto y analizá los archivos modificados en esta Pull Request.
 
@@ -142,7 +146,7 @@ No modifiques ningún archivo.
 Entregá un reporte estructurado con:
 
 Errores e inconsistencias detectados, indicando archivo y sección específica.
-
+```
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
@@ -183,7 +187,8 @@ Problema: La tarjeta declara Combo como subclase de Producto. En el diagrama, Pr
 * **Autor:** Agustin Ariel Feijo
 
 ### 1. Prompt utilizado
-&gt;Realizá un Code Review de los cambios realizados por el rol
+```text
+Realizá un Code Review de los cambios realizados por el rol
 Modelador de Diagramas de Casos de Uso para la Actividad Obligatoria N.º 2.
 
 Usá como principal archivo de contexto:
@@ -208,6 +213,7 @@ Mostrame únicamente:
 
 Para cada hallazgo indicá el archivo, la ubicación aproximada, el problema
 detectado y la corrección recomendada.
+```
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
@@ -309,7 +315,8 @@ Problema: ambos actores están asociados directamente con `Cambiar Estado de Ped
 * **Autor:** Agustin Ariel Feijo
 
 ### 1. Prompt utilizado
-&gt; Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos.
+```text
+ Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos.
 
 Leé de forma obligatoria el archivo #file:anexos/introduccion.md como contexto general del proyecto y analizá los archivos modificados en esta Pull Request.
 
@@ -328,7 +335,7 @@ Casos de uso:
 Verificá específicamente que los casos de uso y escenarios incluidos en esta PR tengan actores, flujo principal, flujos alternativos y pasos coherentes con el modelo del proyecto y entre sí.
 
 No modifiques ningún archivo.
-
+```
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`

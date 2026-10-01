@@ -46,9 +46,6 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#55](https://github.com/eloeyhe/SistemaPedidos/issues/55)
   PR: [#77](https://github.com/eloeyhe/SistemaPedidos/pull/77) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-### Changed
-
-
   
 ### Fixed
 
