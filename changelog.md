@@ -72,7 +72,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#64](https://github.com/eloeyhe/SistemaPedidos/issues/64)
   PR: [#83](https://github.com/eloeyhe/SistemaPedidos/pull/83) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)  
 
-- [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Corrijo errores RC3
+- [fix/correcciones-y-creacion-de-tarjetas-crc-restantes] Corrijo errores RC3
  Issue: [#41](https://github.com/eloeyhe/SistemaPedidos/issues/41)
   PR: [#85](https://github.com/eloeyhe/SistemaPedidos/pull/85) - @eloeyhe (Diseñador de Tarjetas CRC)
 
