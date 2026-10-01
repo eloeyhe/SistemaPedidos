@@ -70,6 +70,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Busco cada ItemPedido y PersonalizacionItem y lo reemplazo por Item_pedido y Personalizacion_item
   PR: [#85](https://github.com/eloeyhe/SistemaPedidos/pull/85) - @eloeyhe (Diseñador de Tarjetas CRC)
 
+  - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Realizo las correcciones sobre el indice de tarjetas crc y el apartado de ia
+  PR: [#90](https://github.com/eloeyhe/SistemaPedidos/pull/90) - @eloeyhe (Diseñador de Tarjetas CRC)
+
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
 
