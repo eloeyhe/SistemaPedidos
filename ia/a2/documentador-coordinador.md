@@ -5,7 +5,9 @@
 * **Autor:** Eloy Eyheramendy
 
  ### 1. Prompt utilizado
-&gt; Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos:
+
+```text
+ Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos:
 Leé de forma obligatoria el archivo #file:anexos/introduccion.md como contexto general del proyecto y analizá los archivos modificados en esta Pull Request.
 
 Realizá las siguientes verificaciones:
@@ -23,7 +25,7 @@ No modifiques ningún archivo.
 Entregá un reporte estructurado con:
 
 Errores e inconsistencias detectados, indicando archivo y sección específica.
-
+```
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
@@ -35,9 +37,9 @@ Errores e inconsistencias detectados, indicando archivo y sección específica.
 
 * Combo no está alineado entre el diagrama y la tarjeta: `04-tarjeta-crc-producto.md\` declara `Combo\` como subclase de `Producto\`, pero el diagrama UML lo muestra separado sin una generalización explícita hacia `Producto\`, violando el RF1\. 
 
-* Colaborador incorrecto en `PersonalizacionItem\`: En `05-tarjeta-crc-personalizacion-item.md\`, `Pago\` figura como colaborador del cálculo del costo adicional, cuando la personalización afecta a `ItemPedido\` y `Pago\` interviene posteriormente en el cobro del `Pedido\` completo (RF1, CU01).
+* Colaborador incorrecto en `Personalizacion_item\`: En `05-tarjeta-crc-personalizacion-item.md\`, `Pago\` figura como colaborador del cálculo del costo adicional, cuando la personalización afecta a `Item_pedido\` y `Pago\` interviene posteriormente en el cobro del `Pedido\` completo (RF1, CU01).
 
-* Relación directa entre `ItemPedido\` y `Pago\` sin justificación:`03-tarjeta-crc-item-pedido.md\` incluye a `Pago\` como colaborador de `ItemPedido\`, mientras que el dominio establece una relación 1 a 1 entre `Pago\` y el `Pedido\` completo.
+* Relación directa entre `Item_pedido\` y `Pago\` sin justificación:`03-tarjeta-crc-item-pedido.md\` incluye a `Pago\` como colaborador de `Item_pedido\`, mientras que el dominio establece una relación 1 a 1 entre `Pago\` y el `Pedido\` completo.
 
 ### 4. Ajustes críticos realizados
 * **Sugerencias aceptadas:**  
@@ -46,11 +48,11 @@ Errores e inconsistencias detectados, indicando archivo y sección específica.
 * Combo no está alineado entre el diagrama y la tarjeta: `04-tarjeta-crc-producto.md\` declara `Combo\` como subclase de `Producto\`, pero el diagrama UML lo muestra separado sin una generalización explícita hacia `Producto\`, violando el RF1\. 
     + se la descarto debido a que si se la declara a `Combo\` como subclase.
 
-* Relación directa entre `ItemPedido\` y `Pago\` sin justificación:`03-tarjeta-crc-item-pedido.md\` incluye a `Pago\` como colaborador de `ItemPedido\`, mientras que el dominio establece una relación 1 a 1 entre `Pago\` y el `Pedido\` completo.
-    + se mantuvo la eliminacion de `Pago\` de los colaboradores de `ItemPedido\`, pero se modifico el argumento ya que `Pago\` no establece una realcion 1 a 1 con `Pedido\` ni con `ItemPedido\`
+* Relación directa entre `Item_pedido\` y `Pago\` sin justificación:`03-tarjeta-crc-item-pedido.md\` incluye a `Pago\` como colaborador de `Item_pedido\`, mientras que el dominio establece una relación 1 a 1 entre `Pago\` y el `Pedido\` completo.
+    + se mantuvo la eliminacion de `Pago\` de los colaboradores de `Item_pedido\`, pero se modifico el argumento ya que `Pago\` no establece una realcion 1 a 1 con `Pedido\` ni con `Item_pedido\`
 
-* Colaborador incorrecto en `PersonalizacionItem\`: En `05-tarjeta-crc-personalizacion-item.md\`, `Pago\` figura como colaborador del cálculo del costo adicional, cuando la personalización afecta a `ItemPedido\` y `Pago\` interviene posteriormente en el cobro del `Pedido\` completo (RF1, CU01).
-    + se sugirio removér a Pago de la lista de colaboradores. ya que, PersonalizacionItem, se relaciona unicamente con item_pedido
+* Colaborador incorrecto en `Personalizacion_item\`: En `05-tarjeta-crc-personalizacion-item.md\`, `Pago\` figura como colaborador del cálculo del costo adicional, cuando la personalización afecta a `Item_pedido\` y `Pago\` interviene posteriormente en el cobro del `Pedido\` completo (RF1, CU01).
+    + se sugirio removér a Pago de la lista de colaboradores. ya que, Personalizacion_item, se relaciona unicamente con item_pedido
 
 
 
@@ -62,7 +64,8 @@ Errores e inconsistencias detectados, indicando archivo y sección específica.
 * **Autor:** Leandro Dominguez
 
 ### 1. Prompt utilizado
-&gt; Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos.
+```text
+ Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos.
 
 Leé de forma obligatoria el archivo #file:anexos/introduccion.md como contexto general del proyecto y analizá los archivos modificados en esta Pull Request.
 
@@ -81,7 +84,7 @@ Casos de uso:
 Verificá específicamente que los casos de uso y escenarios incluidos en esta PR tengan actores, flujo principal, flujos alternativos y pasos coherentes con el modelo del proyecto y entre sí.
 
 No modifiques ningún archivo.
-
+```
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
@@ -123,7 +126,8 @@ No modifiques ningún archivo.
 * **Autor:** Eloy Eyheramendy
 
 ### 1. Prompt utilizado
- &gt; Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos:
+```text
+Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos:
 
 Leé de forma obligatoria el archivo #file:anexos/introduccion.md como contexto general del proyecto y analizá los archivos modificados en esta Pull Request.
 
@@ -142,7 +146,7 @@ No modifiques ningún archivo.
 Entregá un reporte estructurado con:
 
 Errores e inconsistencias detectados, indicando archivo y sección específica.
-
+```
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
@@ -183,7 +187,8 @@ Problema: La tarjeta declara Combo como subclase de Producto. En el diagrama, Pr
 * **Autor:** Agustin Ariel Feijo
 
 ### 1. Prompt utilizado
-&gt;Realizá un Code Review de los cambios realizados por el rol
+```text
+Realizá un Code Review de los cambios realizados por el rol
 Modelador de Diagramas de Casos de Uso para la Actividad Obligatoria N.º 2.
 
 Usá como principal archivo de contexto:
@@ -208,6 +213,7 @@ Mostrame únicamente:
 
 Para cada hallazgo indicá el archivo, la ubicación aproximada, el problema
 detectado y la corrección recomendada.
+```
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
@@ -309,7 +315,8 @@ Problema: ambos actores están asociados directamente con `Cambiar Estado de Ped
 * **Autor:** Agustin Ariel Feijo
 
 ### 1. Prompt utilizado
-&gt; Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos.
+```text
+ Actuá como un revisor técnico para el repositorio del proyecto SistemaPedidos.
 
 Leé de forma obligatoria el archivo #file:anexos/introduccion.md como contexto general del proyecto y analizá los archivos modificados en esta Pull Request.
 
@@ -328,7 +335,7 @@ Casos de uso:
 Verificá específicamente que los casos de uso y escenarios incluidos en esta PR tengan actores, flujo principal, flujos alternativos y pasos coherentes con el modelo del proyecto y entre sí.
 
 No modifiques ningún archivo.
-
+```
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`

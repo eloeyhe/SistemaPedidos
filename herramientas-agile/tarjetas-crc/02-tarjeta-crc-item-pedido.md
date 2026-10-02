@@ -1,6 +1,6 @@
 |  |  |  |  |
 |---|---|---|---|
-| **Nombre de la Clase:** | item_pedido | | |
+| **Nombre de la Clase:** | Item_pedido | | |
 | **Superclase:** |Ninguna | | |
 | **Subclase:** |Ninguna | | |
 | **Responsabilidades** | **Colaboradores** | **Pensamiento del objeto** | **Propiedad** |
