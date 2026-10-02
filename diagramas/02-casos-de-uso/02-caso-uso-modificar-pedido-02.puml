@@ -1,0 +1,64 @@
+@startuml 02-caso-uso-modificar-pedido-02
+top to bottom direction
+skinparam dpi 150
+skinparam nodesep 45
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam ArrowFontSize 11
+hide empty members
+actor Cliente
+note right of Cliente
+	Actor externo: solicita al Mostrador,
+	sin acceso directo al sistema.
+	El boceto tambien dibuja una clase Cliente;
+	RF6 no exige ficha de cliente en el MVP.
+end note
+actor "Usuario de Mostrador" as Mostrador
+
+Cliente .. Mostrador : solicita la modificacion
+
+rectangle "Sistema de Pedidos" {
+	usecase "Modificar Pedido" as Modificar
+	usecase "Buscar pedido" as Buscar
+	usecase "Validar estado RECIBIDO" as ValidarEstado
+	usecase "Editar items y personalizaciones" as Editar
+	usecase "Recalcular total" as Recalcular
+	usecase "Registrar ajuste de cobro" as AjusteCobro
+	usecase "Seleccionar medio de pago" as MedioPago
+	usecase "Validar medio de pago" as ValidarPago
+	usecase "Confirmar modificacion" as Confirmar
+	usecase "Rechazar modificacion por estado" as RechazarEstado
+	usecase "Impedir pedido sin items" as SinItems
+}
+
+Mostrador -- Modificar
+
+Modificar .> Buscar : <<include>>
+Modificar .> ValidarEstado : <<include>>
+Modificar .> Editar : <<include>>
+Modificar .> Recalcular : <<include>>
+Modificar .> Confirmar : <<include>>
+
+AjusteCobro .> Modificar : <<extend>>
+AjusteCobro .> MedioPago : <<include>>
+AjusteCobro .> ValidarPago : <<include>>
+
+RechazarEstado .> ValidarEstado : <<extend>>
+SinItems .> Editar : <<extend>>
+
+' --- Control de ranks: caso base arriba, incluidos en fila propia debajo ---
+Modificar -[hidden]down- Buscar
+Modificar -[hidden]down- ValidarEstado
+Modificar -[hidden]down- Editar
+Modificar -[hidden]down- Recalcular
+Modificar -[hidden]down- Confirmar
+Buscar -[hidden]right- ValidarEstado
+ValidarEstado -[hidden]right- Editar
+Editar -[hidden]right- Recalcular
+Recalcular -[hidden]right- Confirmar
+AjusteCobro -[hidden]down- Modificar
+AjusteCobro -[hidden]down- MedioPago
+MedioPago -[hidden]right- ValidarPago
+RechazarEstado -[hidden]down- ValidarEstado
+SinItems -[hidden]down- Editar
+@enduml

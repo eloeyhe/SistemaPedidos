@@ -172,18 +172,17 @@ Permite al Usuario de Mostrador registrar un nuevo pedido, seleccionando product
 1. El Usuario de Mostrador inicia la creación de un nuevo pedido.
 2. El sistema genera automáticamente un número de pedido único y registra la fecha y hora actual.
 3. El usuario ingresa una referencia o nombre para el retiro (ej. "Matías") para identificar la comanda del pedido.
-4. El usuario selecciona ítems de catálogo (Producto individual o Combo predefinido con su precio propio) y especifica las cantidades, agregándolos al pedido como ítems de línea (ItemPedido).
-5. El usuario agrega las personalizaciones (PersonalizacionItem) a cada ItemPedido, indicando ingredientes a quitar o adicionales a agregar con su costo extra.
-6. El sistema calcula en tiempo real el subtotal de cada ItemPedido (precio base de catálogo del Producto/Combo + suma de adicionales de personalización) por su cantidad, y obtiene el total general del pedido derivado de la suma de dichos subtotales.
+4. El usuario selecciona ítems de catálogo (Producto individual o Combo predefinido con su precio propio) y especifica las cantidades, agregándolos al pedido como ítems de línea (Item_pedido).
+5. El usuario agrega las personalizaciones (Personalizacion_item) a cada Item_pedido, indicando ingredientes a quitar o adicionales a agregar con su costo extra.
+6. El sistema calcula en tiempo real el subtotal de cada Item_pedido (precio base de catálogo del Producto/Combo + suma de adicionales de personalización) por su cantidad, y obtiene el total general del pedido derivado de la suma de dichos subtotales.
 7. El usuario selecciona y valida el medio de pago permitido (EFECTIVO o TRANSFERENCIA) ingresado para abonar el monto total.
 8. El sistema crea y asocia la entidad Pago (monto, método de pago y fecha/hora) al pedido, manteniendo la relación 1 a 1 para la auditoría de caja.
-9. El sistema congela y guarda el precio histórico unitario de cada ItemPedido y sus personalizaciones, y establece el estado del pedido como RECIBIDO.
+9. El sistema congela y guarda el precio histórico unitario de cada Item_pedido y sus personalizaciones, y establece el estado del pedido como RECIBIDO.
 10. El sistema envía automáticamente el pedido a la pantalla de cocina.
 
 __Flujos Alternativos__
-1. Sin Stock de Producto/Combo: Si un ítem seleccionado no tiene disponibilidad, el sistema notifica la falta de stock. El Usuario de Mostrador debe remover el ítem o consultar al Cliente por un sustituto para continuar.
-2. Cancelación por parte del Cliente antes del Pago: El Cliente decide no concretar la compra durante la carga. El Usuario de Mostrador cancela la operación y el sistema no registra ningún pedido.
-3. Error o Rechazo en el Pago por Transferencia: Si la transferencia no es aprobada o confirmada, el sistema impide la creación del registro de Pago y bloquea la confirmación del pedido hasta seleccionar un medio de pago válido (EFECTIVO o TRANSFERENCIA) o cancelar la operación.
+1. Cancelación por parte del Cliente antes del Pago: El Cliente decide no concretar la compra durante la carga. El Usuario de Mostrador cancela la operación y el sistema no registra ningún pedido.
+2. Error o Rechazo en el Pago por Transferencia: Si la transferencia no es aprobada o confirmada, el sistema impide la creación del registro de Pago y bloquea la confirmación del pedido hasta seleccionar un medio de pago válido (EFECTIVO o TRANSFERENCIA) o cancelar la operación.
 
  __Precondiciones:__
 

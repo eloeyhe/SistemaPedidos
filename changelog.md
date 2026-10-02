@@ -6,6 +6,92 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+## [Release Actividad Obligatoria N°2] - 2026-09-19
+
+### Added
+
+- [feature/doc-coord-repo-update-readme-md] se creo la rama backport y se gestionó el backport hacia develop, creo rama future y creo carpeta ia, tambien realice las issue
+  Issue: [#48](https://github.com/eloeyhe/SistemaPedidos/issues/48)
+  Issue: [#54](https://github.com/eloeyhe/SistemaPedidos/issues/54)
+  Issue: [#56](https://github.com/eloeyhe/SistemaPedidos/issues/56)
+  Issue: [#57](https://github.com/eloeyhe/SistemaPedidos/issues/57)
+  PR: [#68](https://github.com/eloeyhe/SistemaPedidos/pull/68) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+- [feature/espec-escenarios-casos-uso-add-escenario-1] Feature/espec escenarios casos uso add escenario 1
+  Issue: [#65](https://github.com/eloeyhe/SistemaPedidos/issues/65)
+  Issue: [#66](https://github.com/eloeyhe/SistemaPedidos/issues/66)
+  Issue: [#67](https://github.com/eloeyhe/SistemaPedidos/issues/67)
+  PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)  
+
+- [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego tarjetas CRC
+  Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
+  Issue: [#43](https://github.com/eloeyhe/SistemaPedidos/issues/43)
+  Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
+  Issue: [#45](https://github.com/eloeyhe/SistemaPedidos/issues/45)
+  PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
+
+- [feature/modelador-diag-casos-uso-update-use-case-1] feat: agregar diagramas de casos de uso e indices UML para A2
+  Issue: [#73](https://github.com/eloeyhe/SistemaPedidos/issues/73)
+  Issue: [#74](https://github.com/eloeyhe/SistemaPedidos/issues/74)
+  Issue: [#75](https://github.com/eloeyhe/SistemaPedidos/issues/75)
+  Issue: [#76](https://github.com/eloeyhe/SistemaPedidos/issues/76)
+  PR: [#72](https://github.com/eloeyhe/SistemaPedidos/pull/72) - @AgustinCalaver (Modelador de Diagramas de Casos de Uso)
+
+- [feature/doc-coord-repo-update-readme-md] completo documentador-coordinador.md, README.md 
+  Issue: [#49](https://github.com/eloeyhe/SistemaPedidos/issues/49)
+  Issue: [#50](https://github.com/eloeyhe/SistemaPedidos/issues/50)
+  Issue: [#51](https://github.com/eloeyhe/SistemaPedidos/issues/51)
+  Issue: [#52](https://github.com/eloeyhe/SistemaPedidos/issues/52)
+  Issue: [#53](https://github.com/eloeyhe/SistemaPedidos/issues/53)
+  Issue: [#55](https://github.com/eloeyhe/SistemaPedidos/issues/55)
+  PR: [#77](https://github.com/eloeyhe/SistemaPedidos/pull/77) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+  
+### Fixed
+
+- [fix/doc-coord-fix-changelog-and-naming] envio correcciones en changelog, hambas template y actualizo README
+ Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  PR: [#79](https://github.com/eloeyhe/SistemaPedidos/pull/79) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+- [fix/correcciones-y-creacion-de-tarjetas-crc-restantes]Aplico correcciones solicitadas sobre las Tarjetas CRC
+ Issue: [#41](https://github.com/eloeyhe/SistemaPedidos/issues/41)
+  PR: [#82](https://github.com/eloeyhe/SistemaPedidos/pull/82) - @eloeyhe (Diseñador de Tarjetas CRC)
+
+- [fix/correccion-RC6-escenarios-casos-de-uso] corregir introducción de escenarios casos de uso
+  Issue: [#64](https://github.com/eloeyhe/SistemaPedidos/issues/64)
+  PR: [#83](https://github.com/eloeyhe/SistemaPedidos/pull/83) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)  
+
+- [fix/correcciones-y-creacion-de-tarjetas-crc-restantes] Corrijo errores RC3
+ Issue: [#41](https://github.com/eloeyhe/SistemaPedidos/issues/41)
+  PR: [#85](https://github.com/eloeyhe/SistemaPedidos/pull/85) - @eloeyhe (Diseñador de Tarjetas CRC)
+
+- [fix/doc-coord-fix-changelog-and-naming] realizo correcciones en changelog
+ Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  PR: [#84](https://github.com/eloeyhe/SistemaPedidos/pull/84) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+- [fix/modelador-diag-casos-uso-corregir-actividad-2]Fix: Correcciones en diagramas e índices de Casos de Uso
+ Issue: [#80](https://github.com/eloeyhe/SistemaPedidos/issues/80)
+ PR: [#81](https://github.com/eloeyhe/SistemaPedidos/pull/81) - @cmariano93-netizen (Modelador de Diagramas de Casos de Uso)
+
+
+- [fix/doc-coord-fix-changelog-and-naming] hago correcciones en changelog.md solicitadas por el docente
+ Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  PR: [#87](https://github.com/eloeyhe/SistemaPedidos/pull/87) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+- [fix/doc-coord-fix-changelog-and-naming] realizo nuevas correcciones asignadas por el docente en el changelog
+ Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  PR: [#88](https://github.com/eloeyhe/SistemaPedidos/pull/88) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+- [fix/doc-coord-fix-changelog-and-naming] resuevlo PC 17 y RC16
+ Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  PR: [#89](https://github.com/eloeyhe/SistemaPedidos/pull/89) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+- [fix/doc-coord-fix-changelog-and-naming] realizo cambios en carpeta ia y changelog
+ Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  PR: [#91](https://github.com/eloeyhe/SistemaPedidos/pull/91) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+  - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Realizo las correcciones sobre el indice de tarjetas crc y el apartado de ia
+  PR: [#90](https://github.com/eloeyhe/SistemaPedidos/pull/90) - @eloeyhe (Diseñador de Tarjetas CRC)
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
 
@@ -58,7 +144,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#29](https://github.com/eloeyhe/SistemaPedidos/issues/29)
   PR: [#30](https://github.com/eloeyhe/SistemaPedidos/pull/30) - @AgustinCalaver (Analista de requerimientos)
 
-- [feature/diseniador-clases-add-boceto-inicial] Se actualizo 01-boceto-inicial.excalidraw y 01_boceto_inicial.png. Se remplazo la entidad Detalle_pedido por Item_Pedido, Se incorporó PersonalizacionItem, fue creada la subentidad Metodo_pago y se actualizaron las relaciones.
+- [feature/diseniador-clases-add-boceto-inicial] Se actualizo 01-boceto-inicial.excalidraw y 01_boceto_inicial.png. Se remplazo la entidad Detalle_pedido por Item_Pedido, Se incorporó Personalizacion_item, fue creada la subentidad Metodo_pago y se actualizaron las relaciones.
   Issue: [#10](https://github.com/eloeyhe/SistemaPedidos/issues/10)
   PR: [#34](https://github.com/eloeyhe/SistemaPedidos/pull/34#issue-5294730443) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
 

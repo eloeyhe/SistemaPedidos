@@ -2,7 +2,7 @@
 
 - __Materia:__ Diseño Orientado a Objetos
 - __Carrera:__ Tec. en Programación de Sistemas
-- __Grupo:__ Grupo N° 2
+- __Grupo:__ Grupo N° 1
 
 ## Introducción
 
@@ -19,4 +19,6 @@ Este proyecto tiene como objetivo el diseño orientado a objetos de una aplicaci
 
 # Diagramas y Diseños
 
-- [Anexos](anexos.md) 
+- [Anexos](anexos/anexos.md) 
+- [Diagramas UML](diagramas/diagramasUML.md)
+- [Herramientas Agile](herramientas-agile/herramientas_agile.md)

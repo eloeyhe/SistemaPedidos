@@ -1,0 +1,45 @@
+@startuml 02-caso-uso-consultar-pedidos-activos-05
+top to bottom direction
+skinparam dpi 150
+skinparam nodesep 45
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam ArrowFontSize 11
+hide empty members
+
+actor "Usuario de Mostrador" as Mostrador
+actor Cocina
+
+rectangle "Sistema de Pedidos" {
+	usecase "Consultar Pedidos Activos" as Consultar
+	usecase "Obtener listado de pedidos activos" as Obtener
+	usecase "Visualizar comandas en cocina (RECIBIDO, EN_PREPARACION)" as ConsultarCocina
+	usecase "Visualizar estado de entregas en mostrador (LISTO)" as ConsultarMostrador
+	usecase "Ordenar pedidos por antigüedad y prioridad" as Ordenar
+	usecase "Destacar pedidos prioritarios" as Destacar
+	usecase "Informar falta de conexion o datos desactualizados" as SinConexion
+}
+
+Cocina -- ConsultarCocina
+Mostrador -- ConsultarMostrador
+
+ConsultarCocina .> Consultar : <<extend>>
+ConsultarMostrador .> Consultar : <<extend>>
+
+' Vistas diferenciadas por actor (A1, CU05).
+Consultar .> Obtener : <<include>>
+Consultar .> Ordenar : <<include>>
+
+' La falta de conexion y el listado vacio son flujos alternativos.
+Destacar .> Ordenar : <<extend>>
+SinConexion .> Consultar : <<extend>>
+
+' Control visual: listado y ordenamiento debajo del caso base; vistas separadas.
+Consultar -[hidden]down- Obtener
+Consultar -[hidden]down- Ordenar
+Obtener -[hidden]right- Ordenar
+ConsultarCocina -[hidden]down- Consultar
+ConsultarMostrador -[hidden]down- Consultar
+SinConexion -[hidden]down- Consultar
+Destacar -[hidden]down- Ordenar
+@enduml
