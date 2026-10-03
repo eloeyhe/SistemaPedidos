@@ -1,0 +1,49 @@
+@startuml 01-solid-02-ocp
+skinparam classAttributeIconSize 0
+
+class Pago {
+    - Pago: String
+    - monto: Double
+    - estrategiaPago: EstrategiaPago
+    + registrarPago(): void
+}
+
+interface EstrategiaPago {
+    + procesarCobro(monto: Double): Boolean
+}
+
+class PagoEfectivo implements EstrategiaPago {
+    + procesarCobro(monto: Double): Boolean
+}
+
+class PagoTransferencia implements EstrategiaPago {
+    + procesarCobro(monto: Double): Boolean
+}
+
+class PagoQR implements EstrategiaPago {
+    + procesarCobro(monto: Double): Boolean
+}
+
+Pago --|> EstrategiaPago
+
+class Pedido {
+    - Pedido: String
+    - estrategiaDescuento: EstrategiaDescuento
+    + calcularTotal(): Double
+}
+
+interface EstrategiaDescuento {
+    + aplicarDescuento(montoBase: Double): Double
+}
+
+class DescuentoSocio implements EstrategiaDescuento {
+    + aplicarDescuento(montoBase: Double): Double
+}
+
+class DescuentoPromocional implements EstrategiaDescuento {
+    + aplicarDescuento(montoBase: Double): Double
+}
+
+Pedido --|> EstrategiaDescuento
+
+@enduml
