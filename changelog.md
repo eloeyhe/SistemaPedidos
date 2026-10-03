@@ -25,6 +25,16 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#125](https://github.com/eloeyhe/SistemaPedidos/issues/125)
   PR: [#126](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
+  - [feature/esp-dip-add-anexo-dip] Creo archivos y docs correspondientes al rol DIP
+  Issue: [#143](https://github.com/eloeyhe/SistemaPedidos/issues/143)
+  Issue: [#144](https://github.com/eloeyhe/SistemaPedidos/issues/144)
+  issue: [#145](https://github.com/eloeyhe/SistemaPedidos/issues/145)
+  issue: [#146](https://github.com/eloeyhe/SistemaPedidos/issues/146)
+  issue: [#147](https://github.com/eloeyhe/SistemaPedidos/issues/147)
+  issue: [#148](https://github.com/eloeyhe/SistemaPedidos/issues/148)
+  issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
+  PR: [#150](https://github.com/eloeyhe/SistemaPedidos/pull/150) - @eloeyhe (Especialista en Inversión de Dependencias)
+
 
 
 
