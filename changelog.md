@@ -6,6 +6,19 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+## [Primer Parcial] - 2026-10-03
+
+### Added
+
+- [feature/doc-coord-repo-update-readme-md] creo estrucutra de repositorio
+  Issue: [#110](https://github.com/eloeyhe/SistemaPedidos/issues/110)
+  Issue: [#116](https://github.com/eloeyhe/SistemaPedidos/issues/116)
+  issue: [#118](https://github.com/eloeyhe/SistemaPedidos/issues/118)
+  PR: [#117](https://github.com/eloeyhe/SistemaPedidos/pull/117) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+
+
+
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
 
 ### Added
