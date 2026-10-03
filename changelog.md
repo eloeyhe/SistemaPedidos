@@ -33,7 +33,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#106](https://github.com/eloeyhe/SistemaPedidos/issues/106)
   issue: [#107](https://github.com/eloeyhe/SistemaPedidos/issues/107)
   issue: [#108](https://github.com/eloeyhe/SistemaPedidos/issues/108)
-  PR: [#126](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @Leandro2107 (Especialista en ISP)
+  PR: [#151](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @Leandro2107 (Especialista en ISP)
 
 
 
