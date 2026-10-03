@@ -56,4 +56,4 @@ Por eso, separar estas reglas reduce el acoplamiento sin perder trazabilidad ni 
 
   ## 4. Ajustes realizados:
 
-  * Se realizaron ajustes de diseño con el fin de simpllificar el modelo: Se elimino el atributo `idPedido` debido a que las clases no precisan de un identificador unico como "id". 
+  * Se realizaron ajustes de diseño con el fin de simplificar el modelo: Se elimino el atributo `idPedido` debido a que las clases no precisan de un identificador unico como "id". 
