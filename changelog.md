@@ -16,6 +16,16 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#118](https://github.com/eloeyhe/SistemaPedidos/issues/118)
   PR: [#117](https://github.com/eloeyhe/SistemaPedidos/pull/117) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
+- [feature/esp-srp-add-anexo-srp] agrego 02-srp.md, .png, .puml, y especialista-srp.md
+  Issue: [#120](https://github.com/eloeyhe/SistemaPedidos/issues/120)
+  Issue: [#121](https://github.com/eloeyhe/SistemaPedidos/issues/121)
+  issue: [#122](https://github.com/eloeyhe/SistemaPedidos/issues/122)
+  issue: [#123](https://github.com/eloeyhe/SistemaPedidos/issues/123)
+  issue: [#124](https://github.com/eloeyhe/SistemaPedidos/issues/124)
+  issue: [#125](https://github.com/eloeyhe/SistemaPedidos/issues/125)
+  PR: [#126](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
+
+
 
 
 
