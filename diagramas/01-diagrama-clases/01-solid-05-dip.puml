@@ -1,0 +1,63 @@
+@startuml 01-solid-05-dip
+skinparam classAttributeIconSize 0
+
+' Dominio y Abstracción del Catálogo
+interface ElementoMenu {
+    + getNombre(): String
+    + getPrecio(): Double
+}
+
+class Producto implements ElementoMenu {
+    - Producto: String
+    - nombre: String
+    - precioBase: Double
+    + getNombre(): String
+    + getPrecio(): Double
+}
+
+class Combo implements ElementoMenu {
+    - Combo: String
+    - nombre: String
+    - descuento: Double
+    + getNombre(): String
+    + getPrecio(): Double
+}
+
+class Item_pedido {
+    - cantidad: Integer
+    - elemento: ElementoMenu
+    + calcularSubtotal(): Double
+
+}
+
+Item_pedido --|> ElementoMenu
+
+' Puertos de Infraestructura (Interfaces)
+
+interface RepositorioPedidos {
+    + guardar(pedido: Pedido): Boolean
+}
+
+interface CatalogoMenu {
+    + buscarPorId(id: String): ElementoMenu
+}
+
+interface PublicadorComandasCocina {
+    + publicarComanda(pedido: Pedido): void
+}
+
+' Servicio de Aplicación e Inyección de Dependencias
+
+class ServicioTomarPedido {
+    - repositorioPedidos: RepositorioPedidos
+    - catalogoMenu: CatalogoMenu
+    - publicadorCocina: PublicadorComandasCocina
+    + ServicioTomarPedido(repo: RepositorioPedidos, cat: CatalogoMenu, pub: PublicadorComandasCocina)
+    + ejecutar(datosPedido: Object): void
+}
+
+ServicioTomarPedido --> RepositorioPedidos
+ServicioTomarPedido --> CatalogoMenu
+ServicioTomarPedido --> PublicadorComandasCocina
+
+@enduml
