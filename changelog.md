@@ -25,6 +25,16 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#125](https://github.com/eloeyhe/SistemaPedidos/issues/125)
   PR: [#126](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
+  - [feature/esp-isp-add-anexo-isp] Se creo la rama e issues y se agregaron los archivos solicitados para el repositorio. 
+  Issue: [#102](https://github.com/eloeyhe/SistemaPedidos/issues/102)
+  Issue: [#103](https://github.com/eloeyhe/SistemaPedidos/issues/103)
+  issue: [#104](https://github.com/eloeyhe/SistemaPedidos/issues/104)
+  issue: [#105](https://github.com/eloeyhe/SistemaPedidos/issues/105)
+  issue: [#106](https://github.com/eloeyhe/SistemaPedidos/issues/106)
+  issue: [#107](https://github.com/eloeyhe/SistemaPedidos/issues/107)
+  issue: [#108](https://github.com/eloeyhe/SistemaPedidos/issues/108)
+  PR: [#126](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @Leandro2107 (Especialista en ISP)
+
 
 
 
