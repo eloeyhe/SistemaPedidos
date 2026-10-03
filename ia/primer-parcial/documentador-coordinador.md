@@ -1,5 +1,8 @@
 # Registro de Code Reviews asistidas con IA - Documentador y Coordinador
 
+## Objetivo
+Coordinar la estructura del proyecto, la documentación y la trazabilidad de cambios.
+
 ## Code Review 1: PR [#133] - [ESPECIALISTA EN PRINCIPIOS DE EXTENSIÓN (OCP + LSP)]
 * **Rama revisada:** `future/esp-extension-ocp-add-anexo-ocp`
 * **Autor:** Eloy Eyheramendy
