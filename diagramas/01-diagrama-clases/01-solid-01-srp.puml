@@ -1,0 +1,106 @@
+@startuml
+title Sistema de Pedidos - Refactorización aplicando SRP
+
+skinparam classAttributeIconSize 0
+hide empty members
+
+class Pedido {
+  - fecha: DateTime
+  - referenciaRetiro: String
+  - estado: EstadoPedido
+  - prioritario: Boolean
+  + agregarItem(item: ItemPedido): void
+  + modificarItem(item: ItemPedido): void
+  + cancelar(): void
+  + cambiarEstado(nuevoEstado: EstadoPedido): void
+  + priorizar(): void
+  + calcularTotal(): Decimal
+}
+
+class ItemPedido {
+  - cantidad: int
+  - precioUnitarioHistorico: Decimal
+  + agregarPersonalizacion(personalizacion: PersonalizacionItem): void
+  + quitarPersonalizacion(personalizacion: PersonalizacionItem): void
+  + calcularSubtotal(): Decimal
+}
+
+class PersonalizacionItem {
+  - descripcion: String
+  - costoAdicional: Decimal
+  + calcularCosto(): Decimal
+}
+
+class Pago {
+  - monto: Decimal
+  - metodoDePago: MetodoPago
+  - fechaHora: DateTime
+}
+
+class HistorialPago {
+  - tipo: TipoMovimiento
+  - monto: Decimal
+  - motivo: String
+  - fechaHora: DateTime
+  + registrar(): void
+}
+
+class PoliticaCicloPedido <<policy>> {
+  + validarModificacion(pedido: Pedido): void
+  + validarTransicion(actual: EstadoPedido, nuevo: EstadoPedido): Boolean
+  + validarCancelacion(pedido: Pedido): void
+}
+
+class PoliticaPrioridadPedido <<policy>> {
+  + marcarPrioritario(pedido: Pedido): void
+}
+
+class ServicioRegistroPago <<service>> {
+  + registrarCobro(pedido: Pedido, monto: Decimal, metodo: MetodoPago): Pago
+  + registrarAjuste(pago: Pago, diferencia: Decimal): HistorialPago
+}
+
+class CalculadorAjustePago <<service>> {
+  + calcularDiferencia(totalAnterior: Decimal, totalNuevo: Decimal): Decimal
+}
+
+class CalculadorSubtotalItem <<service>> {
+  + calcular(item: ItemPedido): Decimal
+}
+
+enum EstadoPedido {
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+enum MetodoPago {
+  EFECTIVO
+  TRANSFERENCIA
+}
+
+enum TipoMovimiento {
+  COBRO_INICIAL
+  AJUSTE
+  DEVOLUCION
+}
+
+Pedido "1" *-- "1..*" ItemPedido : contiene
+ItemPedido "1" *-- "0..*" PersonalizacionItem : personalizaciones
+Pedido "1" -- "0..1" Pago : pago
+Pago "1" *-- "1..*" HistorialPago : movimientos
+
+Pedido ..> PoliticaCicloPedido : delega reglas del ciclo
+Pedido ..> PoliticaPrioridadPedido : delega priorización
+ItemPedido ..> CalculadorSubtotalItem : delega cálculo
+CalculadorSubtotalItem ..> PersonalizacionItem : suma adicionales
+ServicioRegistroPago ..> Pago : registra
+ServicioRegistroPago ..> HistorialPago : registra movimientos
+CalculadorAjustePago ..> ServicioRegistroPago : informa ajuste
+
+
+
+
+@enduml
