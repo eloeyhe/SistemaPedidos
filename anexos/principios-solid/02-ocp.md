@@ -19,7 +19,7 @@ Para cumplir con OCP, la herencia (o la implementación de interfaces) se utiliz
 
 ## Estructura de Clases
 
-![Diagrama UML - OCP](C:\Users\Asus\Desktop\SistemaPedido\diagramas\01-diagrama-clases\01-solid-02-ocp.png)
+![Diagrama UML - OCP](../../diagramas/01-diagrama-clases/01-solid-02-ocp.png)
 
 ## Justificación Técnica
 
