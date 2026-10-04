@@ -1,0 +1,40 @@
+@startuml 01-solid-03-lsp
+
+skinparam classAttributeIconSize 0
+
+abstract class Producto {
+    - Producto: String
+    - nombre: String
+    - precioBase: Double
+    + getPrecio(): Double
+}
+
+class ProductoEnvasado extends Producto {
+    - fechaVencimiento: Date
+    + getPrecio(): Double
+}
+
+class ProductoPreparado extends Producto implements Elaborable {
+    - tiempoPreparacion: Integer
+    + getPrecio(): Double
+    + iniciarPreparacion(): void
+}
+
+interface Elaborable {
+    + iniciarPreparacion(): void
+}
+
+class Item_pedido {
+    - cantidad: Integer
+    - producto: Producto
+    + calcularSubtotal(): Double
+}
+
+class Cocina {
+    + prepararItem(item: Elaborable): void
+}
+
+Item_pedido --|> Producto
+Cocina --|> Elaborable
+
+@enduml
