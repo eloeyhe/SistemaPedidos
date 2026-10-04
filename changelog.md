@@ -33,6 +33,26 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
   PR: [#133](https://github.com/eloeyhe/SistemaPedidos/pull/133) - @eloeyhe (Especialista en Principios de Extension(OCP + LSP))
 
+
+- [feature/esp-extension-lsp-add-anexo-lsp] Creo las carpetas y archivos con datos correspondientes a LSP
+  Issue: [#135](https://github.com/eloeyhe/SistemaPedidos/issues/135)
+  Issue: [#136](https://github.com/eloeyhe/SistemaPedidos/issues/136)
+  issue: [#137](https://github.com/eloeyhe/SistemaPedidos/issues/137)
+  issue: [#138](https://github.com/eloeyhe/SistemaPedidos/issues/138)
+  issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
+  PR: [#141](https://github.com/eloeyhe/SistemaPedidos/pull/141) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+  - [feature/esp-dip-add-anexo-dip] Creo archivos y docs correspondientes al rol DIP
+  Issue: [#143](https://github.com/eloeyhe/SistemaPedidos/issues/143)
+  Issue: [#144](https://github.com/eloeyhe/SistemaPedidos/issues/144)
+  issue: [#145](https://github.com/eloeyhe/SistemaPedidos/issues/145)
+  issue: [#146](https://github.com/eloeyhe/SistemaPedidos/issues/146)
+  issue: [#147](https://github.com/eloeyhe/SistemaPedidos/issues/147)
+  issue: [#148](https://github.com/eloeyhe/SistemaPedidos/issues/148)
+  issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
+  PR: [#150](https://github.com/eloeyhe/SistemaPedidos/pull/150) - @eloeyhe (Especialista en Inversión de Dependencias)
+  
   - [feature/esp-isp-add-anexo-isp] Se creo la rama e issues y se agregaron los archivos solicitados para el repositorio.
   Issue: [#102](https://github.com/eloeyhe/SistemaPedidos/issues/102)
   Issue: [#103](https://github.com/eloeyhe/SistemaPedidos/issues/103)
@@ -42,6 +62,23 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#107](https://github.com/eloeyhe/SistemaPedidos/issues/107)
   issue: [#108](https://github.com/eloeyhe/SistemaPedidos/issues/108)
   PR: [#151](https://github.com/eloeyhe/SistemaPedidos/pull/151) - @Leandro2107 (Especialista en ISP)
+
+### Changed
+
+- [feature/esp-extension-lsp-add-anexo-lsp] Corrijo el link/path del "Diagrama UML - LSP"
+  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  PR: [#141](https://github.com/eloeyhe/SistemaPedidos/pull/141) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+  - [feature/esp-extension-ocp-add-anexo-ocp] Corrig¿jo el link/path del "Diagrama UML - OCP"
+  Issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
+  PR: [#133](https://github.com/eloeyhe/SistemaPedidos/pull/133) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+  - [feature/esp-dip-add-anexo-dip] Corrijo el link/path del "Diagrama UML - DIP"
+  Issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
+  PR: [#150](https://github.com/eloeyhe/SistemaPedidos/pull/150) - @eloeyhe (Especialista en Inversión de Dependencias)
+
+
+
 
 
 
