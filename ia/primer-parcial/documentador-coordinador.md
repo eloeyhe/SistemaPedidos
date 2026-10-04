@@ -11,7 +11,7 @@ Coordinar la estructura del proyecto, la documentación y la trazabilidad de cam
 
 ```text
 Actúa como un Senior Software Engineer realizando code review profesional.
-
+utiliza como referencia introduccion.md
 Estás analizando los cambios de una Pull Request activa.
 
 INSTRUCCIONES IMPORTANTES:
@@ -93,7 +93,7 @@ Usar una ruta relativa al documento para que el recurso se resuelva correctament
 
 ```text
 Actúa como un Senior Software Engineer realizando code review profesional.
-
+utiliza como referencia introduccion.md
 Estás analizando los cambios de una Pull Request activa.
 
 INSTRUCCIONES IMPORTANTES:
@@ -173,6 +173,7 @@ Usar una ruta relativa al documento para que el recurso se resuelva correctament
 
 ```text
 Actúa como un Senior Software Engineer realizando code review profesional.
+utiliza como referencia introduccion.md
 
 Estás analizando los cambios de una Pull Request activa.
 
@@ -248,5 +249,84 @@ Usar una ruta relativa al documento para que la imagen se resuelva en cualquier 
 
 
 ---
+## Code Review 4: PR [#151] - [ESPECIALISTA EN ISP]
+* **Rama revisada:** `feature/esp-isp-add-anexo-isp`
+* **Autor:** Leandro Dominguez
+
+ ### 1. Prompt utilizado
+
+```text
+Actúa como un Senior Software Engineer realizando code review profesional.
+utiliza como referencia introduccion.md
+
+Estás analizando los cambios de una Pull Request activa.
+
+INSTRUCCIONES IMPORTANTES:
+
+- Identifica problemas reales del código
+- Enumera los hallazgos (1, 2, 3…)
+- Cada hallazgo debe ser independiente
+- Sé claro, técnico y concreto
+- No inventes problemas hipotéticos sin evidencia en el código
+- No incluyas sugerencias de tests
+
+Para cada hallazgo usa EXACTAMENTE esta estructura:
+
+==================================================
+HALLAZGO #<número>
+
+Archivo:
+Línea:
+
+Tipo de problema:
+(bug | performance | seguridad | legibilidad | diseño | otro)
+
+Severidad:
+(baja | media | alta | crítica)
+
+Explicación técnica:
+Por qué esto es un problema real.
+
+Sugerencia de mejora:
+Cambio concreto recomendado.
+
+```
+
+### 2. Archivos de contexto referenciados
+* `anexos/introduccion.md`
+
+
+### 3. Output obtenido de Copilot
+
+
+HALLAZGO #1
+
+Archivo:
+`changelog.md`
+
+Línea:
+28
+
+Tipo de problema:
+otro
+
+Severidad:
+media
+
+Explicación técnica:
+El changelog contiene marcadores de conflicto de Git (`>>>>>>> origin/develop` en la línea 46) que quedaron versionados. Son residuos de una resolución de conflicto sin finalizar: se muestran como texto en el Markdown y dejan ambiguo el contenido integrado del changelog, incluida la entrada de esta rama.
+
+Sugerencia de mejora:
+Resolver el conflicto conservando las entrada válida ISP y eliminar los marcadores de conflicto.
+
+### 4. Ajustes críticos realizados
+* **Sugerencias aceptadas:**  
+- Resolver el conflicto conservando las entrada válida de ISP y eliminar los marcadores de conflicto.
+
+* **Sugerencias descartadas o modificadas:** 
+
+
+---
+
 
 
