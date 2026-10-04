@@ -16,7 +16,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#118](https://github.com/eloeyhe/SistemaPedidos/issues/118)
   PR: [#117](https://github.com/eloeyhe/SistemaPedidos/pull/117) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-- [feature/esp-srp-add-anexo-srp] agrego 02-srp.md, .png, .puml, y especialista-srp.md
+- [feature/esp-extension-ocp-add-anexo-ocp] Realizo el OCP con todas sus carpetas y datos correspondientes
   Issue: [#120](https://github.com/eloeyhe/SistemaPedidos/issues/120)
   Issue: [#121](https://github.com/eloeyhe/SistemaPedidos/issues/121)
   issue: [#122](https://github.com/eloeyhe/SistemaPedidos/issues/122)
@@ -25,7 +25,15 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#125](https://github.com/eloeyhe/SistemaPedidos/issues/125)
   PR: [#126](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-  - [feature/esp-extension-lsp-add-anexo-lsp] Creo las carpetas y archivos con datos correspondientes a LSP
+  - [feature/esp-srp-add-anexo-srp] agrego 02-srp.md, .png, .puml, y especialista-srp.md
+  Issue: [#128](https://github.com/eloeyhe/SistemaPedidos/issues/128)
+  Issue: [#129](https://github.com/eloeyhe/SistemaPedidos/issues/129)
+  issue: [#130](https://github.com/eloeyhe/SistemaPedidos/issues/130)
+  issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
+  issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
+  PR: [#133](https://github.com/eloeyhe/SistemaPedidos/pull/133) - @eloeyhe (Especialista en Principios de Extension(OCP + LSP))
+
+- [feature/esp-extension-lsp-add-anexo-lsp] Creo las carpetas y archivos con datos correspondientes a LSP
   Issue: [#135](https://github.com/eloeyhe/SistemaPedidos/issues/135)
   Issue: [#136](https://github.com/eloeyhe/SistemaPedidos/issues/136)
   issue: [#137](https://github.com/eloeyhe/SistemaPedidos/issues/137)
@@ -33,6 +41,16 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
   issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
   PR: [#141](https://github.com/eloeyhe/SistemaPedidos/pull/141) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+### Changed
+
+- [feature/esp-extension-lsp-add-anexo-lsp] Corrigo el link/path del "Diagrama UML - LSP"
+  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  PR: [#141](https://github.com/eloeyhe/SistemaPedidos/pull/141) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+  - [feature/esp-extension-ocp-add-anexo-ocp] Corrigo el link/path del "Diagrama UML - OCP"
+  Issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
+  PR: [#133](https://github.com/eloeyhe/SistemaPedidos/pull/133) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 
 
