@@ -1,0 +1,112 @@
+@startuml 01-solid-04-isp
+
+skinparam classAttributeIconSize 0
+skinparam style strictuml
+skinparam handwritten false
+
+package "Segregacion de Interfaces - Sistema de Pedidos" {
+
+    ' ==========================================
+    ' INTERFACES SEGREGADAS (ISP)
+    ' ==========================================
+    interface IAtencionCliente <<interface>> {
+        + registrarPedido(): void
+        + modificarPedido(): void
+        + marcarComoEntregado(): void
+    }
+
+    interface IPreparacionCocina <<interface>> {
+        + comenzarPreparacion(): void
+        + marcarPedidoListo(): void
+    }
+
+    interface ISupervision <<interface>> {
+        + autorizarCancelacion(): void
+        + registrarDevolucionManual(): void
+    }
+
+    interface IRegistrable <<interface>> {
+        + registrar(): void
+    }
+
+    ' ==========================================
+    ' CLASES BASE / ABSTRACTAS
+    ' ==========================================
+    abstract class Usuario {
+        - nombre: string
+        - usuario: string
+        - passwordHash: string
+        - activo: boolean
+        + autenticar(): boolean
+    }
+
+    ' ==========================================
+    ' IMPLEMENTACIÓN DE INTERFACES EN USUARIOS
+    ' ==========================================
+    class UsuarioMostrador {
+        - numeroCaja: int
+        + registrarPedido(): void
+        + modificarPedido(): void
+        + marcarComoEntregado(): void
+    }
+
+    class UsuarioCocina {
+        - estacionTrabajo: string
+        + comenzarPreparacion(): void
+        + marcarPedidoListo(): void
+    }
+
+    class UsuarioEncargado {
+        - claveSupervision: string
+        + autorizarCancelacion(): void
+        + registrarDevolucionManual(): void
+    }
+
+    Usuario <|-- UsuarioMostrador
+    Usuario <|-- UsuarioCocina
+    Usuario <|-- UsuarioEncargado
+
+    IAtencionCliente <|.. UsuarioMostrador
+    IPreparacionCocina <|.. UsuarioCocina
+    ISupervision <|.. UsuarioEncargado
+
+    ' ==========================================
+    ' REGISTROS / HISTORIALES
+    ' ==========================================
+    class Historial_pago {
+        - pago: Pago
+        - tipo: string
+        - monto: decimal
+        - motivo: string
+        - fechayhora: datetime
+        - usuario: Usuario
+        + registrar(): void
+    }
+
+    class Auditoria_pedido {
+        - pedido: Pedido
+        - usuario: Usuario
+        - accion: string
+        - detalles: string
+        - fechayhora: datetime
+        + registrar(): void
+    }
+
+    class Historial_cambio_pedido {
+        - pedido: Pedido
+        - campo: string
+        - valor_anterior: string
+        - valor_nuevo: string
+        - fechayhora: datetime
+        - usuario: Usuario
+        + registrarCambio(): void
+        + registrar(): void
+    }
+
+    IRegistrable <|.. Historial_pago
+    IRegistrable <|.. Auditoria_pedido
+    IRegistrable <|.. Historial_cambio_pedido
+
+}
+
+@enduml
