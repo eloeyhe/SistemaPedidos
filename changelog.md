@@ -42,15 +42,30 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
   PR: [#141](https://github.com/eloeyhe/SistemaPedidos/pull/141) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
+  - [feature/esp-dip-add-anexo-dip] Creo archivos y docs correspondientes al rol DIP
+  Issue: [#143](https://github.com/eloeyhe/SistemaPedidos/issues/143)
+  Issue: [#144](https://github.com/eloeyhe/SistemaPedidos/issues/144)
+  issue: [#145](https://github.com/eloeyhe/SistemaPedidos/issues/145)
+  issue: [#146](https://github.com/eloeyhe/SistemaPedidos/issues/146)
+  issue: [#147](https://github.com/eloeyhe/SistemaPedidos/issues/147)
+  issue: [#148](https://github.com/eloeyhe/SistemaPedidos/issues/148)
+  issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
+  PR: [#150](https://github.com/eloeyhe/SistemaPedidos/pull/150) - @eloeyhe (Especialista en Inversión de Dependencias)
+
 ### Changed
 
-- [feature/esp-extension-lsp-add-anexo-lsp] Corrigo el link/path del "Diagrama UML - LSP"
+- [feature/esp-extension-lsp-add-anexo-lsp] Corrijo el link/path del "Diagrama UML - LSP"
   Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
   PR: [#141](https://github.com/eloeyhe/SistemaPedidos/pull/141) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
-  - [feature/esp-extension-ocp-add-anexo-ocp] Corrigo el link/path del "Diagrama UML - OCP"
+  - [feature/esp-extension-ocp-add-anexo-ocp] Corrig¿jo el link/path del "Diagrama UML - OCP"
   Issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
   PR: [#133](https://github.com/eloeyhe/SistemaPedidos/pull/133) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+  - [feature/esp-dip-add-anexo-dip] Corrijo el link/path del "Diagrama UML - DIP"
+  Issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
+  PR: [#150](https://github.com/eloeyhe/SistemaPedidos/pull/150) - @eloeyhe (Especialista en Inversión de Dependencias)
+
 
 
 
