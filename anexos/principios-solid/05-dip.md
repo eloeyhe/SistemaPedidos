@@ -22,7 +22,7 @@ Para cumplir con DIP, se invierten las dependencias introduciendo interfaces en 
 
 ## Estructura de Clases
 
-![Diagrama UML - DIP](C:\Users\Asus\Desktop\SistemaPedido\diagramas\01-diagrama-clases\01-solid-05-dip.png)
+![Diagrama UML - DIP](../../diagramas/01-diagrama-clases/01-solid-05-dip.png)
 
 ## Justificación Técnica
 
