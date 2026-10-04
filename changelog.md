@@ -25,13 +25,14 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#125](https://github.com/eloeyhe/SistemaPedidos/issues/125)
   PR: [#126](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
-  - [feature/esp-srp-add-anexo-srp] agrego 02-srp.md, .png, .puml, y especialista-srp.md
+- [feature/esp-srp-add-anexo-srp] agrego 02-srp.md, .png, .puml, y especialista-srp.md
   Issue: [#128](https://github.com/eloeyhe/SistemaPedidos/issues/128)
   Issue: [#129](https://github.com/eloeyhe/SistemaPedidos/issues/129)
   issue: [#130](https://github.com/eloeyhe/SistemaPedidos/issues/130)
   issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
   issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
   PR: [#133](https://github.com/eloeyhe/SistemaPedidos/pull/133) - @eloeyhe (Especialista en Principios de Extension(OCP + LSP))
+
 
 - [feature/esp-extension-lsp-add-anexo-lsp] Creo las carpetas y archivos con datos correspondientes a LSP
   Issue: [#135](https://github.com/eloeyhe/SistemaPedidos/issues/135)
@@ -51,6 +52,24 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#148](https://github.com/eloeyhe/SistemaPedidos/issues/148)
   issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
   PR: [#150](https://github.com/eloeyhe/SistemaPedidos/pull/150) - @eloeyhe (Especialista en Inversión de Dependencias)
+  
+  - [feature/esp-isp-add-anexo-isp] Se creo la rama e issues y se agregaron los archivos solicitados para el repositorio.
+  Issue: [#102](https://github.com/eloeyhe/SistemaPedidos/issues/102)
+  Issue: [#103](https://github.com/eloeyhe/SistemaPedidos/issues/103)
+  issue: [#104](https://github.com/eloeyhe/SistemaPedidos/issues/104)
+  issue: [#105](https://github.com/eloeyhe/SistemaPedidos/issues/105)
+  issue: [#106](https://github.com/eloeyhe/SistemaPedidos/issues/106)
+  issue: [#107](https://github.com/eloeyhe/SistemaPedidos/issues/107)
+  issue: [#108](https://github.com/eloeyhe/SistemaPedidos/issues/108)
+  PR: [#151](https://github.com/eloeyhe/SistemaPedidos/pull/151) - @Leandro2107 (Especialista en ISP)
+
+  - [feature/doc-coord-repo-update-readme-md] realizo code review, actualizo anexos y changelog
+  Issue: [#111](https://github.com/eloeyhe/SistemaPedidos/issues/111)
+  Issue: [#112](https://github.com/eloeyhe/SistemaPedidos/issues/112)
+  issue: [#113](https://github.com/eloeyhe/SistemaPedidos/issues/113)
+  issue: [#114](https://github.com/eloeyhe/SistemaPedidos/issues/114)
+  issue: [#115](https://github.com/eloeyhe/SistemaPedidos/issues/115)
+  PR: [#152](https://github.com/eloeyhe/SistemaPedidos/pull/152) - @nachovelesquen7-rgb (ocumentador y Coordinador de Repositorio + srp)
 
 ### Changed
 
