@@ -14,7 +14,7 @@ La herencia es un mecanismo de la Programación Orientada a Objetos que crea una
 
 ## Estructura de Clases
 
-![Diagrama UML - LSP](C:\Users\Asus\Desktop\SistemaPedido\diagramas\01-diagrama-clases\01-solid-03-lsp.png)
+![Diagrama UML - LSP](../../diagramas/01-diagrama-clases/01-solid-03-lsp.png)
 
 ## Justificación Técnica
 
