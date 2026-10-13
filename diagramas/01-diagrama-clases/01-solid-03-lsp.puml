@@ -34,7 +34,7 @@ class Cocina {
     + prepararItem(item: Elaborable): void
 }
 
-Item_pedido --|> Producto
-Cocina --|> Elaborable
+Item_pedido --> Producto
+Cocina ..> Elaborable
 
 @enduml
