@@ -14,7 +14,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#110](https://github.com/eloeyhe/SistemaPedidos/issues/110)
   Issue: [#116](https://github.com/eloeyhe/SistemaPedidos/issues/116)
   issue: [#118](https://github.com/eloeyhe/SistemaPedidos/issues/118)
-  PR: [#117](https://github.com/eloeyhe/SistemaPedidos/pull/117) - @nachovelesquen7-rgb (ocumentador y Coordinador de Repositorio + srp)
+  PR: [#117](https://github.com/eloeyhe/SistemaPedidos/pull/117) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 - [feature/esp-extension-ocp-add-anexo-ocp] Realizo el OCP con todas sus carpetas y datos correspondientes
   Issue: [#120](https://github.com/eloeyhe/SistemaPedidos/issues/120)
@@ -69,7 +69,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#113](https://github.com/eloeyhe/SistemaPedidos/issues/113)
   issue: [#114](https://github.com/eloeyhe/SistemaPedidos/issues/114)
   issue: [#115](https://github.com/eloeyhe/SistemaPedidos/issues/115)
-  PR: [#152](https://github.com/eloeyhe/SistemaPedidos/pull/152) - @nachovelesquen7-rgb (ocumentador y Coordinador de Repositorio + srp)
+  PR: [#152](https://github.com/eloeyhe/SistemaPedidos/pull/152) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 ### Fixed
 
@@ -84,7 +84,12 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 - [feature/doc-coord-repo-update-readme-md] fix: corregir RC12 y documentar code reviews
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
-  PR: [#158](https://github.com/eloeyhe/SistemaPedidos/pull/158) - @nachovelesquen7-rgb (ocumentador y Coordinador de Repositorio + srp)
+  PR: [#158](https://github.com/eloeyhe/SistemaPedidos/pull/158) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+  - [feature/doc-coord-repo-update-readme-md] fix: corrijo diagrama SRP y actualizo PNG
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#159](https://github.com/eloeyhe/SistemaPedidos/pull/159) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
 
 
 
