@@ -71,18 +71,16 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#115](https://github.com/eloeyhe/SistemaPedidos/issues/115)
   PR: [#152](https://github.com/eloeyhe/SistemaPedidos/pull/152) - @nachovelesquen7-rgb (ocumentador y Coordinador de Repositorio + srp)
 
-### Changed
-
-  - [feature/esp-dip-add-anexo-dip] Corrijo el link/path del "Diagrama UML - DIP"
-  Issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
-  PR: [#150](https://github.com/eloeyhe/SistemaPedidos/pull/150) - @eloeyhe (Especialista en Inversión de Dependencias)
-
-#### Fixed
+### Fixed
 
 - [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo link y arreglo diagramas PUML (OCP+LSP)
  Issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
   PR: [#155](https://github.com/eloeyhe/SistemaPedidos/pull/155) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+- [fix/esp-dip-correccion-diagrama-dip] Corrijo la relación Item_pedido - IElementoMenu y aplico el prefijo I a las interfaces de DIP (RC1, RC15)
+  Issue: [#156](https://github.com/eloeyhe/SistemaPedidos/issues/156)
+  PR: [#157](https://github.com/eloeyhe/SistemaPedidos/pull/157) - @santimarM (Especialista en Inversión de Dependencias)
 
 
 
