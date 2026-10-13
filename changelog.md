@@ -90,6 +90,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
   PR: [#159](https://github.com/eloeyhe/SistemaPedidos/pull/159) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
+- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo nomenclatura de Estrategia.. por IEstrategia..
+ Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  PR: [#160](https://github.com/eloeyhe/SistemaPedidos/pull/160) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 
 
