@@ -82,6 +82,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#156](https://github.com/eloeyhe/SistemaPedidos/issues/156)
   PR: [#157](https://github.com/eloeyhe/SistemaPedidos/pull/157) - @santimarM (Especialista en Inversión de Dependencias)
 
+- [feature/doc-coord-repo-update-readme-md] fix: corregir RC12 y documentar code reviews
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#158](https://github.com/eloeyhe/SistemaPedidos/pull/158) - @nachovelesquen7-rgb (ocumentador y Coordinador de Repositorio + srp)
+
 
 
 
