@@ -8,42 +8,42 @@ class Pago {
     + registrarPago(): void
 }
 
-interface EstrategiaPago {
+interface IEstrategiaPago {
     + procesarCobro(monto: Double): Boolean
 }
 
-class PagoEfectivo implements EstrategiaPago {
+class PagoEfectivo implements IEstrategiaPago {
     + procesarCobro(monto: Double): Boolean
 }
 
-class PagoTransferencia implements EstrategiaPago {
+class PagoTransferencia implements IEstrategiaPago {
     + procesarCobro(monto: Double): Boolean
 }
 
-class PagoQR implements EstrategiaPago {
+class PagoQR implements IEstrategiaPago {
     + procesarCobro(monto: Double): Boolean
 }
 
-Pago --> EstrategiaPago
+Pago --> IEstrategiaPago
 
 class Pedido {
     - Pedido: String
-    - estrategiaDescuento: EstrategiaDescuento
+    - estrategiaDescuento: IEstrategiaDescuento
     + calcularTotal(): Double
 }
 
-interface EstrategiaDescuento {
+interface IEstrategiaDescuento {
     + aplicarDescuento(montoBase: Double): Double
 }
 
-class DescuentoSocio implements EstrategiaDescuento {
+class DescuentoSocio implements IEstrategiaDescuento {
     + aplicarDescuento(montoBase: Double): Double
 }
 
-class DescuentoPromocional implements EstrategiaDescuento {
+class DescuentoPromocional implements IEstrategiaDescuento {
     + aplicarDescuento(montoBase: Double): Double
 }
 
-Pedido --> EstrategiaDescuento
+Pedido --> IEstrategiaDescuento
 
 @enduml
