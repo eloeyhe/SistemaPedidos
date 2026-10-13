@@ -9,15 +9,15 @@ class Pedido {
   - referenciaRetiro: String
   - estado: EstadoPedido
   - prioritario: Boolean
-  + agregarItem(item: ItemPedido): void
-  + modificarItem(item: ItemPedido): void
+  + agregarItem(item: Item_pedido): void
+  + modificarItem(item: Item_pedido): void
   + cancelar(): void
   + cambiarEstado(nuevoEstado: EstadoPedido): void
   + priorizar(): void
   + calcularTotal(): Decimal
 }
 
-class ItemPedido {
+class Item_pedido {
   - cantidad: int
   - precioUnitarioHistorico: Decimal
   + agregarPersonalizacion(personalizacion: PersonalizacionItem): void
@@ -37,7 +37,7 @@ class Pago {
   - fechaHora: DateTime
 }
 
-class HistorialPago {
+class Historial_pago {
   - tipo: TipoMovimiento
   - monto: Decimal
   - motivo: String
@@ -57,7 +57,7 @@ class PoliticaPrioridadPedido <<policy>> {
 
 class ServicioRegistroPago <<service>> {
   + registrarCobro(pedido: Pedido, monto: Decimal, metodo: MetodoPago): Pago
-  + registrarAjuste(pago: Pago, diferencia: Decimal): HistorialPago
+  + registrarAjuste(pago: Pago, diferencia: Decimal): Historial_pago
 }
 
 class CalculadorAjustePago <<service>> {
@@ -65,7 +65,7 @@ class CalculadorAjustePago <<service>> {
 }
 
 class CalculadorSubtotalItem <<service>> {
-  + calcular(item: ItemPedido): Decimal
+  + calcular(item: Item_pedido): Decimal
 }
 
 enum EstadoPedido {
@@ -87,17 +87,17 @@ enum TipoMovimiento {
   DEVOLUCION
 }
 
-Pedido "1" *-- "1..*" ItemPedido : contiene
-ItemPedido "1" *-- "0..*" PersonalizacionItem : personalizaciones
+Pedido "1" *-- "1..*" Item_pedido : contiene
+Item_pedido "1" *-- "0..*" PersonalizacionItem : personalizaciones
 Pedido "1" -- "0..1" Pago : pago
-Pago "1" *-- "1..*" HistorialPago : movimientos
+Pago "1" *-- "1..*" Historial_pago : movimientos
 
 Pedido ..> PoliticaCicloPedido : delega reglas del ciclo
 Pedido ..> PoliticaPrioridadPedido : delega priorización
-ItemPedido ..> CalculadorSubtotalItem : delega cálculo
+Item_pedido ..> CalculadorSubtotalItem : delega cálculo
 CalculadorSubtotalItem ..> PersonalizacionItem : suma adicionales
 ServicioRegistroPago ..> Pago : registra
-ServicioRegistroPago ..> HistorialPago : registra movimientos
+ServicioRegistroPago ..> Historial_pago : registra movimientos
 CalculadorAjustePago ..> ServicioRegistroPago : informa ajuste
 
 
