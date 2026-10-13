@@ -14,7 +14,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#110](https://github.com/eloeyhe/SistemaPedidos/issues/110)
   Issue: [#116](https://github.com/eloeyhe/SistemaPedidos/issues/116)
   issue: [#118](https://github.com/eloeyhe/SistemaPedidos/issues/118)
-  PR: [#117](https://github.com/eloeyhe/SistemaPedidos/pull/117) - @nachovelesquen7-rgb (ocumentador y Coordinador de Repositorio + srp)
+  PR: [#117](https://github.com/eloeyhe/SistemaPedidos/pull/117) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 - [feature/esp-extension-ocp-add-anexo-ocp] Realizo el OCP con todas sus carpetas y datos correspondientes
   Issue: [#120](https://github.com/eloeyhe/SistemaPedidos/issues/120)
@@ -69,20 +69,26 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#113](https://github.com/eloeyhe/SistemaPedidos/issues/113)
   issue: [#114](https://github.com/eloeyhe/SistemaPedidos/issues/114)
   issue: [#115](https://github.com/eloeyhe/SistemaPedidos/issues/115)
-  PR: [#152](https://github.com/eloeyhe/SistemaPedidos/pull/152) - @nachovelesquen7-rgb (ocumentador y Coordinador de Repositorio + srp)
+  PR: [#152](https://github.com/eloeyhe/SistemaPedidos/pull/152) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
-### Changed
-
-  - [feature/esp-dip-add-anexo-dip] Corrijo el link/path del "Diagrama UML - DIP"
-  Issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
-  PR: [#150](https://github.com/eloeyhe/SistemaPedidos/pull/150) - @eloeyhe (Especialista en Inversión de Dependencias)
-
-#### Fixed
+### Fixed
 
 - [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo link y arreglo diagramas PUML (OCP+LSP)
  Issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
   PR: [#155](https://github.com/eloeyhe/SistemaPedidos/pull/155) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+- [fix/esp-dip-correccion-diagrama-dip] Corrijo la relación Item_pedido - IElementoMenu y aplico el prefijo I a las interfaces de DIP (RC1, RC15)
+  Issue: [#156](https://github.com/eloeyhe/SistemaPedidos/issues/156)
+  PR: [#157](https://github.com/eloeyhe/SistemaPedidos/pull/157) - @santimarM (Especialista en Inversión de Dependencias)
+
+- [feature/doc-coord-repo-update-readme-md] fix: corregir RC12 y documentar code reviews
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#158](https://github.com/eloeyhe/SistemaPedidos/pull/158) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+  - [feature/doc-coord-repo-update-readme-md] fix: corrijo diagrama SRP y actualizo PNG
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#159](https://github.com/eloeyhe/SistemaPedidos/pull/159) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 - [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo nomenclatura de Estrategia.. por IEstrategia..
  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
