@@ -24,7 +24,7 @@ class PagoQR implements EstrategiaPago {
     + procesarCobro(monto: Double): Boolean
 }
 
-Pago --|> EstrategiaPago
+Pago --> EstrategiaPago
 
 class Pedido {
     - Pedido: String
@@ -44,6 +44,6 @@ class DescuentoPromocional implements EstrategiaDescuento {
     + aplicarDescuento(montoBase: Double): Double
 }
 
-Pedido --|> EstrategiaDescuento
+Pedido --> EstrategiaDescuento
 
 @enduml
