@@ -1,4 +1,4 @@
-# Informe de Interacción con IA - Especialista en SRP 
+# Informe de Interacción con IA - Especialista en DIP
 
 **Rol:** Especialista en Inversión de Dependencias (DIP) 
 
@@ -8,9 +8,9 @@
   --- 
 
   ## 1. Archivos de Contexto Referenciados: 
-  * `anexos/introduccion.md\` 
-  * `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw\`
-  * `herramientas-agile/tarjetas-crc/\` 
+  * `anexos/introduccion.md`
+  * `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`
+  * `herramientas-agile/tarjetas-crc/`
    
    --- 
    ## 2. Prompt Utilizado:
@@ -88,4 +88,6 @@ En síntesis, las inversiones que sí responden a necesidades identificables son
 ```
   ## 4. Ajustes realizados:
 
-  * Se ajustaron las firmas de las interfaces de infraestructura (`RepositorioPedidos`, `PublicadorComandasCocina`) para alinearlas con los requisitos funcionales del sistema de pedidos (RF1 y RF2), y se redactó la sección teórica formalizando los conceptos de clase abstracta e interfaz requeridos por la consigna del parcial.
+  * Se renombraron las interfaces propuestas por la IA con el prefijo `I` (`IElementoMenu`, `IRepositorioPedidos`, `ICatalogoMenu`, `IPublicadorComandasCocina`) para seguir la convención de nomenclatura del grupo, ya utilizada en ISP.
+  * En el diagrama, `Item_pedido` se relaciona con `IElementoMenu` mediante una asociación (mantiene una referencia a la interfaz), no mediante herencia: el ítem usa la abstracción, no la implementa.
+  * Se ajustaron las firmas de las interfaces de infraestructura (`IRepositorioPedidos`, `IPublicadorComandasCocina`) para alinearlas con los requisitos funcionales del sistema de pedidos (RF1 y RF2), y se redactó la sección teórica formalizando los conceptos de clase abstracta e interfaz requeridos por la consigna del parcial.

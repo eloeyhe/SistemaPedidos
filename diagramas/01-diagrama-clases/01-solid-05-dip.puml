@@ -2,12 +2,12 @@
 skinparam classAttributeIconSize 0
 
 ' Dominio y Abstracción del Catálogo
-interface ElementoMenu {
+interface IElementoMenu {
     + getNombre(): String
     + getPrecio(): Double
 }
 
-class Producto implements ElementoMenu {
+class Producto implements IElementoMenu {
     - Producto: String
     - nombre: String
     - precioBase: Double
@@ -15,7 +15,7 @@ class Producto implements ElementoMenu {
     + getPrecio(): Double
 }
 
-class Combo implements ElementoMenu {
+class Combo implements IElementoMenu {
     - Combo: String
     - nombre: String
     - descuento: Double
@@ -25,39 +25,39 @@ class Combo implements ElementoMenu {
 
 class Item_pedido {
     - cantidad: Integer
-    - elemento: ElementoMenu
+    - elemento: IElementoMenu
     + calcularSubtotal(): Double
 
 }
 
-Item_pedido --|> ElementoMenu
+Item_pedido --> IElementoMenu
 
 ' Puertos de Infraestructura (Interfaces)
 
-interface RepositorioPedidos {
+interface IRepositorioPedidos {
     + guardar(pedido: Pedido): Boolean
 }
 
-interface CatalogoMenu {
-    + buscarPorId(id: String): ElementoMenu
+interface ICatalogoMenu {
+    + buscarPorId(id: String): IElementoMenu
 }
 
-interface PublicadorComandasCocina {
+interface IPublicadorComandasCocina {
     + publicarComanda(pedido: Pedido): void
 }
 
 ' Servicio de Aplicación e Inyección de Dependencias
 
 class ServicioTomarPedido {
-    - repositorioPedidos: RepositorioPedidos
-    - catalogoMenu: CatalogoMenu
-    - publicadorCocina: PublicadorComandasCocina
-    + ServicioTomarPedido(repo: RepositorioPedidos, cat: CatalogoMenu, pub: PublicadorComandasCocina)
+    - repositorioPedidos: IRepositorioPedidos
+    - catalogoMenu: ICatalogoMenu
+    - publicadorCocina: IPublicadorComandasCocina
+    + ServicioTomarPedido(repo: IRepositorioPedidos, cat: ICatalogoMenu, pub: IPublicadorComandasCocina)
     + ejecutar(datosPedido: Object): void
 }
 
-ServicioTomarPedido --> RepositorioPedidos
-ServicioTomarPedido --> CatalogoMenu
-ServicioTomarPedido --> PublicadorComandasCocina
+ServicioTomarPedido --> IRepositorioPedidos
+ServicioTomarPedido --> ICatalogoMenu
+ServicioTomarPedido --> IPublicadorComandasCocina
 
 @enduml
