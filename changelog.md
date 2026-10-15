@@ -98,6 +98,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
   PR: [#160](https://github.com/eloeyhe/SistemaPedidos/pull/167) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
+- [feature/doc-coord-repo-update-readme-md] Corrección de las Request Changes (RC) asignadas.
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#168](https://github.com/eloeyhe/SistemaPedidos/pull/168) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
 
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
 
