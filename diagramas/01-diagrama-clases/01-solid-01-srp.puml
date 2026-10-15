@@ -5,6 +5,7 @@ skinparam classAttributeIconSize 0
 hide empty members
 
 class Pedido {
+  - numeroPedido: String
   - fecha: DateTime
   - referenciaRetiro: String
   - estado: EstadoPedido
@@ -20,12 +21,12 @@ class Pedido {
 class Item_pedido {
   - cantidad: int
   - precioUnitarioHistorico: Decimal
-  + agregarPersonalizacion(personalizacion: PersonalizacionItem): void
-  + quitarPersonalizacion(personalizacion: PersonalizacionItem): void
+  + agregarPersonalizacion(personalizacion: Personalizacion_item): void
+  + quitarPersonalizacion(personalizacion: Personalizacion_item): void
   + calcularSubtotal(): Decimal
 }
 
-class PersonalizacionItem {
+class Personalizacion_item {
   - descripcion: String
   - costoAdicional: Decimal
   + calcularCosto(): Decimal
@@ -88,14 +89,14 @@ enum TipoMovimiento {
 }
 
 Pedido "1" *-- "1..*" Item_pedido : contiene
-Item_pedido "1" *-- "0..*" PersonalizacionItem : personalizaciones
+Item_pedido "1" *-- "0..*" Personalizacion_item : personalizaciones
 Pedido "1" -- "0..1" Pago : pago
 Pago "1" *-- "1..*" Historial_pago : movimientos
 
 Pedido ..> PoliticaCicloPedido : delega reglas del ciclo
 Pedido ..> PoliticaPrioridadPedido : delega priorización
 Item_pedido ..> CalculadorSubtotalItem : delega cálculo
-CalculadorSubtotalItem ..> PersonalizacionItem : suma adicionales
+CalculadorSubtotalItem ..> Personalizacion_item : suma adicionales
 ServicioRegistroPago ..> Pago : registra
 ServicioRegistroPago ..> Historial_pago : registra movimientos
 CalculadorAjustePago ..> ServicioRegistroPago : informa ajuste

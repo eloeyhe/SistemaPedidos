@@ -35,7 +35,7 @@ Para resolver el problema en el **Sistema de Pedidos**, se descomponen las respo
 ┌────────────────────────────────────────────────────────┐
 │ Pedido                                                 │
 ├────────────────────────────────────────────────────────┤
-│ - fecha, referenciaRetiro, estado                      │
+│ - numeroPedido, fecha, referenciaRetiro, estado                      │
 ├────────────────────────────────────────────────────────┤
 │ + agregarItem(), cancelar()                            │  &lt;-- Estructura
 │ + cambiarEstado(), validarModificacionEnRecibido()     │  &lt;-- Ciclo de Vida

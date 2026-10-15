@@ -417,7 +417,8 @@ Explicación técnica:
 Por qué esto es un problema real.
 
 Sugerencia de mejora:
-Cambio concreto recomendado.
+
+Decisión sugerida: (APPROVE | REQUEST CHANGES | COMMENT)
 ```
 
 --- 
@@ -440,11 +441,15 @@ otro
 Severidad:
 media
 
+
 Explicación técnica:
 El PR agrega el archivo destinado a la documentación del rol Documentador y Coordinador, pero está vacío. Por lo tanto, no aporta documentación del repositorio ni información vinculada con el contexto y los requisitos descritos en `introduccion.md`.
 
 Sugerencia de mejora:
 Agregar al archivo la documentación del repositorio correspondiente al rol, incluyendo cómo se organiza y dónde se encuentran sus documentos y diseños.
+
+
+Decisión sugerida por IA: REQUEST CHANGES, hasta que se complete la documentación.
 
 ### 4. Ajustes críticos realizados
 * **Sugerencias aceptadas:**  
@@ -496,6 +501,9 @@ Severidad:
 Explicación técnica:
 
 Sugerencia de mejora:
+
+Decisión sugerida: (APPROVE | REQUEST CHANGES | COMMENT)
+
 ```
 
 ### 2. Archivos de contexto referenciados
@@ -516,21 +524,23 @@ diseño
 Severidad:
 media
 
+
 Explicación técnica:
 El informe justifica eliminar `idPedido` porque, según indica, las clases no necesitan un identificador único. Sin embargo, el requisito RF6 de `anexos/introduccion.md` exige generar un identificador numérico único para cada pedido. El diagrama resultante tampoco muestra ese atributo en `Pedido`, así que el diseño deja sin representar cómo se cumple el requisito.
 
 Sugerencia de mejora:
 Conservar en `Pedido` el identificador numérico único.
 
+Decisión sugerida por IA: REQUEST CHANGES, hasta aclarar la inconsistencia.
+
 --- 
 
 ### 4. Ajustes críticos realizados
 
 - **Sugerencias aceptadas:** 
-- Ninguna.
-- **Sugerencias descartadas o modificadas:** 
 - Conservar en `Pedido` el identificador numérico único.
- * No se acepto la sugerencia debido a que no se trata de un Diagrama entidad-relación, por lo tanto las clases no deben incorporar identificadores únicos.
+- **Sugerencias descartadas o modificadas:** 
+- Ninguno.
 
  
 ---
@@ -576,6 +586,9 @@ Severidad:
 Explicación técnica:
 
 Sugerencia de mejora:
+
+Decisión sugerida: (APPROVE | REQUEST CHANGES | COMMENT)
+
 ```
 
 ### 2. Archivos de contexto referenciados
@@ -586,29 +599,32 @@ Sugerencia de mejora:
 
 HALLAZGO #1
 
-Archivo: `documentador-coordinador.md`
-Línea: 523-525
+Archivo: changelog.md
+Líneas: 17 
 
-Tipo de problema:
-diseño
+Tipo de problema: Legibilidad
 
-Severidad:
-media
+Severidad: Media
 
 Explicación técnica:
-El registro descarta conservar un identificador único en `Pedido` con el argumento de que el modelo no es un diagrama entidad-relación. Sin embargo, RF6 de `anexos/introduccion.md` requiere que el sistema genere un identificador numérico único para cada pedido. La decisión documentada contradice ese requisito y deja sin resolver cómo se identifica cada pedido.
+
+En las entradas de la PR #152, el rol del responsable figura como ocumentador y Coordinador de Repositorio + srp, omitiendo la letra inicial de «Documentador». 
+
+Estas inconsistencias afectan la uniformidad del changelog y dificultan la identificación correcta de los responsables y los cambios registrados.
 
 Sugerencia de mejora:
-Revisar la sugerencia descartada y conservar en el diseño de `Pedido` la identidad numérica única exigida por RF6; no es necesario que sea una clave de base de datos.
 
+Corregir el nombre del rol a Documentador y Coordinador de Repositorio + Especialista SRP.
+
+Decisión sugerida: REQUEST CHANGES, hasta corregir las inconsistencias de documentación.
 
 ### 4. Ajustes críticos realizados
 
 **Sugerencias aceptadas:**
-- Ninguna.
+- Corregir el nombre del rol a Documentador y Coordinador de Repositorio + Especialista SRP.
 
 **Sugerencias descartadas o modificadas:**
-- Se descarta la sugerencia de incorporar `idPedido` en el diagrama de clases, debido a que las clases no deben incorporar identificadores únicos como en Diagrama entidad-relación.
+- Ninguna.
 
 
 
