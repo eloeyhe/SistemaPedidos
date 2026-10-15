@@ -4,7 +4,7 @@ skinparam classAttributeIconSize 0
 class Pago {
     - Pago: String
     - monto: Double
-    - estrategiaPago: EstrategiaPago
+    - estrategiaPago: IEstrategiaPago
     + registrarPago(): void
 }
 
@@ -23,6 +23,7 @@ class PagoTransferencia implements IEstrategiaPago {
 class PagoQR implements IEstrategiaPago {
     + procesarCobro(monto: Double): Boolean
 }
+note bottom of PagoQR : Extensión futura para demostrar OCP (No en RF8)
 
 Pago --> IEstrategiaPago
 
