@@ -43,7 +43,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
   PR: [#141](https://github.com/eloeyhe/SistemaPedidos/pull/141) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
-  - [feature/esp-dip-add-anexo-dip] Creo archivos y docs correspondientes al rol DIP
+- [feature/esp-dip-add-anexo-dip] Creo archivos y docs correspondientes al rol DIP
   Issue: [#143](https://github.com/eloeyhe/SistemaPedidos/issues/143)
   Issue: [#144](https://github.com/eloeyhe/SistemaPedidos/issues/144)
   issue: [#145](https://github.com/eloeyhe/SistemaPedidos/issues/145)
@@ -53,7 +53,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
   PR: [#150](https://github.com/eloeyhe/SistemaPedidos/pull/150) - @eloeyhe (Especialista en Inversión de Dependencias)
   
-  - [feature/esp-isp-add-anexo-isp] Se creo la rama e issues y se agregaron los archivos solicitados para el repositorio.
+- [feature/esp-isp-add-anexo-isp] Se creo la rama e issues y se agregaron los archivos solicitados para el repositorio.
   Issue: [#102](https://github.com/eloeyhe/SistemaPedidos/issues/102)
   Issue: [#103](https://github.com/eloeyhe/SistemaPedidos/issues/103)
   issue: [#104](https://github.com/eloeyhe/SistemaPedidos/issues/104)
@@ -63,7 +63,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#108](https://github.com/eloeyhe/SistemaPedidos/issues/108)
   PR: [#151](https://github.com/eloeyhe/SistemaPedidos/pull/151) - @Leandro2107 (Especialista en ISP)
 
-  - [feature/doc-coord-repo-update-readme-md] realizo code review, actualizo anexos y changelog
+- [feature/doc-coord-repo-update-readme-md] realizo code review, actualizo anexos y changelog
   Issue: [#111](https://github.com/eloeyhe/SistemaPedidos/issues/111)
   Issue: [#112](https://github.com/eloeyhe/SistemaPedidos/issues/112)
   issue: [#113](https://github.com/eloeyhe/SistemaPedidos/issues/113)
@@ -97,6 +97,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Realizo RCs correspondientes a mi rol (RC15, RC18 y RC21. Changelog: RC5 y RC16)
  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
   PR: [#160](https://github.com/eloeyhe/SistemaPedidos/pull/167) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+- [feature/doc-coord-repo-update-readme-md] Corrección de las Request Changes (RC) asignadas.
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#168](https://github.com/eloeyhe/SistemaPedidos/pull/168) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
