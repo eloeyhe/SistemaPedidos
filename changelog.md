@@ -23,15 +23,15 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#123](https://github.com/eloeyhe/SistemaPedidos/issues/123)
   issue: [#124](https://github.com/eloeyhe/SistemaPedidos/issues/124)
   issue: [#125](https://github.com/eloeyhe/SistemaPedidos/issues/125)
-  PR: [#126](https://github.com/eloeyhe/SistemaPedidos/pull/133) - @eloeyhe (Especialista en Principios de Extension(OCP + LSP))
+  PR: [#133](https://github.com/eloeyhe/SistemaPedidos/pull/133) - @eloeyhe (Especialista en Principios de Extension(OCP + LSP))
 
 - [feature/esp-srp-add-anexo-srp] agrego 02-srp.md, .png, .puml, y especialista-srp.md
-  Issue: [#128](https://github.com/eloeyhe/SistemaPedidos/issues/128)
-  Issue: [#129](https://github.com/eloeyhe/SistemaPedidos/issues/129)
-  issue: [#130](https://github.com/eloeyhe/SistemaPedidos/issues/130)
-  issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
-  issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
-  PR: [#133](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @eloeyhe (Especialista en Principios de Extension(OCP + LSP))
+  Issue: [#120](https://github.com/eloeyhe/SistemaPedidos/issues/120)
+  Issue: [#121](https://github.com/eloeyhe/SistemaPedidos/issues/121)
+  issue: [#122](https://github.com/eloeyhe/SistemaPedidos/issues/122)
+  issue: [#123](https://github.com/eloeyhe/SistemaPedidos/issues/123)
+  issue: [#124](https://github.com/eloeyhe/SistemaPedidos/issues/124)
+  PR: [#126](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 
 - [feature/esp-extension-lsp-add-anexo-lsp] Creo las carpetas y archivos con datos correspondientes a LSP
@@ -73,7 +73,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
-- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo link y arreglo diagramas PUML (OCP+LSP)
+- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Realizo RC2, RC3, RC4, RC5 y RC6 en cuanto a OCP y LSP
  Issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
   PR: [#155](https://github.com/eloeyhe/SistemaPedidos/pull/155) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
@@ -94,8 +94,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
   PR: [#160](https://github.com/eloeyhe/SistemaPedidos/pull/160) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
-
-
+- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Realizo RCs correspondientes a mi rol (RC15, RC18 y RC21. Changelog: RC5 y RC16)
+ Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  PR: [#160](https://github.com/eloeyhe/SistemaPedidos/pull/167) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
