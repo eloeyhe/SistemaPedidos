@@ -102,6 +102,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
   PR: [#168](https://github.com/eloeyhe/SistemaPedidos/pull/168) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
+- [fix/doc-coord-correccion-changelog-ia] realizo correcciones en changelog.
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#169](https://github.com/eloeyhe/SistemaPedidos/pull/169) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
 
