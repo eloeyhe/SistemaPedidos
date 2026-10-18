@@ -106,6 +106,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
   PR: [#169](https://github.com/eloeyhe/SistemaPedidos/pull/169) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
+- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo nomenclatura en anexos/principios-solid/02-ocp.md y lsp.md
+ Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139) 
+ PR: [#170](https://github.com/eloeyhe/SistemaPedidos/pull/170) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
 
 ### Added
