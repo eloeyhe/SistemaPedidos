@@ -120,6 +120,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
   PR: [#172](https://github.com/eloeyhe/SistemaPedidos/pull/172) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
+- [fix/correcciones-detalles-srp] creo rama fix con correcciones de pulido sobre el diagrama srp.
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#173](https://github.com/eloeyhe/SistemaPedidos/pull/173) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
 
 ### Added
