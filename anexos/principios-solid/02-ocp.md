@@ -4,9 +4,9 @@
 El Principio Abierto/Cerrado (Open/Closed Principle) es un principio de diseño fundamental que establece que las entidades de software (clases, módulos, funciones) deben estar **abiertas para su extensión, pero cerradas para su modificación**. Su propósito principal es permitir que el sistema incorpore nuevos comportamientos o características en el futuro sin riesgo de introducir errores o alterar el código existente que ya ha sido probado y está en funcionamiento.
 
 ## Motivación
-En el diseño original del sistema, se detectó una fuerte dependencia de estructuras condicionales estáticas en dos clases clave del dominio:
+En el diseño original del sistema, se detectó una fuerte dependencia de estructuras condicionales estáticas en una clase clave del dominio:
 
-1. **Clase `Pago`**: Gestiona el cobro basándose en el atributo `metodoDePago` de tipo `Metodo_pago` (un enum con valores como `efectivo` y `transferencia`). Los métodos `registrarPago()` y `calcularDiferencia()` utilizan bloques condicionales (`if/else` o `switch`) para decidir cómo procesar el cobro. El Requisito Funcional RF8 anticipa la incorporación futura de pagos con tarjeta y código QR, lo que obligaría a modificar el código fuente de `Pago` cada vez que se agregue un nuevo medio de pago. 
+1. **Clase `Pago`**: Gestiona el cobro basándose en el atributo `metodoDePago` de tipo `Metodo_pago` (un enum). El Requisito Funcional RF8 establece claramente que **el alcance actual del MVP admite únicamente pagos en EFECTIVO y TRANSFERENCIA**. Sin embargo, los métodos originales `registrarPago()` y `calcularDiferencia()` utilizaban bloques condicionales (`if/else` o `switch`) para procesar el cobro. El problema de este enfoque es que el negocio es dinámico; si en el futuro se desea escalar el sistema, esta estructura obligaría a modificar el código fuente de `Pago` cada vez que se agregue un nuevo medio de pago.
 
 Este caso representa una clara violación del principio OCP, ya que las variaciones futuras fuerzan la modificación directa de clases estables.
 
@@ -20,9 +20,9 @@ Para cumplir con OCP, la herencia (o la implementación de interfaces) se utiliz
 ![Diagrama UML - OCP](../../diagramas/01-diagrama-clases/01-solid-02-ocp.png)
 
 ## Justificación Técnica
-El diagrama UML asociado demuestra la aplicación del patrón **Strategy** para resolver las violaciones de OCP en el sistema:
+El diagrama UML asociado demuestra la aplicación del patrón **Strategy** para resolver las violaciones de OCP en el sistema, respetando el alcance del proyecto:
 
-1. **Estrategia de Pagos**: Se extrajo la lógica condicional de la clase `Pago` hacia una abstracción llamada `IEstrategiaPago`. De ella derivan las subclases concretas `PagoEfectivo` y `PagoTransferencia`. La clase `Pago` delega la ejecución invocando el método polimórfico `procesarCobro()`. Si mañana se requiere incorporar `PagoQR` o `PagoTarjeta`, solo bastará con crear una nueva subclase sin alterar la clase `Pago`.
+1. **Estrategia de Pagos**: Se extrajo la lógica condicional de la clase `Pago` hacia una abstracción llamada `IEstrategiaPago`. Alineado con el RF8, derivan las **únicas dos subclases del MVP actual**: `PagoEfectivo` y `PagoTransferencia`. La clase `Pago` delega la ejecución invocando el método polimórfico `procesarCobro()`. Si mañana el negocio decide incorporar extensiones futuras fuera del alcance del MVP (como `PagoQR` o `PagoTarjeta`), solo bastará con crear nuevas subclases sin alterar la clase `Pago`.
 
 2. **Estrategia de Descuentos**: Se aisló el cálculo del total de la clase `Pedido` eliminando los condicionales internos y delegando la responsabilidad a la interfaz `IEstrategiaDescuento`. Las subclases como `DescuentoSocio` y `DescuentoPromocional` implementan el método `aplicarDescuento(montoBase)`. Técnicamente, el sistema está **cerrado a modificaciones** porque para agregar un nuevo tipo de cliente o promoción mañana, bastará con crear una nueva subclase de estrategia de descuento, manteniendo la clase `Pedido` intacta y **abierta a la extensión**.
 

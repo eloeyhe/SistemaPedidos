@@ -14,13 +14,13 @@ La herencia es un mecanismo de la Programación Orientada a Objetos que crea una
 ![Diagrama UML - LSP](../../diagramas/01-diagrama-clases/01-solid-03-lsp.png)
 
 ## Justificación Técnica
-El diagrama UML ilustra la corrección estructural para garantizar el cumplimiento del LSP:
+El diagrama UML ilustra la corrección estructural para separar claramente los contratos y garantizar el cumplimiento del LSP:
 
-1. **Jerarquía Comercial Limpia**: La superclase `Producto` mantiene estrictamente los atributos y métodos comerciales (como `precio` y `nombre`), lo que garantiza que, desde el punto de vista de la clase `Item_pedido`, cualquier `Producto` (ya sea preparado o envasado) pueda ser sustituido perfectamente para calcular el subtotal.
+1. **Contrato Comercial (Precio)**: Entidades como `Producto` (o agrupaciones como `Combo`) se rigen por un contrato estrictamente comercial a través de interfaces como `IElementoMenu` (la cual define `getPrecio()`). Esto garantiza que, desde el punto de vista de la clase `Item_pedido` o la Caja, cualquier elemento de compra pueda ser sustituido perfectamente para calcular subtotales, sin importar su naturaleza.
 
-2. **Segregación del Comportamiento Operativo**: La capacidad de ser cocinado o elaborado se ha extraído a una interfaz específica llamada `IElaborable`, la cual solo es implementada por `ProductoPreparado`.
+2. **Contrato Operativo (Preparación)**: Se establece una frontera conceptual clara respecto a la cocina. La capacidad de ser cocinado se ha extraído a una interfaz específica llamada `IElaborable` (que define `iniciarPreparacion()`). Esta interfaz **solo** es implementada por `ProductoPreparado`. Un `Combo` o un `ProductoEnvasado` pueden ser elementos del menú para ser cobrados, pero no son elementos preparables.
 
-3. **Garantía para el Cliente**: La entidad `Cocina` u otros módulos operativos del sistema interactúan únicamente con objetos que implementan `IElaborable`. Esto asegura que los clientes del código operen sobre contratos que los objetos realmente pueden cumplir, protegiendo al sistema de excepciones en tiempo de ejecución y garantizando la sustituibilidad en la jerarquía.
+3. **Garantía para el Cliente**: La entidad `Cocina` u otros módulos operativos del sistema interactúan únicamente con objetos que implementan `IElaborable`, no con `IElementoMenu`. Esto asegura que los clientes del código operen sobre contratos que los objetos realmente pueden cumplir, protegiendo al sistema de excepciones en tiempo de ejecución y garantizando la sustituibilidad exacta en cada contexto.
 
 ## Validación mediante Tests
-Para asegurar la correcta sustituibilidad de las clases en el entorno operativo y evitar fallos en producción, este diseño facilita la creación de **pruebas de integración** enfocadas en el módulo `Cocina`. Estos tests deben validar que las dependencias de la `Cocina` aceptan exclusivamente colecciones de objetos `IElaborable`. Esto blinda el sistema y asegura a nivel de pruebas automatizadas que nunca se intentará encolar o preparar un `ProductoEnvasado`, erradicando definitivamente el riesgo de disparar una `NotImplementedException` por un mal uso de la jerarquía.
+Para asegurar la correcta sustituibilidad de las clases en el entorno operativo y evitar fallos en producción, este diseño facilita la creación de **pruebas de integración** enfocadas en el módulo `Cocina`. Estos tests deben validar que las dependencias de la `Cocina` aceptan exclusivamente colecciones de objetos `IElaborable`. Esto blinda el sistema y asegura a nivel de pruebas automatizadas que nunca se intentará encolar o preparar un `ProductoEnvasado` o un `Combo` genérico, erradicando definitivamente el riesgo de disparar una `NotImplementedException` por un mal uso de la jerarquía.
