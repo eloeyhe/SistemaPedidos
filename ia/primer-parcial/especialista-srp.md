@@ -7,13 +7,13 @@
 
   --- 
 
-  ## 1. Archivos de Contexto Referenciados: 
+## 1. Archivos de Contexto Referenciados: 
   * `anexos/introduccion.md\` 
   * `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw\`
   * `herramientas-agile/tarjetas-crc/\` 
-   
-   --- 
-   ## 2. Prompt Utilizado:
+ 
+ --- 
+ ## 2. Prompt Utilizado:
    ```text
    anexos/introduccion.md
    diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw
@@ -23,8 +23,7 @@
    no modifiques archivos
  ```
 
- 
-  ## 3. Output obtenido:
+## 3. Output obtenido:
 
 - Análisis de clases según el Principio de Responsabilidad Única (SRP)
 
@@ -56,4 +55,6 @@ Por eso, separar estas reglas reduce el acoplamiento sin perder trazabilidad ni 
 
   ## 4. Ajustes realizados:
 
-  * Se realizaron ajustes de diseño con el fin de simplificar el modelo: Se elimino el atributo `idPedido` debido a que las clases no precisan de un identificador unico como "id". 
+  * Aparecen cancelar() y cambiarEstado() en Pedido, y PoliticaCicloPedido, por lo que no se identifica quién valida y quién aplica el cambio. para eso se incorporo "solicita validación" en la relacion y tambien una nota.
+  * Aparecen calcularTotal() en Pedido, calcularSubtotal() en Item_pedido y CalculadorSubtotalItem. Genera duda en si el calculo se encneuntra duplicado o si las clases realizan distintos calculos, po lo que se elimina CalculadorSubtotalItem, y en la relacion de Pedido e Item_pedido se indico la suma de subtotales.
+  * aparecen el atributo prioritario y priorizar() en Pedido, además de marcarPrioritario() en PoliticaPrioridadPedido. no queda claro quien quien toma la desicion y quien actualiza el dato. para que la prioridad se indique de manera manual como se indica en la intrduccion, se elimino PoliticaPrioridadPedido y se remplazo priorizar() por marcarPrioritario() en Pedido.
