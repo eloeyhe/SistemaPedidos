@@ -116,6 +116,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
  Issue: [#137](https://github.com/eloeyhe/SistemaPedidos/issues/137)
  PR: [#171](https://github.com/eloeyhe/SistemaPedidos/pull/171) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
+- [fix/doc-coord-correccion-changelog-ia] realizo code review hacia PR #171.
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#172](https://github.com/eloeyhe/SistemaPedidos/pull/172) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
 
 ### Added

@@ -628,5 +628,178 @@ Decisión sugerida: REQUEST CHANGES, hasta corregir las inconsistencias de docum
 
 
 
+## Code Review 8: PR [#171] - [ESPECIALISTA EN PRINCIPIOS DE EXTENSIÓN (OCP + LSP)]
+
+- **Pull Request:** [#171](https://github.com/eloeyhe/SistemaPedidos/pull/171)
+- **Rama revisada:** `fix/mejoras-documentacion-ocp-lsp`
+- **Autor:** `Eloy Eyheramendy`
+
+### 1. Prompt utilizado
+
+```text
+Actúa como un Senior Software Engineer realizando code review profesional.
+
+Estás analizando los cambios de una Pull Request activa de la rama fix/mejoras-documentacion-ocp-lsp.
+
+INSTRUCCIONES IMPORTANTES:
+
+- Identifica problemas reales del código
+- Enumera los hallazgos (1, 2, 3…)
+- Cada hallazgo debe ser independiente
+- Sé claro, técnico y concreto
+- No inventes problemas hipotéticos sin evidencia en el código
+- No incluyas sugerencias de tests
+
+Para cada hallazgo usa EXACTAMENTE esta estructura:
+
+==================================================
+HALLAZGO #<número>
+
+Archivo:
+Línea:
+
+Tipo de problema:
+(bug | performance | seguridad | legibilidad | diseño | otro)
+
+Severidad:
+(baja | media | alta | crítica)
+
+Explicación técnica:
+Por qué esto es un problema real.
+
+Sugerencia de mejora:
+Cambio concreto recomendado.
+
+Ejemplo de código corregido (si aplica):
+```codigo
+ejemplo
+DECISIÓN DEL REVISOR HUMANO:
+
+[ ] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+(Completar manualmente si se rechaza)
+Al final agrega:
+
+RESUMEN GENERAL DE LA PR
+Evaluación global de calidad y riesgos técnicos.
+
+DECISIÓN FINAL SUGERIDA POR IA:
+
+APPROVE / REQUEST CHANGES / COMMENT ONLY
+No completes la sección "DECISIÓN DEL REVISOR HUMANO".
+Debe quedar vacía para edición manual.
+Publica comentarios directamente en la Pull Request en las líneas correspondientes.
+No respondas en el chat salvo para el resumen final.
+
+```
+
+### 2. Archivos de contexto referenciados
+
+- `anexos/introduccion.md`
+
+### 3. Output obtenido de Copilot
+
+HALLAZGO #1
+
+Archivo:
+anexos/principios-solid/02-ocp.md
+
+Línea:
+8-27
+
+Tipo de problema:
+diseño
+
+Severidad:
+media
+
+Explicación técnica:
+La PR presenta la refactorización de `Pago` como una estrategia extensible con `PagoQR`/`PagoTarjeta`, pero el resto del dominio del proyecto establece en RF8 que el MVP solo admite `EFECTIVO` y `TRANSFERENCIA`. Esa contradicción no es solo de estilo: la justificación del OCP se vuelve engañosa porque se presenta una extensión como “solución del diseño” cuando el alcance del sistema no la incluye. La documentación y el diagrama terminan mezclando una evolución futura con la solución actual del dominio.
+
+Sugerencia de mejora:
+Mantener el alcance del documento alineado con RF8. Si se quiere mostrar una extensión futura, debe quedar explícitamente etiquetada como “fuera del alcance del MVP” y no como parte de la solución actual del diseño OCP.
+
+Ejemplo de código corregido (si aplica):
+```md
+> Alcance actual del MVP (RF8): únicamente EFECTIVO y TRANSFERENCIA.
+> `PagoQR` y `PagoTarjeta` son extensiones futuras para OCP, no parte del alcance actual.
+```
+DECISIÓN DEL REVISOR HUMANO:
+[ ] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+
+==================================================
+HALLAZGO #2
+
+Archivo:
+anexos/principios-solid/03-lsp.md
+
+Línea:
+17-23
+
+Tipo de problema:
+diseño
+
+Severidad:
+baja
+
+Explicación técnica:
+El documento explica que `Cocina` trabaja solo con `IElaborable`, pero el diagrama de clases muestra a `Combo` como implementador de `IElementoMenu` y no como `IElaborable`. La explicación del principio LSP es correcta para productos elaborados, pero la forma en que se presenta la jerarquía deja la frontera conceptual ambigua: `IElementoMenu` representa “precio”, mientras `IElaborable` representa “puede prepararse”. Si el lector no lee con cuidado, puede interpretar que cualquier elemento del menú es válido para la cocina, lo cual no es cierto.
+
+Sugerencia de mejora:
+Separar claramente el alcance de cada contrato en la documentación: `IElementoMenu` solo define el precio comercial, mientras que `IElaborable` define el contrato operativo de la cocina. Esto deja explícito que `Combo` puede ser un elemento de compra pero no un elemento de preparación.
+
+Ejemplo de código corregido (si aplica):
+```plantuml
+interface IElementoMenu {
+  + getPrecio(): Double
+}
+
+interface IElaborable {
+  + iniciarPreparacion(): void
+}
+
+class Cocina {
+  + prepararItem(item: IElaborable): void
+}
+```
+DECISIÓN DEL REVISOR HUMANO:
+[ ] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+
+RESUMEN GENERAL DE LA PR
+La PR mejora la redacción y estructura de los anexos OCP y LSP, y en general la documentación es clara y bien organizada. Sin embargo, hay dos inconsistencias reales entre la justificación del diseño y el alcance funcional del proyecto: el OCP asume extensiones futuras de pago que RF8 no contempla, y el LSP no deja explícita la separación entre “elemento de menú” y “elemento elaborable”. Esas discrepancias pueden confundir a la persona que lea la documentación y no reflejan con precisión el dominio del sistema.
+
+DECISIÓN FINAL SUGERIDA POR IA:
+REQUEST CHANGES
+
+### 4. Ajustes críticos realizados
+
+**Sugerencias aceptadas:**
+- Hallazgo 1: Acepté la sugerencia porque el requisito RF8 establece que el sistema admite únicamente pagos en efectivo y transferencia.
+- Hallazgo 2: Acepté la sugerencia ya que esto permite comprender que un combo puede venderse como elemento del menú, pero que la preparación corresponde a los productos elaborables que lo componen. aunque es de severidad baja.
+
+**Sugerencias descartadas o modificadas:**
+- Ninguna.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
