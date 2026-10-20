@@ -10,7 +10,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 - [fix/isp-correcciones] Se elimina IRegistrable (sin consumidores y en contradicción con el informe del especialista ISP), se deja un único método en Historial_cambio_pedido, se agregan IConsultaComandas e IConsultaEntregas (CU05) y cancelarPedido en IAtencionCliente (CU03), se agregan parámetros y tipos de retorno al diagrama y se actualiza 04-isp.md (comparación antes/después, tabla de casos de uso y relación con LSP y DIP).
   Issue: [#174](https://github.com/eloeyhe/SistemaPedidos/issues/174)
-  PR: [#175](https://github.com/eloeyhe/SistemaPedidos/pull/XXX) - @Leandro2107 (Especialista en ISP)
+  PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (Especialista en ISP)
 
 ## [Primer Parcial] - 2026-10-03
 
