@@ -110,7 +110,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139) 
  PR: [#170](https://github.com/eloeyhe/SistemaPedidos/pull/170) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
- - [fix/mejoras-documentacion-ocp-lsp] Mejora y pulida a la documentacion de principios OCP y LSP
+- [fix/mejoras-documentacion-ocp-lsp] Mejora y pulida a la documentacion de principios OCP y LSP
  Issue: [#129](https://github.com/eloeyhe/SistemaPedidos/issues/129)
  Issue: [#135](https://github.com/eloeyhe/SistemaPedidos/issues/135)
  Issue: [#137](https://github.com/eloeyhe/SistemaPedidos/issues/137)
@@ -124,11 +124,15 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
   PR: [#173](https://github.com/eloeyhe/SistemaPedidos/pull/173) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
- - [fix/correcciones-documentacion-dip] Realizo correcciones a la documentacion del principio DIP
+- [fix/correcciones-documentacion-dip] Realizo correcciones a la documentacion del principio DIP
  Issue: [#144](https://github.com/eloeyhe/SistemaPedidos/issues/144)
  Issue: [#146](https://github.com/eloeyhe/SistemaPedidos/issues/146)
  Issue: [#143](https://github.com/eloeyhe/SistemaPedidos/issues/143)
  PR: [#177](https://github.com/eloeyhe/SistemaPedidos/pull/177) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+- [fix/correcciones-detalles-srp] realizo code review de PR #177.
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#178](https://github.com/eloeyhe/SistemaPedidos/pull/178) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
