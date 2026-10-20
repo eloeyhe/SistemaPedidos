@@ -20,10 +20,27 @@ class Pedido {
 
 class Item_pedido {
   - cantidad: int
+  - elemento: IElementoMenu
   - precioUnitarioHistorico: Decimal
   + agregarPersonalizacion(personalizacion: Personalizacion_item): void
   + quitarPersonalizacion(personalizacion: Personalizacion_item): void
   + calcularSubtotal(): Decimal
+}
+
+interface IElementoMenu {
+  + getPrecio(): Decimal
+}
+
+class Producto implements IElementoMenu {
+  - nombre: String
+  - precioBase: Decimal
+  + getPrecio(): Decimal
+}
+
+class Combo implements IElementoMenu {
+  - nombre: String
+  - precioPropio: Decimal
+  + getPrecio(): Decimal
 }
 
 class Personalizacion_item {
@@ -81,6 +98,9 @@ enum TipoMovimiento {
 }
 
 Pedido "1" *-- "1..*" Item_pedido : contiene
+Item_pedido "0..*" --> "1" IElementoMenu : elemento seleccionado
+Producto ..|> IElementoMenu
+Combo ..|> IElementoMenu
 Item_pedido "1" *-- "0..*" Personalizacion_item : personalizaciones
 Pedido "1" -- "0..1" Pago : pago
 Pago "1" *-- "1..*" Historial_pago : movimientos
@@ -96,7 +116,7 @@ Pedido ..> PoliticaCicloPedido : solicitar validacion
 
 ServicioRegistroPago ..> Pago : registra
 ServicioRegistroPago ..> Historial_pago : registra movimientos
-CalculadorAjustePago ..> ServicioRegistroPago : informa ajuste
+ServicioRegistroPago ..> CalculadorAjustePago : solicita cálculo
 
 
 

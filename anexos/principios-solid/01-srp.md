@@ -56,9 +56,15 @@ Pedido
   - contiene Item_pedido
 
 Item_pedido
-  - mantiene la cantidad y el precio unitario histórico
-  - calcula su subtotal considerando sus personalizaciones
+  - referencia un IElementoMenu (Producto o Combo)
+  - conserva el precio unitario histórico capturado al agregar el ítem
+  - calcula su subtotal con el precio histórico, las personalizaciones y la cantidad
   - contiene Personalizacion_item
+
+IElementoMenu
+  - define getPrecio()
+  - Producto obtiene su precio base
+  - Combo obtiene su precio propio, independiente de sus componentes
 
 ServicioRegistroPago
   - registra cobros y ajustes en Pago e Historial_pago
@@ -96,6 +102,6 @@ En el **Módulo Pedido**, la entidad **Pedido** mantiene la estructura de la ord
 
 En el **Módulo Pago**, la clase **Pago** representa el cobro asociado al pedido. **ServicioRegistroPago** registra los cobros y ajustes, y **CalculadorAjustePago** calcula la diferencia entre el total anterior y el nuevo; el servicio registra el movimiento correspondiente en **Historial_pago**.
  
-  En el **Módulo Ítem Pedido**, **Item_pedido** mantiene la cantidad y el precio unitario histórico acordado y calcula su propio subtotal, considerando las personalizaciones de **Personalizacion_item**. **Pedido** calcula el total sumando los subtotales de sus ítems. Así, el cálculo del subtotal y el del total tienen alcances distintos, sin duplicar el cálculo del subtotal en un servicio aparte.
+  En el **Módulo Ítem Pedido**, **Item_pedido** referencia un elemento del catálogo mediante **IElementoMenu**, implementada por **Producto** y **Combo**. Cada elemento proporciona su precio con `getPrecio()`; **Combo** usa su precio propio, sin derivarlo de la suma de sus componentes, como requiere RF1. Al agregar un elemento, `Item_pedido` conserva ese valor como `precioUnitarioHistorico`, para que cambios posteriores en el catálogo no alteren el precio acordado. `Item_pedido.calcularSubtotal()` calcula el subtotal con ese precio histórico, la cantidad y los adicionales de sus personalizaciones. **Pedido.calcularTotal()** suma los subtotales, sin conocer las reglas internas de precio de productos o combos.
 
 Desde un punto de vista técnico, las reglas del ciclo de vida y el cálculo de ajustes se mantienen en componentes especializados, mientras que cada entidad protege la coherencia de sus propios datos. Esta separación facilita probar las reglas y los cálculos de forma aislada y conserva el precio histórico acordado para los ítems.
