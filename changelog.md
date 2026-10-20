@@ -6,15 +6,6 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
-### Fixed
-
-- [fix/isp-correcciones] Se elimina IRegistrable (sin consumidores y en contradicción con el informe del especialista ISP), se deja un único método en Historial_cambio_pedido, se agregan IConsultaComandas e IConsultaEntregas (CU05) y cancelarPedido en IAtencionCliente (CU03), se agregan parámetros y tipos de retorno al diagrama y se actualiza 04-isp.md (comparación antes/después, tabla de casos de uso y relación con LSP y DIP).
-  Issue: [#174](https://github.com/eloeyhe/SistemaPedidos/issues/174)
-  PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (Especialista en ISP)
-
-- [fix/nuevos-ajustes-en-diagramas-ISP] Se extrae cancelarPedido de IAtencionCliente a la nueva interfaz ICancelacionPedido, implementada por UsuarioMostrador y UsuarioEncargado (CU03), se deja ISupervision solo con autorizarCancelacion y registrarDevolucionManual, se reemplaza la directiva obsoleta skinparam handwritten por !option handwritten false, se regenera el PNG y se actualiza 04-isp.md (estructura de clases, tablas y justificación técnica).
-  Issue: [#174](https://github.com/eloeyhe/SistemaPedidos/issues/174)
-  PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (Especialista en ISP)
 
 ## [Primer Parcial] - 2026-10-03
 
@@ -138,11 +129,20 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
  Issue: [#144](https://github.com/eloeyhe/SistemaPedidos/issues/144)
  Issue: [#146](https://github.com/eloeyhe/SistemaPedidos/issues/146)
  Issue: [#143](https://github.com/eloeyhe/SistemaPedidos/issues/143)
- PR: [#177](https://github.com/eloeyhe/SistemaPedidos/pull/177) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+ PR: [#177](https://github.com/eloeyhe/SistemaPedidos/pull/177) - @eloeyhe (Especialista en Inversión de Dependencias)
 
-- [fix/correcciones-detalles-srp] realizo code review de PR #177.
+- [fix/doc-coord-correccion-changelog-ia] realizo code review de PR #177.
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
   PR: [#178](https://github.com/eloeyhe/SistemaPedidos/pull/178) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+- [fix/nuevos-ajustes-en-diagramas-ISP] [ISP] Corregir diagrama y anexo de Segregación de Interfaces.
+Issue: [#174](https://github.com/eloeyhe/SistemaPedidos/issues/174)
+PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (Especialista en ISP)
+
+- [fix/doc-coord-correccion-changelog-ia] realizo correcciones en el changelog
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#179](https://github.com/eloeyhe/SistemaPedidos/pull/179) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
 
 
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
