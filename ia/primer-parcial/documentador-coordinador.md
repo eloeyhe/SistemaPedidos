@@ -788,6 +788,188 @@ REQUEST CHANGES
 **Sugerencias descartadas o modificadas:**
 - Ninguna.
 
+## Code Review 9: PR [#173] - [Documentador y Coordinador + Especialista SRP]
+
+- **Pull Request:** [#173](https://github.com/eloeyhe/SistemaPedidos/pull/173)
+- **Rama revisada:** `fix/correccion-detalles-srp`
+- **Autor:** `Ignacio Velesquen`
+
+### 1. Prompt utilizado
+
+```text
+Actúa como un Senior Software Engineer realizando code review profesional.
+
+Estás analizando los cambios de una Pull Request activa de la rama fix/mejoras-documentacion-ocp-lsp.
+
+INSTRUCCIONES IMPORTANTES:
+
+- Identifica problemas reales del código
+- Enumera los hallazgos (1, 2, 3…)
+- Cada hallazgo debe ser independiente
+- Sé claro, técnico y concreto
+- No inventes problemas hipotéticos sin evidencia en el código
+- No incluyas sugerencias de tests
+Hay un PR en github que esta activa y quiero analizarla, te dejo el link(https://github.com/eloeyhe/SistemaPedidos/pull/173). Quiero que en los archivos 01-srp.md, 01-solid-01-srp.png, 01-solid-01-srp.puml y especialista-srp.dip busques como dije antes problemas de codigo, nomeclatura, contendio,etc.
+
+Para cada hallazgo usa EXACTAMENTE esta estructura:
+
+==================================================
+HALLAZGO #<número>
+
+Archivo:
+Línea:
+
+Tipo de problema:
+(bug | performance | seguridad | legibilidad | diseño | otro)
+
+Severidad:
+(baja | media | alta | crítica)
+
+Explicación técnica:
+Por qué esto es un problema real.
+
+Sugerencia de mejora:
+Cambio concreto recomendado.
+
+Ejemplo de código corregido (si aplica):
+```codigo
+ejemplo
+DECISIÓN DEL REVISOR HUMANO:
+
+[ ] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+(Completar manualmente si se rechaza)
+Al final agrega:
+
+RESUMEN GENERAL DE LA PR
+Evaluación global de calidad y riesgos técnicos.
+
+DECISIÓN FINAL SUGERIDA POR IA:
+
+APPROVE / REQUEST CHANGES / COMMENT ONLY
+No completes la sección "DECISIÓN DEL REVISOR HUMANO".
+Debe quedar vacía para edición manual.
+Publica comentarios directamente en la Pull Request en las líneas correspondientes.
+No respondas en el chat salvo para el resumen final.
+
+```
+
+### 2. Archivos de contexto referenciados
+
+- `01-srp.md`
+- `01-solid-01-srp.png`
+- `01-solid-01-srp.puml`
+- `especialista-srp.dip`
+
+### 3. Output obtenido de Copilot
+
+==================================================
+HALLAZGO #1
+
+Archivo:
+anexos/principios-solid/01-srp.md
+Línea: 54
+
+Tipo de problema:
+diseño
+
+Severidad:
+media
+
+Explicación técnica:
+La regla nueva indica que el total del pedido se obtiene sumando los subtotales de sus ítems, pero RF1 exige admitir combos cuyo precio tiene lógica propia y no equivale a la suma de sus partes. El modelo descrito no incluye Combo ni otra representación de ese precio, por lo que el cálculo documentado no puede producir el total requerido para un pedido con combos.
+
+Sugerencia de mejora:
+Incluir en el modelo una representación del combo y su cálculo de precio independiente, o documentar cómo se integra ese precio al total del pedido sin tratarlo como una suma ordinaria de subtotales.
+
+Ejemplo de código corregido (si aplica):
+
+class Combo {
+  + calcularPrecio(): Decimal
+}
+DECISIÓN DEL REVISOR HUMANO:
+
+[x] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+El hallazgo es correcto y expone una inconsistencia crítica entre nuestro diseño y las reglas de negocio del MVP. Asumir que el total del pedido es meramente la suma de los subtotales viola el Requisito Funcional 1 (RF1), el cual establece que los combos poseen una lógica de precios independiente. Se actualizará la documentación del SRP y el modelo subyacente para incluir la abstracción correspondiente (por ejemplo, asegurando que tanto Producto como Combo implementen una interfaz común como IElementoMenu con su propio método de cálculo de precio), logrando que la responsabilidad de conocer el precio recaiga en el elemento y no en una sumatoria rígida dentro del Pedido.
+
+==================================================
+HALLAZGO #2
+
+Archivo:
+anexos/principios-solid/01-srp.md
+Línea: 65
+
+Tipo de problema:
+diseño
+
+Severidad:
+media
+
+Explicación técnica:
+El texto asigna al CalculadorAjustePago la tarea de calcular la diferencia y al ServicioRegistroPago registrar el ajuste. Sin embargo, el diagrama mantiene la dependencia en sentido inverso (CalculadorAjustePago ..> ServicioRegistroPago), que representa que el calculador depende del servicio y no que el servicio solicita el cálculo. La relación contradice las responsabilidades que esta sección acaba de describir.
+
+Sugerencia de mejora:
+Invertir la dependencia en el PlantUML y regenerar el PNG para mostrar al ServicioRegistroPago dependiendo del CalculadorAjustePago.
+
+Ejemplo de código corregido (si aplica):
+
+ServicioRegistroPago ..> CalculadorAjustePago : solicita cálculo
+DECISIÓN DEL REVISOR HUMANO:
+
+[x] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+Se trata de un error conceptual en la representación gráfica del diagrama UML que contradice directamente la justificación redactada. Si el ServicioRegistroPago requiere del cálculo de la diferencia para poder efectuar el registro final, entonces es el Servicio quien depende y solicita información al CalculadorAjustePago, y no a la inversa. Se corregirá la dirección de la flecha de dependencia (..>) en el archivo PlantUML y se regenerará la imagen .png para asegurar la coherencia técnica del documento.
+
+==================================================
+HALLAZGO #3
+
+Archivo:
+ia/primer-parcial/especialista-srp.md
+Línea: 59-60
+
+Tipo de problema:
+legibilidad
+
+Severidad:
+baja
+
+Explicación técnica:
+El texto agregado contiene errores ortográficos y gramaticales que dificultan la lectura del informe: «encneuntra», «desicion», «intrduccion», «remplazo» y la repetición «quien quien». Al ser parte de la explicación de los cambios del diseño, esos errores reducen la claridad del registro.
+
+Sugerencia de mejora:
+Corregirlos por «encuentra», «decisión», «introducción» y «reemplazó», eliminar la repetición y ajustar la puntuación y las tildes de las oraciones.
+
+Ejemplo de código corregido (si aplica):
+No aplica.
+
+DECISIÓN DEL REVISOR HUMANO:
+
+[x] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+Los criterios formales de evaluación del parcial exigen "pertinencia y claridad en la redacción, estilo académico y correcta construcción gramatical". Los errores tipográficos señalados restan profesionalismo al entregable final. Se procederá a aplicar las correcciones ortográficas e idiomáticas ("encuentra", "decisión", "introducción", "reemplazó") y se eliminarán las redundancias en el archivo Markdown de registro de IA para garantizar su legibilidad.
+
+### 4. Ajustes críticos realizados
+
+**Sugerencias aceptadas:**
+
+Actualizar la documentación del SRP y el modelo subyacente para incluir una representación del Combo y su cálculo de precio independiente, asegurando que tanto Producto como Combo implementen una interfaz común (IElementoMenu) para cumplir con el RF1.
+
+Invertir la dirección de la flecha de dependencia en el archivo PlantUML (ServicioRegistroPago ..> CalculadorAjustePago) y regenerar la imagen PNG para reflejar correctamente las responsabilidades.
+
+Corregir los errores ortográficos e idiomáticos («encuentra», «decisión», «introducción», «reemplazó»), eliminar la repetición («quien quien») y ajustar la puntuación en el archivo especialista-srp.md para garantizar la claridad y el estilo académico exigido.
+
+**Sugerencias descartadas o modificadas:**
+- Ninguna.
+
 
 
 

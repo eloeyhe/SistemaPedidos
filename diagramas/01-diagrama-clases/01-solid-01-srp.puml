@@ -14,16 +14,33 @@ class Pedido {
   + modificarItem(item: Item_pedido): void
   + cancelar(): void
   + cambiarEstado(nuevoEstado: EstadoPedido): void
-  + priorizar(): void
+  + marcarPrioritario(): void
   + calcularTotal(): Decimal
 }
 
 class Item_pedido {
   - cantidad: int
+  - elemento: IElementoMenu
   - precioUnitarioHistorico: Decimal
   + agregarPersonalizacion(personalizacion: Personalizacion_item): void
   + quitarPersonalizacion(personalizacion: Personalizacion_item): void
   + calcularSubtotal(): Decimal
+}
+
+interface IElementoMenu {
+  + getPrecio(): Decimal
+}
+
+class Producto implements IElementoMenu {
+  - nombre: String
+  - precioBase: Decimal
+  + getPrecio(): Decimal
+}
+
+class Combo implements IElementoMenu {
+  - nombre: String
+  - precioPropio: Decimal
+  + getPrecio(): Decimal
 }
 
 class Personalizacion_item {
@@ -52,10 +69,6 @@ class PoliticaCicloPedido <<policy>> {
   + validarCancelacion(pedido: Pedido): void
 }
 
-class PoliticaPrioridadPedido <<policy>> {
-  + marcarPrioritario(pedido: Pedido): void
-}
-
 class ServicioRegistroPago <<service>> {
   + registrarCobro(pedido: Pedido, monto: Decimal, metodo: MetodoPago): Pago
   + registrarAjuste(pago: Pago, diferencia: Decimal): Historial_pago
@@ -63,10 +76,6 @@ class ServicioRegistroPago <<service>> {
 
 class CalculadorAjustePago <<service>> {
   + calcularDiferencia(totalAnterior: Decimal, totalNuevo: Decimal): Decimal
-}
-
-class CalculadorSubtotalItem <<service>> {
-  + calcular(item: Item_pedido): Decimal
 }
 
 enum EstadoPedido {
@@ -89,17 +98,25 @@ enum TipoMovimiento {
 }
 
 Pedido "1" *-- "1..*" Item_pedido : contiene
+Item_pedido "0..*" --> "1" IElementoMenu : elemento seleccionado
+Producto ..|> IElementoMenu
+Combo ..|> IElementoMenu
 Item_pedido "1" *-- "0..*" Personalizacion_item : personalizaciones
 Pedido "1" -- "0..1" Pago : pago
 Pago "1" *-- "1..*" Historial_pago : movimientos
 
-Pedido ..> PoliticaCicloPedido : delega reglas del ciclo
-Pedido ..> PoliticaPrioridadPedido : delega priorización
-Item_pedido ..> CalculadorSubtotalItem : delega cálculo
-CalculadorSubtotalItem ..> Personalizacion_item : suma adicionales
+Pedido ..> PoliticaCicloPedido : solicitar validacion
+
+  note right of Pedido
+  cambiarEstado() y cancelar()
+  actualizan el estado de Pedido
+  solo si PoliticaCicloPedido
+  valida la operación.
+  end note
+
 ServicioRegistroPago ..> Pago : registra
 ServicioRegistroPago ..> Historial_pago : registra movimientos
-CalculadorAjustePago ..> ServicioRegistroPago : informa ajuste
+ServicioRegistroPago ..> CalculadorAjustePago : solicita cálculo
 
 
 
