@@ -139,7 +139,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 Issue: [#174](https://github.com/eloeyhe/SistemaPedidos/issues/174)
 PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (Especialista en ISP)
 
-
+- [fix/doc-coord-correccion-changelog-ia] realizo correcciones en el changelog
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#179](https://github.com/eloeyhe/SistemaPedidos/pull/179) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 
 
