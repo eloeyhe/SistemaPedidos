@@ -2,7 +2,7 @@
 
 skinparam classAttributeIconSize 0
 skinparam style strictuml
-skinparam handwritten false
+!option handwritten false
 
 package "Segregacion de Interfaces - Sistema de Pedidos" {
 
@@ -12,8 +12,11 @@ package "Segregacion de Interfaces - Sistema de Pedidos" {
     interface IAtencionCliente <<interface>> {
         + registrarPedido(items: List<Item_pedido>): Pedido
         + modificarPedido(idPedido: string, items: List<Item_pedido>): void
-        + cancelarPedido(idPedido: string, motivo: string): void
         + marcarComoEntregado(idPedido: string): void
+    }
+
+    interface ICancelacionPedido <<interface>> {
+        + cancelarPedido(idPedido: string, motivo: string): void
     }
 
     interface IConsultaEntregas <<interface>> {
@@ -66,6 +69,7 @@ package "Segregacion de Interfaces - Sistema de Pedidos" {
 
     class UsuarioEncargado {
         - claveSupervision: string
+        + cancelarPedido(idPedido: string, motivo: string): void
         + autorizarCancelacion(idPedido: string): boolean
         + registrarDevolucionManual(idPedido: string, monto: decimal): void
     }
@@ -75,9 +79,11 @@ package "Segregacion de Interfaces - Sistema de Pedidos" {
     Usuario <|-- UsuarioEncargado
 
     IAtencionCliente <|.. UsuarioMostrador
+    ICancelacionPedido <|.. UsuarioMostrador
     IConsultaEntregas <|.. UsuarioMostrador
     IPreparacionCocina <|.. UsuarioCocina
     IConsultaComandas <|.. UsuarioCocina
+    ICancelacionPedido <|.. UsuarioEncargado
     ISupervision <|.. UsuarioEncargado
 
     ' ==========================================
