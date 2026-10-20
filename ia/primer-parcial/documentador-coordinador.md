@@ -682,7 +682,7 @@ Justificación del revisor humano:
 (Completar manualmente si se rechaza)
 Al final agrega:
 
-RESUMEN GENERAL DE LA PR
+**RESUMEN GENERAL DE LA PR**
 Evaluación global de calidad y riesgos técnicos.
 
 DECISIÓN FINAL SUGERIDA POR IA:
@@ -971,7 +971,284 @@ Corregir los errores ortográficos e idiomáticos («encuentra», «decisión»,
 - Ninguna.
 
 
+## Code Review 10: PR [#176] - [Especialista en ISP]
 
+- **Pull Request:** [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176)
+- **Rama revisada:** `fix/nuevos-ajustes-en-diagramas-ISP`
+- **Autor:** `Leandro Dominguez`
+
+### 1. Prompt utilizado
+
+```text
+Actúa como un Senior Software Engineer realizando code review profesional.
+
+Estás analizando los cambios de una Pull Request activa de la rama fix/nuevos-ajustes-en-diagramas-SP.
+
+INSTRUCCIONES IMPORTANTES:
+
+- Identifica problemas reales del código
+- Enumera los hallazgos (1, 2, 3…)
+- Cada hallazgo debe ser independiente
+- Sé claro, técnico y concreto
+- No inventes problemas hipotéticos sin evidencia en el código
+- No incluyas sugerencias de tests
+
+Para cada hallazgo usa EXACTAMENTE esta estructura:
+
+==================================================
+HALLAZGO #<número>
+
+Archivo:
+Línea:
+
+Tipo de problema:
+(bug | performance | seguridad | legibilidad | diseño | otro)
+
+Severidad:
+(baja | media | alta | crítica)
+
+Explicación técnica:
+Por qué esto es un problema real.
+
+Sugerencia de mejora:
+Cambio concreto recomendado.
+
+Ejemplo de código corregido (si aplica):
+```codigo
+ejemplo
+DECISIÓN DEL REVISOR HUMANO:
+
+[ ] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+(Completar manualmente si se rechaza)
+Al final agrega:
+
+RESUMEN GENERAL DE LA PR
+Evaluación global de calidad y riesgos técnicos.
+
+DECISIÓN FINAL SUGERIDA POR IA:
+
+APPROVE / REQUEST CHANGES / COMMENT ONLY
+No completes la sección "DECISIÓN DEL REVISOR HUMANO".
+Debe quedar vacía para edición manual.
+Publica comentarios directamente en la Pull Request en las líneas correspondientes.
+No respondas en el chat salvo para el resumen final.
+
+```
+
+### 2. Archivos de contexto referenciados
+
+- `anexos/introduccion.md`
+
+### 3. Output obtenido de Copilot
+
+==================================================
+HALLAZGO #1
+
+Archivo:
+`01-solid-04-isp.puml`
+
+Línea:
+67-70
+
+Tipo de problema:
+diseño
+
+Severidad:
+media
+
+Explicación técnica:
+El caso de uso CU03 incluye al Usuario de Mostrador y al Encargado como actores de la cancelación, pero en el diagrama `UsuarioEncargado` solo ofrece `autorizarCancelacion()` y `registrarDevolucionManual()`. `cancelarPedido()` está únicamente en `IAtencionCliente`, implementada por `UsuarioMostrador`. Por lo tanto, el contrato del Encargado no representa la operación de cancelación que CU03 también le asigna.
+
+Sugerencia de mejora:
+Extraer `cancelarPedido(idPedido, motivo)` a una interfaz específica de cancelación e implementarla tanto en `UsuarioMostrador` como en `UsuarioEncargado`. Mantener en `ISupervision` solo la autorización y la devolución.
+
+Ejemplo de código corregido (si aplica):
+```plantuml
+interface ICancelacionPedido {
+    + cancelarPedido(idPedido: string, motivo: string): void
+}
+
+ICancelacionPedido <|.. UsuarioMostrador
+ICancelacionPedido <|.. UsuarioEncargado
+```
+DECISIÓN DEL REVISOR HUMANO:
+
+[ ] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+(Completar manualmente si se rechaza)
+
+==================================================
+HALLAZGO #2
+
+Archivo:
+`01-solid-04-isp.puml`
+
+Línea:
+4
+
+Tipo de problema:
+legibilidad
+
+Severidad:
+baja
+
+Explicación técnica:
+El PNG actualizado muestra una advertencia de PlantUML indicando que `skinparam handwritten` está obsoleto. La directiva `skinparam handwritten false` sigue en el fuente, por lo que al regenerar el diagrama la advertencia aparece en la imagen publicada.
+
+Sugerencia de mejora:
+Reemplazar la directiva por la sintaxis vigente y regenerar el PNG para que no muestre la advertencia.
+
+Ejemplo de código corregido (si aplica):
+```plantuml
+!option handwritten false
+```
+DECISIÓN DEL REVISOR HUMANO:
+
+[ ] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+(Completar manualmente si se rechaza)
+
+RESUMEN GENERAL DE LA PR
+El anexo ISP amplía la explicación de las interfaces y el diagrama incorpora consultas y operaciones que faltaban. Sin embargo, el contrato de cancelación no contempla al Encargado como actor de CU03, y la imagen actualizada muestra una advertencia de sintaxis obsoleta de PlantUML.
+
+DECISIÓN FINAL SUGERIDA POR IA:
+
+REQUEST CHANGES
+
+### 4. Ajustes críticos realizados
+
+**Sugerencias aceptadas:**
+- Hallazgo 1: Acepté la sugerencia porque el flujo de cancelación no tiene en cuenta al Encargado como actor de CU03.
+- Hallazgo 2: Acepté la sugerencia ya que la imagen actualizada muestra una advertencia de sintaxis obsoleta.
+
+**Sugerencias descartadas o modificadas:**
+- Ninguna.
+
+## Code Review 11: PR [#177] - [Especialista en Inversión de Dependencias]
+
+- **Pull Request:** [#177](https://github.com/eloeyhe/SistemaPedidos/pull/177)
+- **Rama revisada:** `fix/correcciones-documentacion.dip`
+- **Autor:** `Santiago Medel Marquez`
+
+### 1. Prompt utilizado
+
+```text
+Actúa como un Senior Software Engineer realizando code review profesional.
+
+Estás analizando los cambios de una Pull Request activa de la rama fix/correcciones-documentacion.dip.
+
+INSTRUCCIONES IMPORTANTES:
+
+- Identifica problemas reales del código
+- Enumera los hallazgos (1, 2, 3…)
+- Cada hallazgo debe ser independiente
+- Sé claro, técnico y concreto
+- No inventes problemas hipotéticos sin evidencia en el código
+- No incluyas sugerencias de tests
+
+Para cada hallazgo usa EXACTAMENTE esta estructura:
+
+==================================================
+HALLAZGO #<número>
+
+Archivo:
+Línea:
+
+Tipo de problema:
+(bug | performance | seguridad | legibilidad | diseño | otro)
+
+Severidad:
+(baja | media | alta | crítica)
+
+Explicación técnica:
+Por qué esto es un problema real.
+
+Sugerencia de mejora:
+Cambio concreto recomendado.
+
+Ejemplo de código corregido (si aplica):
+```codigo
+ejemplo
+DECISIÓN DEL REVISOR HUMANO:
+
+[ ] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+(Completar manualmente si se rechaza)
+Al final agrega:
+
+RESUMEN GENERAL DE LA PR
+Evaluación global de calidad y riesgos técnicos.
+
+DECISIÓN FINAL SUGERIDA POR IA:
+
+APPROVE / REQUEST CHANGES / COMMENT ONLY
+No completes la sección "DECISIÓN DEL REVISOR HUMANO".
+Debe quedar vacía para edición manual.
+Publica comentarios directamente en la Pull Request en las líneas correspondientes.
+No respondas en el chat salvo para el resumen final.
+
+```
+
+### 2. Archivos de contexto referenciados
+
+- `anexos/introduccion.md`
+
+### 3. Output obtenido de Copilot
+
+HALLAZGO #1
+
+Archivo:
+`05-dip.md`
+
+Línea:
+35
+
+Tipo de problema:
+diseño
+
+Severidad:
+media
+
+Explicación técnica:
+La sección afirma que la inyección de dependencias «garantiza» poder validar el 100 % de la lógica de negocio con pruebas unitarias. DIP y las interfaces facilitan aislar dependencias, pero no garantizan que se escriban pruebas ni que alcancen cobertura completa. Además, el diagrama no especifica que `ServicioTomarPedido` implemente toda la lógica mencionada —por ejemplo, rechazar pedidos vacíos—, por lo que la afirmación presenta como garantizado algo que depende de la implementación y de las pruebas que se desarrollen.
+
+Sugerencia de mejora:
+Indicar que DIP facilita escribir pruebas unitarias aisladas, quitar el porcentaje y presentar el cálculo del total y la validación de pedidos vacíos como ejemplos de comportamientos que podrían probarse si están implementados en el servicio.
+
+Ejemplo de código corregido (si aplica):
+```md
+El uso de interfaces facilita la creación de mocks o stubs y permite probar de forma aislada la lógica de `ServicioTomarPedido`. La cobertura alcanzada dependerá de los casos de prueba implementados.
+```
+DECISIÓN DEL REVISOR HUMANO:
+
+[ ] Aceptar sugerencia
+[ ] Rechazar sugerencia
+
+Justificación del revisor humano:
+(Completar manualmente si se rechaza)
+
+RESUMEN GENERAL DE LA PR  
+La PR mejora la explicación del DIP y añade una sección de testabilidad. Persiste una afirmación demasiado categórica sobre cobertura de pruebas; conviene matizarla para distinguir la capacidad que aporta la inyección de dependencias de la cobertura que efectivamente se implemente.
+
+DECISIÓN FINAL SUGERIDA POR IA:
+
+REQUEST CHANGES
+### 4. Ajustes críticos realizados
+
+**Sugerencias aceptadas:**
+- Hallazgo 1: Acepté la sugerencia debido a que si bien la aplicación del principio DIP facilita la realización de pruebas unitarias, no garantiza una cobertura del 100 %. 
+
+**Sugerencias descartadas o modificadas:**
+- Ninguna.
 
 
 
