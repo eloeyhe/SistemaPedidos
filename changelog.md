@@ -12,6 +12,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#174](https://github.com/eloeyhe/SistemaPedidos/issues/174)
   PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (Especialista en ISP)
 
+- [fix/nuevos-ajustes-en-diagramas-ISP] Se extrae cancelarPedido de IAtencionCliente a la nueva interfaz ICancelacionPedido, implementada por UsuarioMostrador y UsuarioEncargado (CU03), se deja ISupervision solo con autorizarCancelacion y registrarDevolucionManual, se reemplaza la directiva obsoleta skinparam handwritten por !option handwritten false, se regenera el PNG y se actualiza 04-isp.md (estructura de clases, tablas y justificación técnica).
+  Issue: [#174](https://github.com/eloeyhe/SistemaPedidos/issues/174)
+  PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (Especialista en ISP)
+
 ## [Primer Parcial] - 2026-10-03
 
 ### Added
