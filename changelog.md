@@ -148,6 +148,13 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
  Issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
  PR: [#180](https://github.com/eloeyhe/SistemaPedidos/pull/180) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
+- [fix/doc-coord-correccion-changelog-ia] realizo code review a PR #180
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#181](https://github.com/eloeyhe/SistemaPedidos/pull/181) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+
+
+
 
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
 
