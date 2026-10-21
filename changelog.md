@@ -161,6 +161,10 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
  Issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
  PR: [#185](https://github.com/eloeyhe/SistemaPedidos/pull/185) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
+ - [fix/eliminacion-conflicto-ia-a2] Elimino conflicto de linea erronea en ia/a2/diseniador-tarjetas-crc.md
+ Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
+ PR: [#183](https://github.com/eloeyhe/SistemaPedidos/pull/186) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
 
 
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
