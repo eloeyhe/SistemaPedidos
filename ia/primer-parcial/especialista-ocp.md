@@ -1,4 +1,4 @@
-# Informe de Interacción con IA - Especialista en SRP 
+# Informe de Interacción con IA - Especialista en Principios de Extensión (OCP + LSP) 
 
 **Rol:** Especialista en Principios de Extensión (OCP + LSP) 
 
