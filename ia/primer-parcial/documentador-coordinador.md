@@ -1134,8 +1134,8 @@ REQUEST CHANGES
 ## Code Review 11: PR [#177] - [Especialista en Inversión de Dependencias]
 
 - **Pull Request:** [#177](https://github.com/eloeyhe/SistemaPedidos/pull/177)
-- **Rama revisada:** `fix/correcciones-documentacion.dip`
-- **Autor:** `Santiago Medel Marquez`
+- **Rama revisada:** `fix/correcciones-documentacion-dip`
+- **Autor:** `Eloy Eyheramendy`
 
 ### 1. Prompt utilizado
 
