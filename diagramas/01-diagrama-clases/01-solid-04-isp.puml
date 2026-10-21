@@ -1,0 +1,125 @@
+@startuml 01-solid-04-isp
+
+skinparam classAttributeIconSize 0
+skinparam style strictuml
+!option handwritten false
+
+package "Segregacion de Interfaces - Sistema de Pedidos" {
+
+    ' ==========================================
+    ' INTERFACES SEGREGADAS (ISP) - UNA POR ROL
+    ' ==========================================
+    interface IAtencionCliente <<interface>> {
+        + registrarPedido(items: List<Item_pedido>): Pedido
+        + modificarPedido(idPedido: string, items: List<Item_pedido>): void
+        + marcarComoEntregado(idPedido: string): void
+    }
+
+    interface ICancelacionPedido <<interface>> {
+        + cancelarPedido(idPedido: string, motivo: string): void
+    }
+
+    interface IConsultaEntregas <<interface>> {
+        + consultarPedidosListos(): List<Pedido>
+    }
+
+    interface IPreparacionCocina <<interface>> {
+        + comenzarPreparacion(idPedido: string): void
+        + marcarPedidoListo(idPedido: string): void
+    }
+
+    interface IConsultaComandas <<interface>> {
+        + consultarComandasActivas(): List<Pedido>
+    }
+
+    interface ISupervision <<interface>> {
+        + autorizarCancelacion(idPedido: string): boolean
+        + registrarDevolucionManual(idPedido: string, monto: decimal): void
+    }
+
+    ' ==========================================
+    ' CLASES BASE / ABSTRACTAS
+    ' ==========================================
+    abstract class Usuario {
+        - nombre: string
+        - usuario: string
+        - passwordHash: string
+        - activo: boolean
+        + autenticar(): boolean
+    }
+
+    ' ==========================================
+    ' IMPLEMENTACIÓN DE INTERFACES EN USUARIOS
+    ' ==========================================
+    class UsuarioMostrador {
+        - numeroCaja: int
+        + registrarPedido(items: List<Item_pedido>): Pedido
+        + modificarPedido(idPedido: string, items: List<Item_pedido>): void
+        + cancelarPedido(idPedido: string, motivo: string): void
+        + marcarComoEntregado(idPedido: string): void
+        + consultarPedidosListos(): List<Pedido>
+    }
+
+    class UsuarioCocina {
+        - estacionTrabajo: string
+        + comenzarPreparacion(idPedido: string): void
+        + marcarPedidoListo(idPedido: string): void
+        + consultarComandasActivas(): List<Pedido>
+    }
+
+    class UsuarioEncargado {
+        - claveSupervision: string
+        + cancelarPedido(idPedido: string, motivo: string): void
+        + autorizarCancelacion(idPedido: string): boolean
+        + registrarDevolucionManual(idPedido: string, monto: decimal): void
+    }
+
+    Usuario <|-- UsuarioMostrador
+    Usuario <|-- UsuarioCocina
+    Usuario <|-- UsuarioEncargado
+
+    IAtencionCliente <|.. UsuarioMostrador
+    ICancelacionPedido <|.. UsuarioMostrador
+    IConsultaEntregas <|.. UsuarioMostrador
+    IPreparacionCocina <|.. UsuarioCocina
+    IConsultaComandas <|.. UsuarioCocina
+    ICancelacionPedido <|.. UsuarioEncargado
+    ISupervision <|.. UsuarioEncargado
+
+    ' ==========================================
+    ' REGISTROS / HISTORIALES
+    ' Sin interfaz comun: registran hechos distintos y ningun
+    ' componente los consume de forma polimorfica.
+    ' ==========================================
+    class Historial_pago {
+        - pago: Pago
+        - tipo: string
+        - monto: decimal
+        - motivo: string
+        - fechayhora: datetime
+        - usuario: Usuario
+        + registrar(): void
+    }
+
+    class Auditoria_pedido {
+        - pedido: Pedido
+        - usuario: Usuario
+        - accion: string
+        - detalles: string
+        - fechayhora: datetime
+        + registrar(): void
+    }
+
+    class Historial_cambio_pedido {
+        - pedido: Pedido
+        - campo: string
+        - valor_anterior: string
+        - valor_nuevo: string
+        - fechayhora: datetime
+        - usuario: Usuario
+        + registrarCambio(): void
+    }
+
+}
+
+@enduml

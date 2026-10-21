@@ -1,4 +1,4 @@
-# Informe de Interacción con IA - Especialista en SRP 
+# Informe de Interacción con IA - Especialista en Principios de Extensión (OCP + LSP) 
 
 **Rol:** Especialista en Principios de Extensión (OCP + LSP) 
 
@@ -55,7 +55,7 @@ A. Clase Pago (Bifurcación por Metodo_pago)
     códigos QR. Mantener un enum obligará a modificar permanentemente la clase
     Pago y sus condicionales cada vez que se agregue una pasarela.
 - Solución polimórfica (Patrón Strategy):
-    - Definir una abstracción común: interfaz o clase abstracta EstrategiaPago (o
+    - Definir una abstracción común: interfaz o clase abstracta IEstrategiaPago (o
     MetodoPago) con operaciones como procesarCobro(monto: decimal): ResultadoPago
     y procesarAjuste(diferencia: decimal): void.
     - Crear subclases concretas: PagoEfectivo y PagoTransferencia.
