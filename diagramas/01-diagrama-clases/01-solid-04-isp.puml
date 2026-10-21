@@ -2,31 +2,39 @@
 
 skinparam classAttributeIconSize 0
 skinparam style strictuml
-skinparam handwritten false
+!option handwritten false
 
 package "Segregacion de Interfaces - Sistema de Pedidos" {
 
     ' ==========================================
-    ' INTERFACES SEGREGADAS (ISP)
+    ' INTERFACES SEGREGADAS (ISP) - UNA POR ROL
     ' ==========================================
     interface IAtencionCliente <<interface>> {
-        + registrarPedido(): void
-        + modificarPedido(): void
-        + marcarComoEntregado(): void
+        + registrarPedido(items: List<Item_pedido>): Pedido
+        + modificarPedido(idPedido: string, items: List<Item_pedido>): void
+        + marcarComoEntregado(idPedido: string): void
+    }
+
+    interface ICancelacionPedido <<interface>> {
+        + cancelarPedido(idPedido: string, motivo: string): void
+    }
+
+    interface IConsultaEntregas <<interface>> {
+        + consultarPedidosListos(): List<Pedido>
     }
 
     interface IPreparacionCocina <<interface>> {
-        + comenzarPreparacion(): void
-        + marcarPedidoListo(): void
+        + comenzarPreparacion(idPedido: string): void
+        + marcarPedidoListo(idPedido: string): void
+    }
+
+    interface IConsultaComandas <<interface>> {
+        + consultarComandasActivas(): List<Pedido>
     }
 
     interface ISupervision <<interface>> {
-        + autorizarCancelacion(): void
-        + registrarDevolucionManual(): void
-    }
-
-    interface IRegistrable <<interface>> {
-        + registrar(): void
+        + autorizarCancelacion(idPedido: string): boolean
+        + registrarDevolucionManual(idPedido: string, monto: decimal): void
     }
 
     ' ==========================================
@@ -45,21 +53,25 @@ package "Segregacion de Interfaces - Sistema de Pedidos" {
     ' ==========================================
     class UsuarioMostrador {
         - numeroCaja: int
-        + registrarPedido(): void
-        + modificarPedido(): void
-        + marcarComoEntregado(): void
+        + registrarPedido(items: List<Item_pedido>): Pedido
+        + modificarPedido(idPedido: string, items: List<Item_pedido>): void
+        + cancelarPedido(idPedido: string, motivo: string): void
+        + marcarComoEntregado(idPedido: string): void
+        + consultarPedidosListos(): List<Pedido>
     }
 
     class UsuarioCocina {
         - estacionTrabajo: string
-        + comenzarPreparacion(): void
-        + marcarPedidoListo(): void
+        + comenzarPreparacion(idPedido: string): void
+        + marcarPedidoListo(idPedido: string): void
+        + consultarComandasActivas(): List<Pedido>
     }
 
     class UsuarioEncargado {
         - claveSupervision: string
-        + autorizarCancelacion(): void
-        + registrarDevolucionManual(): void
+        + cancelarPedido(idPedido: string, motivo: string): void
+        + autorizarCancelacion(idPedido: string): boolean
+        + registrarDevolucionManual(idPedido: string, monto: decimal): void
     }
 
     Usuario <|-- UsuarioMostrador
@@ -67,11 +79,17 @@ package "Segregacion de Interfaces - Sistema de Pedidos" {
     Usuario <|-- UsuarioEncargado
 
     IAtencionCliente <|.. UsuarioMostrador
+    ICancelacionPedido <|.. UsuarioMostrador
+    IConsultaEntregas <|.. UsuarioMostrador
     IPreparacionCocina <|.. UsuarioCocina
+    IConsultaComandas <|.. UsuarioCocina
+    ICancelacionPedido <|.. UsuarioEncargado
     ISupervision <|.. UsuarioEncargado
 
     ' ==========================================
     ' REGISTROS / HISTORIALES
+    ' Sin interfaz comun: registran hechos distintos y ningun
+    ' componente los consume de forma polimorfica.
     ' ==========================================
     class Historial_pago {
         - pago: Pago
@@ -100,12 +118,7 @@ package "Segregacion de Interfaces - Sistema de Pedidos" {
         - fechayhora: datetime
         - usuario: Usuario
         + registrarCambio(): void
-        + registrar(): void
     }
-
-    IRegistrable <|.. Historial_pago
-    IRegistrable <|.. Auditoria_pedido
-    IRegistrable <|.. Historial_cambio_pedido
 
 }
 
