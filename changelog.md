@@ -6,6 +6,13 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+### Added
+
+- [feature/esp-actividades-1-2-add-diagrama-actividad-1] Agrego diagramas de actividades de los casos de uso 1 y 2 e índice
+  Issue: [#NNN](https://github.com/eloeyhe/SistemaPedidos/issues/NNN)
+  Issue: [#NNN](https://github.com/eloeyhe/SistemaPedidos/issues/NNN)
+  PR: [#NNN](https://github.com/eloeyhe/SistemaPedidos/pull/NNN) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
+
 ## [Primer Parcial] - 2026-10-03
 
 ### Added
