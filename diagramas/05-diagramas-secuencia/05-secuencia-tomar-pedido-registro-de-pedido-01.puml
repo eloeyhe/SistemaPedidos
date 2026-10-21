@@ -1,0 +1,75 @@
+@startuml
+title Tomar pedido - registro exitoso o rechazo del pago
+autonumber
+skinparam style strictuml
+hide footbox
+
+actor "Usuario de Mostrador" as mostrador
+participant "SistemaPedidos:sistema" as sistema
+participant "Producto:producto" as producto
+participant "ProcesadorPago:procesadorPago" as procesadorPago
+participant "PantallaCocina:pantallaCocina" as cocina
+
+mostrador -> sistema : iniciarNuevoPedido()
+create "Pedido:pedido" as pedido
+sistema -> pedido : asignarIdentificador(numeroPedido, fechaHora)
+pedido --> sistema : pedidoIdentificado(numeroPedido)
+
+mostrador -> sistema : ingresarReferenciaRetiro(referenciaRetiro)
+sistema -> pedido : asignarReferenciaRetiro(referenciaRetiro)
+
+loop por cada producto seleccionado
+    mostrador -> sistema : seleccionarProducto(producto, cantidad)
+    sistema -> pedido : agregarItem(producto, cantidad)
+    create "Item_pedido:itemPedido" as itemPedido
+    pedido -> itemPedido : establecerProductoYCantidad(producto, cantidad)
+    itemPedido -> producto : obtenerNombre()
+    producto --> itemPedido : nombreProducto
+    itemPedido -> producto : obtenerPrecio()
+    producto --> itemPedido : precioBase
+    itemPedido -> itemPedido : conservarPrecioHistorico(precioBase)
+
+    loop por cada personalizacion seleccionada
+        mostrador -> sistema : ingresarPersonalizacion(descripcion)
+        sistema -> itemPedido : agregarPersonalizacion(descripcion)
+        create "Personalizacion_item:personalizacion" as personalizacion
+        itemPedido -> personalizacion : obtenerDescripcion()
+        personalizacion --> itemPedido : descripcion
+        itemPedido -> personalizacion : obtenerCostoAdicional(descripcion)
+        personalizacion --> itemPedido : costoAdicional
+    end
+
+    itemPedido -> itemPedido : calcularSubtotal(cantidad, precioBase, listaCostosAdicionales)
+    itemPedido --> pedido : subtotalCalculado(subtotal)
+    pedido -> pedido : actualizarTotal(subtotal)
+end
+
+pedido --> sistema : totalCalculado(totalPedido)
+mostrador -> sistema : seleccionarMedioPago(medioPago)
+create "Pago:pago" as pago
+sistema -> pago : registrarCobro(medioPago, totalPedido)
+pago -> procesadorPago : validarMedioPago(medioPago)
+procesadorPago --> pago : medioPagoValidado(resultadoValidacion)
+pago -> procesadorPago : procesarCobro(medioPago, totalPedido)
+
+alt transferencia rechazada
+    procesadorPago --> pago : cobroRechazado(motivo)
+    pago --> sistema : pagoRechazado(motivo)
+    sistema --> mostrador : informarPagoRechazado(motivo)
+    destroy personalizacion
+    destroy itemPedido
+    destroy pago
+    destroy pedido
+else medio de pago aprobado
+    procesadorPago --> pago : cobroAprobado(monto)
+    pago --> sistema : pagoRegistrado(monto)
+    sistema -> pedido : asociarPago(pago)
+    sistema -> pedido : cambiarEstado(RECIBIDO)
+    sistema -> pedido : registrarPedido(numeroPedido, fechaHora, referenciaRetiro, listaItems, totalPedido, pago)
+    sistema -> cocina : enviarCabeceraPedido(numeroPedido, fechaHora, referenciaRetiro)
+    sistema -> cocina : enviarDetallePedido(listaItems, totalPedido)
+    sistema -> cocina : informarPedidoConfirmado(numeroPedido)
+    cocina --> sistema : pedidoRecibido(numeroPedido)
+    sistema --> mostrador : confirmarRegistro(numeroPedido, totalPedido)
+end
+@enduml
