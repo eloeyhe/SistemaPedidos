@@ -1,0 +1,124 @@
+@startuml
+title Sistema de Pedidos - Refactorización aplicando SRP
+
+skinparam classAttributeIconSize 0
+hide empty members
+
+class Pedido {
+  - numeroPedido: String
+  - fecha: DateTime
+  - referenciaRetiro: String
+  - estado: EstadoPedido
+  - prioritario: Boolean
+  + agregarItem(item: Item_pedido): void
+  + modificarItem(item: Item_pedido): void
+  + cancelar(): void
+  + cambiarEstado(nuevoEstado: EstadoPedido): void
+  + marcarPrioritario(): void
+  + calcularTotal(): Decimal
+}
+
+class Item_pedido {
+  - cantidad: int
+  - elemento: IElementoMenu
+  - precioUnitarioHistorico: Decimal
+  + agregarPersonalizacion(personalizacion: Personalizacion_item): void
+  + quitarPersonalizacion(personalizacion: Personalizacion_item): void
+  + calcularSubtotal(): Decimal
+}
+
+interface IElementoMenu {
+  + getPrecio(): Decimal
+}
+
+class Producto implements IElementoMenu {
+  - nombre: String
+  - precioBase: Decimal
+  + getPrecio(): Decimal
+}
+
+class Combo implements IElementoMenu {
+  - nombre: String
+  - precioPropio: Decimal
+  + getPrecio(): Decimal
+}
+
+class Personalizacion_item {
+  - descripcion: String
+  - costoAdicional: Decimal
+  + calcularCosto(): Decimal
+}
+
+class Pago {
+  - monto: Decimal
+  - metodoDePago: MetodoPago
+  - fechaHora: DateTime
+}
+
+class Historial_pago {
+  - tipo: TipoMovimiento
+  - monto: Decimal
+  - motivo: String
+  - fechaHora: DateTime
+  + registrar(): void
+}
+
+class PoliticaCicloPedido <<policy>> {
+  + validarModificacion(pedido: Pedido): void
+  + validarTransicion(actual: EstadoPedido, nuevo: EstadoPedido): Boolean
+  + validarCancelacion(pedido: Pedido): void
+}
+
+class ServicioRegistroPago <<service>> {
+  + registrarCobro(pedido: Pedido, monto: Decimal, metodo: MetodoPago): Pago
+  + registrarAjuste(pago: Pago, diferencia: Decimal): Historial_pago
+}
+
+class CalculadorAjustePago <<service>> {
+  + calcularDiferencia(totalAnterior: Decimal, totalNuevo: Decimal): Decimal
+}
+
+enum EstadoPedido {
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+enum MetodoPago {
+  EFECTIVO
+  TRANSFERENCIA
+}
+
+enum TipoMovimiento {
+  COBRO_INICIAL
+  AJUSTE
+  DEVOLUCION
+}
+
+Pedido "1" *-- "1..*" Item_pedido : contiene
+Item_pedido "0..*" --> "1" IElementoMenu : elemento seleccionado
+Producto ..|> IElementoMenu
+Combo ..|> IElementoMenu
+Item_pedido "1" *-- "0..*" Personalizacion_item : personalizaciones
+Pedido "1" -- "0..1" Pago : pago
+Pago "1" *-- "1..*" Historial_pago : movimientos
+
+Pedido ..> PoliticaCicloPedido : solicitar validacion
+
+  note right of Pedido
+  cambiarEstado() y cancelar()
+  actualizan el estado de Pedido
+  solo si PoliticaCicloPedido
+  valida la operación.
+  end note
+
+ServicioRegistroPago ..> Pago : registra
+ServicioRegistroPago ..> Historial_pago : registra movimientos
+ServicioRegistroPago ..> CalculadorAjustePago : solicita cálculo
+
+
+
+
+@enduml

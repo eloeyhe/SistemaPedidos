@@ -1,0 +1,50 @@
+@startuml 01-solid-03-lsp
+
+skinparam classAttributeIconSize 0
+
+interface IElementoMenu {
+    + getPrecio(): Double
+}
+
+abstract class Producto implements IElementoMenu {
+    - Producto: String
+    - nombre: String
+    - precioBase: Double
+    + getPrecio(): Double
+}
+
+class ProductoEnvasado extends Producto {
+    - fechaVencimiento: Date
+    + getPrecio(): Double
+}
+
+interface IElaborable {
+    + iniciarPreparacion(): void
+}
+
+class ProductoPreparado extends Producto implements IElaborable {
+    - tiempoPreparacion: Integer
+    + getPrecio(): Double
+    + iniciarPreparacion(): void
+}
+
+class Combo implements IElementoMenu {
+    - nombre: String
+    - descuentoAplicado: Double
+    + getPrecio(): Double
+}
+
+class Item_pedido {
+    - cantidad: Integer
+    - elemento: IElementoMenu
+    + calcularSubtotal(): Double
+}
+
+class Cocina {
+    + prepararItem(item: IElaborable): void
+}
+
+Item_pedido --> IElementoMenu
+Cocina ..> IElaborable
+
+@enduml

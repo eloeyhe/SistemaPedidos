@@ -6,6 +6,167 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+
+## [Primer Parcial] - 2026-10-03
+
+### Added
+
+- [feature/doc-coord-repo-update-readme-md] creo estrucutra de repositorio
+  Issue: [#110](https://github.com/eloeyhe/SistemaPedidos/issues/110)
+  Issue: [#116](https://github.com/eloeyhe/SistemaPedidos/issues/116)
+  issue: [#118](https://github.com/eloeyhe/SistemaPedidos/issues/118)
+  PR: [#117](https://github.com/eloeyhe/SistemaPedidos/pull/117) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+- [feature/esp-extension-ocp-add-anexo-ocp] Realizo el OCP con todas sus carpetas y datos correspondientes
+  Issue: [#120](https://github.com/eloeyhe/SistemaPedidos/issues/120)
+  Issue: [#121](https://github.com/eloeyhe/SistemaPedidos/issues/121)
+  issue: [#122](https://github.com/eloeyhe/SistemaPedidos/issues/122)
+  issue: [#123](https://github.com/eloeyhe/SistemaPedidos/issues/123)
+  issue: [#124](https://github.com/eloeyhe/SistemaPedidos/issues/124)
+  issue: [#125](https://github.com/eloeyhe/SistemaPedidos/issues/125)
+  PR: [#133](https://github.com/eloeyhe/SistemaPedidos/pull/133) - @eloeyhe (Especialista en Principios de Extension(OCP + LSP))
+
+- [feature/esp-srp-add-anexo-srp] agrego 02-srp.md, .png, .puml, y especialista-srp.md
+  Issue: [#120](https://github.com/eloeyhe/SistemaPedidos/issues/120)
+  Issue: [#121](https://github.com/eloeyhe/SistemaPedidos/issues/121)
+  issue: [#122](https://github.com/eloeyhe/SistemaPedidos/issues/122)
+  issue: [#123](https://github.com/eloeyhe/SistemaPedidos/issues/123)
+  issue: [#124](https://github.com/eloeyhe/SistemaPedidos/issues/124)
+  PR: [#126](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+
+- [feature/esp-extension-lsp-add-anexo-lsp] Creo las carpetas y archivos con datos correspondientes a LSP
+  Issue: [#135](https://github.com/eloeyhe/SistemaPedidos/issues/135)
+  Issue: [#136](https://github.com/eloeyhe/SistemaPedidos/issues/136)
+  issue: [#137](https://github.com/eloeyhe/SistemaPedidos/issues/137)
+  issue: [#138](https://github.com/eloeyhe/SistemaPedidos/issues/138)
+  issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
+  PR: [#141](https://github.com/eloeyhe/SistemaPedidos/pull/141) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+- [feature/esp-dip-add-anexo-dip] Creo archivos y docs correspondientes al rol DIP
+  Issue: [#143](https://github.com/eloeyhe/SistemaPedidos/issues/143)
+  Issue: [#144](https://github.com/eloeyhe/SistemaPedidos/issues/144)
+  issue: [#145](https://github.com/eloeyhe/SistemaPedidos/issues/145)
+  issue: [#146](https://github.com/eloeyhe/SistemaPedidos/issues/146)
+  issue: [#147](https://github.com/eloeyhe/SistemaPedidos/issues/147)
+  issue: [#148](https://github.com/eloeyhe/SistemaPedidos/issues/148)
+  issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
+  PR: [#150](https://github.com/eloeyhe/SistemaPedidos/pull/150) - @eloeyhe (Especialista en Inversión de Dependencias)
+  
+- [feature/esp-isp-add-anexo-isp] Se creo la rama e issues y se agregaron los archivos solicitados para el repositorio.
+  Issue: [#102](https://github.com/eloeyhe/SistemaPedidos/issues/102)
+  Issue: [#103](https://github.com/eloeyhe/SistemaPedidos/issues/103)
+  issue: [#104](https://github.com/eloeyhe/SistemaPedidos/issues/104)
+  issue: [#105](https://github.com/eloeyhe/SistemaPedidos/issues/105)
+  issue: [#106](https://github.com/eloeyhe/SistemaPedidos/issues/106)
+  issue: [#107](https://github.com/eloeyhe/SistemaPedidos/issues/107)
+  issue: [#108](https://github.com/eloeyhe/SistemaPedidos/issues/108)
+  PR: [#151](https://github.com/eloeyhe/SistemaPedidos/pull/151) - @Leandro2107 (Especialista en ISP)
+
+- [feature/doc-coord-repo-update-readme-md] realizo code review, actualizo anexos y changelog
+  Issue: [#111](https://github.com/eloeyhe/SistemaPedidos/issues/111)
+  Issue: [#112](https://github.com/eloeyhe/SistemaPedidos/issues/112)
+  issue: [#113](https://github.com/eloeyhe/SistemaPedidos/issues/113)
+  issue: [#114](https://github.com/eloeyhe/SistemaPedidos/issues/114)
+  issue: [#115](https://github.com/eloeyhe/SistemaPedidos/issues/115)
+  PR: [#152](https://github.com/eloeyhe/SistemaPedidos/pull/152) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+### Fixed
+
+- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Realizo RC2, RC3, RC4, RC5 y RC6 en cuanto a OCP y LSP
+ Issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
+ Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  PR: [#155](https://github.com/eloeyhe/SistemaPedidos/pull/155) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+- [fix/esp-dip-correccion-diagrama-dip] Corrijo la relación Item_pedido - IElementoMenu y aplico el prefijo I a las interfaces de DIP (RC1, RC15)
+  Issue: [#156](https://github.com/eloeyhe/SistemaPedidos/issues/156)
+  PR: [#157](https://github.com/eloeyhe/SistemaPedidos/pull/157) - @santimarM (Especialista en Inversión de Dependencias)
+
+- [fix/doc-coord-correccion-changelog-ia] fix: corregir RC12 y documentar code reviews
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#158](https://github.com/eloeyhe/SistemaPedidos/pull/158) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+- [fix/doc-coord-correccion-changelog-ia] fix: corrijo diagrama SRP y actualizo PNG
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#159](https://github.com/eloeyhe/SistemaPedidos/pull/159) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo nomenclatura de Estrategia.. por IEstrategia..
+ Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  PR: [#160](https://github.com/eloeyhe/SistemaPedidos/pull/160) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Realizo RCs correspondientes a mi rol (RC15, RC18 y RC21. Changelog: RC5 y RC16)
+ Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139) 
+ PR: [#167](https://github.com/eloeyhe/SistemaPedidos/pull/167) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+- [fix/doc-coord-correccion-changelog-ia] Corrección de las Request Changes (RC) asignadas.
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#168](https://github.com/eloeyhe/SistemaPedidos/pull/168) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+- [fix/doc-coord-correccion-changelog-ia] realizo correcciones en changelog.
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#169](https://github.com/eloeyhe/SistemaPedidos/pull/169) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo nomenclatura en anexos/principios-solid/02-ocp.md y lsp.md
+ Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139) 
+ PR: [#170](https://github.com/eloeyhe/SistemaPedidos/pull/170) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+- [fix/mejoras-documentacion-ocp-lsp] Mejora y pulida a la documentacion de principios OCP y LSP
+ Issue: [#129](https://github.com/eloeyhe/SistemaPedidos/issues/129)
+ Issue: [#135](https://github.com/eloeyhe/SistemaPedidos/issues/135)
+ Issue: [#137](https://github.com/eloeyhe/SistemaPedidos/issues/137)
+ PR: [#171](https://github.com/eloeyhe/SistemaPedidos/pull/171) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+- [fix/doc-coord-correccion-changelog-ia] realizo code review hacia PR #171.
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#172](https://github.com/eloeyhe/SistemaPedidos/pull/172) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+- [fix/correcciones-detalles-srp] creo rama fix con correcciones de pulido sobre el diagrama srp.
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#173](https://github.com/eloeyhe/SistemaPedidos/pull/173) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+- [fix/correcciones-documentacion-dip] Realizo correcciones a la documentacion del principio DIP
+ Issue: [#144](https://github.com/eloeyhe/SistemaPedidos/issues/144)
+ Issue: [#146](https://github.com/eloeyhe/SistemaPedidos/issues/146)
+ Issue: [#143](https://github.com/eloeyhe/SistemaPedidos/issues/143)
+ PR: [#177](https://github.com/eloeyhe/SistemaPedidos/pull/177) - @eloeyhe (Especialista en Inversión de Dependencias)
+
+- [fix/doc-coord-correccion-changelog-ia] realizo code review de PR #177.
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#178](https://github.com/eloeyhe/SistemaPedidos/pull/178) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+- [fix/nuevos-ajustes-en-diagramas-ISP] [ISP] Corregir diagrama y anexo de Segregación de Interfaces.
+Issue: [#174](https://github.com/eloeyhe/SistemaPedidos/issues/174)
+PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (Especialista en ISP)
+
+- [fix/doc-coord-correccion-changelog-ia] realizo correcciones en el changelog
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#179](https://github.com/eloeyhe/SistemaPedidos/pull/179) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo la nomenclatura en especialista-ocp/lsp
+ Issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
+ Issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
+ PR: [#180](https://github.com/eloeyhe/SistemaPedidos/pull/180) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+- [fix/doc-coord-correccion-changelog-ia] realizo code review a PR #180
+  Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
+  PR: [#181](https://github.com/eloeyhe/SistemaPedidos/pull/181) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
+
+- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Arreglo el titulo de la PR #180 en el changelog
+ Issue: [#184](https://github.com/eloeyhe/SistemaPedidos/issues/184)
+ PR: [#183](https://github.com/eloeyhe/SistemaPedidos/pull/183) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+ - [fix/correcciones-ia-primer-parcial] Realizo correcciones a RCs correspondientes en ia/primer-parcial
+ Issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
+ Issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
+ PR: [#185](https://github.com/eloeyhe/SistemaPedidos/pull/185) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+ - [fix/eliminacion-conflicto-ia-a2] Elimino conflicto de linea erronea en ia/a2/diseniador-tarjetas-crc.md
+ Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
+ PR: [#186](https://github.com/eloeyhe/SistemaPedidos/pull/186) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
+
+
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
 
 ### Added

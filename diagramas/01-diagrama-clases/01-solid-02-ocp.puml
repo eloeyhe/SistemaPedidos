@@ -1,0 +1,50 @@
+@startuml 01-solid-02-ocp
+skinparam classAttributeIconSize 0
+
+class Pago {
+    - Pago: String
+    - monto: Double
+    - estrategiaPago: IEstrategiaPago
+    + registrarPago(): void
+}
+
+interface IEstrategiaPago {
+    + procesarCobro(monto: Double): Boolean
+}
+
+class PagoEfectivo implements IEstrategiaPago {
+    + procesarCobro(monto: Double): Boolean
+}
+
+class PagoTransferencia implements IEstrategiaPago {
+    + procesarCobro(monto: Double): Boolean
+}
+
+class PagoQR implements IEstrategiaPago {
+    + procesarCobro(monto: Double): Boolean
+}
+note bottom of PagoQR : Extensión futura para demostrar OCP (No en RF8)
+
+Pago --> IEstrategiaPago
+
+class Pedido {
+    - Pedido: String
+    - estrategiaDescuento: IEstrategiaDescuento
+    + calcularTotal(): Double
+}
+
+interface IEstrategiaDescuento {
+    + aplicarDescuento(montoBase: Double): Double
+}
+
+class DescuentoSocio implements IEstrategiaDescuento {
+    + aplicarDescuento(montoBase: Double): Double
+}
+
+class DescuentoPromocional implements IEstrategiaDescuento {
+    + aplicarDescuento(montoBase: Double): Double
+}
+
+Pedido --> IEstrategiaDescuento
+
+@enduml
