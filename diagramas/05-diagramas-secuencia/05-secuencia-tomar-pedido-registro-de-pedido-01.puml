@@ -7,6 +7,7 @@ hide footbox
 actor "Usuario de Mostrador" as mostrador
 participant "SistemaPedidos:sistema" as sistema
 participant "Producto:producto" as producto
+participant "Combo:combo" as combo
 participant "ProcesadorPago:procesadorPago" as procesadorPago
 participant "PantallaCocina:pantallaCocina" as cocina
 
@@ -18,29 +19,46 @@ pedido --> sistema : pedidoIdentificado(numeroPedido)
 mostrador -> sistema : ingresarReferenciaRetiro(referenciaRetiro)
 sistema -> pedido : asignarReferenciaRetiro(referenciaRetiro)
 
-loop por cada producto seleccionado
-    mostrador -> sistema : seleccionarProducto(producto, cantidad)
-    sistema -> pedido : agregarItem(producto, cantidad)
-    create "Item_pedido:itemPedido" as itemPedido
-    pedido -> itemPedido : establecerProductoYCantidad(producto, cantidad)
-    itemPedido -> producto : obtenerNombre()
-    producto --> itemPedido : nombreProducto
-    itemPedido -> producto : obtenerPrecio()
-    producto --> itemPedido : precioBase
-    itemPedido -> itemPedido : conservarPrecioHistorico(precioBase)
+loop por cada ítem seleccionado
+    alt selección de producto individual
+        mostrador -> sistema : seleccionarProducto(producto, cantidad)
+        sistema -> pedido : agregarItem(producto, cantidad)
+        create "Item_pedido:itemProducto" as itemProducto
+        pedido -> itemProducto : establecerProductoYCantidad(producto, cantidad)
+        itemProducto -> producto : obtenerNombre()
+        producto --> itemProducto : nombreProducto
+        itemProducto -> producto : obtenerPrecio()
+        producto --> itemProducto : precioBase
+        itemProducto -> itemProducto : conservarPrecioHistorico(precioBase)
 
-    loop por cada personalizacion seleccionada
-        mostrador -> sistema : ingresarPersonalizacion(descripcion)
-        sistema -> itemPedido : agregarPersonalizacion(descripcion)
-        create "Personalizacion_item:personalizacion" as personalizacion
-        itemPedido -> personalizacion : obtenerDescripcion()
-        personalizacion --> itemPedido : descripcion
-        itemPedido -> personalizacion : obtenerCostoAdicional(descripcion)
-        personalizacion --> itemPedido : costoAdicional
+        loop por cada personalizacion seleccionada
+            mostrador -> sistema : ingresarPersonalizacion(descripcion)
+            sistema -> itemProducto : agregarPersonalizacion(descripcion)
+            create "Personalizacion_item:personalizacion" as personalizacion
+            itemProducto -> personalizacion : obtenerDescripcion()
+            personalizacion --> itemProducto : descripcion
+            itemProducto -> personalizacion : obtenerCostoAdicional(descripcion)
+            personalizacion --> itemProducto : costoAdicional
+        end
+
+        itemProducto -> itemProducto : calcularSubtotal(cantidad, precioBase, listaCostosAdicionales)
+        itemProducto --> pedido : subtotalCalculado(subtotal)
+
+    else selección de combo
+        mostrador -> sistema : seleccionarCombo(combo, cantidad)
+        sistema -> pedido : agregarItemCombo(combo, cantidad)
+        create "Item_pedido:itemCombo" as itemCombo
+        pedido -> itemCombo : establecerComboYCantidad(combo, cantidad)
+        itemCombo -> combo : obtenerNombre()
+        combo --> itemCombo : nombreCombo
+        itemCombo -> combo : obtenerPrecio()
+        combo --> itemCombo : precioBase
+        itemCombo -> itemCombo : conservarPrecioHistorico(precioBase)
+
+        itemCombo -> itemCombo : calcularSubtotal(cantidad, precioBase, ceroCostosAdicionales)
+        itemCombo --> pedido : subtotalCalculado(subtotal)
     end
 
-    itemPedido -> itemPedido : calcularSubtotal(cantidad, precioBase, listaCostosAdicionales)
-    itemPedido --> pedido : subtotalCalculado(subtotal)
     pedido -> pedido : actualizarTotal(subtotal)
 end
 
@@ -57,7 +75,8 @@ alt transferencia rechazada
     pago --> sistema : pagoRechazado(motivo)
     sistema --> mostrador : informarPagoRechazado(motivo)
     destroy personalizacion
-    destroy itemPedido
+    destroy itemProducto
+    destroy itemCombo
     destroy pago
     destroy pedido
 else medio de pago aprobado
