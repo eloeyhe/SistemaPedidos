@@ -156,6 +156,11 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
  Issue: [#184](https://github.com/eloeyhe/SistemaPedidos/issues/184)
  PR: [#183](https://github.com/eloeyhe/SistemaPedidos/pull/183) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
+ - [fix/correcciones-ia-primer-parcial] Realizo correcciones a RCs correspondientes en ia/primer-parcial
+ Issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
+ Issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
+ PR: [#185](https://github.com/eloeyhe/SistemaPedidos/pull/185) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+
 
 
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
