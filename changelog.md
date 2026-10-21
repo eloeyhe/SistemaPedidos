@@ -6,8 +6,6 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
-## [Release Actividad Obligatoria N°3] - 2026-10-22
-
 ### Added
 
 - [feature/esp-secuencia-add-diagrama-secuencia-1] Realizo todo lo correspondiente en cuanto a los diagramas de secuencia
