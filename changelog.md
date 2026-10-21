@@ -152,7 +152,9 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
   PR: [#181](https://github.com/eloeyhe/SistemaPedidos/pull/181) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
-
+- [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Arreglo el titulo de la PR #180 en el changelog
+ Issue: [#184](https://github.com/eloeyhe/SistemaPedidos/issues/184)
+ PR: [#183](https://github.com/eloeyhe/SistemaPedidos/pull/183) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 
 
