@@ -6,6 +6,18 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+## [Release Actividad Obligatoria N°3] - 2026-10-22
+
+### Added
+
+- [feature/esp-secuencia-add-diagrama-secuencia-1] Realizo todo lo correspondiente en cuanto a los diagramas de secuencia
+  Issue: [#162](https://github.com/eloeyhe/SistemaPedidos/issues/162)
+  Issue: [#163](https://github.com/eloeyhe/SistemaPedidos/issues/163)
+  issue: [#164](https://github.com/eloeyhe/SistemaPedidos/issues/164)
+  issue: [#165](https://github.com/eloeyhe/SistemaPedidos/issues/165)
+  issue: [#166](https://github.com/eloeyhe/SistemaPedidos/issues/166)
+  PR: [#182](https://github.com/eloeyhe/SistemaPedidos/pull/182) - @eloeyhe (Especialista en Diagramas de Secuencia)
+
 
 ## [Primer Parcial] - 2026-10-03
 
