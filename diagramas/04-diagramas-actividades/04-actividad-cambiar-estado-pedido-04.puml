@@ -1,0 +1,47 @@
+@startuml 04-actividad-cambiar-estado-pedido-04
+title CU04 - Cambiar Estado de Pedido
+skinparam dpi 150
+
+|Cocina|
+start
+:1. Seleccionar pedido existente;
+
+|Sistema de Pedidos|
+:2. Consultar pedido seleccionado;
+:3. Mostrar estado actual;
+:4. Identificar transicion solicitada;
+:5. Verificar permisos del actor;
+
+if (¿Actor autorizado?) then (Si)
+  :6. Validar transicion de estado;
+  if (¿Transicion permitida?) then (Si)
+    if (¿Estado actual RECIBIDO?) then (Si)
+      |Cocina|
+      :7. Iniciar preparacion del pedido;
+      |Sistema de Pedidos|
+      :8. Actualizar a EN_PREPARACION;
+    else (No)
+      if (¿Estado actual EN_PREPARACION?) then (Si)
+        |Cocina|
+        :9. Finalizar preparacion del pedido;
+        |Sistema de Pedidos|
+        :10. Actualizar a LISTO;
+      else (LISTO)
+        |Usuario de Mostrador|
+        :11. Registrar entrega del pedido;
+        |Sistema de Pedidos|
+        :12. Actualizar a ENTREGADO;
+      endif
+    endif
+    note right
+      Cada pedido conserva un unico
+      estado actual valido.
+    end note
+  else (No)
+    :Rechazar cambio sin modificar estado;
+  endif
+else (No)
+  :Rechazar solicitud sin modificar estado;
+endif
+stop
+@enduml
