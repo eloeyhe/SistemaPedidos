@@ -16,60 +16,60 @@ alt consulta de Cocina
     pantalla -> servicio : consultarPedidosActivos(UsuarioCocina)
     servicio -> pedido : obtenerPedidosEnEstados(RECIBIDO, EN_PREPARACION, LISTO)
     alt hay pedidos activos
-        pedido --> servicio : devolverPedidosActivos(listaPedidos)
+        pedido --> servicio : listaPedidos
         loop por cada pedido activo
             servicio -> pedido : obtenerEstado(numeroPedido)
-            pedido --> servicio : devolverEstado(estadoActual)
+            pedido --> servicio : estadoActual
             servicio -> pedido : consultarPrioridad(numeroPedido)
-            pedido --> servicio : devolverPrioridad(esUrgente)
+            pedido --> servicio : esUrgente
         end
         servicio -> filtro : agruparPorEstado(listaPedidos)
-        filtro --> servicio : devolverPedidosAgrupados(pedidosAgrupados)
+        filtro --> servicio : pedidosAgrupados
         servicio -> filtro : ordenarUrgentes(pedidosAgrupados)
-        filtro --> servicio : devolverPedidosOrdenados(listaPedidosOrdenados)
-        servicio --> pantalla : devolverPedidosOrdenados(listaPedidosOrdenados)
-        pantalla --> UsuarioCocina : mostrarMonitorAdaptado(listaPedidosOrdenados)
+        filtro --> servicio : listaPedidosOrdenados
+        servicio --> pantalla : listaPedidosOrdenados
+        pantalla --> UsuarioCocina : vistaMonitorAdaptado
         UsuarioCocina -> pantalla : consultarDetallePedido(numeroPedido)
         pantalla -> servicio : obtenerDetallePedido(numeroPedido)
-        servicio --> pantalla : devolverDetallePedido(detallePedido)
-        pantalla --> UsuarioCocina : mostrarDetallePedido(detallePedido)
+        servicio --> pantalla : detallePedido
+        pantalla --> UsuarioCocina : vistaDetallePedido
     else lista vacia
-        pedido --> servicio : devolverListaVacia()
-        servicio --> pantalla : informarListaVacia()
-        pantalla --> UsuarioCocina : mostrarVistaVacia()
+        pedido --> servicio : listaVacia
+        servicio --> pantalla : avisoListaVacia
+        pantalla --> UsuarioCocina : vistaVacia
     else falla de conexion
-        servicio --> pantalla : informarFallaConexion()
-        pantalla --> UsuarioCocina : advertirDatosPosiblementeDesactualizados()
+        servicio --> pantalla : errorConexion
+        pantalla --> UsuarioCocina : mensajeDatosDesactualizados
     end
 else consulta de Usuario de Mostrador
     UsuarioMostrador -> pantalla : accederMonitorPedidosActivos()
     pantalla -> servicio : consultarPedidosActivos(UsuarioMostrador)
     servicio -> pedido : obtenerPedidosEnEstados(RECIBIDO, EN_PREPARACION, LISTO)
     alt hay pedidos activos
-        pedido --> servicio : devolverPedidosActivos(listaPedidos)
+        pedido --> servicio : listaPedidos
         loop por cada pedido activo
             servicio -> pedido : obtenerEstado(numeroPedido)
-            pedido --> servicio : devolverEstado(estadoActual)
+            pedido --> servicio : estadoActual
             servicio -> pedido : consultarPrioridad(numeroPedido)
-            pedido --> servicio : devolverPrioridad(esUrgente)
+            pedido --> servicio : esUrgente
         end
         servicio -> filtro : agruparPorEstado(listaPedidos)
-        filtro --> servicio : devolverPedidosAgrupados(pedidosAgrupados)
+        filtro --> servicio : pedidosAgrupados
         servicio -> filtro : ordenarUrgentes(pedidosAgrupados)
-        filtro --> servicio : devolverPedidosOrdenados(listaPedidosOrdenados)
-        servicio --> pantalla : devolverPedidosOrdenados(listaPedidosOrdenados)
-        pantalla --> UsuarioMostrador : mostrarMonitorAdaptado(listaPedidosOrdenados)
+        filtro --> servicio : listaPedidosOrdenados
+        servicio --> pantalla : listaPedidosOrdenados
+        pantalla --> UsuarioMostrador : vistaMonitorAdaptado
         UsuarioMostrador -> pantalla : consultarDetallePedido(numeroPedido)
         pantalla -> servicio : obtenerDetallePedido(numeroPedido)
-        servicio --> pantalla : devolverDetallePedido(detallePedido)
-        pantalla --> UsuarioMostrador : mostrarDetallePedido(detallePedido)
+        servicio --> pantalla : detallePedido
+        pantalla --> UsuarioMostrador : vistaDetallePedido
     else lista vacia
-        pedido --> servicio : devolverListaVacia()
-        servicio --> pantalla : informarListaVacia()
-        pantalla --> UsuarioMostrador : mostrarVistaVacia()
+        pedido --> servicio : listaVacia
+        servicio --> pantalla : avisoListaVacia
+        pantalla --> UsuarioMostrador : vistaVacia
     else falla de conexion
-        servicio --> pantalla : informarFallaConexion()
-        pantalla --> UsuarioMostrador : advertirDatosPosiblementeDesactualizados()
+        servicio --> pantalla : errorConexion
+        pantalla --> UsuarioMostrador : mensajeDatosDesactualizados
     end
 end
 @enduml

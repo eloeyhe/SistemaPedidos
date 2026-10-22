@@ -14,7 +14,7 @@ participant "PantallaCocina:pantallaCocina" as cocina
 mostrador -> sistema : iniciarNuevoPedido()
 create "Pedido:pedido" as pedido
 sistema -> pedido : asignarIdentificador(numeroPedido, fechaHora)
-pedido --> sistema : pedidoIdentificado(numeroPedido)
+pedido --> sistema : numeroPedido
 
 mostrador -> sistema : ingresarReferenciaRetiro(referenciaRetiro)
 sistema -> pedido : asignarReferenciaRetiro(referenciaRetiro)
@@ -42,7 +42,7 @@ loop por cada ítem seleccionado
         end
 
         itemProducto -> itemProducto : calcularSubtotal(cantidad, precioBase, listaCostosAdicionales)
-        itemProducto --> pedido : subtotalCalculado(subtotal)
+        itemProducto --> pedido : subtotal
 
     else selección de combo
         mostrador -> sistema : seleccionarCombo(combo, cantidad)
@@ -56,39 +56,39 @@ loop por cada ítem seleccionado
         itemCombo -> itemCombo : conservarPrecioHistorico(precioBase)
 
         itemCombo -> itemCombo : calcularSubtotal(cantidad, precioBase, ceroCostosAdicionales)
-        itemCombo --> pedido : subtotalCalculado(subtotal)
+        itemCombo --> pedido : subtotal
     end
 
     pedido -> pedido : actualizarTotal(subtotal)
 end
 
-pedido --> sistema : totalCalculado(totalPedido)
+pedido --> sistema : totalPedido
 mostrador -> sistema : seleccionarMedioPago(medioPago)
 create "Pago:pago" as pago
 sistema -> pago : registrarCobro(medioPago, totalPedido)
 pago -> procesadorPago : validarMedioPago(medioPago)
-procesadorPago --> pago : medioPagoValidado(resultadoValidacion)
+procesadorPago --> pago : resultadoValidacion
 pago -> procesadorPago : procesarCobro(medioPago, totalPedido)
 
 alt transferencia rechazada
-    procesadorPago --> pago : cobroRechazado(motivo)
-    pago --> sistema : pagoRechazado(motivo)
-    sistema --> mostrador : informarPagoRechazado(motivo)
+    procesadorPago --> pago : motivoRechazo
+    pago --> sistema : motivoRechazo
+    sistema --> mostrador : mensajeRechazo
     destroy personalizacion
     destroy itemProducto
     destroy itemCombo
     destroy pago
     destroy pedido
 else medio de pago aprobado
-    procesadorPago --> pago : cobroAprobado(monto)
-    pago --> sistema : pagoRegistrado(monto)
+    procesadorPago --> pago : comprobanteAprobacion
+    pago --> sistema : confirmacionPago
     sistema -> pedido : asociarPago(pago)
     sistema -> pedido : cambiarEstado(RECIBIDO)
     sistema -> pedido : registrarPedido(numeroPedido, fechaHora, referenciaRetiro, listaItems, totalPedido, pago)
     sistema -> cocina : enviarCabeceraPedido(numeroPedido, fechaHora, referenciaRetiro)
     sistema -> cocina : enviarDetallePedido(listaItems, totalPedido)
     sistema -> cocina : informarPedidoConfirmado(numeroPedido)
-    cocina --> sistema : pedidoRecibido(numeroPedido)
-    sistema --> mostrador : confirmarRegistro(numeroPedido, totalPedido)
+    cocina --> sistema : acuseRecibo
+    sistema --> mostrador : ticketConfirmacion
 end
 @enduml
