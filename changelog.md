@@ -30,6 +30,14 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#204](https://github.com/eloeyhe/SistemaPedidos/issues/204)
   PR: [#206](https://github.com/eloeyhe/SistemaPedidos/pull/206) - @nachovelesquen7-rgb (Especialista en diagramas de actividades - Casos de uso 3, 4 Y 5)
 
+  ### Changed
+
+  - [feature/esp-secuencia-add-diagrama-secuencia-1] Realizo correccion a nomenclatura a los retornos en los Diagramas .puml 
+  Issue: [#163](https://github.com/eloeyhe/SistemaPedidos/issues/163)
+  Issue: [#165](https://github.com/eloeyhe/SistemaPedidos/issues/165)
+  Issue: [#166](https://github.com/eloeyhe/SistemaPedidos/issues/166)
+  PR: [#207](https://github.com/eloeyhe/SistemaPedidos/pull/207) - @eloeyhe (Especialista en Diagramas de Secuencia)
+
 ## [Primer Parcial] - 2026-10-03
 
 ### Added
