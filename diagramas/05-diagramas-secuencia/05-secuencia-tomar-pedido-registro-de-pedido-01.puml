@@ -75,6 +75,16 @@ alt transferencia rechazada
     pago --> sistema : motivoRechazo
     sistema --> mostrador : mensajeRechazo
     destroy pago
+    loop por cada ítem temporal creado
+        alt ítem de producto individual
+            loop por cada personalización creada para el ítem
+                destroy personalizacion
+            end
+            destroy itemProducto
+        else ítem de combo
+            destroy itemCombo
+        end
+    end
     destroy pedido
 else medio de pago aprobado
     procesadorPago --> pago : comprobanteAprobacion

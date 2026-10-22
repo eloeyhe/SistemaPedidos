@@ -5,16 +5,21 @@ autonumber
 skinparam style strictuml
 hide footbox
 
-actor UsuarioCocina
+actor "Usuario de Cocina" as usuarioCocina
+actor "Usuario de Mostrador" as usuarioMostrador
 participant "PantallaPedidos:pantalla" as pantalla
 participant "ServicioPedidos:servicio" as servicio
 participant ":Pedido" as pedido
-participant ":ResumenConsulta" as resumen
 
-UsuarioCocina -> pantalla : accederMonitorPedidosActivos()
 activate pantalla
+alt consulta iniciada por Cocina
+    usuarioCocina -> pantalla : accederMonitorPedidosActivos()
+    pantalla -> servicio : consultarPedidosActivos(usuarioCocina)
+else consulta iniciada por Mostrador
+    usuarioMostrador -> pantalla : accederMonitorPedidosActivos()
+    pantalla -> servicio : consultarPedidosActivos(usuarioMostrador)
+end
 
-pantalla -> servicio : consultarPedidosActivos(UsuarioCocina)
 activate servicio
 
 servicio -> pedido : obtenerPedidosPorEstados("RECIBIDO", "EN_PREPARACION", "LISTO")
@@ -28,24 +33,33 @@ loop por cada pedido activo
     servicio -> pedido : esPrioritario()
     pedido --> servicio : esUrgente
 end
-
 deactivate pedido
 
-create resumen
-servicio -> resumen : new ResumenConsulta(listaPedidosActivos, UsuarioCocina)
-activate resumen
+servicio -> servicio : agruparPedidosPorEstado(listaPedidosActivos)
+loop por cada estado activo
+    servicio -> servicio : ordenarGrupoPorPrioridad(urgentesPrimero)
+end
 
-servicio -> resumen : generarVistaAdaptada()
-resumen --> servicio : vistaGenerada
-deactivate resumen
-destroy resumen
+alt actorSolicitante == Cocina
+    servicio -> servicio : seleccionarEstadosVisibles("RECIBIDO", "EN_PREPARACION")
+else actorSolicitante == Mostrador
+    servicio -> servicio : seleccionarEstadosVisibles("RECIBIDO", "EN_PREPARACION", "LISTO")
+end
 
-servicio --> pantalla : retornarPedidosOrdenados(listaPedidosActivos)
+servicio --> pantalla : retornarPedidosAgrupadosYOrdenados(vistaAdaptada)
 deactivate servicio
 
-pantalla --> UsuarioCocina : mostrarVistaMonitor(vistaGenerada)
+alt consulta iniciada por Cocina
+    pantalla --> usuarioCocina : mostrarVistaMonitor(vistaAdaptada)
+else consulta iniciada por Mostrador
+    pantalla --> usuarioMostrador : mostrarVistaMonitor(vistaAdaptada)
+end
 
-UsuarioCocina -> pantalla : consultarDetallePedido(numeroPedido)
+alt detalle consultado por Cocina
+    usuarioCocina -> pantalla : consultarDetallePedido(numeroPedido)
+else detalle consultado por Mostrador
+    usuarioMostrador -> pantalla : consultarDetallePedido(numeroPedido)
+end
 pantalla -> servicio : obtenerDetallePedido(numeroPedido)
 activate servicio
 
@@ -58,7 +72,11 @@ deactivate pedido
 servicio --> pantalla : retornarDetalle(detallePedido)
 deactivate servicio
 
-pantalla --> UsuarioCocina : mostrarDetallePedido(detallePedido)
+alt detalle consultado por Cocina
+    pantalla --> usuarioCocina : mostrarDetallePedido(detallePedido)
+else detalle consultado por Mostrador
+    pantalla --> usuarioMostrador : mostrarDetallePedido(detallePedido)
+end
 deactivate pantalla
 
 @enduml
