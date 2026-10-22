@@ -1,0 +1,75 @@
+@startuml
+title Cambiar estado de pedido durante su preparacion y entrega
+autonumber
+skinparam style strictuml
+hide footbox
+
+actor UsuarioCocina
+participant "PantallaPedidos:pantalla" as pantalla
+participant "ServicioPedidos:servicio" as servicio
+participant "Pedido:pedido" as pedido
+participant "Historial_cambio_pedido:historial" as historial
+actor UsuarioMostrador
+
+UsuarioCocina -> pantalla : seleccionarPedido(numeroPedido)
+pantalla -> servicio : consultarEstado(numeroPedido)
+servicio -> pedido : obtenerEstado(numeroPedido)
+pedido --> servicio : devolverEstado(RECIBIDO)
+servicio --> pantalla : devolverEstado(RECIBIDO)
+pantalla --> UsuarioCocina : mostrarPedidoYEstado(numeroPedido, RECIBIDO)
+
+note over pantalla, servicio : Transicion RECIBIDO a EN_PREPARACION
+UsuarioCocina -> pantalla : iniciarPreparacion(numeroPedido)
+pantalla -> servicio : solicitarCambioEstado(numeroPedido, EN_PREPARACION, UsuarioCocina)
+servicio -> pedido : validarTransicion(RECIBIDO, EN_PREPARACION, UsuarioCocina)
+alt transicion valida y actor autorizado
+    pedido -> pedido : actualizarEstado(EN_PREPARACION)
+    pedido --> servicio : estadoActualizado(EN_PREPARACION)
+    servicio -> historial : registrarCambioEstado(numeroPedido, RECIBIDO, EN_PREPARACION, UsuarioCocina)
+    historial --> servicio : cambioRegistrado()
+    servicio --> pantalla : confirmarCambioEstado(EN_PREPARACION)
+    pantalla --> UsuarioCocina : mostrarEstadoActualizado(EN_PREPARACION)
+
+    note over pantalla, servicio : Transicion EN_PREPARACION a LISTO
+    UsuarioCocina -> pantalla : finalizarPreparacion(numeroPedido)
+    pantalla -> servicio : solicitarCambioEstado(numeroPedido, LISTO, UsuarioCocina)
+    servicio -> pedido : validarTransicion(EN_PREPARACION, LISTO, UsuarioCocina)
+    alt transicion valida y actor autorizado
+        pedido -> pedido : actualizarEstado(LISTO)
+        pedido --> servicio : estadoActualizado(LISTO)
+        servicio -> historial : registrarCambioEstado(numeroPedido, EN_PREPARACION, LISTO, UsuarioCocina)
+        historial --> servicio : cambioRegistrado()
+        servicio --> pantalla : confirmarCambioEstado(LISTO)
+        pantalla --> UsuarioCocina : mostrarEstadoActualizado(LISTO)
+
+        note over pantalla, servicio : Transicion LISTO a ENTREGADO
+        UsuarioMostrador -> pantalla : consultarPedidosListos()
+        pantalla -> servicio : buscarPedidosPorEstado(LISTO)
+        servicio --> pantalla : devolverPedidosListos(listaPedidos)
+        pantalla --> UsuarioMostrador : mostrarPedidosParaEntrega(listaPedidos)
+        UsuarioMostrador -> pantalla : registrarEntrega(numeroPedido)
+        pantalla -> servicio : solicitarCambioEstado(numeroPedido, ENTREGADO, UsuarioMostrador)
+        servicio -> pedido : validarTransicion(LISTO, ENTREGADO, UsuarioMostrador)
+        alt transicion valida y actor autorizado
+            pedido -> pedido : actualizarEstado(ENTREGADO)
+            pedido --> servicio : estadoActualizado(ENTREGADO)
+            servicio -> historial : registrarCambioEstado(numeroPedido, LISTO, ENTREGADO, UsuarioMostrador)
+            historial --> servicio : cambioRegistrado()
+            servicio --> pantalla : confirmarCambioEstado(ENTREGADO)
+            pantalla --> UsuarioMostrador : mostrarEntregaConfirmada(numeroPedido)
+        else transicion invalida o actor no autorizado
+            pedido --> servicio : rechazarTransicion(LISTO, ENTREGADO)
+            servicio --> pantalla : informarTransicionRechazada()
+            pantalla --> UsuarioMostrador : mostrarErrorTransicion()
+        end
+    else transicion invalida o actor no autorizado
+        pedido --> servicio : rechazarTransicion(EN_PREPARACION, LISTO)
+        servicio --> pantalla : informarTransicionRechazada()
+        pantalla --> UsuarioCocina : mostrarErrorTransicion()
+    end
+else transicion invalida o actor no autorizado
+    pedido --> servicio : rechazarTransicion(RECIBIDO, EN_PREPARACION)
+    servicio --> pantalla : informarTransicionRechazada()
+    pantalla --> UsuarioCocina : mostrarErrorTransicion()
+end
+@enduml
