@@ -21,6 +21,15 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#188](https://github.com/eloeyhe/SistemaPedidos/issues/188)
   PR: [#190](https://github.com/eloeyhe/SistemaPedidos/pull/190) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
 
+- [feature/esp-actividades-3-4-5-add-diagrama-actividad3] realizo diagramas de actividades de casos de uso 3-4-5, incorporo indices y documentacion en ia/a3
+  Issue: [#199](https://github.com/eloeyhe/SistemaPedidos/issues/199)
+  Issue: [#200](https://github.com/eloeyhe/SistemaPedidos/issues/200)
+  issue: [#201](https://github.com/eloeyhe/SistemaPedidos/issues/201)
+  issue: [#202](https://github.com/eloeyhe/SistemaPedidos/issues/202)
+  issue: [#203](https://github.com/eloeyhe/SistemaPedidos/issues/203)
+  issue: [#204](https://github.com/eloeyhe/SistemaPedidos/issues/204)
+  PR: [#206](https://github.com/eloeyhe/SistemaPedidos/pull/206) - @nachovelesquen7-rgb (Especialista en diagramas de actividades - Casos de uso 3, 4 Y 5)
+
 ## [Primer Parcial] - 2026-10-03
 
 ### Added
