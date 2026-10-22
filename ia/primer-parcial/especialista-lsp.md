@@ -1,4 +1,4 @@
-# Informe de Interacción con IA - Especialista en SRP 
+# Informe de Interacción con IA - Especialista en Principios de Extensión (OCP + LSP) 
 
 **Rol:** Especialista en Principios de Extensión (OCP + LSP) 
 
@@ -55,7 +55,7 @@ Jerarquía 1: Producto → ProductoPreparado, ProductoEnvasado
 
 - Recomendación para blindar LSP:
 - Segregar responsabilidades mediante interfaces (ISP). Mantener en Producto exclusivamente los atributos del catálogo comercial.
-- Para los ítems que requieran cocina, implementar una interfaz de capacidad: Elaborable o PreparableEnCocina con getTiempoPreparacion(). De este modo,
+- Para los ítems que requieran cocina, implementar una interfaz de capacidad: IElaborable o PreparableEnCocina con getTiempoPreparacion(). De este modo,
 Cocina opera sobre abstracciones Preparable y no fuerza a ProductoEnvasado a rechazar contratos heredados.
 
 Jerarquía 2: Usuario → UsuarioMostrador, UsuarioCocina, UsuarioEncargado
