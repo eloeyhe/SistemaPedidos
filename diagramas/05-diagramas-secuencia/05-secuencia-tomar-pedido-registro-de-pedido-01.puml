@@ -74,9 +74,6 @@ alt transferencia rechazada
     procesadorPago --> pago : motivoRechazo
     pago --> sistema : motivoRechazo
     sistema --> mostrador : mensajeRechazo
-    destroy personalizacion
-    destroy itemProducto
-    destroy itemCombo
     destroy pago
     destroy pedido
 else medio de pago aprobado

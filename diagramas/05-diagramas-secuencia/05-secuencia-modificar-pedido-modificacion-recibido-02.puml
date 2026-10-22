@@ -49,29 +49,35 @@ alt estado inicial == RECIBIDO
     opt existe pago original
         pedido -> pago : calcularDiferencia(totalAnterior, totalActualizado)
         pago --> pedido : diferencia
-        alt diferencia > 0
-            mostrador -> interfaz : seleccionarMedioPago(medioPago)
-            interfaz -> pago : registrarCobroAdicional(medioPago, diferencia)
-            pago -> historialPago : registrarMovimiento(pagoOriginal, "cobroAdicional", diferencia, motivo, usuario)
-            historialPago -> pago : consultarPagoOriginal(numeroPedido)
-            pago --> historialPago : montoOriginal, medioPagoOriginal
-            historialPago --> pago : acuseRegistro
-        else diferencia < 0
-            mostrador -> interfaz : confirmarDevolucion(medioPago)
-            interfaz -> pago : registrarDevolucion(medioPago, diferencia)
-            pago -> historialPago : registrarMovimiento(pagoOriginal, "devolucion", diferencia, motivo, usuario)
-            historialPago -> pago : consultarPagoOriginal(numeroPedido)
-            pago --> historialPago : montoOriginal, medioPagoOriginal
-            historialPago --> pago : acuseRegistro
-        else diferencia == 0
-            pago --> pedido : sinAjuste
-        end
+        pedido --> interfaz : diferencia
+        interfaz --> mostrador : vistaDiferencia
     end
 
     mostrador -> interfaz : confirmarModificacion(numeroPedido)
     interfaz -> pedido : verificarEstadoAlConfirmar(numeroPedido)
     pedido --> interfaz : estadoConfirmacion
+    
     alt estadoConfirmacion == RECIBIDO
+        opt existe pago original
+            alt diferencia > 0
+                mostrador -> interfaz : seleccionarMedioPago(medioPago)
+                interfaz -> pago : registrarCobroAdicional(medioPago, diferencia)
+                pago -> historialPago : registrarMovimiento(pagoOriginal, "cobroAdicional", diferencia, motivo, usuario)
+                historialPago -> pago : consultarPagoOriginal(numeroPedido)
+                pago --> historialPago : montoOriginal, medioPagoOriginal
+                historialPago --> pago : acuseRegistro
+            else diferencia < 0
+                mostrador -> interfaz : confirmarDevolucion(medioPago)
+                interfaz -> pago : registrarDevolucion(medioPago, diferencia)
+                pago -> historialPago : registrarMovimiento(pagoOriginal, "devolucion", diferencia, motivo, usuario)
+                historialPago -> pago : consultarPagoOriginal(numeroPedido)
+                pago --> historialPago : montoOriginal, medioPagoOriginal
+                historialPago --> pago : acuseRegistro
+            else diferencia == 0
+                pago --> pedido : sinAjuste
+            end
+        end
+
         interfaz -> pedido : actualizarPedido(numeroPedido, listaItems, totalActualizado)
         pedido -> historialCambios : registrarCambioPedido(numeroPedido, "items", valorAnterior, valorNuevo, usuario)
         pedido -> historialCambios : registrarCambioPedido(numeroPedido, "personalizaciones", valorAnterior, valorNuevo, usuario)
