@@ -44,15 +44,23 @@ endif
 |Usuario de Mostrador|
 if (¿Confirma la cancelacion?) then (Si)
   |Sistema de Pedidos|
-  :Cambiar estado del pedido a CANCELADO;
-  :Conservar identificador, items y pagos;
-  :Registrar usuario responsable;
-  :Registrar fecha y hora en auditoria;
-  :Mostrar cancelacion confirmada;
-else (No)
-  |Sistema de Pedidos|
-  :Mantener estado original del pedido;
-  :Informar cancelacion desistida;
+    |Sistema de Pedidos|
+  :Procesar reembolso o devolucion;
+
+  if (¿Reembolso aprobado?) then (Si)
+    :Registrar reembolso o devolucion;
+    :Cambiar estado del pedido a CANCELADO;
+    :Conservar identificador, items y pagos;
+    :Liberar comanda;
+    :Registrar usuario responsable;
+    :Registrar fecha y hora en auditoria;
+    :Mostrar cancelacion confirmada;
+  else (No)
+    :Registrar rechazo del reembolso;
+    :Informar incidencia para su resolucion;
+    :Mantener estado original del pedido;
+  endif
+
 endif
 stop
 @enduml

@@ -2,9 +2,16 @@
 title CU04 - Cambiar Estado de Pedido
 skinparam dpi 150
 
-|Cocina|
+|Sistema de Pedidos|
 start
-:1. Seleccionar pedido existente;
+
+if (¿Quien inicia el cambio?) then (Cocina)
+  |Cocina|
+  :1. Seleccionar pedido existente;
+else (Mostrador)
+  |Usuario de Mostrador|
+  :1. Seleccionar pedido existente;
+endif
 
 |Sistema de Pedidos|
 :2. Consultar pedido seleccionado;

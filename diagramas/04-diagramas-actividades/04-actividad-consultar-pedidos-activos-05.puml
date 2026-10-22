@@ -1,9 +1,16 @@
 @startuml
 title CU05 - Consultar Pedidos Activos (10 actividades)
 
-|Cocina|
+|Sistema de Pedidos|
 start
-:1. Acceder al monitor de pedidos activos;
+
+if (¿Quien inicia la consulta?) then (Cocina)
+  |Cocina|
+  :1. Acceder al monitor de pedidos activos;
+else (Mostrador)
+  |Usuario de Mostrador|
+  :1. Acceder al monitor de pedidos activos;
+endif
 
 |Sistema de Pedidos|
 :2. Comprobar disponibilidad de datos;

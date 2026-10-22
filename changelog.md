@@ -28,7 +28,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#202](https://github.com/eloeyhe/SistemaPedidos/issues/202)
   issue: [#203](https://github.com/eloeyhe/SistemaPedidos/issues/203)
   issue: [#204](https://github.com/eloeyhe/SistemaPedidos/issues/204)
-  PR: [#117](https://github.com/eloeyhe/SistemaPedidos/pull/117) - @nachovelesquen7-rgb (Especialista en diagramas de actividades - Casos de uso 3, 4 Y 5)
+  PR: [#206](https://github.com/eloeyhe/SistemaPedidos/pull/206) - @nachovelesquen7-rgb (Especialista en diagramas de actividades - Casos de uso 3, 4 Y 5)
 
 ## [Primer Parcial] - 2026-10-03
 
