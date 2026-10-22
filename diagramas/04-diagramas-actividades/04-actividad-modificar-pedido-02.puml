@@ -33,24 +33,30 @@ repeat
   :Modificar personalizaciones;
   |Sistema de Pedidos|
   :Recalcular total del pedido;
-backward :Impedir pedido sin ítems;
+backward :Bloquear el guardado y sugerir
+cancelar el pedido mediante CU03;
 repeat while (¿El pedido quedó sin ítems?) is (sí) not (no)
 
 if (¿El pedido ya estaba pagado?) then (sí)
   :Calcular diferencia respecto
   del pago original;
-  if (¿Resultado de la diferencia?) then (a cobrar)
-    |Cliente|
-    :Abonar diferencia
-    (efectivo o transferencia);
-    |Sistema de Pedidos|
-    :Validar medio de pago;
-    :Registrar cobro adicional como ajuste;
-  elseif () then (a devolver)
-    :Registrar devolución como ajuste;
+  if (¿Existe diferencia?) then (sí)
     |Usuario de Mostrador|
-    :Devolver diferencia al cliente;
-  else (sin diferencia)
+    :Seleccionar medio de pago del ajuste
+    (efectivo o transferencia);
+    if (¿Resultado de la diferencia?) then (a cobrar)
+      |Cliente|
+      :Entregar o pagar la diferencia;
+      |Usuario de Mostrador|
+      :Registrar cobro adicional como ajuste;
+    else (a devolver)
+      :Registrar devolución como ajuste;
+      :Devolver diferencia al cliente;
+    endif
+    |Sistema de Pedidos|
+    :Validar medio de pago y asociar
+    el ajuste al historial del pedido;
+  else (no)
   endif
 else (no)
 endif

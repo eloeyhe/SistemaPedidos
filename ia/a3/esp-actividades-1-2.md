@@ -223,7 +223,12 @@ stop
 
 ## 4. Ajustes realizados al output de la IA
 
-- No se realizaron ajustes manuales: los diagramas se versionaron tal como los generó la IA, después de revisar los `.png` renderizados.
+- En la primera versión no se realizaron ajustes manuales: los diagramas se versionaron tal como los generó la IA, después de revisar los `.png` renderizados.
+- A partir de la revisión del Coordinador en la PR #190 se corrigió el output (el código de la sección 3 corresponde a la primera versión):
+  - **CU01:** se agregó el camino alternativo de A2 en el que el Cliente desiste antes del pago, el Usuario de Mostrador cancela la operación y el sistema no registra el pedido.
+  - **CU02:** el Usuario de Mostrador selecciona el medio de pago del ajuste y registra el cobro o la devolución; el Cliente entrega o paga la diferencia.
+  - **CU02:** si la edición deja el pedido sin ítems, el sistema bloquea el guardado y sugiere cancelar el pedido mediante el CU03.
+  - **Índice:** los rótulos siguen el formato «Diagrama de actividad - nombre-caso-uso».
 
 ---
 
@@ -232,10 +237,11 @@ stop
 - **Iteración 1:** se pidió no subir los cambios al repositorio todavía. La IA trabajó solo de forma local, sin commit ni push.
 - **Iteración 2:** se pidió armar la base del rol. La IA creó la rama `feature/esp-actividades-1-2-add-diagrama-actividad-1`, la carpeta `diagramas/04-diagramas-actividades/`, los dos diagramas con sus `.png`, el índice, este informe y la entrada del `changelog.md`.
 - **Iteración 3:** se pidió subir el trabajo. La IA hizo el commit y el push de la rama `feature/esp-actividades-1-2-add-diagrama-actividad-1` al repositorio.
+- **Iteración 4:** se pidió aplicar las correcciones solicitadas en la revisión de la PR #190. La IA modificó los dos diagramas y el índice, regeneró los `.png` y revisó las imágenes renderizadas.
 
 ---
 
 ## 6. Resultado final
 
-- [Diagrama de Actividad - Tomar Pedido](../../diagramas/04-diagramas-actividades/04-actividad-tomar-pedido-01.png)
-- [Diagrama de Actividad - Modificar Pedido](../../diagramas/04-diagramas-actividades/04-actividad-modificar-pedido-02.png)
+- [Diagrama de actividad - tomar-pedido](../../diagramas/04-diagramas-actividades/04-actividad-tomar-pedido-01.png)
+- [Diagrama de actividad - modificar-pedido](../../diagramas/04-diagramas-actividades/04-actividad-modificar-pedido-02.png)

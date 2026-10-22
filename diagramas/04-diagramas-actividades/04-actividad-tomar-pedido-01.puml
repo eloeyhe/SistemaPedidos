@@ -39,6 +39,17 @@ if (¿El pedido es prioritario?) then (sí)
 else (no)
 endif
 
+|Cliente|
+if (¿El cliente decide no concretar la compra?) then (sí)
+  :Desistir del pedido antes del pago;
+  |Usuario de Mostrador|
+  :Cancelar la operación;
+  |Sistema de Pedidos|
+  :Descartar la carga sin registrar el pedido;
+  stop
+else (no)
+endif
+
 repeat
   |Cliente|
   :Elegir medio de pago
