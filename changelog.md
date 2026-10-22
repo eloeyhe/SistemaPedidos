@@ -16,6 +16,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   issue: [#166](https://github.com/eloeyhe/SistemaPedidos/issues/166)
   PR: [#182](https://github.com/eloeyhe/SistemaPedidos/pull/182) - @eloeyhe (Especialista en Diagramas de Secuencia)
 
+- [feature/esp-actividades-1-2-add-diagrama-actividad-1] Agrego diagramas de actividades de los casos de uso 1 y 2 e índice
+  Issue: [#187](https://github.com/eloeyhe/SistemaPedidos/issues/187)
+  Issue: [#188](https://github.com/eloeyhe/SistemaPedidos/issues/188)
+  PR: [#190](https://github.com/eloeyhe/SistemaPedidos/pull/190) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
 
 ## [Primer Parcial] - 2026-10-03
 
