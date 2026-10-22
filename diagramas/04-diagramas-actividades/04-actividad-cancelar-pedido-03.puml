@@ -40,11 +40,19 @@ else (No)
 endif
 
 |Sistema de Pedidos|
+|Sistema de Pedidos|
+:Solicitar motivo de cancelacion;
+
+|Usuario de Mostrador|
+:Ingresar motivo de cancelacion;
+
+|Sistema de Pedidos|
+:Registrar motivo de cancelacion;
 :Solicitar confirmacion de cancelacion;
+
 |Usuario de Mostrador|
 if (¿Confirma la cancelacion?) then (Si)
   |Sistema de Pedidos|
-    |Sistema de Pedidos|
   :Procesar reembolso o devolucion;
 
   if (¿Reembolso aprobado?) then (Si)
@@ -61,6 +69,11 @@ if (¿Confirma la cancelacion?) then (Si)
     :Mantener estado original del pedido;
   endif
 
+else (No)
+  |Sistema de Pedidos|
+  :Mantener estado original del pedido;
+  :Informar cancelacion desistida;
 endif
+
 stop
 @enduml
