@@ -6,6 +6,48 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+### Added
+
+- [feature/doc-coord-repo-update-readme-md] Actualizo README.md y diagramasUML.md con los índices de actividades y secuencia; agrego ia/a3/documentador-coordinador.md y actualizo los templates a la Actividad N°3
+  Issue: [#192](https://github.com/eloeyhe/SistemaPedidos/issues/192)
+  Issue: [#193](https://github.com/eloeyhe/SistemaPedidos/issues/193)
+  Issue: [#194](https://github.com/eloeyhe/SistemaPedidos/issues/194)
+  Issue: [#195](https://github.com/eloeyhe/SistemaPedidos/issues/195)
+  Issue: [#196](https://github.com/eloeyhe/SistemaPedidos/issues/196)
+  Issue: [#197](https://github.com/eloeyhe/SistemaPedidos/issues/197)
+  PR: [#208](https://github.com/eloeyhe/SistemaPedidos/pull/208) - @Leandro2107 (Documentador y Coordinador de Repositorio)
+
+### Added
+
+- [feature/esp-secuencia-add-diagrama-secuencia-1] Realizo todo lo correspondiente en cuanto a los diagramas de secuencia
+  Issue: [#162](https://github.com/eloeyhe/SistemaPedidos/issues/162)
+  Issue: [#163](https://github.com/eloeyhe/SistemaPedidos/issues/163)
+  issue: [#164](https://github.com/eloeyhe/SistemaPedidos/issues/164)
+  issue: [#165](https://github.com/eloeyhe/SistemaPedidos/issues/165)
+  issue: [#166](https://github.com/eloeyhe/SistemaPedidos/issues/166)
+  PR: [#182](https://github.com/eloeyhe/SistemaPedidos/pull/182) - @eloeyhe (Especialista en Diagramas de Secuencia)
+
+- [feature/esp-actividades-1-2-add-diagrama-actividad-1] Agrego diagramas de actividades de los casos de uso 1 y 2 e índice
+  Issue: [#187](https://github.com/eloeyhe/SistemaPedidos/issues/187)
+  Issue: [#188](https://github.com/eloeyhe/SistemaPedidos/issues/188)
+  PR: [#190](https://github.com/eloeyhe/SistemaPedidos/pull/190) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
+
+- [feature/esp-actividades-3-4-5-add-diagrama-actividad3] realizo diagramas de actividades de casos de uso 3-4-5, incorporo indices y documentacion en ia/a3
+  Issue: [#199](https://github.com/eloeyhe/SistemaPedidos/issues/199)
+  Issue: [#200](https://github.com/eloeyhe/SistemaPedidos/issues/200)
+  issue: [#201](https://github.com/eloeyhe/SistemaPedidos/issues/201)
+  issue: [#202](https://github.com/eloeyhe/SistemaPedidos/issues/202)
+  issue: [#203](https://github.com/eloeyhe/SistemaPedidos/issues/203)
+  issue: [#204](https://github.com/eloeyhe/SistemaPedidos/issues/204)
+  PR: [#206](https://github.com/eloeyhe/SistemaPedidos/pull/206) - @nachovelesquen7-rgb (Especialista en diagramas de actividades - Casos de uso 3, 4 Y 5)
+
+  ### Changed
+
+  - [feature/esp-secuencia-add-diagrama-secuencia-1] Realizo correccion a nomenclatura a los retornos en los Diagramas .puml 
+  Issue: [#163](https://github.com/eloeyhe/SistemaPedidos/issues/163)
+  Issue: [#165](https://github.com/eloeyhe/SistemaPedidos/issues/165)
+  Issue: [#166](https://github.com/eloeyhe/SistemaPedidos/issues/166)
+  PR: [#207](https://github.com/eloeyhe/SistemaPedidos/pull/207) - @eloeyhe (Especialista en Diagramas de Secuencia)
 
 ## [Primer Parcial] - 2026-10-03
 

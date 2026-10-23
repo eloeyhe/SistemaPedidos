@@ -1,0 +1,82 @@
+@startuml
+title Consultar pedidos activos priorizando urgentes
+
+autonumber
+skinparam style strictuml
+hide footbox
+
+actor "Usuario de Cocina" as usuarioCocina
+actor "Usuario de Mostrador" as usuarioMostrador
+participant "PantallaPedidos:pantalla" as pantalla
+participant "ServicioPedidos:servicio" as servicio
+participant ":Pedido" as pedido
+
+activate pantalla
+alt consulta iniciada por Cocina
+    usuarioCocina -> pantalla : accederMonitorPedidosActivos()
+    pantalla -> servicio : consultarPedidosActivos(usuarioCocina)
+else consulta iniciada por Mostrador
+    usuarioMostrador -> pantalla : accederMonitorPedidosActivos()
+    pantalla -> servicio : consultarPedidosActivos(usuarioMostrador)
+end
+
+activate servicio
+
+servicio -> pedido : obtenerPedidosPorEstados("RECIBIDO", "EN_PREPARACION", "LISTO")
+activate pedido
+
+pedido --> servicio : listaPedidosActivos
+
+loop por cada pedido activo
+    servicio -> pedido : obtenerEstado()
+    pedido --> servicio : estadoActual
+    servicio -> pedido : esPrioritario()
+    pedido --> servicio : esUrgente
+end
+deactivate pedido
+
+servicio -> servicio : agruparPedidosPorEstado(listaPedidosActivos)
+loop por cada estado activo
+    servicio -> servicio : ordenarGrupoPorPrioridad(urgentesPrimero)
+end
+
+alt actorSolicitante == Cocina
+    servicio -> servicio : seleccionarEstadosVisibles("RECIBIDO", "EN_PREPARACION")
+else actorSolicitante == Mostrador
+    servicio -> servicio : seleccionarEstadosVisibles("RECIBIDO", "EN_PREPARACION", "LISTO")
+end
+
+servicio --> pantalla : retornarPedidosAgrupadosYOrdenados(vistaAdaptada)
+deactivate servicio
+
+alt consulta iniciada por Cocina
+    pantalla --> usuarioCocina : mostrarVistaMonitor(vistaAdaptada)
+else consulta iniciada por Mostrador
+    pantalla --> usuarioMostrador : mostrarVistaMonitor(vistaAdaptada)
+end
+
+alt detalle consultado por Cocina
+    usuarioCocina -> pantalla : consultarDetallePedido(numeroPedido)
+else detalle consultado por Mostrador
+    usuarioMostrador -> pantalla : consultarDetallePedido(numeroPedido)
+end
+pantalla -> servicio : obtenerDetallePedido(numeroPedido)
+activate servicio
+
+servicio -> pedido : obtenerDetalle()
+activate pedido
+
+pedido --> servicio : detallePedido
+deactivate pedido
+
+servicio --> pantalla : retornarDetalle(detallePedido)
+deactivate servicio
+
+alt detalle consultado por Cocina
+    pantalla --> usuarioCocina : mostrarDetallePedido(detallePedido)
+else detalle consultado por Mostrador
+    pantalla --> usuarioMostrador : mostrarDetallePedido(detallePedido)
+end
+deactivate pantalla
+
+@enduml

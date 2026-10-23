@@ -1,0 +1,91 @@
+@startuml
+title Cancelar pedido antes de la entrega
+autonumber
+skinparam style strictuml
+hide footbox
+
+actor UsuarioMostrador
+actor UsuarioEncargado
+participant "PantallaPedidos:pantalla" as pantalla
+participant "ServicioPedidos:servicio" as servicio
+participant "Pedido:pedido" as pedido
+participant "Auditoria_pedido:auditoria" as auditoria
+
+alt iniciador es UsuarioMostrador
+    UsuarioMostrador -> pantalla : solicitarCancelacionPedido(numeroPedido)
+else iniciador es UsuarioEncargado
+    UsuarioEncargado -> pantalla : solicitarCancelacionPedido(numeroPedido)
+end
+
+pantalla -> servicio : consultarPedidoYEstado(numeroPedido)
+servicio -> pedido : obtenerEstado(numeroPedido)
+pedido --> servicio : estadoActual
+servicio --> pantalla : datosPedido, estadoActual
+
+alt iniciador es UsuarioMostrador
+    pantalla --> UsuarioMostrador : vistaPedidoYEstado
+else iniciador es UsuarioEncargado
+    pantalla --> UsuarioEncargado : vistaPedidoYEstado
+end
+
+alt estadoActual == RECIBIDO
+    alt iniciador es UsuarioMostrador
+        UsuarioMostrador -> pantalla : confirmarCancelacion(motivo)
+        pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioMostrador)
+    else iniciador es UsuarioEncargado
+        UsuarioEncargado -> pantalla : confirmarCancelacion(motivo)
+        pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioEncargado)
+    end
+
+    servicio -> pedido : cancelarPedido(motivo)
+    pedido -> pedido : cambiarEstado(CANCELADO)
+    pedido --> servicio : acuseCancelacion
+
+    alt iniciador es UsuarioMostrador
+        servicio -> auditoria : registrarAccion(pedido, UsuarioMostrador, "CANCELACION", fechaHora)
+    else iniciador es UsuarioEncargado
+        servicio -> auditoria : registrarAccion(pedido, UsuarioEncargado, "CANCELACION", fechaHora)
+    end
+    
+    servicio -> auditoria : registrarDetalles(motivo, estadoAnterior, estadoNuevo)
+    auditoria --> servicio : acuseRegistro
+    servicio --> pantalla : confirmacionCancelacion
+    
+    alt iniciador es UsuarioMostrador
+        pantalla --> UsuarioMostrador : mensajeCancelacionExitosa
+    else iniciador es UsuarioEncargado
+        pantalla --> UsuarioEncargado : mensajeCancelacionExitosa
+    end
+
+else estadoActual == EN_PREPARACION
+    alt iniciador es UsuarioMostrador
+        servicio --> pantalla : peticionAutorizacion
+        pantalla --> UsuarioMostrador : avisoAutorizacionRequerida
+    else iniciador es UsuarioEncargado
+        servicio --> pantalla : peticionAutorizacion
+        pantalla --> UsuarioEncargado : avisoAutorizacionRequerida
+    end
+    
+    UsuarioEncargado -> pantalla : responderSolicitudCancelacion(numeroPedido)
+    pantalla -> servicio : solicitarAutorizacion(numeroPedido)
+    servicio -> UsuarioEncargado : solicitarClaveSupervision(numeroPedido)
+    UsuarioEncargado -> UsuarioEncargado : validarClaveSupervision(claveSupervision)
+    UsuarioEncargado --> servicio : resultadoAutorizacion
+
+    alt resultadoAutorizacion == autorizado
+        alt iniciador es UsuarioMostrador
+            UsuarioMostrador -> pantalla : confirmarCancelacion(motivo)
+            pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioMostrador, UsuarioEncargado)
+        else iniciador es UsuarioEncargado
+            UsuarioEncargado -> pantalla : confirmarCancelacion(motivo)
+            pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioEncargado, UsuarioEncargado)
+        end
+        
+        servicio -> pedido : cancelarPedido(motivo)
+        pedido -> pedido : cambiarEstado(CANCELADO)
+        pedido --> servicio : acuseCancelacion
+
+        alt iniciador es UsuarioMostrador
+            servicio -> auditoria : registrarAccion(pedido, UsuarioMostrador, "CANCELACION", fechaHora)
+        else iniciador es UsuarioEncargado
+            servicio -> auditoria : registrarAccion(pedido, Usuario
