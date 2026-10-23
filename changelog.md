@@ -8,6 +8,17 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Added
 
+- [feature/doc-coord-repo-update-readme-md] Actualizo README.md y diagramasUML.md con los índices de actividades y secuencia; agrego ia/a3/documentador-coordinador.md y actualizo los templates a la Actividad N°3
+  Issue: [#192](https://github.com/eloeyhe/SistemaPedidos/issues/192)
+  Issue: [#193](https://github.com/eloeyhe/SistemaPedidos/issues/193)
+  Issue: [#194](https://github.com/eloeyhe/SistemaPedidos/issues/194)
+  Issue: [#195](https://github.com/eloeyhe/SistemaPedidos/issues/195)
+  Issue: [#196](https://github.com/eloeyhe/SistemaPedidos/issues/196)
+  Issue: [#197](https://github.com/eloeyhe/SistemaPedidos/issues/197)
+  PR: [#N](https://github.com/eloeyhe/SistemaPedidos/pull/N) - @Leandro2107 (Documentador y Coordinador de Repositorio)
+
+### Added
+
 - [feature/esp-secuencia-add-diagrama-secuencia-1] Realizo todo lo correspondiente en cuanto a los diagramas de secuencia
   Issue: [#162](https://github.com/eloeyhe/SistemaPedidos/issues/162)
   Issue: [#163](https://github.com/eloeyhe/SistemaPedidos/issues/163)
