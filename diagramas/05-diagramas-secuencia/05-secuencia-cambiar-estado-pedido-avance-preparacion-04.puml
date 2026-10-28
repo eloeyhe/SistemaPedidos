@@ -5,32 +5,50 @@ skinparam style strictuml
 hide footbox
 
 actor UsuarioCocina
+actor UsuarioMostrador
 participant "PantallaPedidos:pantalla" as pantalla
 participant "ServicioPedidos:servicio" as servicio
 participant "Pedido:pedido" as pedido
 participant "Historial_cambio_pedido:historial" as historial
-actor UsuarioMostrador
 
-UsuarioCocina -> pantalla : seleccionarPedido(numeroPedido)
-pantalla -> servicio : consultarEstado(numeroPedido)
-servicio -> pedido : obtenerEstado(numeroPedido)
-pedido --> servicio : estadoActual
-servicio --> pantalla : estadoActual
-pantalla --> UsuarioCocina : vistaPedidoYEstado
+note over UsuarioCocina, UsuarioMostrador
+    Cocina inicia las transiciones de preparacion:
+    RECIBIDO a EN_PREPARACION y EN_PREPARACION a LISTO.
+    Mostrador inicia la transicion LISTO a ENTREGADO.
+end note
 
-note over pantalla, servicio : Transicion RECIBIDO a EN_PREPARACION
-UsuarioCocina -> pantalla : iniciarPreparacion(numeroPedido)
-pantalla -> servicio : solicitarCambioEstado(numeroPedido, EN_PREPARACION, UsuarioCocina)
-servicio -> pedido : validarTransicion(RECIBIDO, EN_PREPARACION, UsuarioCocina)
-alt transicion valida y actor autorizado
-    pedido -> pedido : actualizarEstado(EN_PREPARACION)
-    pedido --> servicio : acuseActualizacion
-    servicio -> historial : registrarCambioEstado(numeroPedido, RECIBIDO, EN_PREPARACION, UsuarioCocina)
-    historial --> servicio : acuseRegistro
-    servicio --> pantalla : confirmacionCambio
-    pantalla --> UsuarioCocina : vistaEstadoActualizado
+alt transicion solicitada: RECIBIDO a EN_PREPARACION
+    UsuarioCocina -> pantalla : seleccionarPedido(numeroPedido)
+    pantalla -> servicio : consultarEstado(numeroPedido)
+    servicio -> pedido : obtenerEstado(numeroPedido)
+    pedido --> servicio : estadoActual
+    servicio --> pantalla : estadoActual
+    pantalla --> UsuarioCocina : vistaPedidoYEstado
 
-    note over pantalla, servicio : Transicion EN_PREPARACION a LISTO
+    UsuarioCocina -> pantalla : iniciarPreparacion(numeroPedido)
+    pantalla -> servicio : solicitarCambioEstado(numeroPedido, EN_PREPARACION, UsuarioCocina)
+    servicio -> pedido : validarTransicion(RECIBIDO, EN_PREPARACION, UsuarioCocina)
+    alt transicion valida y actor autorizado
+        pedido -> pedido : actualizarEstado(EN_PREPARACION)
+        pedido --> servicio : acuseActualizacion
+        servicio -> historial : registrarCambioEstado(numeroPedido, RECIBIDO, EN_PREPARACION, UsuarioCocina)
+        historial --> servicio : acuseRegistro
+        servicio --> pantalla : confirmacionCambio
+        pantalla --> UsuarioCocina : vistaEstadoActualizado
+    else transicion invalida o actor no autorizado
+        pedido --> servicio : motivoRechazo
+        servicio --> pantalla : rechazoTransicion
+        pantalla --> UsuarioCocina : mensajeErrorTransicion
+    end
+
+else transicion solicitada: EN_PREPARACION a LISTO
+    UsuarioCocina -> pantalla : seleccionarPedido(numeroPedido)
+    pantalla -> servicio : consultarEstado(numeroPedido)
+    servicio -> pedido : obtenerEstado(numeroPedido)
+    pedido --> servicio : estadoActual
+    servicio --> pantalla : estadoActual
+    pantalla --> UsuarioCocina : vistaPedidoYEstado
+
     UsuarioCocina -> pantalla : finalizarPreparacion(numeroPedido)
     pantalla -> servicio : solicitarCambioEstado(numeroPedido, LISTO, UsuarioCocina)
     servicio -> pedido : validarTransicion(EN_PREPARACION, LISTO, UsuarioCocina)
@@ -41,35 +59,38 @@ alt transicion valida y actor autorizado
         historial --> servicio : acuseRegistro
         servicio --> pantalla : confirmacionCambio
         pantalla --> UsuarioCocina : vistaEstadoActualizado
-
-        note over pantalla, servicio : Transicion LISTO a ENTREGADO
-        UsuarioMostrador -> pantalla : consultarPedidosListos()
-        pantalla -> servicio : buscarPedidosPorEstado(LISTO)
-        servicio --> pantalla : listaPedidosListos
-        pantalla --> UsuarioMostrador : vistaPedidosParaEntrega
-        UsuarioMostrador -> pantalla : registrarEntrega(numeroPedido)
-        pantalla -> servicio : solicitarCambioEstado(numeroPedido, ENTREGADO, UsuarioMostrador)
-        servicio -> pedido : validarTransicion(LISTO, ENTREGADO, UsuarioMostrador)
-        alt transicion valida y actor autorizado
-            pedido -> pedido : actualizarEstado(ENTREGADO)
-            pedido --> servicio : acuseActualizacion
-            servicio -> historial : registrarCambioEstado(numeroPedido, LISTO, ENTREGADO, UsuarioMostrador)
-            historial --> servicio : acuseRegistro
-            servicio --> pantalla : confirmacionCambio
-            pantalla --> UsuarioMostrador : mensajeEntregaConfirmada
-        else transicion invalida o actor no autorizado
-            pedido --> servicio : motivoRechazo
-            servicio --> pantalla : rechazoTransicion
-            pantalla --> UsuarioMostrador : mensajeErrorTransicion
-        end
     else transicion invalida o actor no autorizado
         pedido --> servicio : motivoRechazo
         servicio --> pantalla : rechazoTransicion
         pantalla --> UsuarioCocina : mensajeErrorTransicion
     end
-else transicion invalida o actor no autorizado
-    pedido --> servicio : motivoRechazo
-    servicio --> pantalla : rechazoTransicion
-    pantalla --> UsuarioCocina : mensajeErrorTransicion
+
+else transicion solicitada: LISTO a ENTREGADO
+    UsuarioMostrador -> pantalla : consultarPedidosListos()
+    pantalla -> servicio : buscarPedidosPorEstado(LISTO)
+    servicio --> pantalla : listaPedidosListos
+    pantalla --> UsuarioMostrador : vistaPedidosParaEntrega
+    UsuarioMostrador -> pantalla : seleccionarPedido(numeroPedido)
+    pantalla -> servicio : consultarEstado(numeroPedido)
+    servicio -> pedido : obtenerEstado(numeroPedido)
+    pedido --> servicio : estadoActual
+    servicio --> pantalla : estadoActual
+    pantalla --> UsuarioMostrador : vistaPedidoYEstado
+
+    UsuarioMostrador -> pantalla : registrarEntrega(numeroPedido)
+    pantalla -> servicio : solicitarCambioEstado(numeroPedido, ENTREGADO, UsuarioMostrador)
+    servicio -> pedido : validarTransicion(LISTO, ENTREGADO, UsuarioMostrador)
+    alt transicion valida y actor autorizado
+        pedido -> pedido : actualizarEstado(ENTREGADO)
+        pedido --> servicio : acuseActualizacion
+        servicio -> historial : registrarCambioEstado(numeroPedido, LISTO, ENTREGADO, UsuarioMostrador)
+        historial --> servicio : acuseRegistro
+        servicio --> pantalla : confirmacionCambio
+        pantalla --> UsuarioMostrador : mensajeEntregaConfirmada
+    else transicion invalida o actor no autorizado
+        pedido --> servicio : motivoRechazo
+        servicio --> pantalla : rechazoTransicion
+        pantalla --> UsuarioMostrador : mensajeErrorTransicion
+    end
 end
 @enduml
