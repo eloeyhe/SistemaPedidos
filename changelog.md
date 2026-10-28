@@ -49,6 +49,13 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#166](https://github.com/eloeyhe/SistemaPedidos/issues/166)
   PR: [#207](https://github.com/eloeyhe/SistemaPedidos/pull/207) - @eloeyhe (Especialista en Diagramas de Secuencia)
 
+  ### Fixed
+
+- [fix/correcciones-diagramas-actividades-cu03-cu04-cu05] incorporo rama fix y correcciones indicadas por el docente
+  Issue: [#210](https://github.com/eloeyhe/SistemaPedidos/issues/210)
+  PR: [#211](https://github.com/eloeyhe/SistemaPedidos/pull/211) - @nachovelesquen7-rgb (Especialista en diagramas de actividades - Casos de uso 3, 4 Y 5)
+
+
 ## [Primer Parcial] - 2026-10-03
 
 ### Added
