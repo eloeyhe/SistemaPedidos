@@ -40,7 +40,6 @@ else (No)
 endif
 
 |Sistema de Pedidos|
-|Sistema de Pedidos|
 :Solicitar motivo de cancelacion;
 
 |Usuario de Mostrador|
@@ -53,21 +52,27 @@ endif
 |Usuario de Mostrador|
 if (¿Confirma la cancelacion?) then (Si)
   |Sistema de Pedidos|
-  :Procesar reembolso o devolucion;
+  :Verificar si corresponde reembolso automatico;
+
+if (¿Corresponde reembolso automatico?) then (Si)
+  :Procesar reembolso automatico;
 
   if (¿Reembolso aprobado?) then (Si)
-    :Registrar reembolso o devolucion;
-    :Cambiar estado del pedido a CANCELADO;
-    :Conservar identificador, items y pagos;
-    :Liberar comanda;
-    :Registrar usuario responsable;
-    :Registrar fecha y hora en auditoria;
-    :Mostrar cancelacion confirmada;
+    :Registrar reembolso;
   else (No)
     :Registrar rechazo del reembolso;
     :Informar incidencia para su resolucion;
     :Mantener estado original del pedido;
+    stop
   endif
+endif
+
+:Cambiar estado del pedido a CANCELADO;
+:Conservar identificador, items y pagos;
+:Liberar comanda;
+:Registrar usuario responsable;
+:Registrar fecha y hora en auditoria;
+:Mostrar cancelacion confirmada;
 
 else (No)
   |Sistema de Pedidos|
