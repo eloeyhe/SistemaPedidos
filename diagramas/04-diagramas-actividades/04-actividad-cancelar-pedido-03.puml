@@ -1,0 +1,69 @@
+@startuml
+title CU03 - Cancelar Pedido - Cancelacion antes de la entrega
+skinparam dpi 150
+skinparam shadowing false
+
+|Usuario de Mostrador o Encargado|
+start
+:Seleccionar pedido a cancelar;
+:Ingresar numero o referencia del pedido;
+
+|Sistema de Pedidos|
+:Buscar pedido;
+:Mostrar estado actual del pedido;
+:Verificar estado y permisos del actor;
+
+if (¿Pedido en RECIBIDO y actor autorizado?) then (Si)
+  :Habilitar cancelacion directa;
+else (No)
+  if (¿Pedido en EN_PREPARACION?) then (Si)
+    :Bloquear cancelacion directa;
+    :Enviar solicitud de autorizacion;
+    |Encargado|
+    :Revisar solicitud de cancelacion;
+    if (¿Autoriza la cancelacion?) then (Si)
+      :Autorizar cancelacion;
+      |Sistema de Pedidos|
+      :Registrar Encargado autorizante;
+    else (No)
+      :Denegar autorizacion;
+      |Sistema de Pedidos|
+      :Mantener estado original del pedido;
+      :Informar rechazo de cancelacion;
+      stop
+    endif
+  else (No)
+    :Bloquear cancelacion automatica;
+    :Informar que el estado no permite cancelar;
+    :Informar que la devolucion manual queda fuera de este flujo;
+    stop
+  endif
+endif
+
+|Sistema de Pedidos|
+:Solicitar motivo de cancelacion;
+
+|Usuario de Mostrador o Encargado|
+:Ingresar motivo de cancelacion;
+
+|Sistema de Pedidos|
+:Registrar motivo de cancelacion;
+:Solicitar confirmacion de cancelacion;
+
+|Usuario de Mostrador o Encargado|
+if (¿Confirma la cancelacion?) then (Si)
+  |Sistema de Pedidos|
+:Cambiar estado del pedido a CANCELADO;
+:Conservar identificador, items y pagos;
+:Registrar usuario responsable;
+:Registrar fecha y hora en auditoria;
+:Mostrar cancelacion confirmada;
+
+else (No)
+  |Sistema de Pedidos|
+  :Mantener estado original del pedido;
+  :Informar cancelacion desistida;
+endif
+
+stop
+@enduml

@@ -1,0 +1,94 @@
+@startuml
+title Modificar pedido - estado RECIBIDO
+autonumber
+skinparam style strictuml
+hide footbox
+
+actor "Usuario de Mostrador" as mostrador
+participant "InterfazPedido:interfaz" as interfaz
+participant "Pedido:pedido" as pedido
+participant "Item_pedido:item" as item
+participant "Producto:producto" as producto
+participant "Personalizacion_item:personalizacion" as personalizacion
+participant "Pago:pagoOriginal" as pago
+participant "Historial_pago:historialPago" as historialPago
+participant "Historial_cambio_pedido:historialCambios" as historialCambios
+
+mostrador -> interfaz : buscarPedido(numeroOReferencia)
+interfaz -> pedido : buscarPedido(numeroOReferencia)
+pedido --> interfaz : detallesPedido
+interfaz --> mostrador : vistaPedido
+
+mostrador -> interfaz : seleccionarPedidoParaModificar(numeroPedido)
+interfaz -> pedido : verificarEstado(numeroPedido)
+pedido --> interfaz : estado
+interfaz --> mostrador : estado
+
+alt estado inicial == RECIBIDO
+    mostrador -> interfaz : modificarItems(listaCambios)
+    interfaz -> pedido : prepararModificacion(listaCambios)
+    pedido -> item : modificarCantidadYPrecio(cantidad, precioUnitario)
+    item -> producto : obtenerNombre()
+    producto --> item : nombreProducto
+    item -> producto : obtenerPrecio()
+    producto --> item : precioBase
+    item -> personalizacion : obtenerDescripcion()
+    personalizacion --> item : descripcion
+    item -> personalizacion : obtenerCostoAdicional(descripcion)
+    personalizacion --> item : costoAdicional
+    item --> pedido : subtotal
+
+    mostrador -> interfaz : modificarPersonalizaciones(listaPersonalizaciones)
+    interfaz -> pedido : prepararPersonalizaciones(listaPersonalizaciones)
+    pedido -> item : actualizarPersonalizaciones(listaPersonalizaciones)
+    item --> pedido : acuseActualizacion
+    pedido -> item : calcularSubtotal(cantidad, precioUnitario, listaPersonalizaciones)
+    item --> pedido : subtotalActualizado
+    pedido --> interfaz : totalActualizado
+
+    opt existe pago original
+        pedido -> pago : calcularDiferencia(totalAnterior, totalActualizado)
+        pago --> pedido : diferencia
+        pedido --> interfaz : diferencia
+        interfaz --> mostrador : vistaDiferencia
+    end
+
+    mostrador -> interfaz : confirmarModificacion(numeroPedido)
+    interfaz -> pedido : verificarEstadoAlConfirmar(numeroPedido)
+    pedido --> interfaz : estadoConfirmacion
+    
+    alt estadoConfirmacion == RECIBIDO
+        opt existe pago original
+            alt diferencia > 0
+                mostrador -> interfaz : seleccionarMedioPago(medioPago)
+                interfaz -> pago : registrarCobroAdicional(medioPago, diferencia)
+                pago -> historialPago : registrarMovimiento(pagoOriginal, "cobroAdicional", diferencia, motivo, usuario)
+                historialPago -> pago : consultarPagoOriginal(numeroPedido)
+                pago --> historialPago : montoOriginal, medioPagoOriginal
+                historialPago --> pago : acuseRegistro
+            else diferencia < 0
+                mostrador -> interfaz : confirmarDevolucion(medioPago)
+                interfaz -> pago : registrarDevolucion(medioPago, diferencia)
+                pago -> historialPago : registrarMovimiento(pagoOriginal, "devolucion", diferencia, motivo, usuario)
+                historialPago -> pago : consultarPagoOriginal(numeroPedido)
+                pago --> historialPago : montoOriginal, medioPagoOriginal
+                historialPago --> pago : acuseRegistro
+            else diferencia == 0
+                pago --> pedido : sinAjuste
+            end
+        end
+
+        interfaz -> pedido : actualizarPedido(numeroPedido, listaItems, totalActualizado)
+        pedido -> historialCambios : registrarCambioPedido(numeroPedido, "items", valorAnterior, valorNuevo, usuario)
+        pedido -> historialCambios : registrarCambioPedido(numeroPedido, "personalizaciones", valorAnterior, valorNuevo, usuario)
+        pedido -> historialCambios : registrarCambioPedido(numeroPedido, "total", totalAnterior, totalActualizado, usuario)
+        pedido --> interfaz : confirmacionModificacion
+        interfaz --> mostrador : ticketModificacion
+    else estadoConfirmacion != RECIBIDO
+        pedido --> interfaz : motivoRechazo
+        interfaz --> mostrador : mensajeRechazo
+    end
+else estado inicial != RECIBIDO
+    interfaz --> mostrador : advertenciaEstadoInvalido
+end
+@enduml
