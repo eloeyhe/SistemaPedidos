@@ -63,6 +63,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#215](https://github.com/eloeyhe/SistemaPedidos/issues/215)
   PR: [#214](https://github.com/eloeyhe/SistemaPedidos/pull/214) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
 
+- [fix/agrego-fuentes-indice-secuencia-rc6] Agrego enlaces a las fuentes puml en el indice de secuencia segun RC6
+  Issue: [#216](https://github.com/eloeyhe/SistemaPedidos/issues/216)
+  PR: [#217](https://github.com/eloeyhe/SistemaPedidos/pull/217) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
+
 
 ## [Primer Parcial] - 2026-10-03
 
