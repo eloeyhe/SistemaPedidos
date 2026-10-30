@@ -35,6 +35,7 @@ else (No)
   else (No)
     :Bloquear cancelacion automatica;
     :Informar que el estado no permite cancelar;
+    :Informar que la devolucion manual queda fuera de este flujo;
     stop
   endif
 endif
@@ -52,21 +53,6 @@ endif
 |Usuario de Mostrador|
 if (¿Confirma la cancelacion?) then (Si)
   |Sistema de Pedidos|
-  :Verificar si corresponde reembolso automatico;
-
-if (¿Corresponde reembolso automatico?) then (Si)
-  :Procesar reembolso automatico;
-
-  if (¿Reembolso aprobado?) then (Si)
-    :Registrar reembolso;
-  else (No)
-    :Registrar rechazo del reembolso;
-    :Informar incidencia para su resolucion;
-    :Mantener estado original del pedido;
-    stop
-  endif
-endif
-
 :Cambiar estado del pedido a CANCELADO;
 :Conservar identificador, items y pagos;
 :Liberar comanda;

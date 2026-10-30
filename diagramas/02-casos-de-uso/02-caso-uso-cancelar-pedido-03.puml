@@ -17,7 +17,6 @@ rectangle "Sistema de Pedidos" {
 	usecase "Buscar pedido por identificador/referencia" as Buscar
 	usecase "Validar estado del pedido" as ValidarEstado
 	usecase "Solicitar y registrar motivo de cancelacion" as RegistrarMotivo
-	usecase "Procesar reembolso/devolucion" as Reembolsar
 	usecase "Confirmar cancelacion y liberar comanda" as Confirmar
 	usecase "Autorizar cancelacion en preparacion" as Autorizar
 	note right of Autorizar
@@ -26,7 +25,10 @@ rectangle "Sistema de Pedidos" {
 		Si deniega, no se cancela el pedido.
 	end note
 	usecase "Bloquear cancelacion (LISTO/ENTREGADO)" as Bloquear
-	usecase "Resolver rechazo de reembolso" as RechazoReembolso
+	note right of Bloquear
+		La devolucion manual del Encargado
+		queda fuera de este flujo.
+	end note
 }
 
 Mostrador -- Cancelar
@@ -37,25 +39,20 @@ Encargado -- Autorizar
 Cancelar .> Buscar : <<include>>
 Cancelar .> ValidarEstado : <<include>>
 Cancelar .> RegistrarMotivo : <<include>>
-Cancelar .> Reembolsar : <<include>>
 Cancelar .> Confirmar : <<include>>
 
 Autorizar .> Cancelar : <<extend>> [EN_PREPARACION]
 Bloquear .> ValidarEstado : <<extend>>
-RechazoReembolso .> Reembolsar : <<extend>>
 
 ' --- Control de ranks: caso base arriba, incluidos en fila propia debajo ---
 Cancelar -[hidden]down- Buscar
 Cancelar -[hidden]down- ValidarEstado
 Cancelar -[hidden]down- RegistrarMotivo
-Cancelar -[hidden]down- Reembolsar
 Cancelar -[hidden]down- Confirmar
 Buscar -[hidden]right- ValidarEstado
 ValidarEstado -[hidden]right- RegistrarMotivo
-RegistrarMotivo -[hidden]right- Reembolsar
-Reembolsar -[hidden]right- Confirmar
+RegistrarMotivo -[hidden]right- Confirmar
 Autorizar -[hidden]down- Cancelar
 Bloquear -[hidden]down- ValidarEstado
-RechazoReembolso -[hidden]down- Reembolsar
 Encargado -[hidden]down- Autorizar
 @enduml
