@@ -55,6 +55,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#210](https://github.com/eloeyhe/SistemaPedidos/issues/210)
   PR: [#211](https://github.com/eloeyhe/SistemaPedidos/pull/211) - @nachovelesquen7-rgb (Especialista en Diagramas de Actividades - Casos de Uso 3, 4 y 5)
 
+- [fix/correccion-artefactos-cu03-rc10] Unifico los artefactos de CU03 segun RC10
+  Issue: [#218](https://github.com/eloeyhe/SistemaPedidos/issues/218)
+  PR: [#219](https://github.com/eloeyhe/SistemaPedidos/pull/219) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
+
 - [fix/correccion-titulos-changelog-rc1-rc2-rc4] Corrijo titulos y referencias del changelog segun RC1, RC2 y RC4
   Issue: [#215](https://github.com/eloeyhe/SistemaPedidos/issues/215)
   PR: [#214](https://github.com/eloeyhe/SistemaPedidos/pull/214) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
