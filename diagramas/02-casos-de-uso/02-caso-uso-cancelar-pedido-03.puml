@@ -17,7 +17,7 @@ rectangle "Sistema de Pedidos" {
 	usecase "Buscar pedido por identificador/referencia" as Buscar
 	usecase "Validar estado del pedido" as ValidarEstado
 	usecase "Solicitar y registrar motivo de cancelacion" as RegistrarMotivo
-	usecase "Confirmar cancelacion y liberar comanda" as Confirmar
+	usecase "Confirmar cancelacion" as Confirmar
 	usecase "Autorizar cancelacion en preparacion" as Autorizar
 	note right of Autorizar
 		Solo EN_PREPARACION: UsuarioEncargado
@@ -32,6 +32,7 @@ rectangle "Sistema de Pedidos" {
 }
 
 Mostrador -- Cancelar
+Encargado -- Cancelar
 Encargado -- Autorizar
 
 ' El actor Encargado corresponde a la clase UsuarioEncargado

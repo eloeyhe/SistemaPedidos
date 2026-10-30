@@ -3,7 +3,7 @@ title CU03 - Cancelar Pedido - Cancelacion antes de la entrega
 skinparam dpi 150
 skinparam shadowing false
 
-|Usuario de Mostrador|
+|Usuario de Mostrador o Encargado|
 start
 :Seleccionar pedido a cancelar;
 :Ingresar numero o referencia del pedido;
@@ -43,19 +43,18 @@ endif
 |Sistema de Pedidos|
 :Solicitar motivo de cancelacion;
 
-|Usuario de Mostrador|
+|Usuario de Mostrador o Encargado|
 :Ingresar motivo de cancelacion;
 
 |Sistema de Pedidos|
 :Registrar motivo de cancelacion;
 :Solicitar confirmacion de cancelacion;
 
-|Usuario de Mostrador|
+|Usuario de Mostrador o Encargado|
 if (¿Confirma la cancelacion?) then (Si)
   |Sistema de Pedidos|
 :Cambiar estado del pedido a CANCELADO;
 :Conservar identificador, items y pagos;
-:Liberar comanda;
 :Registrar usuario responsable;
 :Registrar fecha y hora en auditoria;
 :Mostrar cancelacion confirmada;
