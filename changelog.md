@@ -53,7 +53,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 - [fix/correcciones-diagramas-actividades-cu03-cu04-cu05] incorporo rama fix y correcciones indicadas por el docente
   Issue: [#210](https://github.com/eloeyhe/SistemaPedidos/issues/210)
-  PR: [#211](https://github.com/eloeyhe/SistemaPedidos/pull/211) - @nachovelesquen7-rgb (Especialista en diagramas de actividades - Casos de uso 3, 4 Y 5)
+  PR: [#211](https://github.com/eloeyhe/SistemaPedidos/pull/211) - @nachovelesquen7-rgb (Especialista en Diagramas de Actividades - Casos de Uso 3, 4 y 5)
 
 
 ## [Primer Parcial] - 2026-10-03
