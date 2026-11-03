@@ -21,61 +21,81 @@ else consulta iniciada por Mostrador
 end
 
 activate servicio
+servicio -> servicio : comprobarDisponibilidadDatos()
+servicio --> pantalla : resultadoDisponibilidad
 
-servicio -> pedido : obtenerPedidosPorEstados("RECIBIDO", "EN_PREPARACION", "LISTO")
-activate pedido
+alt conexión disponible
+    servicio -> pedido : obtenerPedidosPorEstados("RECIBIDO", "EN_PREPARACION", "LISTO")
+    activate pedido
+    pedido --> servicio : listaPedidosActivos
+    deactivate pedido
 
-pedido --> servicio : listaPedidosActivos
+    alt existen pedidos activos
+        loop por cada pedido activo
+            servicio -> pedido : obtenerEstado()
+            pedido --> servicio : estadoActual
+            servicio -> pedido : esPrioritario()
+            pedido --> servicio : esUrgente
+        end
 
-loop por cada pedido activo
-    servicio -> pedido : obtenerEstado()
-    pedido --> servicio : estadoActual
-    servicio -> pedido : esPrioritario()
-    pedido --> servicio : esUrgente
-end
-deactivate pedido
+        servicio -> servicio : agruparPedidosPorEstado(listaPedidosActivos)
+        loop por cada estado activo
+            servicio -> servicio : ordenarGrupoPorPrioridad(urgentesPrimero)
+        end
 
-servicio -> servicio : agruparPedidosPorEstado(listaPedidosActivos)
-loop por cada estado activo
-    servicio -> servicio : ordenarGrupoPorPrioridad(urgentesPrimero)
-end
+        alt actorSolicitante == Cocina
+            servicio -> servicio : seleccionarEstadosVisibles("RECIBIDO", "EN_PREPARACION")
+        else actorSolicitante == Mostrador
+            servicio -> servicio : seleccionarEstadosVisibles("RECIBIDO", "EN_PREPARACION", "LISTO")
+        end
 
-alt actorSolicitante == Cocina
-    servicio -> servicio : seleccionarEstadosVisibles("RECIBIDO", "EN_PREPARACION")
-else actorSolicitante == Mostrador
-    servicio -> servicio : seleccionarEstadosVisibles("RECIBIDO", "EN_PREPARACION", "LISTO")
-end
+        servicio --> pantalla : retornarPedidosAgrupadosYOrdenados(vistaAdaptada)
+        deactivate servicio
 
-servicio --> pantalla : retornarPedidosAgrupadosYOrdenados(vistaAdaptada)
-deactivate servicio
+        alt consulta iniciada por Cocina
+            pantalla --> usuarioCocina : mostrarVistaMonitor(vistaAdaptada)
+        else consulta iniciada por Mostrador
+            pantalla --> usuarioMostrador : mostrarVistaMonitor(vistaAdaptada)
+        end
 
-alt consulta iniciada por Cocina
-    pantalla --> usuarioCocina : mostrarVistaMonitor(vistaAdaptada)
-else consulta iniciada por Mostrador
-    pantalla --> usuarioMostrador : mostrarVistaMonitor(vistaAdaptada)
-end
+        alt detalle consultado por Cocina
+            usuarioCocina -> pantalla : consultarDetallePedido(numeroPedido)
+        else detalle consultado por Mostrador
+            usuarioMostrador -> pantalla : consultarDetallePedido(numeroPedido)
+        end
+        pantalla -> servicio : obtenerDetallePedido(numeroPedido)
+        activate servicio
 
-alt detalle consultado por Cocina
-    usuarioCocina -> pantalla : consultarDetallePedido(numeroPedido)
-else detalle consultado por Mostrador
-    usuarioMostrador -> pantalla : consultarDetallePedido(numeroPedido)
-end
-pantalla -> servicio : obtenerDetallePedido(numeroPedido)
-activate servicio
+        servicio -> pedido : obtenerDetalle()
+        activate pedido
+        pedido --> servicio : detallePedido
+        deactivate pedido
 
-servicio -> pedido : obtenerDetalle()
-activate pedido
+        servicio --> pantalla : retornarDetalle(detallePedido)
+        deactivate servicio
 
-pedido --> servicio : detallePedido
-deactivate pedido
-
-servicio --> pantalla : retornarDetalle(detallePedido)
-deactivate servicio
-
-alt detalle consultado por Cocina
-    pantalla --> usuarioCocina : mostrarDetallePedido(detallePedido)
-else detalle consultado por Mostrador
-    pantalla --> usuarioMostrador : mostrarDetallePedido(detallePedido)
+        alt detalle consultado por Cocina
+            pantalla --> usuarioCocina : mostrarDetallePedido(detallePedido)
+        else detalle consultado por Mostrador
+            pantalla --> usuarioMostrador : mostrarDetallePedido(detallePedido)
+        end
+    else lista de pedidos vacía
+        servicio --> pantalla : listaVacia
+        deactivate servicio
+        alt consulta iniciada por Cocina
+            pantalla --> usuarioCocina : mostrarVistaVacia("No hay pedidos activos")
+        else consulta iniciada por Mostrador
+            pantalla --> usuarioMostrador : mostrarVistaVacia("No hay pedidos activos")
+        end
+    end
+else conexión interrumpida
+    servicio --> pantalla : datosDesactualizados
+    deactivate servicio
+    alt consulta iniciada por Cocina
+        pantalla --> usuarioCocina : advertirDatosDesactualizados()
+    else consulta iniciada por Mostrador
+        pantalla --> usuarioMostrador : advertirDatosDesactualizados()
+    end
 end
 deactivate pantalla
 
