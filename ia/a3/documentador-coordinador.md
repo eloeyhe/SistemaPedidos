@@ -262,7 +262,7 @@ Solicitar cambios, porque persisten omisiones en los flujos alternativos y discr
 ### 4. Ajustes críticos realizados
 * **Sugerencias aceptadas:** Acepté los cinco hallazgos de la revisión y los publiqué en la PR #190. Se incorporó al diagrama de Tomar Pedido la alternativa de cancelación del Cliente antes del pago; en Modificar Pedido, se asignó al Usuario de Mostrador la selección del medio de pago y el registro del ajuste; se agregó la sugerencia de cancelar mediante CU03 si la edición deja el pedido sin ítems; y se ajustaron los rótulos del índice al formato solicitado.
 * **Sugerencias descartadas o modificadas:** No descarté hallazgos. El hallazgo #5 se precisó: la descripción inicial ya incluía varias secciones de la plantilla, así que el problema no era la ausencia general de la estructura. Se actualizó la descripción de la PR para completar y respetar la plantilla del repositorio.
-* **Decisión final en GitHub:** Aprobada y fusionada en develop. La revisión inicial solicitó cambios; después de las correcciones, se aprobó y la PR se integro
+* **Decisión final en GitHub:** Aprobada y fusionada en develop. La revisión inicial solicitó cambios; después de las correcciones, se aprobó y la PR se integró en develop.
 
 
 ## Code Review 3: PR [#206](https://github.com/eloeyhe/SistemaPedidos/pull/206) - Especialista en Diagramas de Actividades - Casos de uso 3, 4 y 5
