@@ -1,6 +1,6 @@
 # Registro de Code Reviews asistidas con IA - Documentador y Coordinador
 
-## Code Review 1: PR [#182] - Especialista en Diagramas de Secuencia
+## Code Review 1: PR [#182](https://github.com/eloeyhe/SistemaPedidos/pull/182) - Especialista en Diagramas de Secuencia
 * **Rama revisada:** `feature/esp-secuencia-add-diagrama-secuencia-1`
 * **Autor:** Eloy Eyheramendy
 
@@ -56,8 +56,23 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
-* `diagramas/03-escenarios-casos-de-uso/<COMPLETAR: escenario del diagrama revisado>`
-* `herramientas-agile/tarjetas-crc/<COMPLETAR: tarjetas CRC de las clases que aparecen en el diagrama>`
+* `diagramas/03-escenarios-casos-de-uso/03-tomar-pedido-registro-pedido-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-cancelar-pedido-cancelacion-antes-entrega-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-01.md`
+* `herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md`
+* `herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md`
+* `herramientas-agile/tarjetas-crc/03-tarjeta-crc-producto.md`
+* `herramientas-agile/tarjetas-crc/04-tarjeta-crc-personalizacion-item.md`
+* `herramientas-agile/tarjetas-crc/05-tarjeta-crc-pago.md`
+* `herramientas-agile/tarjetas-crc/09-tarjeta-crc-combo.md`
+* `herramientas-agile/tarjetas-crc/10-tarjeta-crc-historial-pago.md`
+* `herramientas-agile/tarjetas-crc/11-tarjeta-crc-auditoria-pedido.md`
+* `herramientas-agile/tarjetas-crc/12-tarjeta-crc-historial-cambio-pedido.md`
+* `herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md`
+* `herramientas-agile/tarjetas-crc/15-tarjeta-crc-usuario-cocina.md`
+* `herramientas-agile/tarjetas-crc/16-tarjeta-crc-usuario-encargado.md`
 
 ### 3. Output obtenido de Copilot
 
@@ -117,11 +132,11 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 ---
 
 ### 4. Ajustes críticos realizados
-* **Sugerencias aceptadas:** <Acepté los cinco hallazgos y los comenté en la PR #182. Se incorporó la alternativa de selección de combos con su precio propio; se permitió que UsuarioEncargado también inicie la cancelación; se agregaron interacciones de FiltroUrgentes con ServicioPedidos; se corrigió el nombre del índice a diagramas_de_secuencias.md; y se registró la PR en changelog.md bajo [Unreleased].>
-* **Sugerencias descartadas o modificadas:** <No descarté sugerencias. El hallazgo 5 requirió un ajuste posterior: la entrada del changelog se había agregado bajo un encabezado de release y luego se corrigió para que quedara en [Unreleased].>
-* **Decisión final en GitHub:** <Aprobada. La PR se aprobó y se integró en develop. La revisión inicial contenía la solicitud de cambios, aunque GitHub la registró con estado COMMENTED; posteriormente se envió una revisión APPROVED.>
+* **Sugerencias aceptadas:** Acepté los cinco hallazgos y los comenté en la PR #182. Se incorporó la alternativa de selección de combos con su precio propio; se permitió que UsuarioEncargado también inicie la cancelación; se agregaron interacciones de FiltroUrgentes con ServicioPedidos; se corrigió el nombre del índice a diagramas_de_secuencias.md; y se registró la PR en changelog.md bajo [Unreleased].
+* **Sugerencias descartadas o modificadas:** No descarté sugerencias. El hallazgo 5 requirió un ajuste posterior: la entrada del changelog se había agregado bajo un encabezado de release y luego se corrigió para que quedara en [Unreleased].
+* **Decisión final en GitHub:** Aprobada. La PR se aprobó y se integró en develop. La revisión inicial contenía la solicitud de cambios, aunque GitHub la registró con estado COMMENTED; posteriormente se envió una revisión APPROVED.
 
-## Code Review 2: PR [#190] - Especialista en Diagramas de Actividades - Casos de uso 1 y 2
+## Code Review 2: PR [#190](https://github.com/eloeyhe/SistemaPedidos/pull/190) - Especialista en Diagramas de Actividades - Casos de uso 1 y 2
 * **Rama revisada:** `feature/esp-actividades-1-2-add-diagrama-actividad-1`
 * **Autor:** Santiago Marquez
 
@@ -177,8 +192,10 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
-* `diagramas/03-escenarios-casos-de-uso/<COMPLETAR: escenario del diagrama revisado>`
-* `herramientas-agile/tarjetas-crc/<COMPLETAR: tarjetas CRC de las clases que aparecen en el diagrama>`
+* `diagramas/02-casos-de-uso/02-caso-uso-tomar-pedido-01.puml`
+* `diagramas/02-casos-de-uso/02-caso-uso-modificar-pedido-02.puml`
+* `diagramas/03-escenarios-casos-de-uso/03-tomar-pedido-registro-pedido-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-01.md`
 
 ### 3. Output obtenido de Copilot
 
@@ -243,12 +260,12 @@ Solicitar cambios, porque persisten omisiones en los flujos alternativos y discr
 ---
 
 ### 4. Ajustes críticos realizados
-* **Sugerencias aceptadas:** <Acepté los cinco hallazgos de la revisión y los publiqué en la PR #190. Se incorporó al diagrama de Tomar Pedido la alternativa de cancelación del Cliente antes del pago; en Modificar Pedido, se asignó al Usuario de Mostrador la selección del medio de pago y el registro del ajuste; se agregó la sugerencia de cancelar mediante CU03 si la edición deja el pedido sin ítems; y se ajustaron los rótulos del índice al formato solicitado.>
-* **Sugerencias descartadas o modificadas:** <No descarté hallazgos. El hallazgo #5 se precisó: la descripción inicial ya incluía varias secciones de la plantilla, así que el problema no era la ausencia general de la estructura. Se actualizó la descripción de la PR para completar y respetar la plantilla del repositorio.>
-* **Decisión final en GitHub:** <Aprobada y fusionada en develop. La revisión inicial solicitó cambios; después de las correcciones, se aprobó y la PR se integro>
+* **Sugerencias aceptadas:** Acepté los cinco hallazgos de la revisión y los publiqué en la PR #190. Se incorporó al diagrama de Tomar Pedido la alternativa de cancelación del Cliente antes del pago; en Modificar Pedido, se asignó al Usuario de Mostrador la selección del medio de pago y el registro del ajuste; se agregó la sugerencia de cancelar mediante CU03 si la edición deja el pedido sin ítems; y se ajustaron los rótulos del índice al formato solicitado.
+* **Sugerencias descartadas o modificadas:** No descarté hallazgos. El hallazgo #5 se precisó: la descripción inicial ya incluía varias secciones de la plantilla, así que el problema no era la ausencia general de la estructura. Se actualizó la descripción de la PR para completar y respetar la plantilla del repositorio.
+* **Decisión final en GitHub:** Aprobada y fusionada en develop. La revisión inicial solicitó cambios; después de las correcciones, se aprobó y la PR se integró en develop.
 
 
-## Code Review 3: PR [#206] - Especialista en Diagramas de Actividades - Casos de uso 3, 4 y 5
+## Code Review 3: PR [#206](https://github.com/eloeyhe/SistemaPedidos/pull/206) - Especialista en Diagramas de Actividades - Casos de uso 3, 4 y 5
 * **Rama revisada:** `feature/esp-actividades-3-4-5-add-diagrama-actividad3`
 * **Autor:** Ignacio Velesquen
 
@@ -303,6 +320,15 @@ Cambio concreto recomendado.
 Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar cambios) y su justificación breve.
 
 ```
+
+### 2. Archivos de contexto referenciados
+* `anexos/introduccion.md`
+* `diagramas/02-casos-de-uso/02-caso-uso-cancelar-pedido-03.puml`
+* `diagramas/02-casos-de-uso/02-caso-uso-cambiar-estado-pedido-04.puml`
+* `diagramas/02-casos-de-uso/02-caso-uso-consultar-pedidos-activos-05.puml`
+* `diagramas/03-escenarios-casos-de-uso/03-cancelar-pedido-cancelacion-antes-entrega-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-01.md`
 
 ### 3. Output obtenido de Copilot
 
@@ -365,11 +391,11 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 Solicitar cambios, porque hay brechas de trazabilidad en dos diagramas y la entrada del changelog.md apunta a una PR incorrecta.
 
 ### 4. Ajustes críticos realizados
-* **Sugerencias aceptadas:** <Acepté los hallazgos sobre la falta de trazabilidad de los actores en los diagramas CU04 y CU05, el registro incorrecto de la PR en el changelog y las omisiones del flujo CU03. Los comenté en la PR #206 y, tras las correcciones, revisé que se representaran ambos actores iniciadores, se actualizara el motivo de cancelación y se incluyera el camino cuando el usuario desiste. También acepté ajustar los textos de los enlaces del índice a kebab-case, sin reemplazar los de los casos 1 y 2.>
-* **Sugerencias descartadas o modificadas:** <No descarté hallazgos. Ajusté el seguimiento del hallazgo CU03 después de una revisión intermedia: señalé que aún faltaban el motivo de cancelación y la rama de no confirmación; ambos se incorporaron luego. No pedí cambios en los casos CU04, CU05 ni en el changelog tras verificar que esas correcciones estaban hechas.>
-* **Decisión final en GitHub:** <Aprobada. La PR #206 recibió mi aprobación y fue fusionada el 22 de octubre de 2026.>
+* **Sugerencias aceptadas:** Acepté los hallazgos sobre la falta de trazabilidad de los actores en los diagramas CU04 y CU05, el registro incorrecto de la PR en el changelog y las omisiones del flujo CU03. Los comenté en la PR #206 y, tras las correcciones, revisé que se representaran ambos actores iniciadores, se actualizara el motivo de cancelación y se incluyera el camino cuando el usuario desiste. También acepté ajustar los textos de los enlaces del índice a kebab-case, sin reemplazar los de los casos 1 y 2.
+* **Sugerencias descartadas o modificadas:** No descarté hallazgos. Ajusté el seguimiento del hallazgo CU03 después de una revisión intermedia: señalé que aún faltaban el motivo de cancelación y la rama de no confirmación; ambos se incorporaron luego. No pedí cambios en los casos CU04, CU05 ni en el changelog tras verificar que esas correcciones estaban hechas.
+* **Decisión final en GitHub:** Aprobada. La PR #206 recibió mi aprobación y fue fusionada el 22 de octubre de 2026.
 
-## Code Review 4: PR [#207] - Especialista en Diagramas de Secuencia
+## Code Review 4: PR [#207](https://github.com/eloeyhe/SistemaPedidos/pull/207) - Especialista en Diagramas de Secuencia
 * **Rama revisada:** `feature/esp-secuencia-add-diagrama-secuencia-1`
 * **Autor:** Eloy Eyheramendy
 
@@ -425,8 +451,14 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
-* `diagramas/03-escenarios-casos-de-uso/<COMPLETAR: escenario del diagrama revisado>`
-* `herramientas-agile/tarjetas-crc/<COMPLETAR: tarjetas CRC de las clases que aparecen en el diagrama>`
+* `diagramas/03-escenarios-casos-de-uso/03-tomar-pedido-registro-pedido-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-01.md`
+* `herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md`
+* `herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md`
+* `herramientas-agile/tarjetas-crc/04-tarjeta-crc-personalizacion-item.md`
+* `herramientas-agile/tarjetas-crc/05-tarjeta-crc-pago.md`
+* `herramientas-agile/tarjetas-crc/10-tarjeta-crc-historial-pago.md`
 
 ### 3. Output obtenido de Copilot
 
@@ -467,6 +499,6 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 Solicitar cambios, porque el flujo de modificación puede registrar un ajuste de dinero aunque la modificación se rechace, y hay inconsistencias en el ciclo de vida y la trazabilidad de participantes.
 
 ### 4. Ajustes críticos realizados
-* **Sugerencias aceptadas:** <Acepté los tres hallazgos de la revisión y los comenté en la PR #207: el ciclo de vida de los objetos temporales al rechazarse el pago, la posibilidad de registrar ajustes financieros antes de confirmar que el pedido seguía RECIBIDO, y la falta de respaldo CRC y de trazabilidad de actores/prioridades en la consulta de pedidos activos.>
-* **Sugerencias descartadas o modificadas:** <No descarté hallazgos. El seguimiento del hallazgo sobre el ajuste financiero se dio por resuelto cuando el cobro y la devolución quedaron condicionados a que el pedido siguiera RECIBIDO. Los otros dos requirieron una segunda corrección: se acotaron las destrucciones a objetos temporales creados y se eliminó ResumenConsulta, representando la agrupación, el orden por prioridad y ambos actores en el flujo de consulta.>
-* **Decisión final en GitHub:** <La PR #207 fue aprobada y fusionada el 22 de octubre de 2026.>
+* **Sugerencias aceptadas:** Acepté los tres hallazgos de la revisión y los comenté en la PR #207: el ciclo de vida de los objetos temporales al rechazarse el pago, la posibilidad de registrar ajustes financieros antes de confirmar que el pedido seguía RECIBIDO, y la falta de respaldo CRC y de trazabilidad de actores/prioridades en la consulta de pedidos activos.
+* **Sugerencias descartadas o modificadas:** No descarté hallazgos. El seguimiento del hallazgo sobre el ajuste financiero se dio por resuelto cuando el cobro y la devolución quedaron condicionados a que el pedido siguiera RECIBIDO. Los otros dos requirieron una segunda corrección: se acotaron las destrucciones a objetos temporales creados y se eliminó ResumenConsulta, representando la agrupación, el orden por prioridad y ambos actores en el flujo de consulta.
+* **Decisión final en GitHub:** La PR #207 fue aprobada y fusionada el 22 de octubre de 2026.
