@@ -6,6 +6,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+## [Release Actividad Obligatoria N°3] - 2026-10-22
+
 ### Added
 
 - [feature/doc-coord-repo-update-readme-md] Feature/doc coord repo update readme md
@@ -47,6 +49,12 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#165](https://github.com/eloeyhe/SistemaPedidos/issues/165)
   Issue: [#166](https://github.com/eloeyhe/SistemaPedidos/issues/166)
   PR: [#207](https://github.com/eloeyhe/SistemaPedidos/pull/207) - @eloeyhe (Especialista en Diagramas de Secuencia)
+
+  ### Fixed
+
+- [fix/correcciones-changelog-y-documentador-coordinador] orrecciones changelog y documentador coordinador
+  Issue: [#220](https://github.com/eloeyhe/SistemaPedidos/issues/220)
+  PR: [#221](https://github.com/eloeyhe/SistemaPedidos/pull/221) - @Leandro2107 (Documentador y Coordinador de Repositorio)
 
 ## [Primer Parcial] - 2026-10-03
 
