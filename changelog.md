@@ -52,7 +52,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
   ### Fixed
 
-- [fix/correcciones-changelog-y-documentador-coordinador] orrecciones changelog y documentador coordinador
+- [fix/correcciones-changelog-y-documentador-coordinador] correcciones changelog y documentador coordinador
   Issue: [#220](https://github.com/eloeyhe/SistemaPedidos/issues/220)
   PR: [#221](https://github.com/eloeyhe/SistemaPedidos/pull/221) - @Leandro2107 (Documentador y Coordinador de Repositorio)
 
