@@ -14,8 +14,8 @@
 | 1. El actor selecciona el pedido que desea cancelar                                         | Número o referencia del pedido |
 | 2. El sistema muestra el estado actual del pedido                                           | Estado del pedido              |
 | 3. El sistema verifica que el pedido está `RECIBIDO` y que el actor puede cancelarlo        | Estado y permisos del actor    |
-| 4. El sistema solicita confirmación de la cancelación                                       | Confirmación de cancelación    |
-| 5. El actor confirma la cancelación                                                         | Confirmación del usuario       |
+| 4. El sistema solicita el motivo y la confirmación de la cancelación                        | Motivo y confirmación          |
+| 5. El actor ingresa el motivo y confirma la cancelación                                     | Motivo y confirmación          |
 | 6. El sistema cambia el estado del pedido a `CANCELADO`                                     | Estado final                   |
 | 7. El sistema conserva el identificador, los productos, pagos y demás información histórica | Registro histórico             |
 | 8. El sistema registra el usuario y la fecha y hora de la cancelación                       | Registro de auditoría          |

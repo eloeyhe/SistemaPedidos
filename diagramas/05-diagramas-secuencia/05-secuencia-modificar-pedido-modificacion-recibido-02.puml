@@ -11,6 +11,7 @@ participant "Item_pedido:item" as item
 participant "Producto:producto" as producto
 participant "Personalizacion_item:personalizacion" as personalizacion
 participant "Pago:pagoOriginal" as pago
+participant "ProcesadorPago:procesadorPago" as procesadorPago
 participant "Historial_pago:historialPago" as historialPago
 participant "Historial_cambio_pedido:historialCambios" as historialCambios
 
@@ -59,20 +60,32 @@ alt estado inicial == RECIBIDO
     
     alt estadoConfirmacion == RECIBIDO
         opt existe pago original
-            alt diferencia > 0
+            alt diferencia != 0
                 mostrador -> interfaz : seleccionarMedioPago(medioPago)
-                interfaz -> pago : registrarCobroAdicional(medioPago, diferencia)
-                pago -> historialPago : registrarMovimiento(pagoOriginal, "cobroAdicional", diferencia, motivo, usuario)
-                historialPago -> pago : consultarPagoOriginal(numeroPedido)
-                pago --> historialPago : montoOriginal, medioPagoOriginal
-                historialPago --> pago : acuseRegistro
-            else diferencia < 0
-                mostrador -> interfaz : confirmarDevolucion(medioPago)
-                interfaz -> pago : registrarDevolucion(medioPago, diferencia)
-                pago -> historialPago : registrarMovimiento(pagoOriginal, "devolucion", diferencia, motivo, usuario)
-                historialPago -> pago : consultarPagoOriginal(numeroPedido)
-                pago --> historialPago : montoOriginal, medioPagoOriginal
-                historialPago --> pago : acuseRegistro
+                interfaz -> pago : validarMedioPago(medioPago)
+                pago -> procesadorPago : validarMedioPago(medioPago)
+                procesadorPago --> pago : resultadoValidacion
+                pago --> interfaz : resultadoValidacion
+                alt medioPago válido
+                    alt diferencia > 0
+                        interfaz -> pago : registrarCobroAdicional(medioPago, diferencia)
+                        pago -> historialPago : registrarMovimiento(pagoOriginal, "cobroAdicional", diferencia, motivo, usuario)
+                        historialPago -> pago : consultarPagoOriginal(numeroPedido)
+                        pago --> historialPago : montoOriginal, medioPagoOriginal
+                        historialPago --> pago : acuseRegistro
+                    else diferencia < 0
+                        mostrador -> interfaz : confirmarDevolucion(medioPago)
+                        interfaz -> pago : registrarDevolucion(medioPago, diferencia)
+                        pago -> historialPago : registrarMovimiento(pagoOriginal, "devolucion", diferencia, motivo, usuario)
+                        historialPago -> pago : consultarPagoOriginal(numeroPedido)
+                        pago --> historialPago : montoOriginal, medioPagoOriginal
+                        historialPago --> pago : acuseRegistro
+                    end
+                else medioPago inválido
+                    interfaz --> mostrador : informarMedioPagoInvalido()
+                    break Se descarta la modificación y no se registra el ajuste
+                    end
+                end
             else diferencia == 0
                 pago --> pedido : sinAjuste
             end

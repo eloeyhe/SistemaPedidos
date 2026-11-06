@@ -11,6 +11,11 @@ participant "ServicioPedidos:servicio" as servicio
 participant "Pedido:pedido" as pedido
 participant "Auditoria_pedido:auditoria" as auditoria
 
+note over servicio, pedido
+    La cancelacion conserva el pedido y sus pagos.
+    Cualquier devolucion manual se gestiona fuera de este flujo.
+end note
+
 alt iniciador es UsuarioMostrador
     UsuarioMostrador -> pantalla : solicitarCancelacionPedido(numeroPedido)
 else iniciador es UsuarioEncargado
@@ -46,11 +51,11 @@ alt estadoActual == RECIBIDO
     else iniciador es UsuarioEncargado
         servicio -> auditoria : registrarAccion(pedido, UsuarioEncargado, "CANCELACION", fechaHora)
     end
-    
+
     servicio -> auditoria : registrarDetalles(motivo, estadoAnterior, estadoNuevo)
     auditoria --> servicio : acuseRegistro
     servicio --> pantalla : confirmacionCancelacion
-    
+
     alt iniciador es UsuarioMostrador
         pantalla --> UsuarioMostrador : mensajeCancelacionExitosa
     else iniciador es UsuarioEncargado
@@ -65,7 +70,7 @@ else estadoActual == EN_PREPARACION
         servicio --> pantalla : peticionAutorizacion
         pantalla --> UsuarioEncargado : avisoAutorizacionRequerida
     end
-    
+
     UsuarioEncargado -> pantalla : responderSolicitudCancelacion(numeroPedido)
     pantalla -> servicio : solicitarAutorizacion(numeroPedido)
     servicio -> UsuarioEncargado : solicitarClaveSupervision(numeroPedido)
@@ -80,12 +85,48 @@ else estadoActual == EN_PREPARACION
             UsuarioEncargado -> pantalla : confirmarCancelacion(motivo)
             pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioEncargado, UsuarioEncargado)
         end
-        
+
         servicio -> pedido : cancelarPedido(motivo)
         pedido -> pedido : cambiarEstado(CANCELADO)
         pedido --> servicio : acuseCancelacion
 
         alt iniciador es UsuarioMostrador
-            servicio -> auditoria : registrarAccion(pedido, UsuarioMostrador, "CANCELACION", fechaHora)
+            servicio -> auditoria : registrarAccion(pedido, UsuarioMostrador, UsuarioEncargado, "CANCELACION", fechaHora)
         else iniciador es UsuarioEncargado
-            servicio -> auditoria : registrarAccion(pedido, Usuario
+            servicio -> auditoria : registrarAccion(pedido, UsuarioEncargado, UsuarioEncargado, "CANCELACION", fechaHora)
+        end
+
+        servicio -> auditoria : registrarDetalles(motivo, estadoAnterior, estadoNuevo)
+        auditoria --> servicio : acuseRegistro
+        servicio --> pantalla : confirmacionCancelacion
+
+        alt iniciador es UsuarioMostrador
+            pantalla --> UsuarioMostrador : mensajeCancelacionExitosa
+        else iniciador es UsuarioEncargado
+            pantalla --> UsuarioEncargado : mensajeCancelacionExitosa
+        end
+    else resultadoAutorizacion == denegado
+        servicio --> pantalla : cancelacionDenegada
+        alt iniciador es UsuarioMostrador
+            pantalla --> UsuarioMostrador : mensajeCancelacionDenegada
+        else iniciador es UsuarioEncargado
+            pantalla --> UsuarioEncargado : mensajeCancelacionDenegada
+        end
+    end
+
+else estadoActual == LISTO or estadoActual == ENTREGADO
+    servicio --> pantalla : cancelacionAutomaticaNoPermitida
+    alt iniciador es UsuarioMostrador
+        pantalla --> UsuarioMostrador : informarDevolucionManualFueraDeEsteFlujo
+    else iniciador es UsuarioEncargado
+        pantalla --> UsuarioEncargado : informarDevolucionManualFueraDeEsteFlujo
+    end
+else estadoActual no permite cancelacion
+    servicio --> pantalla : cancelacionNoPermitida
+    alt iniciador es UsuarioMostrador
+        pantalla --> UsuarioMostrador : mensajeEstadoNoCancelable
+    else iniciador es UsuarioEncargado
+        pantalla --> UsuarioEncargado : mensajeEstadoNoCancelable
+    end
+end
+@enduml

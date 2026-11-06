@@ -51,10 +51,27 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#207](https://github.com/eloeyhe/SistemaPedidos/pull/207) - @eloeyhe (Especialista en Diagramas de Secuencia)
 
   ### Fixed
+  
+- [fix/correcciones-diagramas-actividades-cu03-cu04-cu05] incorporo rama fix y correcciones indicadas por el docente
+  Issue: [#210](https://github.com/eloeyhe/SistemaPedidos/issues/210)
+  PR: [#211](https://github.com/eloeyhe/SistemaPedidos/pull/211) - @nachovelesquen7-rgb (Especialista en Diagramas de Actividades - Casos de Uso 3, 4 y 5)
+
+- [fix/correccion-artefactos-cu03-rc10] Unifico los artefactos de CU03 segun RC10
+  Issue: [#218](https://github.com/eloeyhe/SistemaPedidos/issues/218)
+  PR: [#219](https://github.com/eloeyhe/SistemaPedidos/pull/219) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
+
+- [fix/correccion-titulos-changelog-rc1-rc2-rc4] Corrijo titulos y referencias del changelog segun RC1, RC2 y RC4
+  Issue: [#215](https://github.com/eloeyhe/SistemaPedidos/issues/215)
+  PR: [#214](https://github.com/eloeyhe/SistemaPedidos/pull/214) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
+
+- [fix/agrego-fuentes-indice-secuencia-rc6] Agrego enlaces a las fuentes puml en el indice de secuencia segun RC6
+  Issue: [#216](https://github.com/eloeyhe/SistemaPedidos/issues/216)
+  PR: [#217](https://github.com/eloeyhe/SistemaPedidos/pull/217) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
 
 - [fix/correcciones-changelog-y-documentador-coordinador] correcciones changelog y documentador coordinador
   Issue: [#220](https://github.com/eloeyhe/SistemaPedidos/issues/220)
   PR: [#221](https://github.com/eloeyhe/SistemaPedidos/pull/221) - @Leandro2107 (Documentador y Coordinador de Repositorio)
+
 
 ## [Primer Parcial] - 2026-10-03
 
