@@ -1,0 +1,85 @@
+@startuml 04-actividad-modificar-pedido-02
+skinparam dpi 150
+skinparam ArrowFontSize 11
+
+title Diagrama de Actividad - Modificar Pedido (CU02)
+
+|Cliente|
+start
+:Solicitar modificación del pedido;
+
+|Usuario de Mostrador|
+:Buscar pedido por número o referencia;
+
+|Sistema de Pedidos|
+:Mostrar información del pedido;
+:Verificar estado del pedido;
+
+if (¿Estado RECIBIDO?) then (no)
+  :Rechazar modificación por estado;
+  |Usuario de Mostrador|
+  :Informar al cliente que el pedido
+  ya no puede modificarse;
+  stop
+else (sí)
+endif
+
+|Usuario de Mostrador|
+:Seleccionar opción modificar pedido;
+
+repeat
+  :Agregar, eliminar o modificar
+  productos y cantidades;
+  :Modificar personalizaciones;
+  |Sistema de Pedidos|
+  :Recalcular total del pedido;
+backward :Bloquear el guardado y sugerir
+cancelar el pedido mediante CU03;
+repeat while (¿El pedido quedó sin ítems?) is (sí) not (no)
+
+if (¿El pedido ya estaba pagado?) then (sí)
+  :Calcular diferencia respecto
+  del pago original;
+  if (¿Existe diferencia?) then (sí)
+    |Usuario de Mostrador|
+    :Seleccionar medio de pago del ajuste
+    (efectivo o transferencia);
+    if (¿Resultado de la diferencia?) then (a cobrar)
+      |Cliente|
+      :Entregar o pagar la diferencia;
+      |Usuario de Mostrador|
+      :Registrar cobro adicional como ajuste;
+    else (a devolver)
+      :Registrar devolución como ajuste;
+      :Devolver diferencia al cliente;
+    endif
+    |Sistema de Pedidos|
+    :Validar medio de pago y asociar
+    el ajuste al historial del pedido;
+  else (no)
+  endif
+else (no)
+endif
+
+|Usuario de Mostrador|
+:Confirmar modificación;
+
+|Sistema de Pedidos|
+:Revalidar estado RECIBIDO al confirmar;
+if (¿Sigue en estado RECIBIDO?) then (no)
+  :Descartar cambios y ajustes no confirmados;
+  stop
+else (sí)
+endif
+
+:Actualizar pedido conservando
+el mismo identificador;
+:Registrar cambio en el historial del pedido;
+
+|Usuario de Mostrador|
+:Informar total actualizado al cliente;
+
+|Cliente|
+:Recibir confirmación de la modificación;
+stop
+@enduml
