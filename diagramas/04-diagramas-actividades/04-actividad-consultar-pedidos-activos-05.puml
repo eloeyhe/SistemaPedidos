@@ -1,0 +1,44 @@
+@startuml
+title CU05 - Consultar Pedidos Activos (10 actividades)
+
+|Sistema de Pedidos|
+start
+
+if (¿Quien inicia la consulta?) then (Cocina)
+  |Cocina|
+  :1. Acceder al monitor de pedidos activos;
+else (Mostrador)
+  |Usuario de Mostrador|
+  :1. Acceder al monitor de pedidos activos;
+endif
+
+|Sistema de Pedidos|
+:2. Comprobar disponibilidad de datos;
+if (¿Hay conexión?) then (Sí)
+  :3. Obtener pedidos activos;
+  :4. Filtrar estados RECIBIDO,
+EN_PREPARACION y LISTO;
+  :5. Agrupar pedidos por estado
+sin duplicarlos;
+  if (¿Hay pedidos activos?) then (Sí)
+    :6. Identificar pedidos urgentes;
+    :7. Ordenar urgentes primero
+dentro de cada estado;
+    :8. Adaptar la vista según el actor;
+    if (¿Consulta Cocina?) then (Sí)
+      |Cocina|
+      :9. Consultar comandas
+RECIBIDO y EN_PREPARACION;
+    else (No: Mostrador)
+      |Usuario de Mostrador|
+      :10. Consultar pedidos LISTO
+para entrega;
+    endif
+  else (No)
+    :Mostrar vista vacía;
+  endif
+else (No)
+  :Advertir posible información desactualizada;
+endif
+stop
+@enduml

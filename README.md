@@ -15,9 +15,10 @@ Este proyecto tiene como objetivo el diseño orientado a objetos de una aplicaci
 | Ignacio Velesquen | 161695    | nachovelesquen7-rgb |
 | Leandro Dominguez | 153062    | Leandro2107       |
 | Eloy Eyheramendy  | 164391    | eloeyhe           |
+| Santiago Marquez  | 154076    | santimarM           |
 
 # Diagramas y Diseños
 
-- [Anexos](anexos/anexos.md) 
+- [Anexos](anexos/anexos.md)
 - [Diagramas UML](diagramas/diagramasUML.md)
 - [Herramientas Agile](herramientas-agile/herramientas_agile.md)

@@ -6,6 +6,72 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
+## [Release Actividad Obligatoria N°3] - 2026-10-22
+
+### Added
+
+- [feature/doc-coord-repo-update-readme-md] Feature/doc coord repo update readme md
+  Issue: [#192](https://github.com/eloeyhe/SistemaPedidos/issues/192)
+  Issue: [#193](https://github.com/eloeyhe/SistemaPedidos/issues/193)
+  Issue: [#194](https://github.com/eloeyhe/SistemaPedidos/issues/194)
+  Issue: [#195](https://github.com/eloeyhe/SistemaPedidos/issues/195)
+  Issue: [#196](https://github.com/eloeyhe/SistemaPedidos/issues/196)
+  Issue: [#197](https://github.com/eloeyhe/SistemaPedidos/issues/197)
+  PR: [#208](https://github.com/eloeyhe/SistemaPedidos/pull/208) - @Leandro2107 (Documentador y Coordinador de Repositorio)
+
+- [feature/esp-secuencia-add-diagrama-secuencia-1] Realizo todo lo correspondiente en cuanto a los diagramas de secuencia
+  Issue: [#162](https://github.com/eloeyhe/SistemaPedidos/issues/162)
+  Issue: [#163](https://github.com/eloeyhe/SistemaPedidos/issues/163)
+  Issue: [#164](https://github.com/eloeyhe/SistemaPedidos/issues/164)
+  Issue: [#165](https://github.com/eloeyhe/SistemaPedidos/issues/165)
+  Issue: [#166](https://github.com/eloeyhe/SistemaPedidos/issues/166)
+  PR: [#182](https://github.com/eloeyhe/SistemaPedidos/pull/182) - @eloeyhe (Especialista en Diagramas de Secuencia)
+
+- [feature/esp-actividades-1-2-add-diagrama-actividad-1] Agrego diagramas de actividades de los casos de uso 1 y 2 e índice
+  Issue: [#187](https://github.com/eloeyhe/SistemaPedidos/issues/187)
+  Issue: [#188](https://github.com/eloeyhe/SistemaPedidos/issues/188)
+  PR: [#190](https://github.com/eloeyhe/SistemaPedidos/pull/190) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
+
+- [feature/esp-actividades-3-4-5-add-diagrama-actividad3] realizo diagramas de actividades de casos de uso 3-4-5, incorporo indices y documentacion en ia/a3
+  Issue: [#199](https://github.com/eloeyhe/SistemaPedidos/issues/199)
+  Issue: [#200](https://github.com/eloeyhe/SistemaPedidos/issues/200)
+  Issue: [#201](https://github.com/eloeyhe/SistemaPedidos/issues/201)
+  Issue: [#202](https://github.com/eloeyhe/SistemaPedidos/issues/202)
+  Issue: [#203](https://github.com/eloeyhe/SistemaPedidos/issues/203)
+  Issue: [#204](https://github.com/eloeyhe/SistemaPedidos/issues/204)
+  PR: [#206](https://github.com/eloeyhe/SistemaPedidos/pull/206) - @nachovelesquen7-rgb (Especialista en Diagramas de Actividades - Casos de Uso 3, 4 y 5)
+
+### Changed
+
+- [feature/esp-secuencia-add-diagrama-secuencia-1] Realizo correccion a nomenclatura a los retornos en los Diagramas .puml
+  Issue: [#163](https://github.com/eloeyhe/SistemaPedidos/issues/163)
+  Issue: [#164](https://github.com/eloeyhe/SistemaPedidos/issues/164)
+  Issue: [#165](https://github.com/eloeyhe/SistemaPedidos/issues/165)
+  Issue: [#166](https://github.com/eloeyhe/SistemaPedidos/issues/166)
+  PR: [#207](https://github.com/eloeyhe/SistemaPedidos/pull/207) - @eloeyhe (Especialista en Diagramas de Secuencia)
+
+  ### Fixed
+  
+- [fix/correcciones-diagramas-actividades-cu03-cu04-cu05] incorporo rama fix y correcciones indicadas por el docente
+  Issue: [#210](https://github.com/eloeyhe/SistemaPedidos/issues/210)
+  PR: [#211](https://github.com/eloeyhe/SistemaPedidos/pull/211) - @nachovelesquen7-rgb (Especialista en Diagramas de Actividades - Casos de Uso 3, 4 y 5)
+
+- [fix/correccion-artefactos-cu03-rc10] Unifico los artefactos de CU03 segun RC10
+  Issue: [#218](https://github.com/eloeyhe/SistemaPedidos/issues/218)
+  PR: [#219](https://github.com/eloeyhe/SistemaPedidos/pull/219) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
+
+- [fix/correccion-titulos-changelog-rc1-rc2-rc4] Corrijo titulos y referencias del changelog segun RC1, RC2 y RC4
+  Issue: [#215](https://github.com/eloeyhe/SistemaPedidos/issues/215)
+  PR: [#214](https://github.com/eloeyhe/SistemaPedidos/pull/214) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
+
+- [fix/agrego-fuentes-indice-secuencia-rc6] Agrego enlaces a las fuentes puml en el indice de secuencia segun RC6
+  Issue: [#216](https://github.com/eloeyhe/SistemaPedidos/issues/216)
+  PR: [#217](https://github.com/eloeyhe/SistemaPedidos/pull/217) - @santimarM (Especialista en Diagramas de Actividades - Casos de Uso 1 y 2)
+
+- [fix/correcciones-changelog-y-documentador-coordinador] correcciones changelog y documentador coordinador
+  Issue: [#220](https://github.com/eloeyhe/SistemaPedidos/issues/220)
+  PR: [#221](https://github.com/eloeyhe/SistemaPedidos/pull/221) - @Leandro2107 (Documentador y Coordinador de Repositorio)
+
 
 ## [Primer Parcial] - 2026-10-03
 
@@ -14,69 +80,69 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/doc-coord-repo-update-readme-md] creo estrucutra de repositorio
   Issue: [#110](https://github.com/eloeyhe/SistemaPedidos/issues/110)
   Issue: [#116](https://github.com/eloeyhe/SistemaPedidos/issues/116)
-  issue: [#118](https://github.com/eloeyhe/SistemaPedidos/issues/118)
+  Issue: [#118](https://github.com/eloeyhe/SistemaPedidos/issues/118)
   PR: [#117](https://github.com/eloeyhe/SistemaPedidos/pull/117) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 - [feature/esp-extension-ocp-add-anexo-ocp] Realizo el OCP con todas sus carpetas y datos correspondientes
   Issue: [#120](https://github.com/eloeyhe/SistemaPedidos/issues/120)
   Issue: [#121](https://github.com/eloeyhe/SistemaPedidos/issues/121)
-  issue: [#122](https://github.com/eloeyhe/SistemaPedidos/issues/122)
-  issue: [#123](https://github.com/eloeyhe/SistemaPedidos/issues/123)
-  issue: [#124](https://github.com/eloeyhe/SistemaPedidos/issues/124)
-  issue: [#125](https://github.com/eloeyhe/SistemaPedidos/issues/125)
+  Issue: [#122](https://github.com/eloeyhe/SistemaPedidos/issues/122)
+  Issue: [#123](https://github.com/eloeyhe/SistemaPedidos/issues/123)
+  Issue: [#124](https://github.com/eloeyhe/SistemaPedidos/issues/124)
+  Issue: [#125](https://github.com/eloeyhe/SistemaPedidos/issues/125)
   PR: [#133](https://github.com/eloeyhe/SistemaPedidos/pull/133) - @eloeyhe (Especialista en Principios de Extension(OCP + LSP))
 
 - [feature/esp-srp-add-anexo-srp] agrego 02-srp.md, .png, .puml, y especialista-srp.md
   Issue: [#120](https://github.com/eloeyhe/SistemaPedidos/issues/120)
   Issue: [#121](https://github.com/eloeyhe/SistemaPedidos/issues/121)
-  issue: [#122](https://github.com/eloeyhe/SistemaPedidos/issues/122)
-  issue: [#123](https://github.com/eloeyhe/SistemaPedidos/issues/123)
-  issue: [#124](https://github.com/eloeyhe/SistemaPedidos/issues/124)
+  Issue: [#122](https://github.com/eloeyhe/SistemaPedidos/issues/122)
+  Issue: [#123](https://github.com/eloeyhe/SistemaPedidos/issues/123)
+  Issue: [#124](https://github.com/eloeyhe/SistemaPedidos/issues/124)
   PR: [#126](https://github.com/eloeyhe/SistemaPedidos/pull/126) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 
 - [feature/esp-extension-lsp-add-anexo-lsp] Creo las carpetas y archivos con datos correspondientes a LSP
   Issue: [#135](https://github.com/eloeyhe/SistemaPedidos/issues/135)
   Issue: [#136](https://github.com/eloeyhe/SistemaPedidos/issues/136)
-  issue: [#137](https://github.com/eloeyhe/SistemaPedidos/issues/137)
-  issue: [#138](https://github.com/eloeyhe/SistemaPedidos/issues/138)
-  issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
-  issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
+  Issue: [#137](https://github.com/eloeyhe/SistemaPedidos/issues/137)
+  Issue: [#138](https://github.com/eloeyhe/SistemaPedidos/issues/138)
+  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  Issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
   PR: [#141](https://github.com/eloeyhe/SistemaPedidos/pull/141) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 - [feature/esp-dip-add-anexo-dip] Creo archivos y docs correspondientes al rol DIP
   Issue: [#143](https://github.com/eloeyhe/SistemaPedidos/issues/143)
   Issue: [#144](https://github.com/eloeyhe/SistemaPedidos/issues/144)
-  issue: [#145](https://github.com/eloeyhe/SistemaPedidos/issues/145)
-  issue: [#146](https://github.com/eloeyhe/SistemaPedidos/issues/146)
-  issue: [#147](https://github.com/eloeyhe/SistemaPedidos/issues/147)
-  issue: [#148](https://github.com/eloeyhe/SistemaPedidos/issues/148)
-  issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
+  Issue: [#145](https://github.com/eloeyhe/SistemaPedidos/issues/145)
+  Issue: [#146](https://github.com/eloeyhe/SistemaPedidos/issues/146)
+  Issue: [#147](https://github.com/eloeyhe/SistemaPedidos/issues/147)
+  Issue: [#148](https://github.com/eloeyhe/SistemaPedidos/issues/148)
+  Issue: [#149](https://github.com/eloeyhe/SistemaPedidos/issues/149)
   PR: [#150](https://github.com/eloeyhe/SistemaPedidos/pull/150) - @eloeyhe (Especialista en Inversión de Dependencias)
-  
+
 - [feature/esp-isp-add-anexo-isp] Se creo la rama e issues y se agregaron los archivos solicitados para el repositorio.
   Issue: [#102](https://github.com/eloeyhe/SistemaPedidos/issues/102)
   Issue: [#103](https://github.com/eloeyhe/SistemaPedidos/issues/103)
-  issue: [#104](https://github.com/eloeyhe/SistemaPedidos/issues/104)
-  issue: [#105](https://github.com/eloeyhe/SistemaPedidos/issues/105)
-  issue: [#106](https://github.com/eloeyhe/SistemaPedidos/issues/106)
-  issue: [#107](https://github.com/eloeyhe/SistemaPedidos/issues/107)
-  issue: [#108](https://github.com/eloeyhe/SistemaPedidos/issues/108)
+  Issue: [#104](https://github.com/eloeyhe/SistemaPedidos/issues/104)
+  Issue: [#105](https://github.com/eloeyhe/SistemaPedidos/issues/105)
+  Issue: [#106](https://github.com/eloeyhe/SistemaPedidos/issues/106)
+  Issue: [#107](https://github.com/eloeyhe/SistemaPedidos/issues/107)
+  Issue: [#108](https://github.com/eloeyhe/SistemaPedidos/issues/108)
   PR: [#151](https://github.com/eloeyhe/SistemaPedidos/pull/151) - @Leandro2107 (Especialista en ISP)
 
 - [feature/doc-coord-repo-update-readme-md] realizo code review, actualizo anexos y changelog
   Issue: [#111](https://github.com/eloeyhe/SistemaPedidos/issues/111)
   Issue: [#112](https://github.com/eloeyhe/SistemaPedidos/issues/112)
-  issue: [#113](https://github.com/eloeyhe/SistemaPedidos/issues/113)
-  issue: [#114](https://github.com/eloeyhe/SistemaPedidos/issues/114)
-  issue: [#115](https://github.com/eloeyhe/SistemaPedidos/issues/115)
+  Issue: [#113](https://github.com/eloeyhe/SistemaPedidos/issues/113)
+  Issue: [#114](https://github.com/eloeyhe/SistemaPedidos/issues/114)
+  Issue: [#115](https://github.com/eloeyhe/SistemaPedidos/issues/115)
   PR: [#152](https://github.com/eloeyhe/SistemaPedidos/pull/152) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 ### Fixed
 
 - [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Realizo RC2, RC3, RC4, RC5 y RC6 en cuanto a OCP y LSP
- Issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
- Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  Issue: [#131](https://github.com/eloeyhe/SistemaPedidos/issues/131)
+  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
   PR: [#155](https://github.com/eloeyhe/SistemaPedidos/pull/155) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 - [fix/esp-dip-correccion-diagrama-dip] Corrijo la relación Item_pedido - IElementoMenu y aplico el prefijo I a las interfaces de DIP (RC1, RC15)
@@ -92,12 +158,12 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#159](https://github.com/eloeyhe/SistemaPedidos/pull/159) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 - [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo nomenclatura de Estrategia.. por IEstrategia..
- Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
   PR: [#160](https://github.com/eloeyhe/SistemaPedidos/pull/160) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 - [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Realizo RCs correspondientes a mi rol (RC15, RC18 y RC21. Changelog: RC5 y RC16)
- Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139) 
- PR: [#167](https://github.com/eloeyhe/SistemaPedidos/pull/167) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  PR: [#167](https://github.com/eloeyhe/SistemaPedidos/pull/167) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 - [fix/doc-coord-correccion-changelog-ia] Corrección de las Request Changes (RC) asignadas.
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
@@ -108,14 +174,14 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#169](https://github.com/eloeyhe/SistemaPedidos/pull/169) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 - [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo nomenclatura en anexos/principios-solid/02-ocp.md y lsp.md
- Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139) 
- PR: [#170](https://github.com/eloeyhe/SistemaPedidos/pull/170) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+  Issue: [#139](https://github.com/eloeyhe/SistemaPedidos/issues/139)
+  PR: [#170](https://github.com/eloeyhe/SistemaPedidos/pull/170) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 - [fix/mejoras-documentacion-ocp-lsp] Mejora y pulida a la documentacion de principios OCP y LSP
- Issue: [#129](https://github.com/eloeyhe/SistemaPedidos/issues/129)
- Issue: [#135](https://github.com/eloeyhe/SistemaPedidos/issues/135)
- Issue: [#137](https://github.com/eloeyhe/SistemaPedidos/issues/137)
- PR: [#171](https://github.com/eloeyhe/SistemaPedidos/pull/171) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+  Issue: [#129](https://github.com/eloeyhe/SistemaPedidos/issues/129)
+  Issue: [#135](https://github.com/eloeyhe/SistemaPedidos/issues/135)
+  Issue: [#137](https://github.com/eloeyhe/SistemaPedidos/issues/137)
+  PR: [#171](https://github.com/eloeyhe/SistemaPedidos/pull/171) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 - [fix/doc-coord-correccion-changelog-ia] realizo code review hacia PR #171.
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
@@ -126,46 +192,44 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#173](https://github.com/eloeyhe/SistemaPedidos/pull/173) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 - [fix/correcciones-documentacion-dip] Realizo correcciones a la documentacion del principio DIP
- Issue: [#144](https://github.com/eloeyhe/SistemaPedidos/issues/144)
- Issue: [#146](https://github.com/eloeyhe/SistemaPedidos/issues/146)
- Issue: [#143](https://github.com/eloeyhe/SistemaPedidos/issues/143)
- PR: [#177](https://github.com/eloeyhe/SistemaPedidos/pull/177) - @eloeyhe (Especialista en Inversión de Dependencias)
+  Issue: [#144](https://github.com/eloeyhe/SistemaPedidos/issues/144)
+  Issue: [#146](https://github.com/eloeyhe/SistemaPedidos/issues/146)
+  Issue: [#143](https://github.com/eloeyhe/SistemaPedidos/issues/143)
+  PR: [#177](https://github.com/eloeyhe/SistemaPedidos/pull/177) - @eloeyhe (Especialista en Inversión de Dependencias)
 
 - [fix/doc-coord-correccion-changelog-ia] realizo code review de PR #177.
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
   PR: [#178](https://github.com/eloeyhe/SistemaPedidos/pull/178) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 - [fix/nuevos-ajustes-en-diagramas-ISP] [ISP] Corregir diagrama y anexo de Segregación de Interfaces.
-Issue: [#174](https://github.com/eloeyhe/SistemaPedidos/issues/174)
-PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (Especialista en ISP)
+  Issue: [#174](https://github.com/eloeyhe/SistemaPedidos/issues/174)
+  PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (Especialista en ISP)
 
 - [fix/doc-coord-correccion-changelog-ia] realizo correcciones en el changelog
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
   PR: [#179](https://github.com/eloeyhe/SistemaPedidos/pull/179) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 - [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Corrijo la nomenclatura en especialista-ocp/lsp
- Issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
- Issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
- PR: [#180](https://github.com/eloeyhe/SistemaPedidos/pull/180) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+  Issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
+  Issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
+  PR: [#180](https://github.com/eloeyhe/SistemaPedidos/pull/180) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 - [fix/doc-coord-correccion-changelog-ia] realizo code review a PR #180
   Issue: [#154](https://github.com/eloeyhe/SistemaPedidos/issues/154)
   PR: [#181](https://github.com/eloeyhe/SistemaPedidos/pull/181) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio + srp)
 
 - [fix/correccion-de-relaciones-de-diagramas-OCP-LSP] Arreglo el titulo de la PR #180 en el changelog
- Issue: [#184](https://github.com/eloeyhe/SistemaPedidos/issues/184)
- PR: [#183](https://github.com/eloeyhe/SistemaPedidos/pull/183) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+  Issue: [#184](https://github.com/eloeyhe/SistemaPedidos/issues/184)
+  PR: [#183](https://github.com/eloeyhe/SistemaPedidos/pull/183) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
- - [fix/correcciones-ia-primer-parcial] Realizo correcciones a RCs correspondientes en ia/primer-parcial
- Issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
- Issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
- PR: [#185](https://github.com/eloeyhe/SistemaPedidos/pull/185) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
+- [fix/correcciones-ia-primer-parcial] Realizo correcciones a RCs correspondientes en ia/primer-parcial
+  Issue: [#140](https://github.com/eloeyhe/SistemaPedidos/issues/140)
+  Issue: [#132](https://github.com/eloeyhe/SistemaPedidos/issues/132)
+  PR: [#185](https://github.com/eloeyhe/SistemaPedidos/pull/185) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
- - [fix/eliminacion-conflicto-ia-a2] Elimino conflicto de linea erronea en ia/a2/diseniador-tarjetas-crc.md
- Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
- PR: [#186](https://github.com/eloeyhe/SistemaPedidos/pull/186) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
-
-
+- [fix/eliminacion-conflicto-ia-a2] Elimino conflicto de linea erronea en ia/a2/diseniador-tarjetas-crc.md
+  Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
+  PR: [#186](https://github.com/eloeyhe/SistemaPedidos/pull/186) - @eloeyhe (Especialista en Principios de Extensión (OCP + LSP))
 
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
 
@@ -182,7 +246,7 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
   Issue: [#65](https://github.com/eloeyhe/SistemaPedidos/issues/65)
   Issue: [#66](https://github.com/eloeyhe/SistemaPedidos/issues/66)
   Issue: [#67](https://github.com/eloeyhe/SistemaPedidos/issues/67)
-  PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)  
+  PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)
 
 - [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego tarjetas CRC
   Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
@@ -198,7 +262,7 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
   Issue: [#76](https://github.com/eloeyhe/SistemaPedidos/issues/76)
   PR: [#72](https://github.com/eloeyhe/SistemaPedidos/pull/72) - @AgustinCalaver (Modelador de Diagramas de Casos de Uso)
 
-- [feature/doc-coord-repo-update-readme-md] completo documentador-coordinador.md, README.md 
+- [feature/doc-coord-repo-update-readme-md] completo documentador-coordinador.md, README.md
   Issue: [#49](https://github.com/eloeyhe/SistemaPedidos/issues/49)
   Issue: [#50](https://github.com/eloeyhe/SistemaPedidos/issues/50)
   Issue: [#51](https://github.com/eloeyhe/SistemaPedidos/issues/51)
@@ -207,51 +271,49 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
   Issue: [#55](https://github.com/eloeyhe/SistemaPedidos/issues/55)
   PR: [#77](https://github.com/eloeyhe/SistemaPedidos/pull/77) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-  
 ### Fixed
 
 - [fix/doc-coord-fix-changelog-and-naming] envio correcciones en changelog, hambas template y actualizo README
- Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
   PR: [#79](https://github.com/eloeyhe/SistemaPedidos/pull/79) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-- [fix/correcciones-y-creacion-de-tarjetas-crc-restantes]Aplico correcciones solicitadas sobre las Tarjetas CRC
- Issue: [#41](https://github.com/eloeyhe/SistemaPedidos/issues/41)
+- [fix/correcciones-y-creacion-de-tarjetas-crc-restantes] Aplico correcciones solicitadas sobre las Tarjetas CRC
+  Issue: [#41](https://github.com/eloeyhe/SistemaPedidos/issues/41)
   PR: [#82](https://github.com/eloeyhe/SistemaPedidos/pull/82) - @eloeyhe (Diseñador de Tarjetas CRC)
 
 - [fix/correccion-RC6-escenarios-casos-de-uso] corregir introducción de escenarios casos de uso
   Issue: [#64](https://github.com/eloeyhe/SistemaPedidos/issues/64)
-  PR: [#83](https://github.com/eloeyhe/SistemaPedidos/pull/83) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)  
+  PR: [#83](https://github.com/eloeyhe/SistemaPedidos/pull/83) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)
 
 - [fix/correcciones-y-creacion-de-tarjetas-crc-restantes] Corrijo errores RC3
- Issue: [#41](https://github.com/eloeyhe/SistemaPedidos/issues/41)
+  Issue: [#41](https://github.com/eloeyhe/SistemaPedidos/issues/41)
   PR: [#85](https://github.com/eloeyhe/SistemaPedidos/pull/85) - @eloeyhe (Diseñador de Tarjetas CRC)
 
 - [fix/doc-coord-fix-changelog-and-naming] realizo correcciones en changelog
- Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
   PR: [#84](https://github.com/eloeyhe/SistemaPedidos/pull/84) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-- [fix/modelador-diag-casos-uso-corregir-actividad-2]Fix: Correcciones en diagramas e índices de Casos de Uso
- Issue: [#80](https://github.com/eloeyhe/SistemaPedidos/issues/80)
- PR: [#81](https://github.com/eloeyhe/SistemaPedidos/pull/81) - @cmariano93-netizen (Modelador de Diagramas de Casos de Uso)
-
+- [fix/modelador-diag-casos-uso-corregir-actividad-2] Fix: Correcciones en diagramas e índices de Casos de Uso
+  Issue: [#80](https://github.com/eloeyhe/SistemaPedidos/issues/80)
+  PR: [#81](https://github.com/eloeyhe/SistemaPedidos/pull/81) - @cmariano93-netizen (Modelador de Diagramas de Casos de Uso)
 
 - [fix/doc-coord-fix-changelog-and-naming] hago correcciones en changelog.md solicitadas por el docente
- Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
   PR: [#87](https://github.com/eloeyhe/SistemaPedidos/pull/87) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
 - [fix/doc-coord-fix-changelog-and-naming] realizo nuevas correcciones asignadas por el docente en el changelog
- Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
   PR: [#88](https://github.com/eloeyhe/SistemaPedidos/pull/88) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
 - [fix/doc-coord-fix-changelog-and-naming] resuevlo PC 17 y RC16
- Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
   PR: [#89](https://github.com/eloeyhe/SistemaPedidos/pull/89) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
 - [fix/doc-coord-fix-changelog-and-naming] realizo cambios en carpeta ia y changelog
- Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
+  Issue: [#86](https://github.com/eloeyhe/SistemaPedidos/issues/86)
   PR: [#91](https://github.com/eloeyhe/SistemaPedidos/pull/91) - @nachovelesquen7-rgb (Documentador y Coordinador de Repositorio)
 
-  - [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Realizo las correcciones sobre el indice de tarjetas crc y el apartado de ia
+- [fix/correcion-y-creacion-de-tarjetas-crc-restantes] Realizo las correcciones sobre el indice de tarjetas crc y el apartado de ia
   PR: [#90](https://github.com/eloeyhe/SistemaPedidos/pull/90) - @eloeyhe (Diseñador de Tarjetas CRC)
 
 ## [Release Actividad Obligatoria N°1] - 2026-09-17
@@ -268,10 +330,10 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
   Issue: [#14](https://github.com/eloeyhe/SistemaPedidos/issues/14)
   Issue: [#15](https://github.com/eloeyhe/SistemaPedidos/issues/15)
   PR: [#31](https://github.com/eloeyhe/SistemaPedidos/pull/31) - @eloeyhe (Documentador y Coordinador de Repositorio:)
-  
+
 - [feature/doc-coord-repo-update-readme-md] Realizo los ultimos correcciones al trabajo
-  Issue: [#16](https://github.com/eloeyhe/SistemaPedidos/issues/11)
-  Issue: [#17](https://github.com/eloeyhe/SistemaPedidos/issues/12)
+  Issue: [#16](https://github.com/eloeyhe/SistemaPedidos/issues/16)
+  Issue: [#17](https://github.com/eloeyhe/SistemaPedidos/issues/17)
   PR: [#36](https://github.com/eloeyhe/SistemaPedidos/pull/36) - @eloeyhe (Documentador y Coordinador de Repositorio:)
 
 - [feature/analista-requerimentos-add-introduccion-md] Agrego introduccion.md
@@ -283,8 +345,8 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
   PR: [#30](https://github.com/eloeyhe/SistemaPedidos/pull/30) - @AgustinCalaver (Analista de requerimientos)
 
 - [feature/diseniador-clases-add-boceto-inicial] Agrego boceto inicial del diseño de clases en introduccion.md, realizo correccion de ruta y actualizo changelog
-  Issue: [[#32](https://github.com/eloeyhe/SistemaPedidos/issues/32)]
-  PR: [#34](https://github.com/eloeyhe/SistemaPedidos/pull/34#issue-5294730443)- @nachovelesquen7-rgb (Diseñador de clases iniciales)
+  Issue: [#32](https://github.com/eloeyhe/SistemaPedidos/issues/32)
+  PR: [#34](https://github.com/eloeyhe/SistemaPedidos/pull/34) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
 
 - [feature/modelador-casos-uso-update-use-case-1] Se agregaron casos de uso en introduccion.md
   Issue: [#20](https://github.com/eloeyhe/SistemaPedidos/issues/20)
@@ -300,6 +362,7 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
   PR: [#18](https://github.com/eloeyhe/SistemaPedidos/pull/18) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
 
 ### Changed
+
 - [feature/analista-requerimentos-add-introduccion-md] Ampliación de las descripciones de "RF" y "RNF", eliminación de encabezado y corrección del link de NotebookLM
   Issue: [#28](https://github.com/eloeyhe/SistemaPedidos/issues/28)
   Issue: [#29](https://github.com/eloeyhe/SistemaPedidos/issues/29)
@@ -307,7 +370,7 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
 
 - [feature/diseniador-clases-add-boceto-inicial] Se actualizo 01-boceto-inicial.excalidraw y 01_boceto_inicial.png. Se remplazo la entidad Detalle_pedido por Item_Pedido, Se incorporó Personalizacion_item, fue creada la subentidad Metodo_pago y se actualizaron las relaciones.
   Issue: [#10](https://github.com/eloeyhe/SistemaPedidos/issues/10)
-  PR: [#34](https://github.com/eloeyhe/SistemaPedidos/pull/34#issue-5294730443) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
+  PR: [#34](https://github.com/eloeyhe/SistemaPedidos/pull/34) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
 
 - [feature/modelador-casos-uso-update-use-case-1] Se corrigio la introduccion.md solucionando los errores de logica en los casos de usos.
   Issue: [#20](https://github.com/eloeyhe/SistemaPedidos/issues/20)
@@ -322,7 +385,8 @@ PR: [#176](https://github.com/eloeyhe/SistemaPedidos/pull/176) - @Leandro2107 (E
   PR: [#35](https://github.com/eloeyhe/SistemaPedidos/pull/35) - @nachovelesquen7-rgb (Diseñador de clases iniciales)
 
 ### Fixed
-- [feature/doc-coord-repo-update-readme-md] Tareas realizadas: completo readme, anexos e introduccion de POO para Sabor Kiosco. Ademas completo changelog. 
+
+- [feature/doc-coord-repo-update-readme-md] Tareas realizadas: completo readme, anexos e introduccion de POO para Sabor Kiosco. Ademas completo changelog.
   PR: [#31](https://github.com/eloeyhe/SistemaPedidos/pull/31) - @eloeyhe (Documentador y Coordinador de Repositorio:)
 
 - [feature/doc-coord-repo-update-readme-md] fix: Reorganizo el Changelog

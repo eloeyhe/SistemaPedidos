@@ -1,0 +1,86 @@
+@startuml 04-actividad-tomar-pedido-01
+skinparam dpi 150
+skinparam ArrowFontSize 11
+
+title Diagrama de Actividad - Tomar Pedido (CU01)
+
+|Cliente|
+start
+:Solicitar pedido al mostrador;
+
+|Usuario de Mostrador|
+:Iniciar nuevo pedido;
+
+|Sistema de Pedidos|
+:Generar número único del pedido
+y registrar fecha y hora;
+
+|Usuario de Mostrador|
+:Ingresar nombre o referencia de retiro;
+
+repeat
+  :Seleccionar producto o combo y cantidad;
+  if (¿Requiere personalización?) then (sí)
+    :Agregar personalizaciones
+    (quitar ingredientes o adicionales);
+  else (no)
+  endif
+  |Sistema de Pedidos|
+  :Calcular subtotal del ítem;
+  |Usuario de Mostrador|
+repeat while (¿Agregar otro ítem?) is (sí) not (no)
+
+|Sistema de Pedidos|
+:Calcular total del pedido;
+
+|Usuario de Mostrador|
+if (¿El pedido es prioritario?) then (sí)
+  :Marcar pedido como prioritario;
+else (no)
+endif
+
+|Cliente|
+if (¿El cliente decide no concretar la compra?) then (sí)
+  :Desistir del pedido antes del pago;
+  |Usuario de Mostrador|
+  :Cancelar la operación;
+  |Sistema de Pedidos|
+  :Descartar la carga sin registrar el pedido;
+  stop
+else (no)
+endif
+
+repeat
+  |Cliente|
+  :Elegir medio de pago
+  (efectivo o transferencia);
+  |Usuario de Mostrador|
+  :Registrar medio de pago seleccionado;
+  |Sistema de Pedidos|
+  :Validar medio de pago;
+backward :Informar rechazo de la transferencia;
+repeat while (¿Transferencia rechazada y el cliente reintenta?) is (sí) not (no)
+
+if (¿Pago aprobado?) then (no)
+  :Descartar pedido sin guardarlo;
+  stop
+else (sí)
+endif
+
+:Registrar pago asociado al pedido;
+:Registrar pedido en estado RECIBIDO
+conservando los precios históricos;
+
+fork
+  :Enviar pedido automáticamente a Cocina;
+  |Cocina|
+  :Visualizar pedido recibido;
+fork again
+  |Usuario de Mostrador|
+  :Informar número de pedido al cliente;
+  |Cliente|
+  :Recibir número de pedido para el retiro;
+end fork
+
+stop
+@enduml
