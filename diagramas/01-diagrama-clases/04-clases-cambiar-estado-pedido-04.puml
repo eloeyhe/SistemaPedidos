@@ -1,4 +1,4 @@
-@startuml 04-clases-cambiar-estado-de-pedido-04
+@startuml 04-clases-cambiar-estado-pedido-04
 title CU04 - Cambiar Estado de Pedido
 skinparam classAttributeIconSize 0
 hide empty members

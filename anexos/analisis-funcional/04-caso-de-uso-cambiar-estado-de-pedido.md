@@ -84,9 +84,9 @@
 
 ## 5. Diagrama de Clases del Caso de Uso
 
-![Diagrama de Clases - Cambiar Estado de Pedido](../../diagramas/01-diagrama-clases/04-clases-cambiar-estado-de-pedido-04.png)
+![Diagrama de Clases - Cambiar Estado de Pedido](../../diagramas/01-diagrama-clases/04-clases-cambiar-estado-pedido-04.png)
 
-Fuente PlantUML: [04-clases-cambiar-estado-de-pedido-04.puml](../../diagramas/01-diagrama-clases/04-clases-cambiar-estado-de-pedido-04.puml)
+Fuente PlantUML: [04-clases-cambiar-estado-pedido-04.puml](../../diagramas/01-diagrama-clases/04-clases-cambiar-estado-pedido-04.puml)
 
 **Clases involucradas:**
 

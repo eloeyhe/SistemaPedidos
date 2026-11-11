@@ -12,5 +12,5 @@
 - Diagramas por Casos de Uso
     - [Diagrama de Clases - Tomar Pedido (CU01)](./01-clases-tomar-pedido-01.png) ([fuente PlantUML](./01-clases-tomar-pedido-01.puml))
 
-    - [Diagrama de Clases - Cambiar Estdo de Pedido](./04-clases-cambiar-estado-de-pedido-04.png)
+    - [Diagrama de Clases - Cambiar Estado de Pedido](./04-clases-cambiar-estado-pedido-04.png)
     - [Diagrama de Clases - Consultar Pedidos Activos](./05-clases-consultar-pedidos-activos-05.png)

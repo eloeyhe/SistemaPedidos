@@ -7,12 +7,12 @@ Este documento registra el proceso de generación asistida con **GitHub Copilot 
 ## 1. Diagrama de Clases - Caso de Uso 4: Cambiar Estado de Pedido
 
 ### 1.1 Archivos de contexto referenciados
-Para la generación del diagrama `diagramas/01-diagrama-clases/04-clases-cambiar-estado-de-pedido-04.puml`, se adjuntaron explícitamente en Copilot Agent Mode los siguientes artefactos del repositorio:
+Para la generación del diagrama `diagramas/01-diagrama-clases/04-clases-cambiar-estado-pedido-04.puml`, se adjuntaron explícitamente en Copilot Agent Mode los siguientes artefactos del repositorio:
 
 - **Boceto inicial de clases (A1):** `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`
-- **Diagrama de caso de uso (A2):** `diagramas/02-casos-de-uso/02-caso-uso-cambiar-estado-de-pedido-04.puml`
+- **Diagrama de caso de uso (A2):** `diagramas/02-casos-de-uso/02-caso-uso-cambiar-estado-pedido-04.puml`
 - **Escenario de caso de uso (A2):** `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-01.md`
-- **Diagrama de actividades (A3):** `diagramas/04-diagramas-actividades/04-actividad-cambiar-estado-de-pedido-04.puml`
+- **Diagrama de actividades (A3):** `diagramas/04-diagramas-actividades/04-actividad-cambiar-estado-pedido-04.puml`
 - **Diagrama de secuencia (A3):** `diagramas/05-diagramas-secuencia/05-secuencia-cambiar-estado-pedido-avance-preparacion-04.puml`
 - **Tarjetas CRC involucradas (A2):**
   - `herramientas-agile/tarjetas-crc/` (`Pedido`, `Estado_pedido`, `Historial_cambio_pedido`, `Usuario`, `UsuarioCocina`, `UsuarioMostrador`)
@@ -23,13 +23,13 @@ Para la generación del diagrama `diagramas/01-diagrama-clases/04-clases-cambiar
 Actúa como un Analista Funcional y Diseñador Orientado a Objetos experto en PlantUML.
 Analiza explícitamente los siguientes archivos de contexto del proyecto SistemaPedidos:
 - #file:diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw
-- #file:diagramas/02-casos-de-uso/02-caso-uso-cambiar-estado-de-pedido-04.puml
+- #file:diagramas/02-casos-de-uso/02-caso-uso-cambiar-estado-pedido-04.puml
 - #file:diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-01.md
-- #file:diagramas/04-diagramas-actividades/04-actividad-cambiar-estado-de-pedido-04.puml
+- #file:diagramas/04-diagramas-actividades/04-actividad-cambiar-estado-pedido-04.puml
 - #file:diagramas/05-diagramas-secuencia/05-secuencia-cambiar-estado-pedido-avance-preparacion-04.puml
 - #file:herramientas-agile/tarjetas-crc/ (tarjetas CRC de Pedido, Estado_pedido, Historial_cambio_pedido, Usuario, UsuarioCocina, UsuarioMostrador)
 
-Genera el código PlantUML para el diagrama de clases específico del Caso de Uso 4 (Cambiar Estado de Pedido) en el archivo `diagramas/01-diagrama-clases/04-clases-cambiar-estado-de-pedido-04.puml` cumpliendo estrictamente estos requisitos:
+Genera el código PlantUML para el diagrama de clases específico del Caso de Uso 4 (Cambiar Estado de Pedido) en el archivo `diagramas/01-diagrama-clases/04-clases-cambiar-estado-pedido-04.puml` cumpliendo estrictamente estos requisitos:
 1. Incluir ÚNICAMENTE las clases, interfaces o enumeraciones que participan en la resolución del Caso de Uso 4 (actualización del estado operativo del pedido siguiendo las transiciones RECIBIDO, EN_PREPARACION, LISTO y ENTREGADO).
 2. Definir para cada clase: nombre exacto, atributos con modificadores de visibilidad (-, +, #) y tipos de datos, y métodos con visibilidad, parámetros tipados y tipo de retorno.
 3. Asegurar coherencia total con las tarjetas CRC y el diagrama de secuencia del CU4: los participantes del diagrama de secuencia y los mensajes enviados deben corresponderse exactamente con los nombres de las clases, atributos y métodos de este diagrama.
