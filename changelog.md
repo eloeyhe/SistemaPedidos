@@ -15,7 +15,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#231](https://github.com/eloeyhe/SistemaPedidos/issues/231)
   Issue: [#232](https://github.com/eloeyhe/SistemaPedidos/issues/232)
   Issue: [#233](https://github.com/eloeyhe/SistemaPedidos/issues/233)
-  PR: [#234]() - @eloeyhe (Analista Funcional de Casos de Uso 4 y 5)
+  PR: [#234](https://github.com/eloeyhe/SistemaPedidos/pull/234) - @eloeyhe (Analista Funcional de Casos de Uso 4 y 5)
 
 ## [Release Actividad Obligatoria N°2] - 2026-09-19
 
