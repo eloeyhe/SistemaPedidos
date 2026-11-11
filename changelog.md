@@ -12,6 +12,15 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#224](https://github.com/eloeyhe/SistemaPedidos/issues/224)
   PR: [#226](https://github.com/eloeyhe/SistemaPedidos/pull/226) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
+- [feature/analista-cu-4-5-add-anexo-cu4-cu5] Realizo Diagramas de Clases y Anexos Funcionales CU4 y CU5
+  Issue: [#228](https://github.com/eloeyhe/SistemaPedidos/issues/228)
+  Issue: [#229](https://github.com/eloeyhe/SistemaPedidos/issues/229)
+  Issue: [#230](https://github.com/eloeyhe/SistemaPedidos/issues/230)
+  Issue: [#231](https://github.com/eloeyhe/SistemaPedidos/issues/231)
+  Issue: [#232](https://github.com/eloeyhe/SistemaPedidos/issues/232)
+  Issue: [#233](https://github.com/eloeyhe/SistemaPedidos/issues/233)
+  PR: [#234](https://github.com/eloeyhe/SistemaPedidos/pull/234) - @eloeyhe (Analista Funcional de Casos de Uso 4 y 5)
+
 ### Changed
 
 - [backport/release-actividad-obligatoria-3] Backport de las correcciones aprobadas de la Actividad Obligatoria N°3 hacia develop
