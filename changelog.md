@@ -83,6 +83,14 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#220](https://github.com/eloeyhe/SistemaPedidos/issues/220)
   PR: [#221](https://github.com/eloeyhe/SistemaPedidos/pull/221) - @Leandro2107 (Documentador y Coordinador de Repositorio)
 
+- [fix/correccion-nomenclatura-changelog-diagrama-secuencia] Se corrigieron los diagramas de secuencia 02, 03, 04 y 05 segun los RCs correspondientes
+  Issue: [#213](https://github.com/eloeyhe/SistemaPedidos/issues/213)
+  PR: [#212](https://github.com/eloeyhe/SistemaPedidos/pull/212) - @eloeyhe (Especialista en Diagramas de Secuencia)
+
+- [fix/correcciones-changelog-y-documentador-coordinador] Se agregaron correcciones en el changelog
+  Issue: [#222](https://github.com/eloeyhe/SistemaPedidos/issues/222)
+  PR: [#223](https://github.com/eloeyhe/SistemaPedidos/pull/223) - @Leandro2107 (Documentador y Coordinador de Repositorio)
+
 
 ## [Primer Parcial] - 2026-10-03
 

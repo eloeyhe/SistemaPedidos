@@ -12,8 +12,8 @@
 
 ## Tareas de coordinación
 
-- **Correcciones de A3:** todos los Request Changes del docente sobre `release/actividad-obligatoria-3` se resolvieron con ramas `fix/` (PRs #211, #212, #214, #217, #219 y #221) y la release se mergeó a `master` (PR #209).
-- **Backport:** se creó `backport/release-actividad-obligatoria-3` desde `master` actualizada para llevar las correcciones aprobadas a `develop` y establecer la base de la Actividad Obligatoria N°4.
+- **Correcciones de A3:** todos los Request Changes del docente sobre `release/actividad-obligatoria-3` se resolvieron con ramas `fix/` (PRs #211, #212, #214, #217, #219, #221 y #223) y la release se mergeó a `master` (PR #209).
+- **Backport:** se creó `backport/release-actividad-obligatoria-3` desde `master` actualizada para llevar las correcciones aprobadas a `develop` y establecer la base de la Actividad Obligatoria N°4 (PR #225, aprobada por otro integrante).
 
 ---
 
@@ -61,3 +61,27 @@ Sugerencia:
 ## Code Reviews realizadas
 
 Las reviews se registran a medida que los integrantes abren sus PRs hacia `develop` (mínimo 4).
+
+| # | PR | Rama | Autor | Resultado |
+|---|----|------|-------|-----------|
+| 1 | | `feature/analista-cu-2-3-add-anexo-cu2-cu3` | Analista Funcional CU2 y CU3 | |
+| 2 | | `feature/analista-cu-4-5-add-anexo-cu4-cu5` | Analista Funcional CU4 y CU5 | |
+| 3 | | `feature/arquitecto-dominio-add-diagrama-final` | Arquitecto de Dominio | |
+| 4 | | | | |
+
+<!-- Por cada review, copiar el bloque siguiente con los datos reales y borrar este comentario antes de la release.
+
+### Review N - PR #XXX
+
+**Rama:** `feature/...`
+**Archivos de contexto referenciados:** anexo, .puml/.png de clases, tarjetas CRC involucradas, diagrama de secuencia del CU.
+
+**Prompt utilizado:** prompt base de este documento, cambiando la rama y los archivos.
+
+**Hallazgos de la IA:**
+1. ...
+
+**Ajustes al output de la IA:** qué hallazgos se descartaron por falta de evidencia y cuáles se trasladaron como comentario a la PR.
+
+**Resultado:** Request changes / Aprobada.
+-->
