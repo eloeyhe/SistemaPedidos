@@ -9,13 +9,13 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ### Added
 
 - [feature/coordinador-devops-add-anexo-cu1] Agrego diagrama de clases y anexo del CU1 Tomar Pedido, índices y registro de IA de A4
-  Issue: [#ISSUE_CU1](https://github.com/eloeyhe/SistemaPedidos/issues/ISSUE_CU1)
-  PR: [#PR_CU1](https://github.com/eloeyhe/SistemaPedidos/pull/PR_CU1) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+  Issue: [#224](https://github.com/eloeyhe/SistemaPedidos/issues/224)
+  PR: [#226](https://github.com/eloeyhe/SistemaPedidos/pull/226) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
 ### Changed
 
 - [backport/release-actividad-obligatoria-3] Backport de las correcciones aprobadas de la Actividad Obligatoria N°3 hacia develop
-  PR: [#PR_BACKPORT](https://github.com/eloeyhe/SistemaPedidos/pull/PR_BACKPORT) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+  PR: [#225](https://github.com/eloeyhe/SistemaPedidos/pull/225) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
 ## [Release Actividad Obligatoria N°3] - 2026-10-22
 
