@@ -21,6 +21,20 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#233](https://github.com/eloeyhe/SistemaPedidos/issues/233)
   PR: [#234](https://github.com/eloeyhe/SistemaPedidos/pull/234) - @eloeyhe (Analista Funcional de Casos de Uso 4 y 5)
 
+- [feature/analista-cu-2-3-add-anexo-cu2-cu3] Agrego diagramas de clases de casos de uso 2 y 3 tanto .png como .puml, anexos de ambos, índice de los mismos, documentación de utilización de la ia
+  Issue: [#236](https://github.com/eloeyhe/SistemaPedidos/issues/236)
+  Issue: [#237](https://github.com/eloeyhe/SistemaPedidos/issues/237)
+  Issue: [#238](https://github.com/eloeyhe/SistemaPedidos/issues/238)
+  Issue: [#239](https://github.com/eloeyhe/SistemaPedidos/issues/239)
+  Issue: [#240](https://github.com/eloeyhe/SistemaPedidos/issues/240)
+  Issue: [#241](https://github.com/eloeyhe/SistemaPedidos/issues/241)
+  Issue: [#242](https://github.com/eloeyhe/SistemaPedidos/issues/242)
+  Issue: [#243](https://github.com/eloeyhe/SistemaPedidos/issues/243)
+  Issue: [#244](https://github.com/eloeyhe/SistemaPedidos/issues/244)
+  Issue: [#245](https://github.com/eloeyhe/SistemaPedidos/issues/245)
+  PR: [#246](https://github.com/eloeyhe/SistemaPedidos/pull/246) - @nachovelesquen7-rgb (Analista Funcioanal de Casos de Uso 2 y 3 )
+
+
 ### Changed
 
 - [backport/release-actividad-obligatoria-3] Backport de las correcciones aprobadas de la Actividad Obligatoria N°3 hacia develop
