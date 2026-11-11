@@ -3,7 +3,7 @@
 - [Diagrama de Clases - Boceto Inicial](./01_boceto_inicial.png)
 
 - Principios Solid
-    - [Diagrama de Clases - SOLID SRP (Single Responsability Principle)](./01-solid-01-srp.png)
+    - [Diagrama de Clases - SOLID SRP (Single Responsibility Principle)](./01-solid-01-srp.png)
     - [Diagrama de Clases - SOLID OCP (Open/Closed Principle)](./01-solid-02-ocp.png)
     - [Diagrama de Clases - SOLID LSP (Liskov Substitution Principle)](./01-solid-03-lsp.png)
     - [Diagrama de Clases - SOLID ISP (Interface Segregation Principle)](./01-solid-04-isp.png)

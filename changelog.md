@@ -32,7 +32,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#243](https://github.com/eloeyhe/SistemaPedidos/issues/243)
   Issue: [#244](https://github.com/eloeyhe/SistemaPedidos/issues/244)
   Issue: [#245](https://github.com/eloeyhe/SistemaPedidos/issues/245)
-  PR: [#246](https://github.com/eloeyhe/SistemaPedidos/pull/246) - @nachovelesquen7-rgb (Analista Funcioanal de Casos de Uso 2 y 3 )
+  PR: [#246](https://github.com/eloeyhe/SistemaPedidos/pull/246) - @nachovelesquen7-rgb (Analista Funcional de Casos de Uso 2 y 3 )
 
 
 ### Changed

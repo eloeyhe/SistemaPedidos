@@ -68,16 +68,16 @@ class Auditoria_pedido {
 }
 
 enum Estado_pedido {
-  recibido
-  en_preparacion
-  listo
-  entregado
-  cancelado
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
 }
 
 enum Metodo_pago {
-  efectivo
-  transferencia
+  EFECTIVO
+  TRANSFERENCIA
 }
 
 UsuarioMostrador --|> Usuario

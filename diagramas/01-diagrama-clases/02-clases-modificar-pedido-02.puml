@@ -88,42 +88,38 @@ class ProcesadorPago {
 }
 
 class Historial_pago {
-  -pago: Pago
   -tipo: Tipo_movimiento
   -monto: Decimal
   -motivo: String
   -fechayhora: DateTime
-  -usuario: Usuario
   +registrarMovimiento(pago: Pago, tipo: Tipo_movimiento, monto: Decimal, motivo: String, usuario: Usuario): void
 }
 
 class Historial_cambio_pedido {
-  -pedido: Pedido
   -campo: String
   -valor_anterior: String
   -valor_nuevo: String
   -fechayhora: DateTime
-  -usuario: Usuario
   +registrarCambioPedido(pedido: Pedido, campo: String, valorAnterior: String, valorNuevo: String, usuario: Usuario): void
   }
 
 enum Estado_pedido {
-  recibido
-  en_preparacion
-  listo
-  entregado
-  cancelado
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
 }
 
 enum Metodo_pago {
-  efectivo
-  transferencia
+  EFECTIVO
+  TRANSFERENCIA
 }
 
 enum Tipo_movimiento {
-  cobro_inicial
-  ajuste
-  devolucion
+  COBRO_INICIAL
+  AJUSTE
+  DEVOLUCION
 }
 
 ' Herencia

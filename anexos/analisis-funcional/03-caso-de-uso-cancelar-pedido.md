@@ -170,6 +170,14 @@ No se representa la destrucción explícita de objetos persistentes. El pedido, 
 | Asociación | Auditoria_pedido → Usuario | Cada registro identifica al usuario responsable. |
 | Asociación | Auditoria_pedido → UsuarioEncargado | El registro puede identificar al Encargado que autorizó la cancelación. |
 
+
+**Justificación de la clase Pago:**
+
+La clase `Pago` se mantiene en el diagrama de clases porque representa los pagos asociados al pedido, los cuales deben conservarse incluso después de su cancelación para garantizar la trazabilidad y auditoría.
+
+No participa directamente en el diagrama de secuencia porque el proceso de cancelación no contempla operaciones de cobro ni devolución.
+
+
 ---
 
 ## 6. Pseudocódigo
