@@ -1,0 +1,102 @@
+
+@startuml
+title CU03 - Cancelar Pedido
+top to bottom direction
+hide circle
+skinparam classAttributeIconSize 0
+skinparam defaultFontSize 14
+skinparam classFontSize 15
+skinparam classAttributeFontSize 13
+skinparam dpi 160
+
+abstract class Usuario {
+  -nombre: String
+  -usuario: String
+  -passwordHash: String
+  -activo: Boolean
+  +autentificar(): Boolean
+}
+
+class UsuarioMostrador {
+  -numeroCaja: Integer
+}
+
+class UsuarioEncargado {
+  -claveSupervision: String
+  +autorizarCancelacion(): Boolean
+  +solicitarClaveSupervision(numeroPedido: Integer): Boolean
+  +validarClaveSupervision(claveSupervision: String): Boolean
+}
+
+class PantallaPedidos {
+  +solicitarCancelacionPedido(numeroPedido: Integer): void
+  +confirmarCancelacion(motivo: String): void
+  +responderSolicitudCancelacion(numeroPedido: Integer): void
+}
+
+class ServicioPedidos {
+  +consultarPedidoYEstado(numeroPedido: Integer): Pedido
+  +procesarCancelacion(numeroPedido: Integer, motivo: String, usuario: Usuario): void
+  +procesarCancelacion(numeroPedido: Integer, motivo: String, usuario: Usuario, autorizante: UsuarioEncargado): void
+  +solicitarAutorizacion(numeroPedido: Integer): void
+}
+
+class Pedido {
+  -fecha: Date
+  -estado: Estado_pedido
+  -prioritario: Boolean
+  -numeroPedido: Integer
+  -referenciaRetiro: String
+  +obtenerEstado(numeroPedido: Integer): Estado_pedido
+  +cancelarPedido(motivo: String): void
+  +cambiarEstado(nuevoEstado: Estado_pedido): void
+}
+
+class Pago {
+  -monto: Decimal
+  -metodoDePago: Metodo_pago
+}
+
+class Auditoria_pedido {
+  -accion: String
+  -detalles: String
+  -motivo: String
+  -fechayhora: DateTime
+  +registrarAccion(pedido: Pedido, usuario: Usuario, accion: String, fechaHora: DateTime): void
+  +registrarAccion(pedido: Pedido, usuario: Usuario, autorizante: UsuarioEncargado, accion: String, fechaHora: DateTime): void
+  +registrarDetalles(motivo: String, estadoAnterior: Estado_pedido, estadoNuevo: Estado_pedido): void
+}
+
+enum Estado_pedido {
+  recibido
+  en_preparacion
+  listo
+  entregado
+  cancelado
+}
+
+enum Metodo_pago {
+  efectivo
+  transferencia
+}
+
+UsuarioMostrador --|> Usuario
+UsuarioEncargado --|> Usuario
+
+UsuarioMostrador ..> PantallaPedidos : interactua
+UsuarioEncargado ..> PantallaPedidos : interactua
+
+PantallaPedidos ..> ServicioPedidos
+ServicioPedidos ..> Pedido
+ServicioPedidos ..> Auditoria_pedido
+ServicioPedidos ..> UsuarioEncargado
+
+Pedido "1" -- "0..*" Pago : pagos
+Pedido "1" -- "0..*" Auditoria_pedido : auditoria
+
+Auditoria_pedido "0..*" --> "1" Usuario : responsable
+Auditoria_pedido "0..*" --> "0..1" UsuarioEncargado : autorizante
+
+Pedido --> Estado_pedido
+Pago --> Metodo_pago
+@enduml
