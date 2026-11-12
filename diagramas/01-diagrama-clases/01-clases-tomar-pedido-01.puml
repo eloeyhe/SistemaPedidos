@@ -26,7 +26,7 @@ class UsuarioMostrador {
 }
 
 ' ===================== Control / frontera (diagrama de secuencia) =====================
-class SistemaPedidos <<control>> {
+class ServicioPedidos <<control>> {
   - pedidos : List<Pedido>
   - pedidoEnCurso : Pedido
   - itemEnCurso : Item_pedido
@@ -152,7 +152,7 @@ Producto <|-- ProductoPreparado
 Producto <|-- ProductoEnvasado
 
 ' Agregación: el sistema agrupa los pedidos, pero estos persisten por auditoría (RF5)
-SistemaPedidos "1" o-- "0..*" Pedido : gestiona >
+ServicioPedidos "1" o-- "0..*" Pedido : gestiona >
 
 ' Composición: los ítems y sus personalizaciones no existen fuera de su todo
 Pedido "1" *-- "1..*" Item_pedido : contiene >
@@ -163,11 +163,11 @@ Item_pedido "0..*" --> "0..1" Producto : referencia >
 Item_pedido "0..*" --> "0..1" Combo : referencia >
 Pedido "1" -- "0..1" Pago : se abona con >
 Pedido "0..*" --> "1" UsuarioMostrador : creadoPor >
-SistemaPedidos "1" --> "1" PantallaCocina : notifica >
+ServicioPedidos "1" --> "1" PantallaCocina : notifica >
 
 ' Dependencias
-UsuarioMostrador ..> SistemaPedidos : <<use>>
-SistemaPedidos ..> Pago : <<create>>
+UsuarioMostrador ..> ServicioPedidos : <<use>>
+ServicioPedidos ..> Pago : <<create>>
 Pago ..> ProcesadorPago : <<use>>
 Pago ..> Metodo_pago
 Pedido ..> Estado_pedido
