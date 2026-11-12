@@ -25,9 +25,16 @@ Este proyecto tiene como objetivo el diseño orientado a objetos de una aplicaci
 
 ## Actividad Obligatoria N°4 - Diagrama de Clases
 
-En esta entrega se profundiza el modelado orientado a objetos del Sistema de Pedidos: cada caso de uso tiene un anexo con su trazabilidad a los requisitos, los diagramas de actividades y secuencia de A3, un diagrama de clases propio en PlantUML y un pseudocódigo orientado a objetos.
+En esta entrega se profundiza el modelado orientado a objetos del Sistema de Pedidos: cada caso de uso tiene un anexo con su trazabilidad a los requisitos, los diagramas de actividades y secuencia de A3, un diagrama de clases propio en PlantUML y un pseudocódigo orientado a objetos. Los cinco diagramas parciales se integran en un diagrama de clases final unificado.
 
 - [Análisis Funcional por Caso de Uso](anexos/analisis-funcional/analisis_casos_uso.md)
   - [Caso de Uso 1 - Tomar Pedido](anexos/analisis-funcional/01-caso-de-uso-tomar-pedido.md)
+  - [Caso de Uso 2 - Modificar Pedido](anexos/analisis-funcional/02-caso-de-uso-modificar-pedido.md)
+  - [Caso de Uso 3 - Cancelar Pedido](anexos/analisis-funcional/03-caso-de-uso-cancelar-pedido.md)
+  - [Caso de Uso 4 - Cambiar Estado de Pedido](anexos/analisis-funcional/04-caso-de-uso-cambiar-estado-de-pedido.md)
+  - [Caso de Uso 5 - Consultar Pedidos Activos](anexos/analisis-funcional/05-caso-de-uso-consultar-pedidos-activos.md)
 - [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_de_clases.md)
+- [Diagrama de Clases Final - Sistema de Pedidos](anexos/analisis-funcional/diagrama-clases-final.md)
+- [Los Cuatro Pilares del Paradigma Orientado a Objetos](anexos/analisis-funcional/pilares-poo.md)
+- [Pseudocódigo - Happy Path Global del Sistema](anexos/analisis-funcional/happy-path-global.md)
 - [Registro de uso de IA - A4](ia/a4/)
