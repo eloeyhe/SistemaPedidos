@@ -4,7 +4,7 @@
 
 ## 1. Escenario Elegido
 
-**Escenario:** Un cliente pide en el mostrador un combo y un producto personalizado, paga por transferencia, agrega un producto antes de que se prepare y paga la diferencia. Cocina prepara el pedido y el mostrador lo entrega. Es el escenario más representativo porque recorre el ciclo de vida completo de un pedido, desde su registro hasta su entrega, y en cada paso intervienen los dos tipos de usuario del flujo normal (mostrador y cocina) y casi todas las clases del dominio.
+**Escenario:** Un cliente pide en el mostrador un combo y un producto personalizado, paga por transferencia, agrega un producto antes de que se prepare y paga la diferencia. Cocina prepara el pedido y el mostrador lo entrega. Es el escenario más representativo porque recorre el ciclo de vida completo de un pedido, desde su registro hasta su entrega, y en cada paso intervienen los dos tipos de usuario del flujo normal (Usuario de Mostrador y Usuario de Cocina) y casi todas las clases del dominio.
 
 **Casos de uso involucrados:** CU1 (Tomar Pedido), CU2 (Modificar Pedido) y CU4 (Cambiar Estado de Pedido)
 

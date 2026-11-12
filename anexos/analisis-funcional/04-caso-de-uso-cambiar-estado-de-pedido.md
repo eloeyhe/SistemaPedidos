@@ -75,7 +75,7 @@
 - `iniciarPreparacion(numeroPedido)`, `finalizarPreparacion(numeroPedido)` y `registrarEntrega(numeroPedido)` → expresan la acción del actor correspondiente; la pantalla solicita `solicitarCambioEstado(numeroPedido, nuevoEstado, actor)`.
 - `validarTransicion(estadoActual, nuevoEstado, actor)` → comprueba la validez de la transición y la autorización del actor.
 - `actualizarEstado(nuevoEstado)` → cambia el estado cuando la transición es válida.
-- `registrarCambioEstado(numeroPedido, estadoAnterior, estadoNuevo, actor)` → registra el cambio en `Historial_cambio_pedido`.
+- `registrarCambioEstado(pedido, estadoAnterior, estadoNuevo, actor)` → registra el cambio en `Historial_cambio_pedido`.
 - `motivoRechazo` y `rechazoTransicion` → devuelven el rechazo sin modificar el estado cuando la solicitud no es válida o autorizada.
 
 **Objetos temporales destruidos:** no se representan objetos temporales ni mensajes de destrucción en esta secuencia.
@@ -151,7 +151,7 @@ SI la transición es válida y el actor está autorizado
     // Pedido actualiza su único estado vigente.
     Pedido.actualizarEstado(nuevoEstado)
     // El servicio registra los valores anterior y nuevo junto con el actor.
-    Historial_cambio_pedido.registrarCambioEstado(numeroPedido, estadoActual, nuevoEstado, actorSolicitante)
+    Historial_cambio_pedido.registrarCambioEstado(pedido, estadoActual, nuevoEstado, actorSolicitante)
     Retornar "Cambio confirmado"
 SINO SI la transición no está permitida
     // Se informa el rechazo y el pedido conserva el estado anterior.
