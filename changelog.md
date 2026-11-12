@@ -51,7 +51,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 
-- [fix/unificar-nombre-servicio-pedidos] Unifico el nombre de la clase de servicio a ServicioPedidos en el diagrama de clases, la secuencia y el anexo del CU1
+- [fix/unificar-nombre-servicio-pedidos] Unifico el nombre de la clase de servicio a ServicioPedidos en el CU1 y el de la interfaz a PantallaPedidos en el CU2 (diagramas de clases, secuencias y anexos)
   Issue: [#247](https://github.com/eloeyhe/SistemaPedidos/issues/247)
   PR: [#257](https://github.com/eloeyhe/SistemaPedidos/pull/257) - @Leandro2107 (Arquitecto de Dominio)
 
@@ -62,6 +62,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/decidir-clase-cliente] Aclaro que Cliente no se modela como clase en el CU1 según el RF6
   Issue: [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249)
   PR: [#259](https://github.com/eloeyhe/SistemaPedidos/pull/259) - @Leandro2107 (Arquitecto de Dominio)
+
+- [fix/integrar-cliente-en-develop] Integro en develop la aclaración de Cliente de la PR #259, que se mergeó por error contra master en lugar de develop
+  Issue: [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249)
+  PR: [#260](https://github.com/eloeyhe/SistemaPedidos/pull/260) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
 ## [Release Actividad Obligatoria N°3] - 2026-10-22
 
@@ -313,21 +317,12 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#67](https://github.com/eloeyhe/SistemaPedidos/issues/67)
   PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)
 
-<<<<<<< Updated upstream
 - [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego tarjetas CRC
   Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
   Issue: [#43](https://github.com/eloeyhe/SistemaPedidos/issues/43)
   Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
   Issue: [#45](https://github.com/eloeyhe/SistemaPedidos/issues/45)
   PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
-=======
-### Changed
-
-- [feature/espec-escenarios-casos-uso-add-escenario-1] Se realizaron las correcciones solicitadas en los escenarios de caso de uso
-  Issue: [#67](https://github.com/eloeyhe/SistemaPedidos/issues/67)
-  PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)
-  
->>>>>>> Stashed changes
 
 - [feature/modelador-diag-casos-uso-update-use-case-1] feat: agregar diagramas de casos de uso e indices UML para A2
   Issue: [#73](https://github.com/eloeyhe/SistemaPedidos/issues/73)
