@@ -41,7 +41,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#253](https://github.com/eloeyhe/SistemaPedidos/issues/253)
   Issue: [#254](https://github.com/eloeyhe/SistemaPedidos/issues/254)
   Issue: [#255](https://github.com/eloeyhe/SistemaPedidos/issues/255)
-  PR: [#XXX](https://github.com/eloeyhe/SistemaPedidos/pull/XXX) - @Leandro2107 (Arquitecto de Dominio)
+  PR: [#256](https://github.com/eloeyhe/SistemaPedidos/pull/256) - @Leandro2107 (Arquitecto de Dominio)
 
 
 ### Changed
