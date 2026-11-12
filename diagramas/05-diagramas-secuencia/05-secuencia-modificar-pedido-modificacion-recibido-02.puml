@@ -92,9 +92,9 @@ alt estado inicial == RECIBIDO
         end
 
         interfaz -> pedido : actualizarPedido(numeroPedido, listaItems, totalActualizado)
-        pedido -> historialCambios : registrarCambioPedido(numeroPedido, "items", valorAnterior, valorNuevo, usuario)
-        pedido -> historialCambios : registrarCambioPedido(numeroPedido, "personalizaciones", valorAnterior, valorNuevo, usuario)
-        pedido -> historialCambios : registrarCambioPedido(numeroPedido, "total", totalAnterior, totalActualizado, usuario)
+        pedido -> historialCambios : registrarCambioPedido(pedido, "items", valorAnterior, valorNuevo, usuario)
+        pedido -> historialCambios : registrarCambioPedido(pedido, "personalizaciones", valorAnterior, valorNuevo, usuario)
+        pedido -> historialCambios : registrarCambioPedido(pedido, "total", totalAnterior, totalActualizado, usuario)
         pedido --> interfaz : confirmacionModificacion
         interfaz --> mostrador : ticketModificacion
     else estadoConfirmacion != RECIBIDO
