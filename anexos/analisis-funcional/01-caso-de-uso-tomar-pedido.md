@@ -44,7 +44,7 @@
 
 - **Usuario de Mostrador** → inicia y ejecuta "Tomar Pedido": identifica el pedido, carga los ítems y personalizaciones, registra el cobro y confirma.
 - **Cocina** → participa en "Visualizar/Recibir pedido", donde recibe el pedido confirmado.
-- **Cliente** → actor externo que solicita el pedido al Usuario de Mostrador; no interactúa directamente con el sistema.
+- **Cliente** → actor externo que solicita el pedido al Usuario de Mostrador; no interactúa directamente con el sistema. Existe una tarjeta CRC de Cliente en A2 ([06-tarjeta-crc-cliente.md](../../herramientas-agile/tarjetas-crc/06-tarjeta-crc-cliente.md)), pero no se modela como clase persistente porque el RF6 excluye la ficha de cliente.
 - **Include/Extend:** "Tomar Pedido" incluye (`<<include>>`) identificar el pedido, seleccionar productos o combos, agregar personalizaciones, recalcular el total, registrar el cobro y confirmar, porque sin esos pasos no existe un pedido válido. "Registrar cobro" incluye "Validar medio de pago". "Marcar pedido como prioritario" y "Resolver rechazo de transferencia" se modelaron como `<<extend>>` porque sólo ocurren bajo una condición (pedido urgente o transferencia rechazada).
 
 ## 3. Diagrama de Actividades

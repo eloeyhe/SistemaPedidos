@@ -177,4 +177,9 @@ note bottom of Item_pedido
   o un Combo (exactamente uno de los dos).
   precioUnitario congela el precio histórico.
 end note
+note as NotaCliente
+  Cliente es un actor externo y no una
+  clase persistente: no se registra una
+  ficha de cliente (RF6).
+end note
 @enduml
