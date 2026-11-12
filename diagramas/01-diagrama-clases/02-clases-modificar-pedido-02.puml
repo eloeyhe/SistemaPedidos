@@ -21,7 +21,7 @@ class UsuarioMostrador {
   +modificarPedido(): void
 }
 
-class InterfazPedido {
+class PantallaPedidos {
   +buscarPedido(numeroOReferencia: String): Pedido
   +seleccionarPedidoParaModificar(numeroPedido: Integer): void
   +modificarItems(listaCambios: List<Item_pedido>): void
@@ -126,9 +126,9 @@ enum Tipo_movimiento {
 UsuarioMostrador --|> Usuario
 
 ' Dependencias
-UsuarioMostrador ..> InterfazPedido : interactua
-InterfazPedido ..> Pedido
-InterfazPedido ..> Pago
+UsuarioMostrador ..> PantallaPedidos : interactua
+PantallaPedidos ..> Pedido
+PantallaPedidos ..> Pago
 Pago ..> ProcesadorPago
 
 ' Composiciones

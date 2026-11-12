@@ -5,7 +5,7 @@ skinparam style strictuml
 hide footbox
 
 actor "Usuario de Mostrador" as mostrador
-participant "InterfazPedido:interfaz" as interfaz
+participant "PantallaPedidos:interfaz" as interfaz
 participant "Pedido:pedido" as pedido
 participant "Item_pedido:item" as item
 participant "Producto:producto" as producto
