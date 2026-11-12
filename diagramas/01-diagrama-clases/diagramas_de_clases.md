@@ -14,3 +14,6 @@
     - [Diagrama de Clases - Cancelar Pedido](./03-clases-cancelar-pedido-03.png)
     - [Diagrama de Clases - Cambiar Estado de Pedido](./04-clases-cambiar-estado-pedido-04.png)
     - [Diagrama de Clases - Consultar Pedidos Activos](./05-clases-consultar-pedidos-activos-05.png)
+
+- Diagrama Final
+    - [Diagrama de Clases - Final Unificado](./06-clases-diagrama-final.png) ([fuente PlantUML](./06-clases-diagrama-final.puml))
