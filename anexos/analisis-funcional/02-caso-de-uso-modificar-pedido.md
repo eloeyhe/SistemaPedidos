@@ -109,7 +109,7 @@
 **Participantes:**
 
 - **UsuarioMostrador:** actor que inicia la modificación.
-- **InterfazPedido:** interfaz utilizada para buscar y modificar pedidos.
+- **PantallaPedidos:** interfaz utilizada para buscar y modificar pedidos.
 - **Pedido:** entidad que mantiene el estado y la identidad del pedido.
 - **Item_pedido:** entidad que administra cantidades, precios y subtotales.
 - **Producto:** entidad que proporciona información de los productos.
@@ -157,7 +157,7 @@ No se representa la destrucción explícita de objetos persistentes. Los cambios
 |---|---|---|
 | Usuario | Representar la identidad y autenticación de los usuarios del sistema. | [Usuario](../../herramientas-agile/tarjetas-crc/13-tarjeta-crc-usuario.md) |
 | UsuarioMostrador | Realizar operaciones de gestión de pedidos desde el mostrador. | [Usuario de Mostrador](../../herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md) |
-| InterfazPedido | Recibir las acciones del usuario y comunicar las operaciones relacionadas con el pedido. | Interfaz específica del caso de uso |
+| PantallaPedidos | Recibir las acciones del usuario y comunicar las operaciones relacionadas con el pedido. | Interfaz específica del caso de uso |
 | Pedido | Mantener el estado, la identidad y la información del pedido. | [Pedido](../../herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md) |
 | Item_pedido | Administrar los productos, cantidades, personalizaciones y subtotales del pedido. | [Ítem de Pedido](../../herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md) |
 | Producto | Proporcionar los datos y precios de los productos. | [Producto](../../herramientas-agile/tarjetas-crc/03-tarjeta-crc-producto.md) |
@@ -172,9 +172,9 @@ No se representa la destrucción explícita de objetos persistentes. Los cambios
 | Relación | Clases | Justificación |
 |---|---|---|
 | Herencia | UsuarioMostrador → Usuario | UsuarioMostrador especializa a Usuario y hereda sus características generales. |
-| Dependencia | UsuarioMostrador → InterfazPedido | El actor utiliza la interfaz para modificar pedidos. |
-| Dependencia | InterfazPedido → Pedido | La interfaz consulta y solicita operaciones sobre el pedido. |
-| Dependencia | InterfazPedido → Pago | La interfaz participa en la gestión de ajustes económicos. |
+| Dependencia | UsuarioMostrador → PantallaPedidos | El actor utiliza la interfaz para modificar pedidos. |
+| Dependencia | PantallaPedidos → Pedido | La interfaz consulta y solicita operaciones sobre el pedido. |
+| Dependencia | PantallaPedidos → Pago | La interfaz participa en la gestión de ajustes económicos. |
 | Dependencia | Pago → ProcesadorPago | El pago utiliza el procesador para validar el medio seleccionado. |
 | Composición | Pedido → Item_pedido | Los ítems forman parte del pedido y dependen de él. |
 | Asociación | Item_pedido → Producto | Cada ítem corresponde a un producto. |
