@@ -34,6 +34,15 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#245](https://github.com/eloeyhe/SistemaPedidos/issues/245)
   PR: [#246](https://github.com/eloeyhe/SistemaPedidos/pull/246) - @nachovelesquen7-rgb (Analista Funcional de Casos de Uso 2 y 3 )
 
+- [feature/arquitecto-dominio-add-diagrama-final] Agrego diagrama de clases final unificado (.puml y .png), su documento, anexo de pilares de POO con capturas, pseudocódigo del happy path global, índices y registro de IA de A4
+  Issue: [#250](https://github.com/eloeyhe/SistemaPedidos/issues/250)
+  Issue: [#251](https://github.com/eloeyhe/SistemaPedidos/issues/251)
+  Issue: [#252](https://github.com/eloeyhe/SistemaPedidos/issues/252)
+  Issue: [#253](https://github.com/eloeyhe/SistemaPedidos/issues/253)
+  Issue: [#254](https://github.com/eloeyhe/SistemaPedidos/issues/254)
+  Issue: [#255](https://github.com/eloeyhe/SistemaPedidos/issues/255)
+  PR: [#XXX](https://github.com/eloeyhe/SistemaPedidos/pull/XXX) - @Leandro2107 (Arquitecto de Dominio)
+
 
 ### Changed
 

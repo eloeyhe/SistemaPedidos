@@ -1,13 +1,11 @@
 # Diagrama de Clases Final - Sistema de Pedidos
 
----
-
 ## 1. Versión del Diagrama
 
 | Versión | Casos de uso integrados | Fecha |
 |---------|------------------------|-------|
-| v1 | CU1 | [completar fecha] |
-| v2 | CU1, CU2, CU3 | [completar fecha] |
+| v1 | CU1 | 2026-11-11 |
+| v2 | CU1, CU4, CU5 | 2026-11-11 |
 | v3 | CU1, CU2, CU3, CU4, CU5 | 2026-11-11 |
 
 ---
@@ -48,11 +46,12 @@
 
 | Inconsistencia encontrada | Issue creada | Rama fix/ | Decisión tomada | Justificación |
 |--------------------------|--------------|-----------|-----------------|---------------|
-| La clase de servicio se llama SistemaPedidos en CU1 y ServicioPedidos en CU3 a CU5; la interfaz es InterfazPedido o PantallaPedidos | [completar link de la issue] | fix/[completar nombre de la rama] | Se unifica como ServicioPedidos (control) y PantallaPedidos (boundary) | Es el nombre usado en la mayoría de las secuencias, y el diagrama final lo muestra como una única clase de control que unifica los CU1 a CU5 |
-| Historial_cambio_pedido usa dos métodos distintos en CU2 y CU4 | [completar link de la issue] | fix/[completar nombre de la rama] | Se conservan `registrarCambioPedido` (campos) y `registrarCambioEstado` (estados) | Cada método registra un tipo distinto de cambio, y ambos coinciden con la tarjeta CRC |
-| Cliente tiene tarjeta CRC pero el CU1 decidió no modelarlo | [completar link de la issue] | fix/[completar nombre de la rama] | Cliente queda fuera del diagrama final | El RF6 excluye la ficha de cliente; el diagrama lo aclara con una nota |
+| La clase de servicio se llama SistemaPedidos en CU1 y ServicioPedidos en CU3 a CU5; la interfaz es InterfazPedido o PantallaPedidos | [#247](https://github.com/eloeyhe/SistemaPedidos/issues/247) | `fix/unificar-nombre-servicio-pedidos` | Se unifica como ServicioPedidos (control) y PantallaPedidos (boundary) | Es el nombre usado en la mayoría de las secuencias, y el diagrama final lo muestra como una única clase de control que unifica los CU1 a CU5 |
+| Historial_cambio_pedido usa dos métodos distintos en CU2 y CU4 | [#248](https://github.com/eloeyhe/SistemaPedidos/issues/248) | `fix/unificar-historial-cambio-pedido` | Se conservan `registrarCambioPedido` (campos) y `registrarCambioEstado` (estados) | Cada método registra un tipo distinto de cambio, y ambos coinciden con la tarjeta CRC |
+| Cliente tiene tarjeta CRC pero el CU1 decidió no modelarlo | [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249) | `fix/decidir-clase-cliente` | Cliente queda fuera del diagrama final | El RF6 excluye la ficha de cliente; el diagrama lo aclara con una nota |
 
-El resto de las inconsistencias detectadas (firmas de Auditoria_pedido, métodos de prioridad en Pedido, responsabilidad de validar el medio de pago, enumeración Tipo_movimiento, tarjetas CRC de las clases de control y métodos de UsuarioCocina y UsuarioEncargado) se gestionan con el mismo flujo. Para verificar la coherencia se comparó cada clase del diagrama final contra las tarjetas CRC y contra los participantes y mensajes de las cinco secuencias de A3.
+
+Se detectaron otras diferencias menores entre los diagramas parciales (firmas de Auditoria_pedido, métodos de prioridad en Pedido, responsabilidad de validar el medio de pago, enumeración Tipo_movimiento, tarjetas CRC de las clases de control y métodos de UsuarioCocina y UsuarioEncargado). No se abrieron issues para ellas porque el diagrama final unificado ya las resuelve de forma consistente con las secuencias de A3. Para verificar la coherencia se comparó cada clase del diagrama final contra las tarjetas CRC y contra los participantes y mensajes de las cinco secuencias de A3.
 
 ---
 
