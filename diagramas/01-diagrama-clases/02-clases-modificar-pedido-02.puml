@@ -1,0 +1,153 @@
+@startuml
+title CU02 - Modificar Pedido
+top to bottom direction
+hide circle
+skinparam classAttributeIconSize 0
+skinparam defaultFontSize 14
+skinparam classFontSize 15
+skinparam classAttributeFontSize 13
+skinparam dpi 160
+
+abstract class Usuario {
+  -nombre: String
+  -usuario: String
+  -passwordHash: String
+  -activo: Boolean
+  +autentificar(): Boolean
+}
+
+class UsuarioMostrador {
+  -numeroCaja: Integer
+  +modificarPedido(): void
+}
+
+class InterfazPedido {
+  +buscarPedido(numeroOReferencia: String): Pedido
+  +seleccionarPedidoParaModificar(numeroPedido: Integer): void
+  +modificarItems(listaCambios: List<Item_pedido>): void
+  +modificarPersonalizaciones(listaPersonalizaciones: List<Personalizacion_item>): void
+  +confirmarModificacion(numeroPedido: Integer): void
+  +seleccionarMedioPago(medioPago: Metodo_pago): void
+  +confirmarDevolucion(medioPago: Metodo_pago): void
+}
+
+class Pedido {
+  -fecha: Date
+  -estado: Estado_pedido
+  -prioritario: Boolean
+  -numeroPedido: Integer
+  -referenciaRetiro: String
+  +buscarPedido(numeroOReferencia: String): Pedido
+  +verificarEstado(numeroPedido: Integer): Estado_pedido
+  +modificar(): void
+  +prepararModificacion(listaCambios: List<Item_pedido>): void
+  +prepararPersonalizaciones(listaPersonalizaciones: List<Personalizacion_item>): void
+  +verificarEstadoAlConfirmar(numeroPedido: Integer): Estado_pedido
+  +actualizarPedido(numeroPedido: Integer, listaItems: List<Item_pedido>, totalActualizado: Decimal): void
+}
+
+class Item_pedido {
+  -cantidad: Integer
+  -precioUnitario: Decimal
+  -subtotal: Decimal
+  +modificarCantidadYPrecio(cantidad: Integer, precioUnitario: Decimal): void
+  +actualizarPersonalizaciones(listaPersonalizaciones: List<Personalizacion_item>): void
+  +calcularSubtotal(cantidad: Integer, precioUnitario: Decimal, listaPersonalizaciones: List<Personalizacion_item>): Decimal
+  +agregarPersonalizacion(personalizacion: Personalizacion_item): void
+  +quitarPersonalizacion(personalizacion: Personalizacion_item): void
+  +recalcularPrecio(): Decimal
+}
+
+abstract class Producto {
+  -nombre: String
+  -precio: Decimal
+  +obtenerNombre(): String
+  +obtenerPrecio(): Decimal
+}
+
+class Personalizacion_item {
+  -descripcion: String
+  -costoAdicional: Decimal
+  +calcularCosto(): Decimal
+  +obtenerDescripcion(): String
+  +obtenerCostoAdicional(): Decimal
+}
+
+class Pago {
+  -monto: Decimal
+  -metodoDePago: Metodo_pago
+  +calcularDiferencia(totalAnterior: Decimal, totalActualizado: Decimal): Decimal
+  +validarMedioPago(medioPago: Metodo_pago): Boolean
+  +consultarPagoOriginal(numeroPedido: Integer): Pago
+  +registrarCobroAdicional(medioPago: Metodo_pago, diferencia: Decimal): void
+  +registrarDevolucion(medioPago: Metodo_pago, diferencia: Decimal): void
+}
+
+class ProcesadorPago {
+  +validarMedioPago(medioPago: Metodo_pago): Boolean
+}
+
+class Historial_pago {
+  -tipo: Tipo_movimiento
+  -monto: Decimal
+  -motivo: String
+  -fechayhora: DateTime
+  +registrarMovimiento(pago: Pago, tipo: Tipo_movimiento, monto: Decimal, motivo: String, usuario: Usuario): void
+}
+
+class Historial_cambio_pedido {
+  -campo: String
+  -valor_anterior: String
+  -valor_nuevo: String
+  -fechayhora: DateTime
+  +registrarCambioPedido(pedido: Pedido, campo: String, valorAnterior: String, valorNuevo: String, usuario: Usuario): void
+  }
+
+enum Estado_pedido {
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+enum Metodo_pago {
+  EFECTIVO
+  TRANSFERENCIA
+}
+
+enum Tipo_movimiento {
+  COBRO_INICIAL
+  AJUSTE
+  DEVOLUCION
+}
+
+' Herencia
+UsuarioMostrador --|> Usuario
+
+' Dependencias
+UsuarioMostrador ..> InterfazPedido : interactua
+InterfazPedido ..> Pedido
+InterfazPedido ..> Pago
+Pago ..> ProcesadorPago
+
+' Composiciones
+Pedido "1" *-- "1..*" Item_pedido : items
+Item_pedido "1" *-- "0..*" Personalizacion_item : personalizaciones
+
+' Asociaciones
+Item_pedido "0..*" --> "1" Producto : producto
+Pedido "1" -- "0..*" Pago : pagos
+Pago "1" -- "0..*" Historial_pago : movimientos
+Pedido "1" -- "0..*" Historial_cambio_pedido : cambios
+
+' Asociaciones con Usuario
+Historial_pago "0..*" --> "1" Usuario : usuario
+Historial_cambio_pedido "0..*" --> "1" Usuario : usuario
+
+' Enumeraciones
+Pedido --> Estado_pedido
+Pago --> Metodo_pago
+Historial_pago --> Tipo_movimiento
+
+@enduml
