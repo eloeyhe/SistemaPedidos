@@ -22,3 +22,12 @@ Este proyecto tiene como objetivo el diseño orientado a objetos de una aplicaci
 - [Anexos](anexos/anexos.md)
 - [Diagramas UML](diagramas/diagramasUML.md)
 - [Herramientas Agile](herramientas-agile/herramientas_agile.md)
+
+## Actividad Obligatoria N°4 - Diagrama de Clases
+
+En esta entrega se profundiza el modelado orientado a objetos del Sistema de Pedidos: cada caso de uso tiene un anexo con su trazabilidad a los requisitos, los diagramas de actividades y secuencia de A3, un diagrama de clases propio en PlantUML y un pseudocódigo orientado a objetos.
+
+- [Análisis Funcional por Caso de Uso](anexos/analisis-funcional/analisis_casos_uso.md)
+  - [Caso de Uso 1 - Tomar Pedido](anexos/analisis-funcional/01-caso-de-uso-tomar-pedido.md)
+- [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_de_clases.md)
+- [Registro de uso de IA - A4](ia/a4/)

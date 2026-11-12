@@ -1,0 +1,185 @@
+@startuml 01-clases-tomar-pedido-01
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 70
+skinparam ranksep 70
+skinparam ArrowFontSize 11
+hide empty members
+
+title Diagrama de Clases - Tomar Pedido (CU01)
+
+' ===================== Usuarios =====================
+abstract class Usuario {
+  # nombre : String
+  # usuario : String
+  # passwordHash : String
+  # activo : boolean
+  + autentificar(usuario : String, password : String) : boolean
+}
+
+class UsuarioMostrador {
+  - numeroCaja : int
+  + registrarPedido() : Pedido
+  + modificarPedido(pedido : Pedido) : void
+  + marcarComoEntregado(pedido : Pedido) : void
+}
+
+' ===================== Control / frontera (diagrama de secuencia) =====================
+class SistemaPedidos <<control>> {
+  - pedidos : List<Pedido>
+  - pedidoEnCurso : Pedido
+  - itemEnCurso : Item_pedido
+  - ultimoNumeroPedido : int
+  + iniciarNuevoPedido() : Pedido
+  + ingresarReferenciaRetiro(referenciaRetiro : String) : void
+  + seleccionarProducto(producto : Producto, cantidad : int) : void
+  + seleccionarCombo(combo : Combo, cantidad : int) : void
+  + ingresarPersonalizacion(descripcion : String) : void
+  + seleccionarMedioPago(medioPago : Metodo_pago) : String
+  - generarNumeroPedido() : int
+  - descartarPedidoEnCurso() : void
+}
+
+class PantallaCocina <<boundary>> {
+  + enviarCabeceraPedido(numeroPedido : int, fechaHora : DateTime, referenciaRetiro : String) : void
+  + enviarDetallePedido(listaItems : List<Item_pedido>, totalPedido : decimal) : void
+  + informarPedidoConfirmado(numeroPedido : int) : boolean
+}
+
+class ProcesadorPago <<service>> {
+  + validarMedioPago(medioPago : Metodo_pago) : boolean
+  + procesarCobro(medioPago : Metodo_pago, monto : decimal) : boolean
+  + obtenerMotivoRechazo() : String
+}
+
+' ===================== Dominio =====================
+class Pedido {
+  - numeroPedido : int
+  - fechaHora : DateTime
+  - referenciaRetiro : String
+  - estado : Estado_pedido
+  - prioritario : boolean
+  - total : decimal
+  - items : List<Item_pedido>
+  - pago : Pago
+  - creadoPor : UsuarioMostrador
+  + asignarIdentificador(numeroPedido : int, fechaHora : DateTime) : int
+  + asignarReferenciaRetiro(referenciaRetiro : String) : void
+  + agregarItem(producto : Producto, cantidad : int) : Item_pedido
+  + agregarItemCombo(combo : Combo, cantidad : int) : Item_pedido
+  - actualizarTotal(subtotal : decimal) : void
+  + obtenerTotal() : decimal
+  + priorizar() : void
+  + asociarPago(pago : Pago) : void
+  + cambiarEstado(nuevoEstado : Estado_pedido) : void
+  + registrarPedido(numeroPedido : int, fechaHora : DateTime, referenciaRetiro : String, listaItems : List<Item_pedido>, totalPedido : decimal, pago : Pago) : boolean
+}
+
+class Item_pedido {
+  - cantidad : int
+  - precioUnitario : decimal
+  - subtotal : decimal
+  - producto : Producto
+  - combo : Combo
+  - personalizaciones : List<Personalizacion_item>
+  + establecerProductoYCantidad(producto : Producto, cantidad : int) : void
+  + establecerComboYCantidad(combo : Combo, cantidad : int) : void
+  - conservarPrecioHistorico(precioBase : decimal) : void
+  + agregarPersonalizacion(descripcion : String) : Personalizacion_item
+  + quitarPersonalizacion(personalizacion : Personalizacion_item) : void
+  + calcularSubtotal(cantidad : int, precioBase : decimal, costosAdicionales : List<decimal>) : decimal
+}
+
+class Personalizacion_item {
+  - descripcion : String
+  - costoAdicional : decimal
+  + obtenerDescripcion() : String
+  + obtenerCostoAdicional(descripcion : String) : decimal
+  + calcularCosto() : decimal
+}
+
+abstract class Producto {
+  # nombre : String
+  # precio : decimal
+  + obtenerNombre() : String
+  + obtenerPrecio() : decimal
+  + cambiarPrecio(nuevoPrecio : decimal) : void
+}
+
+class ProductoPreparado {
+  - tiempoPreparacion : int
+  + iniciarPreparacion() : void
+}
+
+class ProductoEnvasado {
+  - fechaElaboracion : Date
+  - fechaVencimiento : Date
+}
+
+class Combo {
+  - nombre : String
+  - precio : decimal
+  + obtenerNombre() : String
+  + obtenerPrecio() : decimal
+}
+
+class Pago {
+  - monto : decimal
+  - metodoDePago : Metodo_pago
+  - fechaHora : DateTime
+  + registrarCobro(medioPago : Metodo_pago, monto : decimal) : boolean
+  + calcularDiferencia(nuevoTotal : decimal) : decimal
+}
+
+enum Estado_pedido <<enumeration>> {
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+enum Metodo_pago <<enumeration>> {
+  EFECTIVO
+  TRANSFERENCIA
+}
+
+' ===================== Relaciones =====================
+' Herencia
+Usuario <|-- UsuarioMostrador
+Producto <|-- ProductoPreparado
+Producto <|-- ProductoEnvasado
+
+' Agregación: el sistema agrupa los pedidos, pero estos persisten por auditoría (RF5)
+SistemaPedidos "1" o-- "0..*" Pedido : gestiona >
+
+' Composición: los ítems y sus personalizaciones no existen fuera de su todo
+Pedido "1" *-- "1..*" Item_pedido : contiene >
+Item_pedido "1" *-- "0..*" Personalizacion_item : aplica >
+
+' Asociaciones
+Item_pedido "0..*" --> "0..1" Producto : referencia >
+Item_pedido "0..*" --> "0..1" Combo : referencia >
+Pedido "1" -- "0..1" Pago : se abona con >
+Pedido "0..*" --> "1" UsuarioMostrador : creadoPor >
+SistemaPedidos "1" --> "1" PantallaCocina : notifica >
+
+' Dependencias
+UsuarioMostrador ..> SistemaPedidos : <<use>>
+SistemaPedidos ..> Pago : <<create>>
+Pago ..> ProcesadorPago : <<use>>
+Pago ..> Metodo_pago
+Pedido ..> Estado_pedido
+
+note bottom of Item_pedido
+  Cada ítem referencia un Producto
+  o un Combo (exactamente uno de los dos).
+  precioUnitario congela el precio histórico.
+end note
+note as NotaCliente
+  Cliente es un actor externo y no una
+  clase persistente: no se registra una
+  ficha de cliente (RF6).
+end note
+@enduml
