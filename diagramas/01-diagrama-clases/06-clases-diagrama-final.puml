@@ -186,7 +186,7 @@ package "Dominio" {
     - valor_nuevo: String
     - fechaHora: DateTime
     + registrarCambioPedido(pedido: Pedido, campo: String, valorAnterior: String, valorNuevo: String, usuario: Usuario): void
-    + registrarCambioEstado(pedido: Pedido, estadoAnterior: Estado_pedido, estadoNuevo: Estado_pedido, actor: Usuario): void
+    + registrarCambioEstado(pedido: Pedido, estadoAnterior: Estado_pedido, estadoNuevo: Estado_pedido, actor: Usuario): boolean
   }
 
   enum Estado_pedido {

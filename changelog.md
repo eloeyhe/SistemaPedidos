@@ -49,6 +49,20 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [backport/release-actividad-obligatoria-3] Backport de las correcciones aprobadas de la Actividad Obligatoria N°3 hacia develop
   PR: [#225](https://github.com/eloeyhe/SistemaPedidos/pull/225) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
+### Fixed
+
+- [fix/unificar-nombre-servicio-pedidos] Unifico el nombre de la clase de servicio a ServicioPedidos en el diagrama de clases, la secuencia y el anexo del CU1
+  Issue: [#247](https://github.com/eloeyhe/SistemaPedidos/issues/247)
+  PR: [#257](https://github.com/eloeyhe/SistemaPedidos/pull/257) - @Leandro2107 (Arquitecto de Dominio)
+
+- [fix/unificar-historial-cambio-pedido] Unifico la firma de registrarCambioEstado y registrarCambioPedido entre CU2 y CU4
+  Issue: [#248](https://github.com/eloeyhe/SistemaPedidos/issues/248)
+  PR: [#258](https://github.com/eloeyhe/SistemaPedidos/pull/258) - @Leandro2107 (Arquitecto de Dominio)
+
+- [fix/decidir-clase-cliente] Aclaro que Cliente no se modela como clase en el CU1 según el RF6
+  Issue: [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249)
+  PR: [#259](https://github.com/eloeyhe/SistemaPedidos/pull/259) - @Leandro2107 (Arquitecto de Dominio)
+
 ## [Release Actividad Obligatoria N°3] - 2026-10-22
 
 ### Added
