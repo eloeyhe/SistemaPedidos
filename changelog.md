@@ -34,11 +34,38 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#245](https://github.com/eloeyhe/SistemaPedidos/issues/245)
   PR: [#246](https://github.com/eloeyhe/SistemaPedidos/pull/246) - @nachovelesquen7-rgb (Analista Funcional de Casos de Uso 2 y 3 )
 
+- [feature/arquitecto-dominio-add-diagrama-final] Agrego diagrama de clases final unificado (.puml y .png), su documento, anexo de pilares de POO con capturas, pseudocódigo del happy path global, índices y registro de IA de A4
+  Issue: [#250](https://github.com/eloeyhe/SistemaPedidos/issues/250)
+  Issue: [#251](https://github.com/eloeyhe/SistemaPedidos/issues/251)
+  Issue: [#252](https://github.com/eloeyhe/SistemaPedidos/issues/252)
+  Issue: [#253](https://github.com/eloeyhe/SistemaPedidos/issues/253)
+  Issue: [#254](https://github.com/eloeyhe/SistemaPedidos/issues/254)
+  Issue: [#255](https://github.com/eloeyhe/SistemaPedidos/issues/255)
+  PR: [#256](https://github.com/eloeyhe/SistemaPedidos/pull/256) - @Leandro2107 (Arquitecto de Dominio)
+
 
 ### Changed
 
 - [backport/release-actividad-obligatoria-3] Backport de las correcciones aprobadas de la Actividad Obligatoria N°3 hacia develop
   PR: [#225](https://github.com/eloeyhe/SistemaPedidos/pull/225) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
+### Fixed
+
+- [fix/unificar-nombre-servicio-pedidos] Unifico el nombre de la clase de servicio a ServicioPedidos en el CU1 y el de la interfaz a PantallaPedidos en el CU2 (diagramas de clases, secuencias y anexos)
+  Issue: [#247](https://github.com/eloeyhe/SistemaPedidos/issues/247)
+  PR: [#257](https://github.com/eloeyhe/SistemaPedidos/pull/257) - @Leandro2107 (Arquitecto de Dominio)
+
+- [fix/unificar-historial-cambio-pedido] Unifico la firma de registrarCambioEstado y registrarCambioPedido entre CU2 y CU4
+  Issue: [#248](https://github.com/eloeyhe/SistemaPedidos/issues/248)
+  PR: [#258](https://github.com/eloeyhe/SistemaPedidos/pull/258) - @Leandro2107 (Arquitecto de Dominio)
+
+- [fix/decidir-clase-cliente] Aclaro que Cliente no se modela como clase en el CU1 según el RF6
+  Issue: [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249)
+  PR: [#259](https://github.com/eloeyhe/SistemaPedidos/pull/259) - @Leandro2107 (Arquitecto de Dominio)
+
+- [fix/integrar-cliente-en-develop] Integro en develop la aclaración de Cliente de la PR #259, que se mergeó por error contra master en lugar de develop
+  Issue: [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249)
+  PR: [#260](https://github.com/eloeyhe/SistemaPedidos/pull/260) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
 ## [Release Actividad Obligatoria N°3] - 2026-10-22
 

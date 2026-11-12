@@ -1,0 +1,259 @@
+@startuml 06-clases-diagrama-final
+title Diagrama de Clases Final - Sistema de Pedidos
+top to bottom direction
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam packageStyle rectangle
+hide empty members
+
+package "Presentacion e integracion" {
+  class PantallaPedidos <<boundary>> {
+    + tomarPedido(): void
+    + buscarPedido(numeroOReferencia: String): Pedido
+    + modificarPedido(numeroPedido: int): void
+    + solicitarCancelacionPedido(numeroPedido: int): void
+    + confirmarCancelacion(motivo: String): void
+    + seleccionarPedido(numeroPedido: int): void
+    + iniciarPreparacion(numeroPedido: int): void
+    + finalizarPreparacion(numeroPedido: int): void
+    + registrarEntrega(numeroPedido: int): void
+    + marcarPrioritario(numeroPedido: int): void
+    + consultarPedidosActivos(): void
+    + consultarDetallePedido(numeroPedido: int): void
+  }
+
+  class PantallaCocina <<boundary>> {
+    + enviarCabeceraPedido(numeroPedido: int, fechaHora: DateTime, referenciaRetiro: String): void
+    + enviarDetallePedido(items: List<Item_pedido>, total: decimal): void
+    + informarPedidoConfirmado(numeroPedido: int): boolean
+  }
+
+  class ProcesadorPago <<service>> {
+    + validarMedioPago(medioPago: Metodo_pago): boolean
+    + procesarCobro(medioPago: Metodo_pago, monto: decimal): boolean
+    + obtenerMotivoRechazo(): String
+  }
+}
+
+package "Aplicacion" {
+  class ServicioPedidos <<control>> {
+    - pedidos: List<Pedido>
+    + iniciarNuevoPedido(): Pedido
+    + ingresarReferenciaRetiro(referenciaRetiro: String): void
+    + seleccionarProducto(producto: Producto, cantidad: int): void
+    + seleccionarCombo(combo: Combo, cantidad: int): void
+    + ingresarPersonalizacion(descripcion: String): void
+    + marcarPrioritario(numeroPedido: int): void
+    + confirmarPedido(medioPago: Metodo_pago): boolean
+    + buscarPedido(numeroOReferencia: String): Pedido
+    + modificarPedido(numeroPedido: int): void
+    + cancelarPedido(numeroPedido: int, motivo: String, actor: Usuario): boolean
+    + cancelarPedido(numeroPedido: int, motivo: String, actor: Usuario, autorizante: UsuarioEncargado): boolean
+    + solicitarCambioEstado(numeroPedido: int, nuevoEstado: Estado_pedido, actor: Usuario): boolean
+    + buscarPedidosPorEstado(estado: Estado_pedido): List<Pedido>
+    + consultarPedidosActivos(actorSolicitante: Usuario): Map<Estado_pedido, List<Pedido>>
+    + agruparPedidosPorEstado(pedidos: List<Pedido>): Map<Estado_pedido, List<Pedido>>
+    + ordenarGrupoPorPrioridad(urgentesPrimero: boolean): void
+    + seleccionarEstadosVisibles(actor: Usuario): List<Estado_pedido>
+    + obtenerDetallePedido(numeroPedido: int): List<Item_pedido>
+    - generarNumeroPedido(): int
+  }
+}
+
+package "Dominio" {
+  abstract class Usuario {
+    # nombre: String
+    # usuario: String
+    # passwordHash: String
+    # activo: boolean
+    + autentificar(usuario: String, password: String): boolean
+  }
+
+  class UsuarioMostrador {
+    - numeroCaja: int
+    + registrarPedido(): Pedido
+    + modificarPedido(pedido: Pedido): void
+    + marcarComoEntregado(pedido: Pedido): void
+  }
+
+  class UsuarioCocina {
+    - estacionTrabajo: String
+    + iniciarPreparacion(pedido: Pedido): void
+    + marcarPedidoListo(pedido: Pedido): void
+  }
+
+  class UsuarioEncargado {
+    - claveSupervision: String
+    + autorizarCancelacion(): boolean
+    + validarClaveSupervision(clave: String): boolean
+  }
+
+  class Pedido {
+    - fechaHora: DateTime
+    - numeroPedido: int
+    - referenciaRetiro: String
+    - estado: Estado_pedido
+    - prioritario: boolean
+    - total: decimal
+    + asignarIdentificador(numeroPedido: int, fechaHora: DateTime): void
+    + asignarReferenciaRetiro(referencia: String): void
+    + agregarItem(producto: Producto, cantidad: int): Item_pedido
+    + agregarItemCombo(combo: Combo, cantidad: int): Item_pedido
+    + actualizarTotal(): decimal
+    + priorizar(): void
+    + obtenerEstado(): Estado_pedido
+    + validarTransicion(nuevoEstado: Estado_pedido, actor: Usuario): boolean
+    + cambiarEstado(nuevoEstado: Estado_pedido): void
+    + cancelarPedido(motivo: String): void
+    + modificar(): void
+    + esPrioritario(): boolean
+    + obtenerDetalle(): List<Item_pedido>
+  }
+
+  class Item_pedido {
+    - cantidad: int
+    - precioUnitario: decimal
+    - subtotal: decimal
+    + establecerProductoYCantidad(producto: Producto, cantidad: int): void
+    + establecerComboYCantidad(combo: Combo, cantidad: int): void
+    + agregarPersonalizacion(descripcion: String): Personalizacion_item
+    + quitarPersonalizacion(personalizacion: Personalizacion_item): void
+    + calcularSubtotal(): decimal
+    + recalcularPrecio(): decimal
+  }
+
+  class Personalizacion_item {
+    - descripcion: String
+    - costoAdicional: decimal
+    + calcularCosto(): decimal
+  }
+
+  abstract class Producto {
+    # nombre: String
+    # precio: decimal
+    + obtenerNombre(): String
+    + obtenerPrecio(): decimal
+    + cambiarPrecio(nuevoPrecio: decimal): void
+  }
+
+  class ProductoPreparado {
+    - tiempoPreparacion: int
+    + iniciarPreparacion(): void
+  }
+
+  class ProductoEnvasado {
+    - fechaElaboracion: Date
+    - fechaVencimiento: Date
+  }
+
+  class Combo {
+    - nombre: String
+    - precio: decimal
+    + obtenerNombre(): String
+    + obtenerPrecio(): decimal
+  }
+
+  class Pago {
+    - monto: decimal
+    - metodoDePago: Metodo_pago
+    - fechaHora: DateTime
+    + registrarCobro(medioPago: Metodo_pago, monto: decimal): boolean
+    + calcularDiferencia(nuevoTotal: decimal): decimal
+    + registrarCobroAdicional(medioPago: Metodo_pago, diferencia: decimal): void
+    + registrarDevolucion(medioPago: Metodo_pago, diferencia: decimal): void
+  }
+
+  class Historial_pago {
+    - tipo: Tipo_movimiento
+    - monto: decimal
+    - motivo: String
+    - fechaHora: DateTime
+    + registrarMovimiento(pago: Pago, tipo: Tipo_movimiento, monto: decimal, motivo: String, usuario: Usuario): void
+  }
+
+  class Auditoria_pedido {
+    - accion: String
+    - detalles: String
+    - motivo: String
+    - fechaHora: DateTime
+    + registrarAccion(pedido: Pedido, responsable: Usuario, autorizante: UsuarioEncargado): void
+    + registrarDetalles(motivo: String, estadoAnterior: Estado_pedido, estadoNuevo: Estado_pedido): void
+  }
+
+  class Historial_cambio_pedido {
+    - campo: String
+    - valor_anterior: String
+    - valor_nuevo: String
+    - fechaHora: DateTime
+    + registrarCambioPedido(pedido: Pedido, campo: String, valorAnterior: String, valorNuevo: String, usuario: Usuario): void
+    + registrarCambioEstado(pedido: Pedido, estadoAnterior: Estado_pedido, estadoNuevo: Estado_pedido, actor: Usuario): boolean
+  }
+
+  enum Estado_pedido {
+    RECIBIDO
+    EN_PREPARACION
+    LISTO
+    ENTREGADO
+    CANCELADO
+  }
+
+  enum Metodo_pago {
+    EFECTIVO
+    TRANSFERENCIA
+  }
+
+  enum Tipo_movimiento {
+    COBRO_INICIAL
+    AJUSTE
+    DEVOLUCION
+  }
+}
+
+Usuario <|-- UsuarioMostrador
+Usuario <|-- UsuarioCocina
+Usuario <|-- UsuarioEncargado
+Producto <|-- ProductoPreparado
+Producto <|-- ProductoEnvasado
+
+ServicioPedidos "1" o-- "0..*" Pedido : gestiona
+UsuarioMostrador --> PantallaPedidos : opera
+UsuarioCocina --> PantallaPedidos : consulta y actualiza
+UsuarioEncargado --> PantallaPedidos : autoriza
+Pedido "1" *-- "1..*" Item_pedido : contiene
+Item_pedido "1" *-- "0..*" Personalizacion_item : personalizaciones
+Item_pedido "0..*" --> "0..1" Producto : producto
+Item_pedido "0..*" --> "0..1" Combo : combo
+Pedido "1" -- "1" Pago : pago original
+Pago "1" -- "0..*" Historial_pago : movimientos
+Pedido "1" -- "0..*" Historial_cambio_pedido : cambios
+Pedido "1" -- "0..*" Auditoria_pedido : auditoria
+Historial_pago "0..*" --> "1" Usuario : responsable
+Historial_cambio_pedido "0..*" --> "1" Usuario : actor
+Auditoria_pedido "0..*" --> "1" Usuario : responsable
+Auditoria_pedido "0..*" --> "0..1" UsuarioEncargado : autorizante
+
+PantallaPedidos ..> ServicioPedidos : interactua
+ServicioPedidos ..> ProcesadorPago : procesa pagos
+ServicioPedidos ..> PantallaCocina : envia pedidos confirmados
+ServicioPedidos ..> Historial_cambio_pedido : registra cambios
+ServicioPedidos ..> Auditoria_pedido : registra acciones
+ServicioPedidos ..> Estado_pedido : valida y filtra
+ServicioPedidos ..> Usuario : adapta consultas
+Pago ..> Metodo_pago
+Historial_pago ..> Tipo_movimiento
+Pedido ..> Estado_pedido
+
+note right of Item_pedido
+  Cada item referencia un Producto
+  o un Combo, pero no ambos.
+  precioUnitario conserva el precio
+  vigente al registrar el pedido.
+end note
+
+note bottom of Usuario
+  Cliente es un actor externo y no una
+  clase persistente: no se registra una
+  ficha de cliente (RF6).
+end note
+
+@enduml
