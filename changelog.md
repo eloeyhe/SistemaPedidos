@@ -290,12 +290,21 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#67](https://github.com/eloeyhe/SistemaPedidos/issues/67)
   PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)
 
+<<<<<<< Updated upstream
 - [feature/diseniador-tarjetas-crc-add-tarjeta-clase-1] Agrego tarjetas CRC
   Issue: [#42](https://github.com/eloeyhe/SistemaPedidos/issues/42)
   Issue: [#43](https://github.com/eloeyhe/SistemaPedidos/issues/43)
   Issue: [#44](https://github.com/eloeyhe/SistemaPedidos/issues/44)
   Issue: [#45](https://github.com/eloeyhe/SistemaPedidos/issues/45)
   PR: [#69](https://github.com/eloeyhe/SistemaPedidos/pull/69) - @eloeyhe (Diseñador de Tarjetas CRC)
+=======
+### Changed
+
+- [feature/espec-escenarios-casos-uso-add-escenario-1] Se realizaron las correcciones solicitadas en los escenarios de caso de uso
+  Issue: [#67](https://github.com/eloeyhe/SistemaPedidos/issues/67)
+  PR: [#70](https://github.com/eloeyhe/SistemaPedidos/pull/70) - @Leandro2107 (Especialista en Escenarios de Casos de Uso)
+  
+>>>>>>> Stashed changes
 
 - [feature/modelador-diag-casos-uso-update-use-case-1] feat: agregar diagramas de casos de uso e indices UML para A2
   Issue: [#73](https://github.com/eloeyhe/SistemaPedidos/issues/73)
