@@ -6,40 +6,6 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Unreleased]
 
-### Added
-
-- [feature/coordinador-devops-add-anexo-cu1] Agrego diagrama de clases y anexo del CU1 Tomar Pedido, índices y registro de IA de A4
-  Issue: [#224](https://github.com/eloeyhe/SistemaPedidos/issues/224)
-  PR: [#226](https://github.com/eloeyhe/SistemaPedidos/pull/226) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
-
-- [feature/analista-cu-4-5-add-anexo-cu4-cu5] Realizo Diagramas de Clases y Anexos Funcionales CU4 y CU5
-  Issue: [#228](https://github.com/eloeyhe/SistemaPedidos/issues/228)
-  Issue: [#229](https://github.com/eloeyhe/SistemaPedidos/issues/229)
-  Issue: [#230](https://github.com/eloeyhe/SistemaPedidos/issues/230)
-  Issue: [#231](https://github.com/eloeyhe/SistemaPedidos/issues/231)
-  Issue: [#232](https://github.com/eloeyhe/SistemaPedidos/issues/232)
-  Issue: [#233](https://github.com/eloeyhe/SistemaPedidos/issues/233)
-  PR: [#234](https://github.com/eloeyhe/SistemaPedidos/pull/234) - @eloeyhe (Analista Funcional de Casos de Uso 4 y 5)
-
-- [feature/analista-cu-2-3-add-anexo-cu2-cu3] Agrego diagramas de clases de casos de uso 2 y 3 tanto .png como .puml, anexos de ambos, índice de los mismos, documentación de utilización de la ia
-  Issue: [#236](https://github.com/eloeyhe/SistemaPedidos/issues/236)
-  Issue: [#237](https://github.com/eloeyhe/SistemaPedidos/issues/237)
-  Issue: [#238](https://github.com/eloeyhe/SistemaPedidos/issues/238)
-  Issue: [#239](https://github.com/eloeyhe/SistemaPedidos/issues/239)
-  Issue: [#240](https://github.com/eloeyhe/SistemaPedidos/issues/240)
-  Issue: [#241](https://github.com/eloeyhe/SistemaPedidos/issues/241)
-  Issue: [#242](https://github.com/eloeyhe/SistemaPedidos/issues/242)
-  Issue: [#243](https://github.com/eloeyhe/SistemaPedidos/issues/243)
-  Issue: [#244](https://github.com/eloeyhe/SistemaPedidos/issues/244)
-  Issue: [#245](https://github.com/eloeyhe/SistemaPedidos/issues/245)
-  PR: [#246](https://github.com/eloeyhe/SistemaPedidos/pull/246) - @nachovelesquen7-rgb (Analista Funcional de Casos de Uso 2 y 3 )
-
-
-### Changed
-
-- [backport/release-actividad-obligatoria-3] Backport de las correcciones aprobadas de la Actividad Obligatoria N°3 hacia develop
-  PR: [#225](https://github.com/eloeyhe/SistemaPedidos/pull/225) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
-
 ## [Release Actividad Obligatoria N°3] - 2026-10-22
 
 ### Added
@@ -105,14 +71,6 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/correcciones-changelog-y-documentador-coordinador] correcciones changelog y documentador coordinador
   Issue: [#220](https://github.com/eloeyhe/SistemaPedidos/issues/220)
   PR: [#221](https://github.com/eloeyhe/SistemaPedidos/pull/221) - @Leandro2107 (Documentador y Coordinador de Repositorio)
-
-- [fix/correccion-nomenclatura-changelog-diagrama-secuencia] Se corrigieron los diagramas de secuencia 02, 03, 04 y 05 segun los RCs correspondientes
-  Issue: [#213](https://github.com/eloeyhe/SistemaPedidos/issues/213)
-  PR: [#212](https://github.com/eloeyhe/SistemaPedidos/pull/212) - @eloeyhe (Especialista en Diagramas de Secuencia)
-
-- [fix/correcciones-changelog-y-documentador-coordinador] Se agregaron correcciones en el changelog
-  Issue: [#222](https://github.com/eloeyhe/SistemaPedidos/issues/222)
-  PR: [#223](https://github.com/eloeyhe/SistemaPedidos/pull/223) - @Leandro2107 (Documentador y Coordinador de Repositorio)
 
 
 ## [Primer Parcial] - 2026-10-03
