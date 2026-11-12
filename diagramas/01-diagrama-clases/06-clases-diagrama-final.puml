@@ -256,9 +256,4 @@ note bottom of Usuario
   ficha de cliente (RF6).
 end note
 
-note bottom of ServicioPedidos
-  Unifica la coordinacion del registro
-  del CU01 (SistemaPedidos en su secuencia)
-  con los CU02-CU05 (ServicioPedidos).
-end note
 @enduml
