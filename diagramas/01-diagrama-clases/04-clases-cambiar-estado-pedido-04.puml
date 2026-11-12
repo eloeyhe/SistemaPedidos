@@ -49,7 +49,7 @@ class Historial_cambio_pedido {
   - valor_anterior: String
   - valor_nuevo: String
   - fechayhora: DateTime
-  + registrarCambioEstado(numeroPedido: int, estadoAnterior: Estado_pedido, estadoNuevo: Estado_pedido, actor: Usuario): boolean
+  + registrarCambioEstado(pedido: Pedido, estadoAnterior: Estado_pedido, estadoNuevo: Estado_pedido, actor: Usuario): boolean
 }
 
 enum Estado_pedido {
