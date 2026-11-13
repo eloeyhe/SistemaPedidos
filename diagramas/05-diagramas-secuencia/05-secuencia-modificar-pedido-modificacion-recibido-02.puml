@@ -5,7 +5,7 @@ skinparam style strictuml
 hide footbox
 
 actor "Usuario de Mostrador" as mostrador
-participant "InterfazPedido:interfaz" as interfaz
+participant "PantallaPedidos:interfaz" as interfaz
 participant "Pedido:pedido" as pedido
 participant "Item_pedido:item" as item
 participant "Producto:producto" as producto
@@ -92,9 +92,9 @@ alt estado inicial == RECIBIDO
         end
 
         interfaz -> pedido : actualizarPedido(numeroPedido, listaItems, totalActualizado)
-        pedido -> historialCambios : registrarCambioPedido(numeroPedido, "items", valorAnterior, valorNuevo, usuario)
-        pedido -> historialCambios : registrarCambioPedido(numeroPedido, "personalizaciones", valorAnterior, valorNuevo, usuario)
-        pedido -> historialCambios : registrarCambioPedido(numeroPedido, "total", totalAnterior, totalActualizado, usuario)
+        pedido -> historialCambios : registrarCambioPedido(pedido, "items", valorAnterior, valorNuevo, usuario)
+        pedido -> historialCambios : registrarCambioPedido(pedido, "personalizaciones", valorAnterior, valorNuevo, usuario)
+        pedido -> historialCambios : registrarCambioPedido(pedido, "total", totalAnterior, totalActualizado, usuario)
         pedido --> interfaz : confirmacionModificacion
         interfaz --> mostrador : ticketModificacion
     else estadoConfirmacion != RECIBIDO

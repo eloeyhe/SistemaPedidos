@@ -30,3 +30,9 @@
 - [15 - Usuario Cocina ](15-tarjeta-crc-usuario-cocina.md)
 
 - [16 - Usuario Encargado ](16-tarjeta-crc-usuario-encargado.md)
+
+- [17 - Servicio Pedidos ](17-tarjeta-crc-servicio-pedidos.md)
+
+- [18 - Procesador Pago ](18-tarjeta-crc-procesador-pago.md)
+
+- [19 - Pantalla Cocina ](19-tarjeta-crc-pantalla-cocina.md)

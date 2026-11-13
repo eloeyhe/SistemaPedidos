@@ -5,7 +5,7 @@ skinparam style strictuml
 hide footbox
 
 actor "Usuario de Mostrador" as mostrador
-participant "SistemaPedidos:sistema" as sistema
+participant "ServicioPedidos:sistema" as sistema
 participant "Producto:producto" as producto
 participant "Combo:combo" as combo
 participant "ProcesadorPago:procesadorPago" as procesadorPago
@@ -23,7 +23,7 @@ loop por cada ítem seleccionado
     alt selección de producto individual
         mostrador -> sistema : seleccionarProducto(producto, cantidad)
         sistema -> pedido : agregarItem(producto, cantidad)
-        create "Item_pedido:itemProducto" as itemProducto
+        create "ItemPedido:itemProducto" as itemProducto
         pedido -> itemProducto : establecerProductoYCantidad(producto, cantidad)
         itemProducto -> producto : obtenerNombre()
         producto --> itemProducto : nombreProducto
@@ -34,7 +34,7 @@ loop por cada ítem seleccionado
         loop por cada personalizacion seleccionada
             mostrador -> sistema : ingresarPersonalizacion(descripcion)
             sistema -> itemProducto : agregarPersonalizacion(descripcion)
-            create "Personalizacion_item:personalizacion" as personalizacion
+            create "PersonalizacionItem:personalizacion" as personalizacion
             itemProducto -> personalizacion : obtenerDescripcion()
             personalizacion --> itemProducto : descripcion
             itemProducto -> personalizacion : obtenerCostoAdicional(descripcion)
@@ -47,7 +47,7 @@ loop por cada ítem seleccionado
     else selección de combo
         mostrador -> sistema : seleccionarCombo(combo, cantidad)
         sistema -> pedido : agregarItemCombo(combo, cantidad)
-        create "Item_pedido:itemCombo" as itemCombo
+        create "ItemPedido:itemCombo" as itemCombo
         pedido -> itemCombo : establecerComboYCantidad(combo, cantidad)
         itemCombo -> combo : obtenerNombre()
         combo --> itemCombo : nombreCombo
@@ -62,6 +62,7 @@ loop por cada ítem seleccionado
     pedido -> pedido : actualizarTotal(subtotal)
 end
 
+sistema -> pedido : obtenerTotal()
 pedido --> sistema : totalPedido
 mostrador -> sistema : seleccionarMedioPago(medioPago)
 create "Pago:pago" as pago
@@ -74,6 +75,7 @@ alt transferencia rechazada
     procesadorPago --> pago : motivoRechazo
     pago --> sistema : motivoRechazo
     sistema --> mostrador : mensajeRechazo
+    sistema -> sistema : descartarPedidoEnCurso()
     destroy pago
     loop por cada ítem temporal creado
         alt ítem de producto individual

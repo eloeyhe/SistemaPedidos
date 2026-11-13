@@ -4,7 +4,76 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
-## [Unreleased]
+## [Release Actividad Obligatoria N°4] - 2026-11-12
+
+### Added
+
+- [feature/coordinador-devops-add-anexo-cu1] Agrego diagrama de clases y anexo del CU1 Tomar Pedido, índices y registro de IA de A4
+  Issue: [#224](https://github.com/eloeyhe/SistemaPedidos/issues/224)
+  PR: [#226](https://github.com/eloeyhe/SistemaPedidos/pull/226) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
+- [feature/analista-cu-4-5-add-anexo-cu4-cu5] Realizo Diagramas de Clases y Anexos Funcionales CU4 y CU5
+  Issue: [#228](https://github.com/eloeyhe/SistemaPedidos/issues/228)
+  Issue: [#229](https://github.com/eloeyhe/SistemaPedidos/issues/229)
+  Issue: [#230](https://github.com/eloeyhe/SistemaPedidos/issues/230)
+  Issue: [#231](https://github.com/eloeyhe/SistemaPedidos/issues/231)
+  Issue: [#232](https://github.com/eloeyhe/SistemaPedidos/issues/232)
+  Issue: [#233](https://github.com/eloeyhe/SistemaPedidos/issues/233)
+  PR: [#234](https://github.com/eloeyhe/SistemaPedidos/pull/234) - @eloeyhe (Analista Funcional de Casos de Uso 4 y 5)
+
+- [feature/analista-cu-2-3-add-anexo-cu2-cu3] Agrego diagramas de clases de casos de uso 2 y 3 tanto .png como .puml, anexos de ambos, índice de los mismos, documentación de utilización de la ia
+  Issue: [#236](https://github.com/eloeyhe/SistemaPedidos/issues/236)
+  Issue: [#237](https://github.com/eloeyhe/SistemaPedidos/issues/237)
+  Issue: [#238](https://github.com/eloeyhe/SistemaPedidos/issues/238)
+  Issue: [#239](https://github.com/eloeyhe/SistemaPedidos/issues/239)
+  Issue: [#240](https://github.com/eloeyhe/SistemaPedidos/issues/240)
+  Issue: [#241](https://github.com/eloeyhe/SistemaPedidos/issues/241)
+  Issue: [#242](https://github.com/eloeyhe/SistemaPedidos/issues/242)
+  Issue: [#243](https://github.com/eloeyhe/SistemaPedidos/issues/243)
+  Issue: [#244](https://github.com/eloeyhe/SistemaPedidos/issues/244)
+  Issue: [#245](https://github.com/eloeyhe/SistemaPedidos/issues/245)
+  PR: [#246](https://github.com/eloeyhe/SistemaPedidos/pull/246) - @nachovelesquen7-rgb (Analista Funcional de Casos de Uso 2 y 3 )
+
+- [feature/arquitecto-dominio-add-diagrama-final] Agrego diagrama de clases final unificado (.puml y .png), su documento, anexo de pilares de POO con capturas, pseudocódigo del happy path global, índices y registro de IA de A4
+  Issue: [#250](https://github.com/eloeyhe/SistemaPedidos/issues/250)
+  Issue: [#251](https://github.com/eloeyhe/SistemaPedidos/issues/251)
+  Issue: [#252](https://github.com/eloeyhe/SistemaPedidos/issues/252)
+  Issue: [#253](https://github.com/eloeyhe/SistemaPedidos/issues/253)
+  Issue: [#254](https://github.com/eloeyhe/SistemaPedidos/issues/254)
+  Issue: [#255](https://github.com/eloeyhe/SistemaPedidos/issues/255)
+  PR: [#256](https://github.com/eloeyhe/SistemaPedidos/pull/256) - @Leandro2107 (Arquitecto de Dominio)
+
+- [feature/coordinador-devops-cierre-a4] Completo el registro de code reviews asistidas con IA de A4, actualizo el README con todos los entregables de A4 y creo la sección propia de A4 en el changelog
+  Issue: [#263](https://github.com/eloeyhe/SistemaPedidos/issues/263)
+  PR: [#264](https://github.com/eloeyhe/SistemaPedidos/pull/264) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
+
+### Changed
+
+- [backport/release-actividad-obligatoria-3] Backport de las correcciones aprobadas de la Actividad Obligatoria N°3 hacia develop
+  PR: [#225](https://github.com/eloeyhe/SistemaPedidos/pull/225) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
+### Fixed
+
+- [fix/unificar-nombre-servicio-pedidos] Unifico el nombre de la clase de servicio a ServicioPedidos en el CU1 y el de la interfaz a PantallaPedidos en el CU2 (diagramas de clases, secuencias y anexos)
+  Issue: [#247](https://github.com/eloeyhe/SistemaPedidos/issues/247)
+  PR: [#257](https://github.com/eloeyhe/SistemaPedidos/pull/257) - @Leandro2107 (Arquitecto de Dominio)
+
+- [fix/unificar-historial-cambio-pedido] Unifico la firma de registrarCambioEstado y registrarCambioPedido entre CU2 y CU4
+  Issue: [#248](https://github.com/eloeyhe/SistemaPedidos/issues/248)
+  PR: [#258](https://github.com/eloeyhe/SistemaPedidos/pull/258) - @Leandro2107 (Arquitecto de Dominio)
+
+- [fix/decidir-clase-cliente] Aclaro que Cliente no se modela como clase en el CU1 según el RF6
+  Issue: [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249)
+  PR: [#259](https://github.com/eloeyhe/SistemaPedidos/pull/259) - @Leandro2107 (Arquitecto de Dominio)
+
+- [fix/integrar-cliente-en-develop] Integro en develop la aclaración de Cliente de la PR #259, que se mergeó por error contra master en lugar de develop
+  Issue: [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249)
+  PR: [#260](https://github.com/eloeyhe/SistemaPedidos/pull/260) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
+- [revert-261-revert-259-fix/decidir-clase-cliente] Revierto el revert #261 e integro el historial de master en develop, para que la release de A4 no pierda los cambios que la PR #259 llevó por error a master
+  Issue: [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249)
+  PR: [#262](https://github.com/eloeyhe/SistemaPedidos/pull/262) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
 ## [Release Actividad Obligatoria N°3] - 2026-10-22
 
@@ -71,6 +140,14 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/correcciones-changelog-y-documentador-coordinador] correcciones changelog y documentador coordinador
   Issue: [#220](https://github.com/eloeyhe/SistemaPedidos/issues/220)
   PR: [#221](https://github.com/eloeyhe/SistemaPedidos/pull/221) - @Leandro2107 (Documentador y Coordinador de Repositorio)
+
+- [fix/correccion-nomenclatura-changelog-diagrama-secuencia] Se corrigieron los diagramas de secuencia 02, 03, 04 y 05 segun los RCs correspondientes
+  Issue: [#213](https://github.com/eloeyhe/SistemaPedidos/issues/213)
+  PR: [#212](https://github.com/eloeyhe/SistemaPedidos/pull/212) - @eloeyhe (Especialista en Diagramas de Secuencia)
+
+- [fix/correcciones-changelog-y-documentador-coordinador] Se agregaron correcciones en el changelog
+  Issue: [#222](https://github.com/eloeyhe/SistemaPedidos/issues/222)
+  PR: [#223](https://github.com/eloeyhe/SistemaPedidos/pull/223) - @Leandro2107 (Documentador y Coordinador de Repositorio)
 
 
 ## [Primer Parcial] - 2026-10-03

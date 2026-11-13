@@ -31,7 +31,7 @@ alt transicion solicitada: RECIBIDO a EN_PREPARACION
     alt transicion valida y actor autorizado
         pedido -> pedido : actualizarEstado(EN_PREPARACION)
         pedido --> servicio : acuseActualizacion
-        servicio -> historial : registrarCambioEstado(numeroPedido, RECIBIDO, EN_PREPARACION, UsuarioCocina)
+        servicio -> historial : registrarCambioEstado(pedido, RECIBIDO, EN_PREPARACION, UsuarioCocina)
         historial --> servicio : acuseRegistro
         servicio --> pantalla : confirmacionCambio
         pantalla --> UsuarioCocina : vistaEstadoActualizado
@@ -55,7 +55,7 @@ else transicion solicitada: EN_PREPARACION a LISTO
     alt transicion valida y actor autorizado
         pedido -> pedido : actualizarEstado(LISTO)
         pedido --> servicio : acuseActualizacion
-        servicio -> historial : registrarCambioEstado(numeroPedido, EN_PREPARACION, LISTO, UsuarioCocina)
+        servicio -> historial : registrarCambioEstado(pedido, EN_PREPARACION, LISTO, UsuarioCocina)
         historial --> servicio : acuseRegistro
         servicio --> pantalla : confirmacionCambio
         pantalla --> UsuarioCocina : vistaEstadoActualizado
@@ -83,7 +83,7 @@ else transicion solicitada: LISTO a ENTREGADO
     alt transicion valida y actor autorizado
         pedido -> pedido : actualizarEstado(ENTREGADO)
         pedido --> servicio : acuseActualizacion
-        servicio -> historial : registrarCambioEstado(numeroPedido, LISTO, ENTREGADO, UsuarioMostrador)
+        servicio -> historial : registrarCambioEstado(pedido, LISTO, ENTREGADO, UsuarioMostrador)
         historial --> servicio : acuseRegistro
         servicio --> pantalla : confirmacionCambio
         pantalla --> UsuarioMostrador : mensajeEntregaConfirmada
