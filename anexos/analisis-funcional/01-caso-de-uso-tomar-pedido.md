@@ -29,12 +29,12 @@
 
 | ID | Requisito Funcional (texto exacto de introduccion.md) | Cómo lo satisface este caso de uso |
 | --- | --- | --- |
-| RF1 | El sistema debe permitir al personal del mostrador registrar pedidos especificando productos individuales, combos predefinidos (los cuales tienen su propia lógica de precio y no corresponden a la simple suma de sus partes) e ítems con personalizaciones individuales de ingredientes (quitar ingredientes o agregar adicionales con costo extra), reflejando de forma precisa el desglose y el precio total recalculado en pantalla al momento del registro. | Los pasos 4 a 6 crean un `Item_pedido` por cada `Producto` o `Combo` (el combo usa su propio precio), le agregan `Personalizacion_item` con su costo adicional y recalculan subtotal y total con `calcularSubtotal()` y `actualizarTotal()`. |
+| RF1 | El sistema debe permitir al personal del mostrador registrar pedidos especificando productos individuales, combos predefinidos (los cuales tienen su propia lógica de precio y no corresponden a la simple suma de sus partes) e ítems con personalizaciones individuales de ingredientes (quitar ingredientes o agregar adicionales con costo extra), reflejando de forma precisa el desglose y el precio total recalculado en pantalla al momento del registro. | Los pasos 4 a 6 crean un `ItemPedido` por cada `Producto` o `Combo` (el combo usa su propio precio), le agregan `PersonalizacionItem` con su costo adicional y recalculan subtotal y total con `calcularSubtotal()` y `actualizarTotal()`. |
 | RF2 | El sistema debe transmitir de forma automática e inmediata cada pedido confirmado desde el mostrador a la pantalla de la cocina, eliminando el traslado físico de comandas impresas o manuscritas y evitando pérdidas de información en el proceso. | En el paso 10, `ServicioPedidos` envía cabecera, detalle y confirmación a `PantallaCocina` sin intervención del usuario, y espera el acuse de recibo. |
-| RF3 | El sistema debe permitir al personal visualizar sincronizadamente los pedidos activos y controlar su ciclo de vida mediante un único estado secuencial y restringido: *Recibido*, *En preparación*, *Listo*, *Entregado* y *Cancelado*, garantizando una única fuente de verdad para evitar duplicaciones. | El caso de uso inicia el ciclo de vida: el pedido sólo se registra tras el pago y con `cambiarEstado(RECIBIDO)`, usando el enumerado `Estado_pedido` como único estado válido. |
+| RF3 | El sistema debe permitir al personal visualizar sincronizadamente los pedidos activos y controlar su ciclo de vida mediante un único estado secuencial y restringido: *Recibido*, *En preparación*, *Listo*, *Entregado* y *Cancelado*, garantizando una única fuente de verdad para evitar duplicaciones. | El caso de uso inicia el ciclo de vida: el pedido sólo se registra tras el pago y con `cambiarEstado(RECIBIDO)`, usando el enumerado `EstadoPedido` como único estado válido. |
 | RF6 | El sistema debe generar un identificador numérico único para cada pedido y permitir asociar de manera obligatoria un nombre o referencia de retiro (ej. "Matías", "Carla") en la comanda, facilitando el llamado en el mostrador para su entrega sin necesidad de registrar datos personales del cliente ni crear una ficha de cliente formal. | En los pasos 2 y 3 se ejecutan `asignarIdentificador(numeroPedido, fechaHora)` y `asignarReferenciaRetiro(referenciaRetiro)`. El Cliente no se modela como clase, porque el requisito excluye la ficha de cliente. |
 | RF7 | El sistema debe permitir marcar manualmente un pedido como prioritario (urgente) desde el mostrador al momento de tomarlo, visualizándose de forma destacada en la pantalla de cocina para que el personal altere el orden de preparación según su criterio. | El flujo alternativo A3 (`<<extend>>` "Marcar pedido como prioritario") invoca `Pedido.priorizar()`, que pone en verdadero el atributo `prioritario`. |
-| RF8 | El sistema debe permitir asociar y registrar el cobro de cada pedido utilizando únicamente efectivo o transferencia bancaria (dejando fuera QR y tarjetas en esta fase); asimismo, si un pedido previamente pagado es modificado en estado *Recibido*, el sistema debe recalcular el total y permitir registrar el cobro o ajuste de la diferencia económica generada. | En los pasos 7 y 8, `Pago.registrarCobro()` valida el medio con `ProcesadorPago` y sólo admite los valores del enumerado `Metodo_pago` (`EFECTIVO`, `TRANSFERENCIA`). El pago queda asociado 1 a 1 al pedido con `asociarPago(pago)`. |
+| RF8 | El sistema debe permitir asociar y registrar el cobro de cada pedido utilizando únicamente efectivo o transferencia bancaria (dejando fuera QR y tarjetas en esta fase); asimismo, si un pedido previamente pagado es modificado en estado *Recibido*, el sistema debe recalcular el total y permitir registrar el cobro o ajuste de la diferencia económica generada. | En los pasos 7 y 8, `Pago.registrarCobro()` valida el medio con `ProcesadorPago` y sólo admite los valores del enumerado `MetodoPago` (`EFECTIVO`, `TRANSFERENCIA`). El pago queda asociado 1 a 1 al pedido con `asociarPago(pago)`. |
 
 ## 2. Diagrama de Casos de Uso
 
@@ -71,19 +71,21 @@
 
 ![Diagrama de Secuencia - Tomar Pedido](../../diagramas/05-diagramas-secuencia/05-secuencia-tomar-pedido-registro-de-pedido-01.png)
 
-**Participantes:** `Usuario de Mostrador` (actor), `ServicioPedidos:sistema`, `Producto:producto`, `Combo:combo`, `ProcesadorPago:procesadorPago`, `PantallaCocina:pantallaCocina` y los objetos creados durante el escenario `Pedido:pedido`, `Item_pedido:itemProducto`, `Item_pedido:itemCombo`, `Personalizacion_item:personalizacion` y `Pago:pago`.
+**Participantes:** `Usuario de Mostrador` (actor), `ServicioPedidos:sistema`, `Producto:producto`, `Combo:combo`, `ProcesadorPago:procesadorPago`, `PantallaCocina:pantallaCocina` y los objetos creados durante el escenario `Pedido:pedido`, `ItemPedido:itemProducto`, `ItemPedido:itemCombo`, `PersonalizacionItem:personalizacion` y `Pago:pago`.
 
 **Mensajes clave:**
 
 - `iniciarNuevoPedido()` → crea `Pedido:pedido`, que con `asignarIdentificador(numeroPedido, fechaHora)` devuelve el `numeroPedido`.
-- `agregarItem(producto, cantidad)` / `agregarItemCombo(combo, cantidad)` → crean el `Item_pedido`, que consulta `obtenerPrecio()` y ejecuta `conservarPrecioHistorico(precioBase)`.
-- `agregarPersonalizacion(descripcion)` → crea `Personalizacion_item` y obtiene su `costoAdicional`.
+- `agregarItem(producto, cantidad)` / `agregarItemCombo(combo, cantidad)` → crean el `ItemPedido`, que consulta `obtenerPrecio()` y ejecuta `conservarPrecioHistorico(precioBase)`.
+- `agregarPersonalizacion(descripcion)` → crea `PersonalizacionItem` y obtiene su `costoAdicional`.
 - `calcularSubtotal(cantidad, precioBase, listaCostosAdicionales)` → devuelve el `subtotal`, que el pedido acumula con `actualizarTotal(subtotal)`.
+- `obtenerTotal()` → `ServicioPedidos` consulta al `Pedido` el `totalPedido` acumulado antes de cobrar.
 - `registrarCobro(medioPago, totalPedido)` → `Pago` valida y procesa el cobro con `ProcesadorPago` y devuelve `confirmacionPago` o `motivoRechazo`.
-- `asociarPago(pago)`, `cambiarEstado(RECIBIDO)` y `registrarPedido(...)` → dejan el pedido persistido en estado `RECIBIDO`.
+- `asociarPago(pago)`, `cambiarEstado(RECIBIDO)` y `registrarPedido(...)` → `ServicioPedidos` los invoca sobre `Pedido`, que es el dueño de los tres métodos, y dejan el pedido persistido en estado `RECIBIDO`.
+- `descartarPedidoEnCurso()` → ante el rechazo del pago, `ServicioPedidos` descarta el pedido en curso y se destruyen los objetos temporales.
 - `enviarCabeceraPedido(...)`, `enviarDetallePedido(...)` e `informarPedidoConfirmado(numeroPedido)` → la cocina responde con `acuseRecibo` y el mostrador recibe el `ticketConfirmacion`.
 
-**Objetos temporales destruidos:** si la transferencia es rechazada, se destruyen `Pago:pago`, cada `Personalizacion_item:personalizacion`, cada `Item_pedido` (de producto o de combo) y `Pedido:pedido`. No persisten porque un pedido sin pago aprobado no debe registrarse ni llegar a Cocina (aspecto sobresaliente del escenario CU01-01).
+**Objetos temporales destruidos:** si la transferencia es rechazada, se destruyen `Pago:pago`, cada `PersonalizacionItem:personalizacion`, cada `ItemPedido` (de producto o de combo) y `Pedido:pedido`. No persisten porque un pedido sin pago aprobado no debe registrarse ni llegar a Cocina (aspecto sobresaliente del escenario CU01-01).
 
 ## 5. Diagrama de Clases del Caso de Uso
 
@@ -96,18 +98,18 @@ Fuente PlantUML: [01-clases-tomar-pedido-01.puml](../../diagramas/01-diagrama-cl
 | Clase | Responsabilidad (según tarjeta CRC) | Tarjeta CRC |
 | --- | --- | --- |
 | Pedido | Agregar, modificar y cancelar la orden. Cambiar mi estado operativo y gestionar la prioridad del pedido | [01-tarjeta-crc-pedido.md](../../herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md) |
-| Item_pedido | Calcular mi subtotal y recalcular el precio si sufro modificaciones. Agregar o quitar personalizaciones | [02-tarjeta-crc-item-pedido.md](../../herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md) |
+| ItemPedido | Calcular mi subtotal y recalcular el precio si sufro modificaciones. Agregar o quitar personalizaciones | [02-tarjeta-crc-item-pedido.md](../../herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md) |
 | Producto | Proveer el precio base y el nombre para la venta comercial. Cambiar mi precio en el catálogo general | [03-tarjeta-crc-producto.md](../../herramientas-agile/tarjetas-crc/03-tarjeta-crc-producto.md) |
-| Personalizacion_item | Calcular el costo de la modificación que represento | [04-tarjeta-crc-personalizacion-item.md](../../herramientas-agile/tarjetas-crc/04-tarjeta-crc-personalizacion-item.md) |
+| PersonalizacionItem | Calcular el costo de la modificación que represento | [04-tarjeta-crc-personalizacion-item.md](../../herramientas-agile/tarjetas-crc/04-tarjeta-crc-personalizacion-item.md) |
 | Pago | Registrar el cobro efectuado. Calcular diferencias de dinero asociadas a la transacción | [05-tarjeta-crc-pago.md](../../herramientas-agile/tarjetas-crc/05-tarjeta-crc-pago.md) |
 | ProductoPreparado | Subclase de Producto para los alimentos que se preparan en cocina (`tiempoPreparacion`) | [07-tarjeta-crc-producto-preparado.md](../../herramientas-agile/tarjetas-crc/07-tarjeta-crc-producto-preparado.md) |
 | ProductoEnvasado | Subclase de Producto para los artículos de góndola (`fechaElaboracion`, `fechaVencimiento`) | [08-tarjeta-crc-producto-envasado.md](../../herramientas-agile/tarjetas-crc/08-tarjeta-crc-producto-envasado.md) |
 | Combo | Agregar y eliminar combos del catálogo | [09-tarjeta-crc-combo.md](../../herramientas-agile/tarjetas-crc/09-tarjeta-crc-combo.md) |
 | Usuario | Autentificar el acceso al sistema | [13-tarjeta-crc-usuario.md](../../herramientas-agile/tarjetas-crc/13-tarjeta-crc-usuario.md) |
 | UsuarioMostrador | Registrar y modificar pedidos, y marcarlos como entregados | [14-tarjeta-crc-usuario-mostrador.md](../../herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md) |
-| ServicioPedidos | Clase de control que coordina el escenario. No tiene tarjeta CRC: surge como participante del diagrama de secuencia de A3 | No aplica (participante del diagrama de secuencia) |
-| ProcesadorPago | Servicio que valida el medio de pago y procesa el cobro. Surge del diagrama de secuencia de A3 | No aplica (participante del diagrama de secuencia) |
-| PantallaCocina | Clase de frontera que muestra el pedido en Cocina. Surge del diagrama de secuencia de A3 | No aplica (participante del diagrama de secuencia) |
+| ServicioPedidos | Coordinar la carga del pedido, gestionar el cobro y registrar el pedido confirmado, y notificar a Cocina | [17-tarjeta-crc-servicio-pedidos.md](../../herramientas-agile/tarjetas-crc/17-tarjeta-crc-servicio-pedidos.md) |
+| ProcesadorPago | Validar el medio de pago y procesar el cobro, informando el motivo de rechazo | [18-tarjeta-crc-procesador-pago.md](../../herramientas-agile/tarjetas-crc/18-tarjeta-crc-procesador-pago.md) |
+| PantallaCocina | Recibir la cabecera y el detalle de cada pedido confirmado y confirmar la recepción | [19-tarjeta-crc-pantalla-cocina.md](../../herramientas-agile/tarjetas-crc/19-tarjeta-crc-pantalla-cocina.md) |
 
 **Relaciones UML:**
 
@@ -115,17 +117,17 @@ Fuente PlantUML: [01-clases-tomar-pedido-01.puml](../../diagramas/01-diagrama-cl
 | --- | --- | --- |
 | Herencia | UsuarioMostrador → Usuario | El usuario de mostrador es un tipo de usuario del sistema y hereda sus credenciales y `autentificar()` (tarjetas CRC 13 y 14). |
 | Herencia | ProductoPreparado → Producto, ProductoEnvasado → Producto | Ambos son productos del catálogo con nombre y precio; cada subclase agrega sus atributos propios. `Producto` es abstracta, como en el boceto inicial. |
-| Composición | Pedido ◆→ Item_pedido (1 a 1..*) | Un ítem no existe fuera de su pedido: si el pago es rechazado, el pedido se destruye junto con sus ítems (diagrama de secuencia). |
-| Composición | Item_pedido ◆→ Personalizacion_item (1 a 0..*) | La personalización sólo tiene sentido aplicada a un ítem concreto y se destruye con él. |
+| Composición | Pedido ◆→ ItemPedido (1 a 1..*) | Un ítem no existe fuera de su pedido: si el pago es rechazado, el pedido se destruye junto con sus ítems (diagrama de secuencia). |
+| Composición | ItemPedido ◆→ PersonalizacionItem (1 a 0..*) | La personalización sólo tiene sentido aplicada a un ítem concreto y se destruye con él. |
 | Agregación | ServicioPedidos ◇→ Pedido (1 a 0..*) | El sistema agrupa los pedidos para gestionarlos, pero los pedidos registrados persisten de forma independiente por auditoría (RF5). |
-| Asociación | Item_pedido → Producto / Combo (0..* a 0..1) | El ítem referencia el artículo del catálogo (un producto o un combo) para obtener nombre y precio base. El catálogo existe antes y después del pedido. |
+| Asociación | ItemPedido → Producto / Combo (0..* a 0..1) | El ítem referencia el artículo del catálogo (un producto o un combo) para obtener nombre y precio base. El catálogo existe antes y después del pedido. |
 | Asociación | Pedido — Pago (1 a 0..1) | Relación 1 a 1 para auditoría de caja. Es 0..1 mientras el pedido está en carga y todavía no se cobró. |
 | Asociación | Pedido → UsuarioMostrador (0..* a 1) | `creadoPor` registra qué usuario tomó el pedido (trazabilidad, RNF5). |
 | Asociación | ServicioPedidos → PantallaCocina | El sistema notifica cada pedido confirmado a la pantalla de Cocina (RF2). |
 | Dependencia | UsuarioMostrador ⇢ ServicioPedidos (`<<use>>`) | El usuario opera el sistema para cargar el pedido, sin guardar una referencia permanente. |
 | Dependencia | ServicioPedidos ⇢ Pago (`<<create>>`) | El sistema crea el `Pago` al seleccionar el medio de pago; luego lo asocia al pedido. |
 | Dependencia | Pago ⇢ ProcesadorPago (`<<use>>`) | `Pago` usa el procesador sólo durante `registrarCobro()` para validar y procesar el cobro. |
-| Dependencia | Pedido ⇢ Estado_pedido, Pago ⇢ Metodo_pago | Los enumerados restringen los valores válidos de estado (RF3) y de medio de pago (RF8). |
+| Dependencia | Pedido ⇢ EstadoPedido, Pago ⇢ MetodoPago | Los enumerados restringen los valores válidos de estado (RF3) y de medio de pago (RF8). |
 
 ## 6. Pseudocódigo
 
@@ -201,7 +203,8 @@ ticket = sistema.seleccionarMedioPago(TRANSFERENCIA)
     //       procesadorPago.procesarCobro(TRANSFERENCIA, 16800)    retorna verdadero o falso
 
     SI aprobado
-        // Paso 9: se asocia el pago y se registra el pedido en RECIBIDO (RF3)
+        // Paso 9: ServicioPedidos asocia el pago y registra el pedido en RECIBIDO (RF3).
+        // Los tres métodos pertenecen a Pedido.
         pedido.asociarPago(pago)
         pedido.cambiarEstado(RECIBIDO)
         pedido.registrarPedido(numero, fechaHora, "Matías", [item1, item2], 16800, pago)
@@ -215,7 +218,7 @@ ticket = sistema.seleccionarMedioPago(TRANSFERENCIA)
         // Flujo alternativo A2: transferencia rechazada
         motivo = procesadorPago.obtenerMotivoRechazo()
         // se informa el motivo; si el cliente no reintenta con otro medio,
-        // se destruyen pago, personalizaciones, ítems y pedido
+        // ServicioPedidos descarta el pedido en curso: se destruyen pago, personalizaciones, ítems y pedido
         sistema.descartarPedidoEnCurso()
         ticket = "Pago rechazado: " + motivo
     FIN SI
