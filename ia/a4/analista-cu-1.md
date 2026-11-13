@@ -64,3 +64,11 @@ Con ese pedido, la IA leyó los archivos de contexto de la sección 1 y tomó de
 
 - Se renderizó el `.puml` con PlantUML y se revisó la imagen para verificar que las multiplicidades y estereotipos fueran legibles.
 - Se verificó que todas las rutas de imágenes y tarjetas CRC referenciadas en el anexo existan en el repositorio.
+- **Iteración de corrección (revisión docente de la release, RC6, RC10, RC11, RC12, RC13 y RC19):**
+  - Se normalizaron los nombres de clase a PascalCase en el CU1 y en las tarjetas CRC de esas clases: `ItemPedido`, `PersonalizacionItem`, `EstadoPedido` y `MetodoPago`. Esto reemplaza la decisión del ajuste 2, que había conservado el guion bajo.
+  - Se crearon las tarjetas CRC de `ServicioPedidos`, `ProcesadorPago` y `PantallaCocina` (17, 18 y 19), se agregaron al índice y se enlazaron desde el anexo. Esto resuelve el ajuste 3.
+  - Se alinearon los contratos entre el diagrama de clases, la secuencia y el pseudocódigo:
+    - `registrarPedido(...)` queda sólo en `Pedido`. Se quitó `registrarPedido()` de `UsuarioMostrador`, que opera a través de `ServicioPedidos`.
+    - `obtenerTotal()` ahora aparece como mensaje en la secuencia.
+    - `descartarPedidoEnCurso()` pasa a ser público en `ServicioPedidos` y se invoca en la secuencia ante el rechazo del pago, igual que en el pseudocódigo.
+    - `asociarPago(pago)` y `conservarPrecioHistorico(precioBase)` ya coincidían y se deja explícito que pertenecen a `Pedido` y a `ItemPedido`.

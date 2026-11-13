@@ -20,7 +20,6 @@ abstract class Usuario {
 
 class UsuarioMostrador {
   - numeroCaja : int
-  + registrarPedido() : Pedido
   + modificarPedido(pedido : Pedido) : void
   + marcarComoEntregado(pedido : Pedido) : void
 }
@@ -29,27 +28,27 @@ class UsuarioMostrador {
 class ServicioPedidos <<control>> {
   - pedidos : List<Pedido>
   - pedidoEnCurso : Pedido
-  - itemEnCurso : Item_pedido
+  - itemEnCurso : ItemPedido
   - ultimoNumeroPedido : int
   + iniciarNuevoPedido() : Pedido
   + ingresarReferenciaRetiro(referenciaRetiro : String) : void
   + seleccionarProducto(producto : Producto, cantidad : int) : void
   + seleccionarCombo(combo : Combo, cantidad : int) : void
   + ingresarPersonalizacion(descripcion : String) : void
-  + seleccionarMedioPago(medioPago : Metodo_pago) : String
+  + seleccionarMedioPago(medioPago : MetodoPago) : String
   - generarNumeroPedido() : int
-  - descartarPedidoEnCurso() : void
+  + descartarPedidoEnCurso() : void
 }
 
 class PantallaCocina <<boundary>> {
   + enviarCabeceraPedido(numeroPedido : int, fechaHora : DateTime, referenciaRetiro : String) : void
-  + enviarDetallePedido(listaItems : List<Item_pedido>, totalPedido : decimal) : void
+  + enviarDetallePedido(listaItems : List<ItemPedido>, totalPedido : decimal) : void
   + informarPedidoConfirmado(numeroPedido : int) : boolean
 }
 
 class ProcesadorPago <<service>> {
-  + validarMedioPago(medioPago : Metodo_pago) : boolean
-  + procesarCobro(medioPago : Metodo_pago, monto : decimal) : boolean
+  + validarMedioPago(medioPago : MetodoPago) : boolean
+  + procesarCobro(medioPago : MetodoPago, monto : decimal) : boolean
   + obtenerMotivoRechazo() : String
 }
 
@@ -58,40 +57,40 @@ class Pedido {
   - numeroPedido : int
   - fechaHora : DateTime
   - referenciaRetiro : String
-  - estado : Estado_pedido
+  - estado : EstadoPedido
   - prioritario : boolean
   - total : decimal
-  - items : List<Item_pedido>
+  - items : List<ItemPedido>
   - pago : Pago
   - creadoPor : UsuarioMostrador
   + asignarIdentificador(numeroPedido : int, fechaHora : DateTime) : int
   + asignarReferenciaRetiro(referenciaRetiro : String) : void
-  + agregarItem(producto : Producto, cantidad : int) : Item_pedido
-  + agregarItemCombo(combo : Combo, cantidad : int) : Item_pedido
+  + agregarItem(producto : Producto, cantidad : int) : ItemPedido
+  + agregarItemCombo(combo : Combo, cantidad : int) : ItemPedido
   - actualizarTotal(subtotal : decimal) : void
   + obtenerTotal() : decimal
   + priorizar() : void
   + asociarPago(pago : Pago) : void
-  + cambiarEstado(nuevoEstado : Estado_pedido) : void
-  + registrarPedido(numeroPedido : int, fechaHora : DateTime, referenciaRetiro : String, listaItems : List<Item_pedido>, totalPedido : decimal, pago : Pago) : boolean
+  + cambiarEstado(nuevoEstado : EstadoPedido) : void
+  + registrarPedido(numeroPedido : int, fechaHora : DateTime, referenciaRetiro : String, listaItems : List<ItemPedido>, totalPedido : decimal, pago : Pago) : boolean
 }
 
-class Item_pedido {
+class ItemPedido {
   - cantidad : int
   - precioUnitario : decimal
   - subtotal : decimal
   - producto : Producto
   - combo : Combo
-  - personalizaciones : List<Personalizacion_item>
+  - personalizaciones : List<PersonalizacionItem>
   + establecerProductoYCantidad(producto : Producto, cantidad : int) : void
   + establecerComboYCantidad(combo : Combo, cantidad : int) : void
   - conservarPrecioHistorico(precioBase : decimal) : void
-  + agregarPersonalizacion(descripcion : String) : Personalizacion_item
-  + quitarPersonalizacion(personalizacion : Personalizacion_item) : void
+  + agregarPersonalizacion(descripcion : String) : PersonalizacionItem
+  + quitarPersonalizacion(personalizacion : PersonalizacionItem) : void
   + calcularSubtotal(cantidad : int, precioBase : decimal, costosAdicionales : List<decimal>) : decimal
 }
 
-class Personalizacion_item {
+class PersonalizacionItem {
   - descripcion : String
   - costoAdicional : decimal
   + obtenerDescripcion() : String
@@ -126,13 +125,13 @@ class Combo {
 
 class Pago {
   - monto : decimal
-  - metodoDePago : Metodo_pago
+  - metodoDePago : MetodoPago
   - fechaHora : DateTime
-  + registrarCobro(medioPago : Metodo_pago, monto : decimal) : boolean
+  + registrarCobro(medioPago : MetodoPago, monto : decimal) : boolean
   + calcularDiferencia(nuevoTotal : decimal) : decimal
 }
 
-enum Estado_pedido <<enumeration>> {
+enum EstadoPedido <<enumeration>> {
   RECIBIDO
   EN_PREPARACION
   LISTO
@@ -140,7 +139,7 @@ enum Estado_pedido <<enumeration>> {
   CANCELADO
 }
 
-enum Metodo_pago <<enumeration>> {
+enum MetodoPago <<enumeration>> {
   EFECTIVO
   TRANSFERENCIA
 }
@@ -155,12 +154,12 @@ Producto <|-- ProductoEnvasado
 ServicioPedidos "1" o-- "0..*" Pedido : gestiona >
 
 ' Composición: los ítems y sus personalizaciones no existen fuera de su todo
-Pedido "1" *-- "1..*" Item_pedido : contiene >
-Item_pedido "1" *-- "0..*" Personalizacion_item : aplica >
+Pedido "1" *-- "1..*" ItemPedido : contiene >
+ItemPedido "1" *-- "0..*" PersonalizacionItem : aplica >
 
 ' Asociaciones
-Item_pedido "0..*" --> "0..1" Producto : referencia >
-Item_pedido "0..*" --> "0..1" Combo : referencia >
+ItemPedido "0..*" --> "0..1" Producto : referencia >
+ItemPedido "0..*" --> "0..1" Combo : referencia >
 Pedido "1" -- "0..1" Pago : se abona con >
 Pedido "0..*" --> "1" UsuarioMostrador : creadoPor >
 ServicioPedidos "1" --> "1" PantallaCocina : notifica >
@@ -169,10 +168,10 @@ ServicioPedidos "1" --> "1" PantallaCocina : notifica >
 UsuarioMostrador ..> ServicioPedidos : <<use>>
 ServicioPedidos ..> Pago : <<create>>
 Pago ..> ProcesadorPago : <<use>>
-Pago ..> Metodo_pago
-Pedido ..> Estado_pedido
+Pago ..> MetodoPago
+Pedido ..> EstadoPedido
 
-note bottom of Item_pedido
+note bottom of ItemPedido
   Cada ítem referencia un Producto
   o un Combo (exactamente uno de los dos).
   precioUnitario congela el precio histórico.
