@@ -4,7 +4,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
-## [Unreleased]
+## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added
 
@@ -43,6 +43,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#255](https://github.com/eloeyhe/SistemaPedidos/issues/255)
   PR: [#256](https://github.com/eloeyhe/SistemaPedidos/pull/256) - @Leandro2107 (Arquitecto de Dominio)
 
+- [feature/coordinador-devops-cierre-a4] Completo el registro de code reviews asistidas con IA de A4, actualizo el README con todos los entregables de A4 y creo la sección propia de A4 en el changelog
+  Issue: [#263](https://github.com/eloeyhe/SistemaPedidos/issues/263)
+  PR: [#264](https://github.com/eloeyhe/SistemaPedidos/pull/264) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
 
 ### Changed
 
@@ -66,6 +70,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/integrar-cliente-en-develop] Integro en develop la aclaración de Cliente de la PR #259, que se mergeó por error contra master en lugar de develop
   Issue: [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249)
   PR: [#260](https://github.com/eloeyhe/SistemaPedidos/pull/260) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
+- [revert-261-revert-259-fix/decidir-clase-cliente] Revierto el revert #261 e integro el historial de master en develop, para que la release de A4 no pierda los cambios que la PR #259 llevó por error a master
+  Issue: [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249)
+  PR: [#262](https://github.com/eloeyhe/SistemaPedidos/pull/262) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
 ## [Release Actividad Obligatoria N°3] - 2026-10-22
 
