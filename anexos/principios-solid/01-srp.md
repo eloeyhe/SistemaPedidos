@@ -1,6 +1,6 @@
 # Principio de Responsabilidad Única (SRP)
 ## Propósito y Tipo de Principio SOLID
-En el diseño inicial del Sistema de Pedidos, clases principales como **Pedido**, **Pago** e **Item_pedido** acumulaban **múltiples responsabilidades no relacionadas** dentro de una misma estructura. esto es un problema ya que hacía que el sistema fuera frágil y difícil de mantener (al modificar algo podías romper la estructura del pedido).
+En el diseño inicial del Sistema de Pedidos, clases principales como **Pedido**, **Pago** e **ItemPedido** acumulaban **múltiples responsabilidades no relacionadas** dentro de una misma estructura. esto es un problema ya que hacía que el sistema fuera frágil y difícil de mantener (al modificar algo podías romper la estructura del pedido).
 
 La aplicación del **Principio de Responsabilidad Única (SRP)** soluciona el problema de diseño porque **elimina la fragilidad del sistema al garantizar que cada clase tenga una y solo una razón para cambiar**, debido a que si se realiza algun cambio se modifica la clase especialista encargada, sin riesgo de romper los datos principales del pedido.
 
@@ -53,13 +53,13 @@ Pedido
   - mantiene sus datos, estado y marca manual de prioridad
   - calcula el total sumando los subtotales de sus ítems
   - delega la validación del ciclo de vida a PoliticaCicloPedido
-  - contiene Item_pedido
+  - contiene ItemPedido
 
-Item_pedido
+ItemPedido
   - referencia un IElementoMenu (Producto o Combo)
   - conserva el precio unitario histórico capturado al agregar el ítem
   - calcula su subtotal con el precio histórico, las personalizaciones y la cantidad
-  - contiene Personalizacion_item
+  - contiene PersonalizacionItem
 
 IElementoMenu
   - define getPrecio()
@@ -67,7 +67,7 @@ IElementoMenu
   - Combo obtiene su precio propio, independiente de sus componentes
 
 ServicioRegistroPago
-  - registra cobros y ajustes en Pago e Historial_pago
+  - registra cobros y ajustes en Pago e HistorialPago
 CalculadorAjustePago
   - calcula la diferencia entre el total anterior y el nuevo
 
@@ -100,8 +100,8 @@ Las clases y sus relaciones distribuyen las responsabilidades entre componentes 
 
 En el **Módulo Pedido**, la entidad **Pedido** mantiene la estructura de la orden, sus ítems, su estado y su marca manual de prioridad. `Pedido` ofrece las operaciones que actualizan su propio estado; antes de las transiciones y cancelaciones, **PoliticaCicloPedido** valida si las reglas del dominio las permiten. No hay una política de prioridad, porque el requisito pide que el usuario marque manualmente el pedido como prioritario.
 
-En el **Módulo Pago**, la clase **Pago** representa el cobro asociado al pedido. **ServicioRegistroPago** registra los cobros y ajustes, y **CalculadorAjustePago** calcula la diferencia entre el total anterior y el nuevo; el servicio registra el movimiento correspondiente en **Historial_pago**.
+En el **Módulo Pago**, la clase **Pago** representa el cobro asociado al pedido. **ServicioRegistroPago** registra los cobros y ajustes, y **CalculadorAjustePago** calcula la diferencia entre el total anterior y el nuevo; el servicio registra el movimiento correspondiente en **HistorialPago**.
  
-  En el **Módulo Ítem Pedido**, **Item_pedido** referencia un elemento del catálogo mediante **IElementoMenu**, implementada por **Producto** y **Combo**. Cada elemento proporciona su precio con `getPrecio()`; **Combo** usa su precio propio, sin derivarlo de la suma de sus componentes, como requiere RF1. Al agregar un elemento, `Item_pedido` conserva ese valor como `precioUnitarioHistorico`, para que cambios posteriores en el catálogo no alteren el precio acordado. `Item_pedido.calcularSubtotal()` calcula el subtotal con ese precio histórico, la cantidad y los adicionales de sus personalizaciones. **Pedido.calcularTotal()** suma los subtotales, sin conocer las reglas internas de precio de productos o combos.
+  En el **Módulo Ítem Pedido**, **ItemPedido** referencia un elemento del catálogo mediante **IElementoMenu**, implementada por **Producto** y **Combo**. Cada elemento proporciona su precio con `getPrecio()`; **Combo** usa su precio propio, sin derivarlo de la suma de sus componentes, como requiere RF1. Al agregar un elemento, `ItemPedido` conserva ese valor como `precioUnitarioHistorico`, para que cambios posteriores en el catálogo no alteren el precio acordado. `ItemPedido.calcularSubtotal()` calcula el subtotal con ese precio histórico, la cantidad y los adicionales de sus personalizaciones. **Pedido.calcularTotal()** suma los subtotales, sin conocer las reglas internas de precio de productos o combos.
 
 Desde un punto de vista técnico, las reglas del ciclo de vida y el cálculo de ajustes se mantienen en componentes especializados, mientras que cada entidad protege la coherencia de sus propios datos. Esta separación facilita probar las reglas y los cálculos de forma aislada y conserva el precio histórico acordado para los ítems.

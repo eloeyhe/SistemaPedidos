@@ -9,7 +9,7 @@ actor UsuarioMostrador
 participant "PantallaPedidos:pantalla" as pantalla
 participant "ServicioPedidos:servicio" as servicio
 participant "Pedido:pedido" as pedido
-participant "Historial_cambio_pedido:historial" as historial
+participant "HistorialCambioPedido:historial" as historial
 
 note over UsuarioCocina, UsuarioMostrador
     Cocina inicia las transiciones de preparacion:

@@ -83,7 +83,7 @@
 
 **Objetos temporales destruidos:** no se representan objetos temporales ni mensajes de destrucción en esta secuencia. `:Pedido` representa un pedido consultado, no una instancia creada para la consulta.
 
-**Nota de trazabilidad:** `retornarPedidosAgrupadosYOrdenados(...)`, `retornarDetalle(...)` y los mensajes `mostrar...` se dibujan como respuestas (`-->`) en la secuencia. Por eso se documentan como resultados presentados/devueltos, no como métodos invocados en el diagrama de clases. Además, la secuencia escribe los estados como cadenas entre comillas, mientras las firmas del diagrama de clases usan `Estado_pedido`; debe armonizarse esa tipificación en los artefactos fuente.
+**Nota de trazabilidad:** `retornarPedidosAgrupadosYOrdenados(...)`, `retornarDetalle(...)` y los mensajes `mostrar...` se dibujan como respuestas (`-->`) en la secuencia. Por eso se documentan como resultados presentados/devueltos, no como métodos invocados en el diagrama de clases. Además, la secuencia escribe los estados como cadenas entre comillas, mientras las firmas del diagrama de clases usan `EstadoPedido`; debe armonizarse esa tipificación en los artefactos fuente.
 
 ---
 
@@ -100,11 +100,11 @@ Fuente PlantUML: [05-clases-consultar-pedidos-activos-05.puml](../../diagramas/0
 | Usuario | Autentificar el acceso al sistema | [13-tarjeta-crc-usuario.md](../../herramientas-agile/tarjetas-crc/13-tarjeta-crc-usuario.md) |
 | UsuarioCocina | Comenzar preparaciones y marcar pedidos como listos | [15-tarjeta-crc-usuario-cocina.md](../../herramientas-agile/tarjetas-crc/15-tarjeta-crc-usuario-cocina.md) |
 | UsuarioMostrador | Registrar y modificar pedidos, y marcarlos como entregados | [14-tarjeta-crc-usuario-mostrador.md](../../herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md) |
-| PantallaPedidos | Frontera participante de A3: recibe el acceso al monitor y la consulta de detalle, y presenta sus resultados | Sin tarjeta CRC; participante del [diagrama de secuencia A3](../../diagramas/05-diagramas-secuencia/05-secuencia-consultar-pedidos-activos-prioridad-urgentes-05.puml) |
-| ServicioPedidos | Control participante de A3: obtiene, agrupa, ordena y adapta la consulta y solicita el detalle | Sin tarjeta CRC; participante del [diagrama de secuencia A3](../../diagramas/05-diagramas-secuencia/05-secuencia-consultar-pedidos-activos-prioridad-urgentes-05.puml) |
+| PantallaPedidos | Frontera participante de A3: recibe el acceso al monitor y la consulta de detalle, y presenta sus resultados | [Pantalla Pedidos](../../herramientas-agile/tarjetas-crc/20-tarjeta-crc-pantalla-pedidos.md) |
+| ServicioPedidos | Control participante de A3: obtiene, agrupa, ordena y adapta la consulta y solicita el detalle | [Servicio Pedidos](../../herramientas-agile/tarjetas-crc/17-tarjeta-crc-servicio-pedidos.md) |
 | Pedido | Agregar, modificar y cancelar la orden. Cambiar mi estado operativo y gestionar la prioridad del pedido | [01-tarjeta-crc-pedido.md](../../herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md) |
-| Item_pedido | Calcular mi subtotal y recalcular el precio si sufro modificaciones. Agregar o quitar personalizaciones | [02-tarjeta-crc-item-pedido.md](../../herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md) |
-| Estado_pedido | Enumeración del boceto inicial que restringe los estados del ciclo de vida del pedido | [Boceto inicial](../../diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw); no tiene tarjeta CRC |
+| ItemPedido | Calcular mi subtotal y recalcular el precio si sufro modificaciones. Agregar o quitar personalizaciones | [02-tarjeta-crc-item-pedido.md](../../herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md) |
+| EstadoPedido | Definir el conjunto cerrado de estados del ciclo de vida del pedido | [21-tarjeta-crc-estado-pedido.md](../../herramientas-agile/tarjetas-crc/21-tarjeta-crc-estado-pedido.md) |
 
 **Relaciones UML:**
 
@@ -113,11 +113,11 @@ Fuente PlantUML: [05-clases-consultar-pedidos-activos-05.puml](../../diagramas/0
 | Herencia | Usuario → UsuarioCocina y UsuarioMostrador | Las tarjetas CRC definen ambas clases como subclases de `Usuario`. |
 | Asociación | UsuarioCocina / UsuarioMostrador → PantallaPedidos | Los actores acceden al monitor y consultan los resultados; no se indica que formen parte del ciclo de vida de la pantalla. |
 | Asociación | PantallaPedidos → ServicioPedidos | La pantalla tiene el atributo `servicio: ServicioPedidos`; es una referencia estructural usada para procesar las consultas. |
-| Asociación | Pedido → Estado_pedido | Cada pedido conserva su estado actual; el enum limita los estados que puede tener. |
-| Composición | Pedido ◆→ Item_pedido (1 a 1..*) | Los ítems son el detalle que integra el pedido y se presentan como parte de éste. La multiplicidad mínima expresa el pedido con uno o más ítems. |
+| Asociación | Pedido → EstadoPedido | Cada pedido conserva su estado actual; el enum limita los estados que puede tener. |
+| Composición | Pedido ◆→ ItemPedido (1 a 1..*) | Los ítems son el detalle que integra el pedido y se presentan como parte de éste. La multiplicidad mínima expresa el pedido con uno o más ítems. |
 | Dependencia | ServicioPedidos → Pedido | El servicio solicita el listado por estados y consulta estado, prioridad y detalle de los pedidos; no declara una referencia permanente a cada pedido. |
-| Dependencia | ServicioPedidos → Estado_pedido | El servicio usa los valores del enum para filtrar, agrupar y seleccionar estados visibles. |
-| Dependencia | ServicioPedidos → Item_pedido | El tipo de retorno del detalle es una lista de ítems del pedido. |
+| Dependencia | ServicioPedidos → EstadoPedido | El servicio usa los valores del enum para filtrar, agrupar y seleccionar estados visibles. |
+| Dependencia | ServicioPedidos → ItemPedido | El tipo de retorno del detalle es una lista de ítems del pedido. |
 | Dependencia | ServicioPedidos → Usuario | El actor solicitante determina cómo se adapta la vista. |
 
 ---

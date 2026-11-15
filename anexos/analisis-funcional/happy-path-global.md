@@ -16,17 +16,17 @@
 - PantallaCocina
 - ProcesadorPago
 - Pedido
-- Item_pedido
+- ItemPedido
 - ProductoPreparado (subclase de Producto)
 - ProductoEnvasado (subclase de Producto)
 - Combo
-- Personalizacion_item
+- PersonalizacionItem
 - Pago
-- Historial_pago
-- Historial_cambio_pedido
-- Estado_pedido
-- Metodo_pago
-- Tipo_movimiento
+- HistorialPago
+- HistorialCambioPedido
+- EstadoPedido
+- MetodoPago
+- TipoMovimiento
 
 ---
 
@@ -59,12 +59,12 @@ ProductoPreparado hamburguesa = nuevo ProductoPreparado("Hamburguesa completa", 
 Combo comboFamiliar = nuevo Combo("Combo familiar", 14000.00)
 servicio.seleccionarProducto(hamburguesa, 1)
 servicio.seleccionarCombo(comboFamiliar, 1)
-Item_pedido itemHamburguesa = pedido.agregarItem(hamburguesa, 1)
-Item_pedido itemCombo = pedido.agregarItemCombo(comboFamiliar, 1)
+ItemPedido itemHamburguesa = pedido.agregarItem(hamburguesa, 1)
+ItemPedido itemCombo = pedido.agregarItemCombo(comboFamiliar, 1)
 
 // La hamburguesa se pide con un ingrediente extra, que suma un costo adicional.
 servicio.ingresarPersonalizacion("Extra queso")
-Personalizacion_item extra = itemHamburguesa.agregarPersonalizacion("Extra queso")
+PersonalizacionItem extra = itemHamburguesa.agregarPersonalizacion("Extra queso")
 costoExtra = extra.calcularCosto()
 
 // Cada ítem calcula su subtotal y el pedido recalcula el total.
@@ -73,19 +73,19 @@ itemCombo.calcularSubtotal()
 total = pedido.actualizarTotal()
 
 // El cliente prefiere pagar por transferencia: se valida el medio antes de cobrar (RF8).
-medio = Metodo_pago.TRANSFERENCIA
+medio = MetodoPago.TRANSFERENCIA
 medioValido = procesador.validarMedioPago(medio)
 SI medioValido ENTONCES
     cobroAprobado = procesador.procesarCobro(medio, total)
     Pago pago = nuevo Pago(total, medio, fechaHoraActual)
     pago.registrarCobro(medio, total)
-    Historial_pago historialPago = nuevo Historial_pago()
-    historialPago.registrarMovimiento(pago, Tipo_movimiento.COBRO_INICIAL, total, "Cobro del pedido", mostrador)
+    HistorialPago historialPago = nuevo HistorialPago()
+    historialPago.registrarMovimiento(pago, TipoMovimiento.COBRO_INICIAL, total, "Cobro del pedido", mostrador)
 FIN SI
 
 // El pedido queda confirmado en estado RECIBIDO y se envía a la pantalla de Cocina (RF2).
 confirmado = servicio.confirmarPedido(medio)
-estadoActual = pedido.obtenerEstado()          // Estado_pedido.RECIBIDO
+estadoActual = pedido.obtenerEstado()          // EstadoPedido.RECIBIDO
 pantallaCocina.enviarCabeceraPedido(numeroPedido, fechaHoraActual, "Carla")
 pantallaCocina.enviarDetallePedido(pedido.obtenerDetalle(), total)
 pantallaCocina.informarPedidoConfirmado(numeroPedido)
@@ -96,7 +96,7 @@ pantallaCocina.informarPedidoConfirmado(numeroPedido)
 
 // El cliente se arrepiente y quiere sumar una bebida antes de que Cocina empiece (RF4).
 // Solo se puede modificar mientras el estado es RECIBIDO.
-SI estadoActual == Estado_pedido.RECIBIDO ENTONCES
+SI estadoActual == EstadoPedido.RECIBIDO ENTONCES
     mostrador.modificarPedido(pedido)
     servicio.modificarPedido(numeroPedido)
     pedido.modificar()
@@ -110,14 +110,14 @@ SI estadoActual == Estado_pedido.RECIBIDO ENTONCES
 
     // La diferencia es a favor del negocio: se cobra y queda registrada para auditoría.
     SI diferencia > 0 ENTONCES
-        procesador.validarMedioPago(Metodo_pago.EFECTIVO)
-        procesador.procesarCobro(Metodo_pago.EFECTIVO, diferencia)
-        pago.registrarCobroAdicional(Metodo_pago.EFECTIVO, diferencia)
-        historialPago.registrarMovimiento(pago, Tipo_movimiento.AJUSTE, diferencia, "Se agregó una bebida", mostrador)
+        procesador.validarMedioPago(MetodoPago.EFECTIVO)
+        procesador.procesarCobro(MetodoPago.EFECTIVO, diferencia)
+        pago.registrarCobroAdicional(MetodoPago.EFECTIVO, diferencia)
+        historialPago.registrarMovimiento(pago, TipoMovimiento.AJUSTE, diferencia, "Se agregó una bebida", mostrador)
     FIN SI
 
     // Queda trazado qué campo cambió, quién lo cambió y su valor anterior y nuevo.
-    Historial_cambio_pedido historialCambios = nuevo Historial_cambio_pedido()
+    HistorialCambioPedido historialCambios = nuevo HistorialCambioPedido()
     historialCambios.registrarCambioPedido(pedido, "total", total, totalNuevo, mostrador)
 FIN SI
 
@@ -127,27 +127,27 @@ FIN SI
 
 // Cocina toma el pedido y empieza a prepararlo: pasa de RECIBIDO a EN_PREPARACION (RF3).
 UsuarioCocina cocina = nuevo UsuarioCocina("Mario", "mrios", "hash456", verdadero, "Parrilla")
-transicionValida = pedido.validarTransicion(Estado_pedido.EN_PREPARACION, cocina)
+transicionValida = pedido.validarTransicion(EstadoPedido.EN_PREPARACION, cocina)
 SI transicionValida ENTONCES
-    servicio.solicitarCambioEstado(numeroPedido, Estado_pedido.EN_PREPARACION, cocina)
+    servicio.solicitarCambioEstado(numeroPedido, EstadoPedido.EN_PREPARACION, cocina)
     cocina.iniciarPreparacion(pedido)
-    pedido.cambiarEstado(Estado_pedido.EN_PREPARACION)
-    historialCambios.registrarCambioEstado(pedido, Estado_pedido.RECIBIDO, Estado_pedido.EN_PREPARACION, cocina)
+    pedido.cambiarEstado(EstadoPedido.EN_PREPARACION)
+    historialCambios.registrarCambioEstado(pedido, EstadoPedido.RECIBIDO, EstadoPedido.EN_PREPARACION, cocina)
     hamburguesa.iniciarPreparacion()
 FIN SI
 
 // Cuando termina la elaboración, Cocina lo marca como LISTO.
 cocina.marcarPedidoListo(pedido)
-pedido.cambiarEstado(Estado_pedido.LISTO)
-historialCambios.registrarCambioEstado(pedido, Estado_pedido.EN_PREPARACION, Estado_pedido.LISTO, cocina)
+pedido.cambiarEstado(EstadoPedido.LISTO)
+historialCambios.registrarCambioEstado(pedido, EstadoPedido.EN_PREPARACION, EstadoPedido.LISTO, cocina)
 
 // El usuario de mostrador llama a "Carla", le entrega el pedido y lo marca como ENTREGADO.
 mostrador.marcarComoEntregado(pedido)
-pedido.cambiarEstado(Estado_pedido.ENTREGADO)
-historialCambios.registrarCambioEstado(pedido, Estado_pedido.LISTO, Estado_pedido.ENTREGADO, mostrador)
+pedido.cambiarEstado(EstadoPedido.ENTREGADO)
+historialCambios.registrarCambioEstado(pedido, EstadoPedido.LISTO, EstadoPedido.ENTREGADO, mostrador)
 
 // Estado final del sistema: el pedido queda guardado con todo su historial, pagos y cambios.
-Retornar pedido.obtenerEstado()                // Estado_pedido.ENTREGADO
+Retornar pedido.obtenerEstado()                // EstadoPedido.ENTREGADO
 
 FIN
 ```
@@ -158,6 +158,6 @@ FIN
 
 | Bloque | Caso de uso | Clases involucradas | Diagrama de secuencia de referencia |
 |--------|-------------|---------------------|-------------------------------------|
-| Registro del pedido, cobro y envío a Cocina | CU1 | UsuarioMostrador, ServicioPedidos, Pedido, Item_pedido, ProductoPreparado, Combo, Personalizacion_item, Pago, Historial_pago, ProcesadorPago, PantallaCocina | [Secuencia - Tomar Pedido](../../diagramas/05-diagramas-secuencia/05-secuencia-tomar-pedido-registro-de-pedido-01.png) |
-| Modificación del pedido, cobro de la diferencia y registro de cambios | CU2 | UsuarioMostrador, ServicioPedidos, Pedido, ProductoEnvasado, Pago, ProcesadorPago, Historial_pago, Historial_cambio_pedido | [Secuencia - Modificar Pedido](../../diagramas/05-diagramas-secuencia/05-secuencia-modificar-pedido-modificacion-recibido-02.png) |
-| Preparación, listo y entrega | CU4 | UsuarioCocina, UsuarioMostrador, ServicioPedidos, Pedido, ProductoPreparado, Estado_pedido, Historial_cambio_pedido | [Secuencia - Cambiar Estado de Pedido](../../diagramas/05-diagramas-secuencia/05-secuencia-cambiar-estado-pedido-avance-preparacion-04.png) |
+| Registro del pedido, cobro y envío a Cocina | CU1 | UsuarioMostrador, ServicioPedidos, Pedido, ItemPedido, ProductoPreparado, Combo, PersonalizacionItem, Pago, HistorialPago, ProcesadorPago, PantallaCocina | [Secuencia - Tomar Pedido](../../diagramas/05-diagramas-secuencia/05-secuencia-tomar-pedido-registro-de-pedido-01.png) |
+| Modificación del pedido, cobro de la diferencia y registro de cambios | CU2 | UsuarioMostrador, ServicioPedidos, Pedido, ProductoEnvasado, Pago, ProcesadorPago, HistorialPago, HistorialCambioPedido | [Secuencia - Modificar Pedido](../../diagramas/05-diagramas-secuencia/05-secuencia-modificar-pedido-modificacion-recibido-02.png) |
+| Preparación, listo y entrega | CU4 | UsuarioCocina, UsuarioMostrador, ServicioPedidos, Pedido, ProductoPreparado, EstadoPedido, HistorialCambioPedido | [Secuencia - Cambiar Estado de Pedido](../../diagramas/05-diagramas-secuencia/05-secuencia-cambiar-estado-pedido-avance-preparacion-04.png) |

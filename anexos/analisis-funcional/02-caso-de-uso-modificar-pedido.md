@@ -111,13 +111,13 @@
 - **UsuarioMostrador:** actor que inicia la modificación.
 - **PantallaPedidos:** interfaz utilizada para buscar y modificar pedidos.
 - **Pedido:** entidad que mantiene el estado y la identidad del pedido.
-- **Item_pedido:** entidad que administra cantidades, precios y subtotales.
+- **ItemPedido:** entidad que administra cantidades, precios y subtotales.
 - **Producto:** entidad que proporciona información de los productos.
-- **Personalizacion_item:** entidad que representa modificaciones y costos adicionales.
+- **PersonalizacionItem:** entidad que representa modificaciones y costos adicionales.
 - **Pago:** entidad que administra los importes y diferencias económicas.
 - **ProcesadorPago:** componente encargado de validar el medio de pago.
-- **Historial_pago:** registro de movimientos económicos.
-- **Historial_cambio_pedido:** registro de modificaciones realizadas.
+- **HistorialPago:** registro de movimientos económicos.
+- **HistorialCambioPedido:** registro de modificaciones realizadas.
 
 **Mensajes clave:**
 
@@ -159,13 +159,14 @@ No se representa la destrucción explícita de objetos persistentes. Los cambios
 | UsuarioMostrador | Realizar operaciones de gestión de pedidos desde el mostrador. | [Usuario de Mostrador](../../herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md) |
 | PantallaPedidos | Recibir las acciones del usuario y comunicar las operaciones relacionadas con el pedido. | Interfaz específica del caso de uso |
 | Pedido | Mantener el estado, la identidad y la información del pedido. | [Pedido](../../herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md) |
-| Item_pedido | Administrar los productos, cantidades, personalizaciones y subtotales del pedido. | [Ítem de Pedido](../../herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md) |
+| ItemPedido | Administrar los productos, cantidades, personalizaciones y subtotales del pedido. | [Ítem de Pedido](../../herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md) |
 | Producto | Proporcionar los datos y precios de los productos. | [Producto](../../herramientas-agile/tarjetas-crc/03-tarjeta-crc-producto.md) |
-| Personalizacion_item | Representar las personalizaciones y sus costos adicionales. | [Personalización de Ítem](../../herramientas-agile/tarjetas-crc/04-tarjeta-crc-personalizacion-item.md) |
+| PersonalizacionItem | Representar las personalizaciones y sus costos adicionales. | [Personalización de Ítem](../../herramientas-agile/tarjetas-crc/04-tarjeta-crc-personalizacion-item.md) |
 | Pago | Administrar los importes, medios de pago y ajustes económicos. | [Pago](../../herramientas-agile/tarjetas-crc/05-tarjeta-crc-pago.md) |
-| ProcesadorPago | Validar el medio de pago seleccionado. | Componente de apoyo del caso de uso |
-| Historial_pago | Conservar los movimientos económicos asociados a un pago. | [Historial de Pago](../../herramientas-agile/tarjetas-crc/10-tarjeta-crc-historial-pago.md) |
-| Historial_cambio_pedido | Registrar los cambios realizados sobre un pedido. | [Historial de Cambio de Pedido](../../herramientas-agile/tarjetas-crc/12-tarjeta-crc-historial-cambio-pedido.md) |
+| ProcesadorPago | Validar el medio de pago seleccionado. | [Procesador Pago](../../herramientas-agile/tarjetas-crc/18-tarjeta-crc-procesador-pago.md) |
+| HistorialPago | Conservar los movimientos económicos asociados a un pago. | [Historial de Pago](../../herramientas-agile/tarjetas-crc/10-tarjeta-crc-historial-pago.md) |
+| HistorialCambioPedido | Registrar los cambios realizados sobre un pedido. | [Historial de Cambio de Pedido](../../herramientas-agile/tarjetas-crc/12-tarjeta-crc-historial-cambio-pedido.md) |
+| EstadoPedido | Definir el conjunto cerrado de estados del ciclo de vida del pedido | [21-tarjeta-crc-estado-pedido.md](../../herramientas-agile/tarjetas-crc/21-tarjeta-crc-estado-pedido.md) |
 
 **Relaciones UML:**
 
@@ -176,14 +177,14 @@ No se representa la destrucción explícita de objetos persistentes. Los cambios
 | Dependencia | PantallaPedidos → Pedido | La interfaz consulta y solicita operaciones sobre el pedido. |
 | Dependencia | PantallaPedidos → Pago | La interfaz participa en la gestión de ajustes económicos. |
 | Dependencia | Pago → ProcesadorPago | El pago utiliza el procesador para validar el medio seleccionado. |
-| Composición | Pedido → Item_pedido | Los ítems forman parte del pedido y dependen de él. |
-| Asociación | Item_pedido → Producto | Cada ítem corresponde a un producto. |
-| Composición | Item_pedido → Personalizacion_item | Las personalizaciones pertenecen al ítem correspondiente. |
+| Composición | Pedido → ItemPedido | Los ítems forman parte del pedido y dependen de él. |
+| Asociación | ItemPedido → Producto | Cada ítem corresponde a un producto. |
+| Composición | ItemPedido → PersonalizacionItem | Las personalizaciones pertenecen al ítem correspondiente. |
 | Asociación | Pedido → Pago | Un pedido puede tener pagos asociados. |
-| Asociación | Pago → Historial_pago | Los movimientos económicos se relacionan con el pago correspondiente. |
-| Asociación | Pedido → Historial_cambio_pedido | El pedido conserva registros de sus modificaciones. |
-| Asociación | Historial_pago → Usuario | Permite identificar al usuario responsable del movimiento. |
-| Asociación | Historial_cambio_pedido → Usuario | Permite identificar al usuario responsable de la modificación. |
+| Asociación | Pago → HistorialPago | Los movimientos económicos se relacionan con el pago correspondiente. |
+| Asociación | Pedido → HistorialCambioPedido | El pedido conserva registros de sus modificaciones. |
+| Asociación | HistorialPago → Usuario | Permite identificar al usuario responsable del movimiento. |
+| Asociación | HistorialCambioPedido → Usuario | Permite identificar al usuario responsable de la modificación. |
 
 
 
