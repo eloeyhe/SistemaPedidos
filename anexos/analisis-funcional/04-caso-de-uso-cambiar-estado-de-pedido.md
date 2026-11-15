@@ -71,10 +71,10 @@
 **Mensajes clave:**
 
 - `seleccionarPedido(numeroPedido)` → solicita mostrar el estado del pedido seleccionado.
-- `consultarEstado(numeroPedido)` → `ServicioPedidos` solicita a `Pedido` `obtenerEstado(numeroPedido)` y devuelve el estado actual.
+- `consultarEstado(numeroPedido)` → `ServicioPedidos` localiza el pedido con `buscarPedido(numeroPedido)`, le solicita `obtenerEstado()` y devuelve el estado actual.
 - `iniciarPreparacion(numeroPedido)`, `finalizarPreparacion(numeroPedido)` y `registrarEntrega(numeroPedido)` → expresan la acción del actor correspondiente; la pantalla solicita `solicitarCambioEstado(numeroPedido, nuevoEstado, actor)`.
-- `validarTransicion(estadoActual, nuevoEstado, actor)` → comprueba la validez de la transición y la autorización del actor.
-- `actualizarEstado(nuevoEstado)` → cambia el estado cuando la transición es válida.
+- `validarTransicion(nuevoEstado, actor)` → `Pedido` compara su estado vigente con el nuevo estado y comprueba la validez de la transición y la autorización del actor.
+- `cambiarEstado(nuevoEstado)` → cambia el estado cuando la transición es válida.
 - `registrarCambioEstado(pedido, estadoAnterior, estadoNuevo, actor)` → registra el cambio en `HistorialCambioPedido`.
 - `motivoRechazo` y `rechazoTransicion` → devuelven el rechazo sin modificar el estado cuando la solicitud no es válida o autorizada.
 
@@ -127,7 +127,7 @@ INICIO Cambiar Estado de Pedido
 
 actorSolicitante selecciona un pedido mediante PantallaPedidos.seleccionarPedido(numeroPedido)
 estadoActual = ServicioPedidos.consultarEstado(numeroPedido)
-    // ServicioPedidos consulta Pedido.obtenerEstado(numeroPedido)
+    // ServicioPedidos localiza el pedido con buscarPedido(numeroPedido) y consulta Pedido.obtenerEstado()
 
 SI actorSolicitante es Cocina Y estadoActual es RECIBIDO
     PantallaPedidos.iniciarPreparacion(numeroPedido)
@@ -145,11 +145,11 @@ FIN SI
 
 // ServicioPedidos coordina la comprobación y el cambio solicitado por la pantalla.
 resultado = ServicioPedidos.solicitarCambioEstado(numeroPedido, nuevoEstado, actorSolicitante)
-    // Pedido.validarTransicion(estadoActual, nuevoEstado, actorSolicitante)
+    // Pedido.validarTransicion(nuevoEstado, actorSolicitante)
 
 SI la transición es válida y el actor está autorizado
     // Pedido actualiza su único estado vigente.
-    Pedido.actualizarEstado(nuevoEstado)
+    Pedido.cambiarEstado(nuevoEstado)
     // El servicio registra los valores anterior y nuevo junto con el actor.
     HistorialCambioPedido.registrarCambioEstado(pedido, estadoActual, nuevoEstado, actorSolicitante)
     Retornar "Cambio confirmado"

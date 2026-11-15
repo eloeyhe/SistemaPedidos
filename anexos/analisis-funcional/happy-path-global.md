@@ -67,24 +67,29 @@ servicio.ingresarPersonalizacion("Extra queso")
 PersonalizacionItem extra = itemHamburguesa.agregarPersonalizacion("Extra queso")
 costoExtra = extra.calcularCosto()
 
-// Cada ítem calcula su subtotal y el pedido recalcula el total.
+// Cada ítem calcula su subtotal; el pedido acumula cada subtotal con actualizarTotal(subtotal)
+// (operación interna de Pedido) y expone el total con obtenerTotal().
 itemHamburguesa.calcularSubtotal()
 itemCombo.calcularSubtotal()
-total = pedido.actualizarTotal()
+total = pedido.obtenerTotal()
 
 // El cliente prefiere pagar por transferencia: se valida el medio antes de cobrar (RF8).
 medio = MetodoPago.TRANSFERENCIA
+resultadoPago = servicio.seleccionarMedioPago(medio)
 medioValido = procesador.validarMedioPago(medio)
 SI medioValido ENTONCES
     cobroAprobado = procesador.procesarCobro(medio, total)
     Pago pago = nuevo Pago(total, medio, fechaHoraActual)
     pago.registrarCobro(medio, total)
+    pedido.asociarPago(pago)
     HistorialPago historialPago = nuevo HistorialPago()
     historialPago.registrarMovimiento(pago, TipoMovimiento.COBRO_INICIAL, total, "Cobro del pedido", mostrador)
 FIN SI
+// Si el cobro fuera rechazado, el servicio invocaría servicio.descartarPedidoEnCurso() (CU1).
 
 // El pedido queda confirmado en estado RECIBIDO y se envía a la pantalla de Cocina (RF2).
-confirmado = servicio.confirmarPedido(medio)
+pedido.registrarPedido(numeroPedido, fechaHoraActual, "Carla", pedido.obtenerDetalle(), total, pago)
+pedido.cambiarEstado(EstadoPedido.RECIBIDO)
 estadoActual = pedido.obtenerEstado()          // EstadoPedido.RECIBIDO
 pantallaCocina.enviarCabeceraPedido(numeroPedido, fechaHoraActual, "Carla")
 pantallaCocina.enviarDetallePedido(pedido.obtenerDetalle(), total)
@@ -105,8 +110,8 @@ SI estadoActual == EstadoPedido.RECIBIDO ENTONCES
     pedido.agregarItem(bebida, 1)
 
     // El sistema recalcula el total y obtiene la diferencia contra lo ya abonado (RF8).
-    totalNuevo = pedido.actualizarTotal()
-    diferencia = pago.calcularDiferencia(totalNuevo)
+    totalNuevo = pedido.obtenerTotal()
+    diferencia = pago.calcularDiferencia(total, totalNuevo)
 
     // La diferencia es a favor del negocio: se cobra y queda registrada para auditoría.
     SI diferencia > 0 ENTONCES

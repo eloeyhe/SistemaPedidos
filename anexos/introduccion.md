@@ -318,7 +318,7 @@ __Flujo principal de eventos:__
 1. El actor accede a la pantalla de monitoreo de pedidos.
 2. El sistema obtiene los pedidos activos registrados.
 3. El sistema muestra los pedidos agrupados o filtrados según su estado.
-4. El sistema obtiene los pedidos en los estados activos (RECIBIDO, EN_PREPARACION y LISTO), diferenciando la vista según el actor (Cocina visualiza RECIBIDO y EN_PREPARACION; Mostrador visualiza todos los activos para el seguimiento y entrega).
+4. El sistema obtiene los pedidos en los estados activos (RECIBIDO, EN_PREPARACION y LISTO), diferenciando la vista según el actor (Cocina visualiza RECIBIDO y EN_PREPARACION; Mostrador visualiza únicamente los pedidos LISTO para su entrega).
 5. El sistema lee el atributo de dominio de prioridad del pedido (prioritario = true) y ordena la lista anteponiendo los pedidos urgentes sobre el resto dentro de su mismo estado, garantizando que el orden de atención en cocina cambie sin alterar la máquina de estados del pedido.
 6. El actor consulta la información de los pedidos según sus necesidades.
 7. El sistema garantiza que cada pedido figure en un único estado a la vez.

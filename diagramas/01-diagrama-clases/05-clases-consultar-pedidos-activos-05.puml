@@ -29,8 +29,7 @@ class ServicioPedidos {
   + comprobarDisponibilidadDatos(): boolean
   + agruparPedidosPorEstado(listaPedidosActivos: List<Pedido>): Map<EstadoPedido, List<Pedido>>
   + ordenarGrupoPorPrioridad(urgentesPrimero: boolean): void
-  + seleccionarEstadosVisibles(estado1: EstadoPedido, estado2: EstadoPedido): List<EstadoPedido>
-  + seleccionarEstadosVisibles(estado1: EstadoPedido, estado2: EstadoPedido, estado3: EstadoPedido): List<EstadoPedido>
+  + seleccionarEstadosVisibles(actor: Usuario): List<EstadoPedido>
   + obtenerDetallePedido(numeroPedido: int): List<ItemPedido>
 }
 

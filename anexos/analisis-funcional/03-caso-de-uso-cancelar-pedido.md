@@ -116,7 +116,7 @@
 
 - `solicitarCancelacionPedido(numeroPedido)` → inicia la solicitud de cancelación del pedido.
 - `consultarPedidoYEstado(numeroPedido)` → obtiene el pedido solicitado y consulta su estado actual.
-- `obtenerEstado(numeroPedido)` → devuelve el estado vigente del pedido.
+- `obtenerEstado()` → `ServicioPedidos` localiza el pedido con `buscarPedido(numeroPedido)` y `Pedido` devuelve el estado vigente del pedido.
 - `solicitarAutorizacion(numeroPedido)` → solicita la intervención del Encargado cuando el pedido está EN_PREPARACION.
 - `solicitarClaveSupervision(numeroPedido)` → solicita la clave de supervisión del Encargado.
 - `validarClaveSupervision(claveSupervision)` → verifica si la autorización ingresada es válida.
@@ -193,7 +193,7 @@ No participa directamente en el diagrama de secuencia porque el proceso de cance
         FIN SI
 
         // Se consulta el estado actual del pedido.
-        estadoAnterior = pedido.obtenerEstado(numeroPedido)
+        estadoAnterior = pedido.obtenerEstado()
 
         SI estadoAnterior == RECIBIDO
 

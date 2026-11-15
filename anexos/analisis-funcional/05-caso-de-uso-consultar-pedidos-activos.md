@@ -20,6 +20,8 @@
 **Flujos alternativos:**
 
 - **A1: No hay pedidos activos.** Si no hay pedidos en estado `RECIBIDO`, `EN_PREPARACION` o `LISTO`, el sistema muestra la vista vacía e informa que no hay pedidos activos.
+
+**Regla de estados visibles por actor:** Cocina visualiza los pedidos `RECIBIDO` y `EN_PREPARACION`; el Usuario de Mostrador visualiza únicamente los pedidos `LISTO` para su entrega. Esta regla se aplica igual en el diagrama de casos de uso, la actividad, la secuencia, el pseudocódigo y los diagramas de clases mediante `ServicioPedidos.seleccionarEstadosVisibles(actor: Usuario): List<EstadoPedido>`.
 - **A2: Falla de conexión o actualización.** Si se interrumpe la comunicación durante la consulta, el sistema advierte que los datos mostrados pueden estar desactualizados.
 
 **Requisitos funcionales que satisface:**
@@ -41,7 +43,7 @@
 - **Usuario de Mostrador** → consulta el estado de las entregas en `LISTO`, según el caso de uso A2.
 - **Include/Extend:** "Consultar Pedidos Activos" incluye obtener el listado y ordenarlo porque son tareas comunes de la consulta. Las vistas de Cocina y Mostrador extienden el caso base para representar consultas por actor. "Destacar pedidos prioritarios" extiende el ordenamiento cuando hay pedidos prioritarios. "Informar falta de conexión o datos desactualizados" extiende la consulta cuando ocurre una falla.
 
-**Nota de consistencia documental:** el diagrama de casos de uso y el de actividades indican que Mostrador consulta pedidos `LISTO`; la descripción general de CU05 en `introduccion.md` dice que Mostrador visualiza todos los pedidos activos, y la secuencia CU05 filtra para Mostrador `RECIBIDO`, `EN_PREPARACION` y `LISTO`. El escenario tampoco resuelve esa diferencia de alcance. Se conserva aquí la vista `LISTO` al explicar el diagrama de casos de uso y se deja documentada la discrepancia; no se interpreta como una decisión de diseño ya resuelta.
+La vista `LISTO` del Usuario de Mostrador es la misma en la descripción del CU05 de `introduccion.md`, el escenario, la actividad, la secuencia y el pseudocódigo.
 
 ---
 
@@ -76,14 +78,14 @@
 - `comprobarDisponibilidadDatos()` → comprueba si la consulta cuenta con datos disponibles; el resultado se devuelve como `resultadoDisponibilidad`.
 - `obtenerPedidosPorEstados("RECIBIDO", "EN_PREPARACION", "LISTO")` → obtiene los pedidos activos y devuelve `listaPedidosActivos`.
 - `obtenerEstado()` y `esPrioritario()` → consultan, para cada pedido, el estado y la marca de urgencia.
-- `agruparPedidosPorEstado(listaPedidosActivos)`, `ordenarGrupoPorPrioridad(urgentesPrimero)` y `seleccionarEstadosVisibles(...)` → agrupan, priorizan y adaptan los estados consultados al actor.
+- `agruparPedidosPorEstado(listaPedidosActivos)`, `ordenarGrupoPorPrioridad(urgentesPrimero)` y `seleccionarEstadosVisibles(actorSolicitante)` → agrupan, priorizan y adaptan los estados consultados al actor: para Cocina devuelve `RECIBIDO` y `EN_PREPARACION`; para Mostrador, `LISTO`.
 - `retornarPedidosAgrupadosYOrdenados(vistaAdaptada)` → devuelve a la pantalla el resultado ordenado; la pantalla presenta la vista al actor.
 - `consultarDetallePedido(numeroPedido)` y `obtenerDetallePedido(numeroPedido)` → solicitan el detalle; `Pedido.obtenerDetalle()` devuelve `detallePedido` y el servicio devuelve ese resultado a la pantalla.
 - `mostrarVistaVacia("No hay pedidos activos")` y `advertirDatosDesactualizados()` → representan las respuestas de la pantalla en los flujos alternativos correspondientes.
 
 **Objetos temporales destruidos:** no se representan objetos temporales ni mensajes de destrucción en esta secuencia. `:Pedido` representa un pedido consultado, no una instancia creada para la consulta.
 
-**Nota de trazabilidad:** `retornarPedidosAgrupadosYOrdenados(...)`, `retornarDetalle(...)` y los mensajes `mostrar...` se dibujan como respuestas (`-->`) en la secuencia. Por eso se documentan como resultados presentados/devueltos, no como métodos invocados en el diagrama de clases. Además, la secuencia escribe los estados como cadenas entre comillas, mientras las firmas del diagrama de clases usan `EstadoPedido`; debe armonizarse esa tipificación en los artefactos fuente.
+**Nota de trazabilidad:** `retornarPedidosAgrupadosYOrdenados(...)`, `retornarDetalle(...)` y los mensajes `mostrar...` se dibujan como respuestas (`-->`) en la secuencia. Por eso se documentan como resultados presentados/devueltos, no como métodos invocados en el diagrama de clases. Los estados se escriben como valores de `EstadoPedido` (sin comillas) en la secuencia, el pseudocódigo y las firmas del diagrama de clases.
 
 ---
 
@@ -157,11 +159,9 @@ SINO
         ServicioPedidos.ordenarGrupoPorPrioridad(urgentesPrimero)
     FIN PARA
 
-    SI actorSolicitante es Cocina
-        estadosVisibles = ServicioPedidos.seleccionarEstadosVisibles(RECIBIDO, EN_PREPARACION)
-    SINO SI actorSolicitante es Usuario de Mostrador
-        estadosVisibles = ServicioPedidos.seleccionarEstadosVisibles(RECIBIDO, EN_PREPARACION, LISTO)
-    FIN SI
+    estadosVisibles = ServicioPedidos.seleccionarEstadosVisibles(actorSolicitante)
+        // Cocina: RECIBIDO y EN_PREPARACION
+        // Usuario de Mostrador: LISTO
 
     // consulta devuelve la vista agrupada, ordenada y adaptada al actor.
     vistaAdaptada = resultado de consulta
@@ -181,4 +181,4 @@ FIN SI
 FIN
 ```
 
-**Nota de consistencia del pseudocódigo:** se mantienen los filtros del diagrama de secuencia y del diagrama de clases existente. En esos artefactos, Mostrador selecciona los tres estados activos. Esto contradice el diagrama de casos de uso y el de actividades, que limitan la vista de Mostrador a `LISTO`; debe resolverse esa diferencia en los artefactos de origen antes de considerar un único comportamiento definitivo.
+**Nota de consistencia del pseudocódigo:** `seleccionarEstadosVisibles(actorSolicitante)` tiene la misma firma en el pseudocódigo, la secuencia, el diagrama de clases del CU5 y el diagrama final. El servicio decide los estados visibles según el actor: Cocina ve `RECIBIDO` y `EN_PREPARACION`; Mostrador ve `LISTO`, como en el diagrama de casos de uso y el de actividades.

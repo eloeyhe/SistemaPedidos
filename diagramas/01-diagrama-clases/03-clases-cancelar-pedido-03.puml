@@ -36,6 +36,7 @@ class PantallaPedidos {
 
 class ServicioPedidos {
   +consultarPedidoYEstado(numeroPedido: Integer): Pedido
+  +buscarPedido(numeroOReferencia: String): Pedido
   +procesarCancelacion(numeroPedido: Integer, motivo: String, usuario: Usuario): void
   +procesarCancelacion(numeroPedido: Integer, motivo: String, usuario: Usuario, autorizante: UsuarioEncargado): void
   +solicitarAutorizacion(numeroPedido: Integer): void
@@ -47,7 +48,7 @@ class Pedido {
   -prioritario: Boolean
   -numeroPedido: Integer
   -referenciaRetiro: String
-  +obtenerEstado(numeroPedido: Integer): EstadoPedido
+  +obtenerEstado(): EstadoPedido
   +cancelarPedido(motivo: String): void
   +cambiarEstado(nuevoEstado: EstadoPedido): void
 }

@@ -128,7 +128,7 @@ class Pago {
   - metodoDePago : MetodoPago
   - fechaHora : DateTime
   + registrarCobro(medioPago : MetodoPago, monto : decimal) : boolean
-  + calcularDiferencia(nuevoTotal : decimal) : decimal
+  + calcularDiferencia(totalAnterior : decimal, totalActualizado : decimal) : decimal
 }
 
 enum EstadoPedido <<enumeration>> {

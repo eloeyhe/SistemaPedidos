@@ -25,7 +25,7 @@ servicio -> servicio : comprobarDisponibilidadDatos()
 servicio --> pantalla : resultadoDisponibilidad
 
 alt conexión disponible
-    servicio -> pedido : obtenerPedidosPorEstados("RECIBIDO", "EN_PREPARACION", "LISTO")
+    servicio -> pedido : obtenerPedidosPorEstados(RECIBIDO, EN_PREPARACION, LISTO)
     activate pedido
     pedido --> servicio : listaPedidosActivos
     deactivate pedido
@@ -43,11 +43,11 @@ alt conexión disponible
             servicio -> servicio : ordenarGrupoPorPrioridad(urgentesPrimero)
         end
 
-        alt actorSolicitante == Cocina
-            servicio -> servicio : seleccionarEstadosVisibles("RECIBIDO", "EN_PREPARACION")
-        else actorSolicitante == Mostrador
-            servicio -> servicio : seleccionarEstadosVisibles("RECIBIDO", "EN_PREPARACION", "LISTO")
-        end
+        servicio -> servicio : seleccionarEstadosVisibles(actorSolicitante)
+        note right of servicio
+          Cocina: RECIBIDO, EN_PREPARACION
+          Mostrador: LISTO
+        end note
 
         servicio --> pantalla : retornarPedidosAgrupadosYOrdenados(vistaAdaptada)
         deactivate servicio
