@@ -38,17 +38,22 @@ package "Presentacion e integracion" {
 package "Aplicacion" {
   class ServicioPedidos <<control>> {
     - pedidos: List<Pedido>
+    - pedidoEnCurso: Pedido
+    - itemEnCurso: ItemPedido
+    - ultimoNumeroPedido: int
     + iniciarNuevoPedido(): Pedido
     + ingresarReferenciaRetiro(referenciaRetiro: String): void
     + seleccionarProducto(producto: Producto, cantidad: int): void
     + seleccionarCombo(combo: Combo, cantidad: int): void
     + ingresarPersonalizacion(descripcion: String): void
     + marcarPrioritario(numeroPedido: int): void
-    + confirmarPedido(medioPago: MetodoPago): boolean
+    + seleccionarMedioPago(medioPago: MetodoPago): String
+    + descartarPedidoEnCurso(): void
     + buscarPedido(numeroOReferencia: String): Pedido
     + modificarPedido(numeroPedido: int): void
     + cancelarPedido(numeroPedido: int, motivo: String, actor: Usuario): boolean
     + cancelarPedido(numeroPedido: int, motivo: String, actor: Usuario, autorizante: UsuarioEncargado): boolean
+    + consultarEstado(numeroPedido: int): EstadoPedido
     + solicitarCambioEstado(numeroPedido: int, nuevoEstado: EstadoPedido, actor: Usuario): boolean
     + buscarPedidosPorEstado(estado: EstadoPedido): List<Pedido>
     + consultarPedidosActivos(actorSolicitante: Usuario): Map<EstadoPedido, List<Pedido>>
@@ -71,7 +76,6 @@ package "Dominio" {
 
   class UsuarioMostrador {
     - numeroCaja: int
-    + registrarPedido(): Pedido
     + modificarPedido(pedido: Pedido): void
     + marcarComoEntregado(pedido: Pedido): void
   }
@@ -95,12 +99,15 @@ package "Dominio" {
     - estado: EstadoPedido
     - prioritario: boolean
     - total: decimal
-    + asignarIdentificador(numeroPedido: int, fechaHora: DateTime): void
+    + asignarIdentificador(numeroPedido: int, fechaHora: DateTime): int
     + asignarReferenciaRetiro(referencia: String): void
     + agregarItem(producto: Producto, cantidad: int): ItemPedido
     + agregarItemCombo(combo: Combo, cantidad: int): ItemPedido
-    + actualizarTotal(): decimal
+    - actualizarTotal(subtotal: decimal): void
+    + obtenerTotal(): decimal
     + priorizar(): void
+    + asociarPago(pago: Pago): void
+    + registrarPedido(numeroPedido: int, fechaHora: DateTime, referenciaRetiro: String, listaItems: List<ItemPedido>, totalPedido: decimal, pago: Pago): boolean
     + obtenerEstado(): EstadoPedido
     + validarTransicion(nuevoEstado: EstadoPedido, actor: Usuario): boolean
     + cambiarEstado(nuevoEstado: EstadoPedido): void
@@ -116,6 +123,7 @@ package "Dominio" {
     - subtotal: decimal
     + establecerProductoYCantidad(producto: Producto, cantidad: int): void
     + establecerComboYCantidad(combo: Combo, cantidad: int): void
+    - conservarPrecioHistorico(precioBase: decimal): void
     + agregarPersonalizacion(descripcion: String): PersonalizacionItem
     + quitarPersonalizacion(personalizacion: PersonalizacionItem): void
     + calcularSubtotal(): decimal
@@ -158,7 +166,7 @@ package "Dominio" {
     - metodoDePago: MetodoPago
     - fechaHora: DateTime
     + registrarCobro(medioPago: MetodoPago, monto: decimal): boolean
-    + calcularDiferencia(nuevoTotal: decimal): decimal
+    + calcularDiferencia(totalAnterior: decimal, totalActualizado: decimal): decimal
     + registrarCobroAdicional(medioPago: MetodoPago, diferencia: decimal): void
     + registrarDevolucion(medioPago: MetodoPago, diferencia: decimal): void
   }
@@ -176,7 +184,8 @@ package "Dominio" {
     - detalles: String
     - motivo: String
     - fechaHora: DateTime
-    + registrarAccion(pedido: Pedido, responsable: Usuario, autorizante: UsuarioEncargado): void
+    + registrarAccion(pedido: Pedido, usuario: Usuario, accion: String, fechaHora: DateTime): void
+    + registrarAccion(pedido: Pedido, usuario: Usuario, autorizante: UsuarioEncargado, accion: String, fechaHora: DateTime): void
     + registrarDetalles(motivo: String, estadoAnterior: EstadoPedido, estadoNuevo: EstadoPedido): void
   }
 

@@ -23,7 +23,8 @@ else iniciador es UsuarioEncargado
 end
 
 pantalla -> servicio : consultarPedidoYEstado(numeroPedido)
-servicio -> pedido : obtenerEstado(numeroPedido)
+servicio -> servicio : buscarPedido(numeroPedido)
+servicio -> pedido : obtenerEstado()
 pedido --> servicio : estadoActual
 servicio --> pantalla : datosPedido, estadoActual
 

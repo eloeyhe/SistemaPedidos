@@ -10,7 +10,7 @@ Este anexo analiza cómo el diagrama de clases final del Sistema de Pedidos ([ve
 
 **Ejemplo 1 — Pedido:**
 
-`Pedido` declara todos sus atributos como privados (`fechaHora`, `numeroPedido`, `referenciaRetiro`, `estado`, `prioritario` y `total`). Hacia afuera solo expone métodos públicos que controlan cada cambio: `agregarItem`, `agregarItemCombo`, `actualizarTotal()`, `priorizar()`, `validarTransicion(nuevoEstado, actor)` y `cambiarEstado(nuevoEstado)`. Ninguna otra clase puede fijar el total ni el estado a mano: el total se recalcula con `actualizarTotal()` cuando cambia un ítem, y el estado solo cambia si `validarTransicion` lo permite. Esto protege el RF1, que exige que el precio total se recalcule de forma precisa al registrar el pedido, y evita que `UsuarioMostrador`, `UsuarioCocina` o el `ServicioPedidos` dejen un pedido con un total que no coincide con la suma de los subtotales o con un estado que salta pasos del flujo.
+`Pedido` declara todos sus atributos como privados (`fechaHora`, `numeroPedido`, `referenciaRetiro`, `estado`, `prioritario` y `total`). Hacia afuera solo expone métodos públicos que controlan cada cambio: `agregarItem`, `agregarItemCombo`, `obtenerTotal()`, `asociarPago(pago)`, `priorizar()`, `validarTransicion(nuevoEstado, actor)` y `cambiarEstado(nuevoEstado)`. Ninguna otra clase puede fijar el total ni el estado a mano: el total se recalcula con `actualizarTotal(subtotal)`, que es privado, cada vez que se agrega un ítem, y el estado solo cambia si `validarTransicion` lo permite. Esto protege el RF1, que exige que el precio total se recalcule de forma precisa al registrar el pedido, y evita que `UsuarioMostrador`, `UsuarioCocina` o el `ServicioPedidos` dejen un pedido con un total que no coincide con la suma de los subtotales o con un estado que salta pasos del flujo.
 
 ![Encapsulamiento - Ejemplo 1](../../diagramas/01-diagrama-clases/capturas-pilares/poo-encapsulamiento-ejemplo-1.png)
 
@@ -34,7 +34,7 @@ Este anexo analiza cómo el diagrama de clases final del Sistema de Pedidos ([ve
 
 **Ejemplo 2 — Usuario → UsuarioMostrador (UsuarioCocina y UsuarioEncargado):**
 
-`UsuarioMostrador` hereda de `Usuario` las credenciales (`nombre`, `usuario`, `passwordHash`, `activo`) y el método `autentificar`, y agrega `numeroCaja` junto con `registrarPedido()`, `modificarPedido(pedido)` y `marcarComoEntregado(pedido)`. `UsuarioCocina` (`estacionTrabajo`, `iniciarPreparacion(pedido)`, `marcarPedidoListo(pedido)`) y `UsuarioEncargado` (`claveSupervision`, `autorizarCancelacion()`, `validarClaveSupervision(clave)`) heredan de la misma superclase. Lo que comparten es la identidad del personal que accede al sistema, y cada rol suma las operaciones que le corresponden.
+`UsuarioMostrador` hereda de `Usuario` las credenciales (`nombre`, `usuario`, `passwordHash`, `activo`) y el método `autentificar`, y agrega `numeroCaja` junto con `modificarPedido(pedido)` y `marcarComoEntregado(pedido)` (el registro del pedido lo coordina `ServicioPedidos` mediante `Pedido.registrarPedido(...)`). `UsuarioCocina` (`estacionTrabajo`, `iniciarPreparacion(pedido)`, `marcarPedidoListo(pedido)`) y `UsuarioEncargado` (`claveSupervision`, `autorizarCancelacion()`, `validarClaveSupervision(clave)`) heredan de la misma superclase. Lo que comparten es la identidad del personal que accede al sistema, y cada rol suma las operaciones que le corresponden.
 
 ![Herencia - Ejemplo 2](../../diagramas/01-diagrama-clases/capturas-pilares/poo-herencia-ejemplo-2.png)
 
@@ -52,7 +52,7 @@ Tanto `Producto` como `Combo` responden a `obtenerNombre()` y `obtenerPrecio()`,
 
 **Ejemplo 2 — el parámetro Usuario en AuditoriaPedido.registrarAccion() y Pedido.validarTransicion():**
 
-`AuditoriaPedido.registrarAccion(pedido, responsable: Usuario, autorizante: UsuarioEncargado)` y `Pedido.validarTransicion(nuevoEstado, actor: Usuario)` reciben un `Usuario` sin importar su subclase. Allí puede llegar un `UsuarioMostrador`, un `UsuarioCocina` o un `UsuarioEncargado`, y el mismo método responde según quién es el actor: la validación permite o rechaza la transición de estado según el rol, y la auditoría guarda a quien realizó la acción. Es polimorfismo de subtipo: un único método sirve para las tres subclases sin conocer cuál es.
+`AuditoriaPedido.registrarAccion(pedido, usuario: Usuario, accion, fechaHora)` (y su sobrecarga con `autorizante: UsuarioEncargado`) y `Pedido.validarTransicion(nuevoEstado, actor: Usuario)` reciben un `Usuario` sin importar su subclase. Allí puede llegar un `UsuarioMostrador`, un `UsuarioCocina` o un `UsuarioEncargado`, y el mismo método responde según quién es el actor: la validación permite o rechaza la transición de estado según el rol, y la auditoría guarda a quien realizó la acción. Es polimorfismo de subtipo: un único método sirve para las tres subclases sin conocer cuál es.
 
 ![Polimorfismo - Ejemplo 2](../../diagramas/01-diagrama-clases/capturas-pilares/poo-polimorfismo-ejemplo-2.png)
 

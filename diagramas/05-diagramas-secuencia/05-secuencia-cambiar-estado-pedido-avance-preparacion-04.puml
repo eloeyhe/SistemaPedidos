@@ -20,16 +20,17 @@ end note
 alt transicion solicitada: RECIBIDO a EN_PREPARACION
     UsuarioCocina -> pantalla : seleccionarPedido(numeroPedido)
     pantalla -> servicio : consultarEstado(numeroPedido)
-    servicio -> pedido : obtenerEstado(numeroPedido)
+    servicio -> servicio : buscarPedido(numeroPedido)
+    servicio -> pedido : obtenerEstado()
     pedido --> servicio : estadoActual
     servicio --> pantalla : estadoActual
     pantalla --> UsuarioCocina : vistaPedidoYEstado
 
     UsuarioCocina -> pantalla : iniciarPreparacion(numeroPedido)
     pantalla -> servicio : solicitarCambioEstado(numeroPedido, EN_PREPARACION, UsuarioCocina)
-    servicio -> pedido : validarTransicion(RECIBIDO, EN_PREPARACION, UsuarioCocina)
+    servicio -> pedido : validarTransicion(EN_PREPARACION, UsuarioCocina)
     alt transicion valida y actor autorizado
-        pedido -> pedido : actualizarEstado(EN_PREPARACION)
+        pedido -> pedido : cambiarEstado(EN_PREPARACION)
         pedido --> servicio : acuseActualizacion
         servicio -> historial : registrarCambioEstado(pedido, RECIBIDO, EN_PREPARACION, UsuarioCocina)
         historial --> servicio : acuseRegistro
@@ -44,16 +45,17 @@ alt transicion solicitada: RECIBIDO a EN_PREPARACION
 else transicion solicitada: EN_PREPARACION a LISTO
     UsuarioCocina -> pantalla : seleccionarPedido(numeroPedido)
     pantalla -> servicio : consultarEstado(numeroPedido)
-    servicio -> pedido : obtenerEstado(numeroPedido)
+    servicio -> servicio : buscarPedido(numeroPedido)
+    servicio -> pedido : obtenerEstado()
     pedido --> servicio : estadoActual
     servicio --> pantalla : estadoActual
     pantalla --> UsuarioCocina : vistaPedidoYEstado
 
     UsuarioCocina -> pantalla : finalizarPreparacion(numeroPedido)
     pantalla -> servicio : solicitarCambioEstado(numeroPedido, LISTO, UsuarioCocina)
-    servicio -> pedido : validarTransicion(EN_PREPARACION, LISTO, UsuarioCocina)
+    servicio -> pedido : validarTransicion(LISTO, UsuarioCocina)
     alt transicion valida y actor autorizado
-        pedido -> pedido : actualizarEstado(LISTO)
+        pedido -> pedido : cambiarEstado(LISTO)
         pedido --> servicio : acuseActualizacion
         servicio -> historial : registrarCambioEstado(pedido, EN_PREPARACION, LISTO, UsuarioCocina)
         historial --> servicio : acuseRegistro
@@ -72,16 +74,17 @@ else transicion solicitada: LISTO a ENTREGADO
     pantalla --> UsuarioMostrador : vistaPedidosParaEntrega
     UsuarioMostrador -> pantalla : seleccionarPedido(numeroPedido)
     pantalla -> servicio : consultarEstado(numeroPedido)
-    servicio -> pedido : obtenerEstado(numeroPedido)
+    servicio -> servicio : buscarPedido(numeroPedido)
+    servicio -> pedido : obtenerEstado()
     pedido --> servicio : estadoActual
     servicio --> pantalla : estadoActual
     pantalla --> UsuarioMostrador : vistaPedidoYEstado
 
     UsuarioMostrador -> pantalla : registrarEntrega(numeroPedido)
     pantalla -> servicio : solicitarCambioEstado(numeroPedido, ENTREGADO, UsuarioMostrador)
-    servicio -> pedido : validarTransicion(LISTO, ENTREGADO, UsuarioMostrador)
+    servicio -> pedido : validarTransicion(ENTREGADO, UsuarioMostrador)
     alt transicion valida y actor autorizado
-        pedido -> pedido : actualizarEstado(ENTREGADO)
+        pedido -> pedido : cambiarEstado(ENTREGADO)
         pedido --> servicio : acuseActualizacion
         servicio -> historial : registrarCambioEstado(pedido, LISTO, ENTREGADO, UsuarioMostrador)
         historial --> servicio : acuseRegistro

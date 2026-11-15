@@ -132,7 +132,7 @@
 - `calcularSubtotal(...)` → obtiene el subtotal correspondiente a cada ítem.
 - `recalcularPrecio()` → actualiza el importe del ítem.
 - `consultarPagoOriginal()` → obtiene la información del pago anterior.
-- `calcularDiferencia()` → determina la diferencia entre el pago anterior y el nuevo total.
+- `calcularDiferencia(totalAnterior, totalActualizado)` → determina la diferencia entre el total ya abonado (`totalAnterior`) y el nuevo total del pedido (`totalActualizado`).
 - `validarMedioPago()` → comprueba que el medio seleccionado sea válido.
 - `registrarCobroAdicional()` → registra un importe adicional.
 - `registrarDevolucion()` → registra una devolución.
@@ -233,7 +233,7 @@ No se representa la destrucción explícita de objetos persistentes. Los cambios
         SI pagoOriginal existe
 
             diferencia = pago.calcularDiferencia(
-                totalNuevo, pagoOriginal.monto
+                pagoOriginal.monto, totalNuevo
             )
 
             SI diferencia != 0

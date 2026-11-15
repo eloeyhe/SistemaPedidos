@@ -29,6 +29,7 @@ class PantallaPedidos {
 
 class ServicioPedidos {
   + consultarEstado(numeroPedido: int): EstadoPedido
+  + buscarPedido(numeroOReferencia: String): Pedido
   + buscarPedidosPorEstado(estado: EstadoPedido): List<Pedido>
   + solicitarCambioEstado(numeroPedido: int, nuevoEstado: EstadoPedido, actor: Usuario): boolean
 }
@@ -39,9 +40,9 @@ class Pedido {
   - referenciaRetiro: String
   - estado: EstadoPedido
   - prioritario: boolean
-  + obtenerEstado(numeroPedido: int): EstadoPedido
-  + validarTransicion(estadoActual: EstadoPedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
-  + actualizarEstado(nuevoEstado: EstadoPedido): boolean
+  + obtenerEstado(): EstadoPedido
+  + validarTransicion(nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(nuevoEstado: EstadoPedido): void
 }
 
 class HistorialCambioPedido {
