@@ -85,6 +85,32 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/rc17-elimino-anexo-diagrama-clases-final] fix: elimino el anexo diagrama-clases-final.md y sus referencias (RC17)
   PR: [#267](https://github.com/eloeyhe/SistemaPedidos/pull/267) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
+- [fix/rc3-changelog-titulos-literales-a4] fix: corrijo el changelog de A4 con títulos literales y entradas faltantes (RC3)
+  PR: [#268](https://github.com/eloeyhe/SistemaPedidos/pull/268) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
+- [fix/rc7-rc8-rc9-rc10-rc14-rc15-rc16-nombres-y-crc] fix: normalizo nombres de clases y agrego tarjetas CRC (RC7, RC8, RC9, RC10, RC14, RC15, RC16)
+  PR: [#269](https://github.com/eloeyhe/SistemaPedidos/pull/269) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
+- [fix/rc4-rc18-rc23-cu5-contratos-y-diagrama-final] fix: unifico CU5, contratos de CU2 a CU4 y actualizo el diagrama final (RC4, RC18, RC19, RC20, RC21, RC22, RC23)
+  PR: [#270](https://github.com/eloeyhe/SistemaPedidos/pull/270) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
+- [fix/rc5-documento-desvio-pr-259-y-changelog] fix: documento el desvío de la PR #259 y actualizo el changelog de A4 (RC5)
+  PR: [#271](https://github.com/eloeyhe/SistemaPedidos/pull/271) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
+### Desvíos del flujo de ramas
+
+**PR #259 mergeada contra `master` en lugar de `develop` (RC5)**
+
+- **Qué pasó:** el 12/11/2026 la PR [#259](https://github.com/eloeyhe/SistemaPedidos/pull/259) (`fix/decidir-clase-cliente`, issue [#249](https://github.com/eloeyhe/SistemaPedidos/issues/249)) se abrió y se mergeó con base `master`. La rama había salido de `develop`, así que llevó a `master` todo el trabajo de A4 sin pasar por la release.
+- **Por qué es un desvío:** en el flujo del grupo, las ramas `feature/` y `fix/` se integran en `develop` y `master` solo recibe la rama `release/` aprobada por el docente.
+- **Cómo se regularizó:**
+  1. PR [#260](https://github.com/eloeyhe/SistemaPedidos/pull/260): la aclaración de Cliente de la #259 se integró en `develop`, que era su destino correcto.
+  2. PR [#261](https://github.com/eloeyhe/SistemaPedidos/pull/261): se revirtió la #259 en `master`.
+  3. PR [#262](https://github.com/eloeyhe/SistemaPedidos/pull/262): se revirtió el revert en `develop`. Sin este paso, Git hubiera tomado esos commits como ya integrados y revertidos, y la release de A4 los habría perdido sin mostrar conflicto.
+  4. El 15/11/2026, `master` se restauró con un force-push al merge de la release de A3 (`3df1b47`, PR [#209](https://github.com/eloeyhe/SistemaPedidos/pull/209)). Así `master` ya no tiene los merges de las PRs #259 y #261 y queda igual que antes del desvío.
+- **Estado final:** el contenido de la #259 llega a `master` solo a través de `release/actividad-obligatoria-4` (PR [#265](https://github.com/eloeyhe/SistemaPedidos/pull/265)), como el resto de A4.
+- **Prevención:** antes de mergear se verifica que la base de toda PR `feature/` o `fix/` sea `develop`, o la `release/` durante las correcciones. Las PRs con base `master` solo se aceptan desde `release/`.
+
 ## [Release Actividad Obligatoria N°3] - 2026-10-22
 
 ### Added

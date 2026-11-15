@@ -16,6 +16,14 @@
 - **Backport:** se creó `backport/release-actividad-obligatoria-3` desde `master` actualizada para llevar las correcciones aprobadas a `develop` y establecer la base de la Actividad Obligatoria N°4 (PR #225, aprobada por otro integrante).
 - **Integración de las correcciones del Arquitecto de Dominio:** se revisaron y mergearon a `develop` las ramas `fix/` de las issues #247, #248 y #249 (PRs #257 y #258). Como `develop` no es la rama por defecto, las issues vinculadas se cerraron a mano.
 - **Merge erróneo contra `master`:** la PR #259 se mergeó por error a `master` y, como su rama salía de `develop`, arrastró todo el trabajo de A4. La PR #261 lo revirtió, pero eso dejaba esos commits como "ya mergeados y revertidos" en `master`, por lo que la release de A4 los hubiera perdido sin mostrar conflicto. Se integró la aclaración en `develop` (PR #260) y se revirtió el revert hacia `develop` (PR #262, sin cambios de archivos y aprobada por otro integrante). Se verificó con `git merge-tree` que el merge `develop` → `master` queda limpio.
+- **Correcciones de la release de A4 (Request Changes de la PR #265):** se usó Claude en modo agente para verificar cada RC contra `release/actividad-obligatoria-4` y para aplicar las correcciones en ramas `fix/`. Las PRs fueron #266, #267 y #268, más #269 (nombres y tarjetas CRC), #270 (CU5, contratos y diagrama final) y #271 (desvío de la #259 y changelog).
+  - **Prompt:** "En este repositorio, fijate cuáles de estas correcciones (RC2 a RC23) ya están hechas y cuáles faltan", seguido de "hacé todo".
+  - **Decisiones revisadas sobre el output de la IA:**
+    1. En CU5 se adoptó la regla del diagrama de casos de uso y de actividades: Mostrador ve solo `LISTO`. La secuencia, el pseudocódigo, la introducción y los diagramas de clases se ajustaron a esa regla.
+    2. Para cada contrato se tomó la firma que ya compartían más artefactos. `calcularDiferencia(totalAnterior, totalActualizado)` viene del parcial y la secuencia del CU2, y `registrarAccion(..., accion, fechaHora)` del CU3. `obtenerEstado()`, `cambiarEstado` y `validarTransicion(nuevoEstado, actor)` vienen del diagrama final.
+    3. No se renombraron los registros históricos (`ia/`, entradas previas del changelog, boceto `.excalidraw` de A2), porque documentan lo que se hizo en su momento.
+    4. Los `.png` se regeneraron con el servidor de PlantUML. El diagrama del CU2 superaba 4096 px y se le agregó `scale 0.9`. Las capturas de `pilares-poo.md` se regeneraron a partir de fragmentos del diagrama final corregido.
+  - **Verificación:** se buscaron con `grep` los nombres con guion bajo y las firmas viejas en `.md` y `.puml` (sin resultados fuera de los registros históricos) y se revisaron visualmente los diagramas regenerados.
 
 ---
 
