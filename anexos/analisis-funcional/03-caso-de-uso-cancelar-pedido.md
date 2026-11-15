@@ -110,7 +110,7 @@
 - **PantallaPedidos:** interfaz que recibe las solicitudes, motivos y confirmaciones.
 - **ServicioPedidos:** componente que coordina las validaciones y el procesamiento de la cancelación.
 - **Pedido:** entidad que administra la información y el estado del pedido.
-- **Auditoria_pedido:** entidad que registra la operación, el motivo y los responsables.
+- **AuditoriaPedido:** entidad que registra la operación, el motivo y los responsables.
 
 **Mensajes clave:**
 
@@ -146,12 +146,13 @@ No se representa la destrucción explícita de objetos persistentes. El pedido, 
 |---|---|---|
 | Usuario | Representar la identidad y autenticación de los usuarios del sistema. | [Usuario](../../herramientas-agile/tarjetas-crc/13-tarjeta-crc-usuario.md) |
 | UsuarioMostrador | Gestionar solicitudes de cancelación desde el mostrador. | [Usuario de Mostrador](../../herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md) |
-| UsuarioEncargado | Autorizar cancelaciones que requieren supervisión mediante una clave. | Clase especializada de Usuario |
+| UsuarioEncargado | Autorizar cancelaciones que requieren supervisión mediante una clave. | [Usuario Encargado](../../herramientas-agile/tarjetas-crc/16-tarjeta-crc-usuario-encargado.md) |
 | PantallaPedidos | Recibir las solicitudes, motivos y confirmaciones de cancelación. | Interfaz específica del caso de uso |
 | ServicioPedidos | Consultar pedidos, validar condiciones y coordinar cancelaciones. | Control del caso de uso |
 | Pedido | Mantener la información, el identificador y el estado del pedido. | [Pedido](../../herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md) |
 | Pago | Conservar los pagos asociados al pedido. | [Pago](../../herramientas-agile/tarjetas-crc/05-tarjeta-crc-pago.md) |
-| Auditoria_pedido | Registrar las cancelaciones, motivos, fechas y usuarios responsables. | [Auditoría de Pedido](../../herramientas-agile/tarjetas-crc/11-tarjeta-crc-auditoria-pedido.md) |
+| AuditoriaPedido | Registrar las cancelaciones, motivos, fechas y usuarios responsables. | [Auditoría de Pedido](../../herramientas-agile/tarjetas-crc/11-tarjeta-crc-auditoria-pedido.md) |
+| EstadoPedido | Definir el conjunto cerrado de estados del ciclo de vida del pedido | [21-tarjeta-crc-estado-pedido.md](../../herramientas-agile/tarjetas-crc/21-tarjeta-crc-estado-pedido.md) |
 
 **Relaciones UML:**
 
@@ -163,12 +164,12 @@ No se representa la destrucción explícita de objetos persistentes. El pedido, 
 | Dependencia | UsuarioEncargado → PantallaPedidos | El Encargado utiliza la interfaz para autorizar operaciones. |
 | Dependencia | PantallaPedidos → ServicioPedidos | La interfaz delega la lógica de cancelación al servicio. |
 | Dependencia | ServicioPedidos → Pedido | El servicio consulta y solicita cambios sobre el estado del pedido. |
-| Dependencia | ServicioPedidos → Auditoria_pedido | El servicio solicita registrar la operación realizada. |
+| Dependencia | ServicioPedidos → AuditoriaPedido | El servicio solicita registrar la operación realizada. |
 | Dependencia | ServicioPedidos → UsuarioEncargado | El servicio requiere autorización cuando el pedido está EN_PREPARACION. |
 | Asociación | Pedido → Pago | El pedido mantiene vinculados sus pagos registrados. |
-| Asociación | Pedido → Auditoria_pedido | Un pedido puede tener múltiples registros de auditoría. |
-| Asociación | Auditoria_pedido → Usuario | Cada registro identifica al usuario responsable. |
-| Asociación | Auditoria_pedido → UsuarioEncargado | El registro puede identificar al Encargado que autorizó la cancelación. |
+| Asociación | Pedido → AuditoriaPedido | Un pedido puede tener múltiples registros de auditoría. |
+| Asociación | AuditoriaPedido → Usuario | Cada registro identifica al usuario responsable. |
+| Asociación | AuditoriaPedido → UsuarioEncargado | El registro puede identificar al Encargado que autorizó la cancelación. |
 
 
 **Justificación de la clase Pago:**

@@ -9,7 +9,7 @@ actor UsuarioEncargado
 participant "PantallaPedidos:pantalla" as pantalla
 participant "ServicioPedidos:servicio" as servicio
 participant "Pedido:pedido" as pedido
-participant "Auditoria_pedido:auditoria" as auditoria
+participant "AuditoriaPedido:auditoria" as auditoria
 
 note over servicio, pedido
     La cancelacion conserva el pedido y sus pagos.

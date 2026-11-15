@@ -7,13 +7,13 @@ hide footbox
 actor "Usuario de Mostrador" as mostrador
 participant "PantallaPedidos:interfaz" as interfaz
 participant "Pedido:pedido" as pedido
-participant "Item_pedido:item" as item
+participant "ItemPedido:item" as item
 participant "Producto:producto" as producto
-participant "Personalizacion_item:personalizacion" as personalizacion
+participant "PersonalizacionItem:personalizacion" as personalizacion
 participant "Pago:pagoOriginal" as pago
 participant "ProcesadorPago:procesadorPago" as procesadorPago
-participant "Historial_pago:historialPago" as historialPago
-participant "Historial_cambio_pedido:historialCambios" as historialCambios
+participant "HistorialPago:historialPago" as historialPago
+participant "HistorialCambioPedido:historialCambios" as historialCambios
 
 mostrador -> interfaz : buscarPedido(numeroOReferencia)
 interfaz -> pedido : buscarPedido(numeroOReferencia)

@@ -44,15 +44,15 @@ Este anexo analiza cómo el diagrama de clases final del Sistema de Pedidos ([ve
 
 **Definición:** El polimorfismo permite que objetos de distintas clases respondan al mismo mensaje, cada uno a su manera, de modo que quien los usa no necesita conocer su clase concreta.
 
-**Ejemplo 1 — obtenerPrecio() en Producto vs Combo (con Item_pedido):**
+**Ejemplo 1 — obtenerPrecio() en Producto vs Combo (con ItemPedido):**
 
-Tanto `Producto` como `Combo` responden a `obtenerNombre()` y `obtenerPrecio()`, y `Item_pedido` los usa de la misma forma, ya que referencia uno u otro (multiplicidad 0..1 hacia cada uno, y exactamente uno de los dos por ítem). El comportamiento difiere: `Producto` devuelve su precio base, mientras que `Combo` devuelve su precio propio, que según el RF1 no es la suma de sus partes. `Item_pedido` lo refleja con `establecerProductoYCantidad` y `establecerComboYCantidad`, y `Pedido` con `agregarItem` y `agregarItemCombo`. En este diagrama `Combo` no hereda de `Producto`, por lo que se trata de polimorfismo por contrato común (mismos mensajes, respuesta propia de cada clase) y no por jerarquía. Una mejora futura sería extraer una interfaz compartida.
+Tanto `Producto` como `Combo` responden a `obtenerNombre()` y `obtenerPrecio()`, y `ItemPedido` los usa de la misma forma, ya que referencia uno u otro (multiplicidad 0..1 hacia cada uno, y exactamente uno de los dos por ítem). El comportamiento difiere: `Producto` devuelve su precio base, mientras que `Combo` devuelve su precio propio, que según el RF1 no es la suma de sus partes. `ItemPedido` lo refleja con `establecerProductoYCantidad` y `establecerComboYCantidad`, y `Pedido` con `agregarItem` y `agregarItemCombo`. En este diagrama `Combo` no hereda de `Producto`, por lo que se trata de polimorfismo por contrato común (mismos mensajes, respuesta propia de cada clase) y no por jerarquía. Una mejora futura sería extraer una interfaz compartida.
 
 ![Polimorfismo - Ejemplo 1](../../diagramas/01-diagrama-clases/capturas-pilares/poo-polimorfismo-ejemplo-1.png)
 
-**Ejemplo 2 — el parámetro Usuario en Auditoria_pedido.registrarAccion() y Pedido.validarTransicion():**
+**Ejemplo 2 — el parámetro Usuario en AuditoriaPedido.registrarAccion() y Pedido.validarTransicion():**
 
-`Auditoria_pedido.registrarAccion(pedido, responsable: Usuario, autorizante: UsuarioEncargado)` y `Pedido.validarTransicion(nuevoEstado, actor: Usuario)` reciben un `Usuario` sin importar su subclase. Allí puede llegar un `UsuarioMostrador`, un `UsuarioCocina` o un `UsuarioEncargado`, y el mismo método responde según quién es el actor: la validación permite o rechaza la transición de estado según el rol, y la auditoría guarda a quien realizó la acción. Es polimorfismo de subtipo: un único método sirve para las tres subclases sin conocer cuál es.
+`AuditoriaPedido.registrarAccion(pedido, responsable: Usuario, autorizante: UsuarioEncargado)` y `Pedido.validarTransicion(nuevoEstado, actor: Usuario)` reciben un `Usuario` sin importar su subclase. Allí puede llegar un `UsuarioMostrador`, un `UsuarioCocina` o un `UsuarioEncargado`, y el mismo método responde según quién es el actor: la validación permite o rechaza la transición de estado según el rol, y la auditoría guarda a quien realizó la acción. Es polimorfismo de subtipo: un único método sirve para las tres subclases sin conocer cuál es.
 
 ![Polimorfismo - Ejemplo 2](../../diagramas/01-diagrama-clases/capturas-pilares/poo-polimorfismo-ejemplo-2.png)
 
@@ -64,7 +64,7 @@ Tanto `Producto` como `Combo` responden a `obtenerNombre()` y `obtenerPrecio()`,
 
 **Ejemplo 1 — Producto:**
 
-`Producto` es una clase abstracta que modela la idea de artículo del catálogo con solo `nombre` y `precio`, y oculta si se trata de algo preparado en cocina o de algo envasado. `Item_pedido` solo necesita pedirle `obtenerNombre()` y `obtenerPrecio()` para calcular su subtotal con `calcularSubtotal()`; no le importa cómo se elaboró el artículo. Esa simplificación evita que la lógica del pedido dependa de cada tipo de producto.
+`Producto` es una clase abstracta que modela la idea de artículo del catálogo con solo `nombre` y `precio`, y oculta si se trata de algo preparado en cocina o de algo envasado. `ItemPedido` solo necesita pedirle `obtenerNombre()` y `obtenerPrecio()` para calcular su subtotal con `calcularSubtotal()`; no le importa cómo se elaboró el artículo. Esa simplificación evita que la lógica del pedido dependa de cada tipo de producto.
 
 ![Abstracción - Ejemplo 1](../../diagramas/01-diagrama-clases/capturas-pilares/poo-abstraccion-ejemplo-1.png)
 

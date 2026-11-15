@@ -36,3 +36,7 @@
 - [18 - Procesador Pago ](18-tarjeta-crc-procesador-pago.md)
 
 - [19 - Pantalla Cocina ](19-tarjeta-crc-pantalla-cocina.md)
+
+- [20 - Pantalla Pedidos ](20-tarjeta-crc-pantalla-pedidos.md)
+
+- [21 - Estado Pedido ](21-tarjeta-crc-estado-pedido.md)

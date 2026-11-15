@@ -110,6 +110,7 @@ Fuente PlantUML: [01-clases-tomar-pedido-01.puml](../../diagramas/01-diagrama-cl
 | ServicioPedidos | Coordinar la carga del pedido, gestionar el cobro y registrar el pedido confirmado, y notificar a Cocina | [17-tarjeta-crc-servicio-pedidos.md](../../herramientas-agile/tarjetas-crc/17-tarjeta-crc-servicio-pedidos.md) |
 | ProcesadorPago | Validar el medio de pago y procesar el cobro, informando el motivo de rechazo | [18-tarjeta-crc-procesador-pago.md](../../herramientas-agile/tarjetas-crc/18-tarjeta-crc-procesador-pago.md) |
 | PantallaCocina | Recibir la cabecera y el detalle de cada pedido confirmado y confirmar la recepción | [19-tarjeta-crc-pantalla-cocina.md](../../herramientas-agile/tarjetas-crc/19-tarjeta-crc-pantalla-cocina.md) |
+| EstadoPedido | Definir el conjunto cerrado de estados del ciclo de vida del pedido | [21-tarjeta-crc-estado-pedido.md](../../herramientas-agile/tarjetas-crc/21-tarjeta-crc-estado-pedido.md) |
 
 **Relaciones UML:**
 

@@ -6,7 +6,7 @@ El Principio de Inversión de Dependencias (DIP) es un principio de diseño estr
 ## Motivación
 En el boceto inicial del sistema, se detectaron dos problemas principales de acoplamiento que violan este principio y dificultan la mantenibilidad:
 
-1. **Acoplamiento de Dominio:** La clase `Item_pedido` dependía directamente de la clase concreta `Producto`, dejando a la clase `Combo` aislada. Esto contradice el Requisito Funcional RF1, que permite incluir tanto productos individuales como combos dentro de un mismo pedido.
+1. **Acoplamiento de Dominio:** La clase `ItemPedido` dependía directamente de la clase concreta `Producto`, dejando a la clase `Combo` aislada. Esto contradice el Requisito Funcional RF1, que permite incluir tanto productos individuales como combos dentro de un mismo pedido.
 
 2. **Acoplamiento de Infraestructura:** El sistema requiere guardar los pedidos y enviarlos automáticamente a la cocina (RF2). Si los servicios del sistema (módulos de alto nivel) instancian directamente conexiones a bases de datos específicas o envían datos a pantallas físicas concretas (módulos de bajo nivel), el software se vuelve rígido, frágil e imposible de probar mediante pruebas unitarias aislando la infraestructura.
 
@@ -25,7 +25,7 @@ Para cumplir con DIP, se invierten las dependencias introduciendo interfaces en 
 ## Justificación Técnica
 El diagrama muestra la resolución de las dependencias a través de inyección e interfaces:
 
-1. **Abstracción en el Catálogo (`IElementoMenu`):** Se creó la interfaz `IElementoMenu`. Tanto `Producto` como `Combo` implementan esta abstracción. Ahora, `Item_pedido` depende únicamente de la interfaz `IElementoMenu` (obteniendo el nombre y precio vigente), desconectándose de las clases concretas y permitiendo futuras extensiones del catálogo.
+1. **Abstracción en el Catálogo (`IElementoMenu`):** Se creó la interfaz `IElementoMenu`. Tanto `Producto` como `Combo` implementan esta abstracción. Ahora, `ItemPedido` depende únicamente de la interfaz `IElementoMenu` (obteniendo el nombre y precio vigente), desconectándose de las clases concretas y permitiendo futuras extensiones del catálogo.
 
 2. **Puertos de Infraestructura:** Para resolver el RF2, se definieron las interfaces `IRepositorioPedidos` (para la persistencia) y `IPublicadorComandasCocina` (para notificar a la cocina sin acoplarse a una tecnología de red o pantalla específica). 
 
