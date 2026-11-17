@@ -2,6 +2,8 @@
 # Actividad Obligatoria N.º 4
 ## Registro de uso de IA — Analista Funcional CU02 y CU03
 
+> **Nota de vigencia de nombres (RC10):** a partir de las correcciones de la release de A4 (PRs #266 y #269), las clases del modelo se nombran en PascalCase: `ItemPedido`, `PersonalizacionItem`, `EstadoPedido`, `MetodoPago`, `TipoMovimiento`, `HistorialPago`, `HistorialCambioPedido` y `AuditoriaPedido`. El texto de este registro usa esos nombres. Los prompts y los outputs de la IA que aparecen en bloques de código se conservan literales, porque documentan lo que se pidió y lo que devolvió la IA en ese momento: las variantes con guion bajo que figuran ahí (por ejemplo `Item_pedido` o `Estado_pedido`) son **contexto histórico no vigente**.
+
 ---
 
 
@@ -93,6 +95,10 @@ No inventes clases ni funcionalidades que no estén justificadas por los documen
 
 
 ### 2.4. Output obtenido
+
+Output literal devuelto por la IA (contexto histórico: conserva los nombres con guion bajo de ese momento).
+
+```text
 
 - CU02 — Modificar Pedido
 
@@ -339,6 +345,7 @@ Historial_pago --> Tipo_movimiento
  Pedido --> Estado_pedido
  Pago --> Metodo_pago
 @enduml
+```
 
 ### 2.5. Ajustes Realizados
 
@@ -349,19 +356,19 @@ Historial_pago --> Tipo_movimiento
 
 - **Modificación de `Usuario`:** se incorporó el método `autentificar(): Boolean`, conservando los atributos `nombre`, `usuario`, `passwordHash` y `activo`, para representar la autenticación del usuario.
 
-- **Modificación de `UsuarioMostrador`:** se reemplazó `modificarPedido(pedido: Pedido, cambios: List<Item_pedido>): void` por `modificarPedido(): void`, simplificando su firma.
+- **Modificación de `UsuarioMostrador`:** se reemplazó `modificarPedido(pedido: Pedido, cambios: List<ItemPedido>): void` por `modificarPedido(): void`, simplificando su firma.
 
 - **Modificación de `InterfazPedido`:** se agregó `seleccionarPedidoParaModificar(numeroPedido: Integer): void`. También se ajustaron los parámetros de los métodos relacionados con las personalizaciones y los medios de pago, y se modificaron los retornos de `confirmarModificacion()`, `seleccionarMedioPago()` y `confirmarDevolucion()` de `Boolean` a `void`.
 
 - **Modificación de `Pedido`:** se incorporó `modificar(): void` y se eliminó `calcularTotal(): Decimal` del diagrama. 
 
-- **Modificación de `Item_pedido`:** se amplió `calcularSubtotal()` para recibir cantidad, precio unitario y personalizaciones. También se agregó `recalcularPrecio(): Decimal`, para representar el recálculo de los importes.
+- **Modificación de `ItemPedido`:** se amplió `calcularSubtotal()` para recibir cantidad, precio unitario y personalizaciones. También se agregó `recalcularPrecio(): Decimal`, para representar el recálculo de los importes.
 
 - **Modificación de `Pago`:** se incorporó `consultarPagoOriginal(numeroPedido: Integer): Pago`, para consultar el pago existente antes de calcular diferencias económicas. 
 
-- **Modificación de `Historial_pago`:** se mantuvieron los atributos y el método `registrarMovimiento()`, pero se ajustó el nombre del atributo temporal de `fechaHora` a `fechayhora`. Se conservó la asociación con `Usuario` para identificar al responsable.
+- **Modificación de `HistorialPago`:** se mantuvieron los atributos y el método `registrarMovimiento()`, pero se ajustó el nombre del atributo temporal de `fechaHora` a `fechayhora`. Se conservó la asociación con `Usuario` para identificar al responsable.
 
-- **Modificación de `Historial_cambio_pedido`:** se reemplazó `registrarCambio()` por `registrarCambioPedido()`. También se ajustaron los nombres de los atributos para registrar los valores anteriores y nuevos.
+- **Modificación de `HistorialCambioPedido`:** se reemplazó `registrarCambio()` por `registrarCambioPedido()`. También se ajustaron los nombres de los atributos para registrar los valores anteriores y nuevos.
 
 - **Revisión de `ProcesadorPago`:** se mantuvo el método `validarMedioPago()`, eliminando el estereotipo `<<control>>`. Se conservó su dependencia con `Pago`.
 
@@ -371,7 +378,7 @@ Historial_pago --> Tipo_movimiento
 * Cancelar Pedido — CU03
 
 
-- **Incorporación del atributo `motivo`:** se agregó `-motivo: String` a la clase `Auditoria_pedido`, para representar explícitamente el motivo de la cancelación y conservarlo como parte del registro de auditoría.
+- **Incorporación del atributo `motivo`:** se agregó `-motivo: String` a la clase `AuditoriaPedido`, para representar explícitamente el motivo de la cancelación y conservarlo como parte del registro de auditoría.
 
 - **Identificación de las interacciones:** se agregó la etiqueta `interactua` a las dependencias de `UsuarioMostrador` y `UsuarioEncargado` hacia `PantallaPedidos`, para aclarar la participación de ambos usuarios en la interfaz.
 

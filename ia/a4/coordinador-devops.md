@@ -1,5 +1,7 @@
 # Registro de Code Reviews asistidas con IA - Coordinador de Repositorio
 
+> **Nota de vigencia de nombres (RC10):** a partir de las correcciones de la release de A4 (PRs #266 y #269), las clases del modelo se nombran en PascalCase: `ItemPedido`, `PersonalizacionItem`, `EstadoPedido`, `MetodoPago`, `TipoMovimiento`, `HistorialPago`, `HistorialCambioPedido` y `AuditoriaPedido`. El texto de este registro usa esos nombres. Los prompts y los outputs de la IA que aparecen en bloques de código se conservan literales, porque documentan lo que se pidió y lo que devolvió la IA en ese momento: las variantes con guion bajo que figuran ahí (por ejemplo `Item_pedido` o `Estado_pedido`) son **contexto histórico no vigente**.
+
 **Rol:** Coordinador de Repositorio + Analista Funcional del Caso de Uso 1
 
 **Autor:** Santiago Medel Marquez
@@ -104,8 +106,8 @@ Las reviews se hicieron con Claude en modo agente sobre la rama de cada PR. Los 
 **Prompt utilizado:** prompt base de este documento, cambiando la rama y los archivos.
 
 **Hallazgos de la IA:**
-1. Los enums `Estado_pedido`, `Metodo_pago` y `Tipo_movimiento` estaban en minúscula, a diferencia de CU1, CU4 y CU5.
-2. En CU2, `Historial_pago` e `Historial_cambio_pedido` repetían como atributo lo que ya estaba dibujado como asociación.
+1. Los enums `EstadoPedido`, `MetodoPago` y `TipoMovimiento` estaban en minúscula, a diferencia de CU1, CU4 y CU5.
+2. En CU2, `HistorialPago` e `HistorialCambioPedido` repetían como atributo lo que ya estaba dibujado como asociación.
 3. Typos: "Responsability" en `diagramas_de_clases.md` y "Funcioanal" en el changelog.
 4. Descripción de la PR con año, nombre de archivo y link de la consigna incorrectos, y "Closes" solo en el primer issue.
 5. Sugerencia: en CU3 la clase `Pago` no participa del diagrama de secuencia de cancelación.
@@ -139,7 +141,7 @@ Las reviews se hicieron con Claude en modo agente sobre la rama de cada PR. Los 
 **Prompt utilizado:** prompt base de este documento, cambiando la rama y los archivos.
 
 **Hallazgos de la IA:**
-1. El PNG de clases de CU2 se regeneró en 4096 px de ancho, el límite por defecto de PlantUML, y quedó recortado: la clase `Historial_pago` aparecía cortada a la derecha.
+1. El PNG de clases de CU2 se regeneró en 4096 px de ancho, el límite por defecto de PlantUML, y quedó recortado: la clase `HistorialPago` aparecía cortada a la derecha.
 2. El título de la PR solo menciona CU1, pero también renombra `InterfazPedido` a `PantallaPedidos` en CU2.
 
 **Ajustes al output de la IA:** en lugar de devolver la PR, el coordinador regeneró el PNG con `PLANTUML_LIMIT_SIZE` mayor y lo agregó a la rama. Se verificó que la imagen nueva no estuviera recortada. El hallazgo 2 se consideró no bloqueante porque el changelog ya describe los dos cambios.
