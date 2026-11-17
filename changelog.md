@@ -97,6 +97,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/rc5-documento-desvio-pr-259-y-changelog] fix: documento el desvío de la PR #259 y actualizo el changelog de A4 (RC5)
   PR: [#271](https://github.com/eloeyhe/SistemaPedidos/pull/271) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
+- [fix/rc3-rc10-rc24-changelog-ia-issue] fix: corrijo la entrada de la PR #270 y normalizo los registros de IA de A4
+  Issue: [#263](https://github.com/eloeyhe/SistemaPedidos/issues/263)
+  PR: [#272](https://github.com/eloeyhe/SistemaPedidos/pull/272) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
 ### Desvíos del flujo de ramas
 
 **PR #259 mergeada contra `master` en lugar de `develop` (RC5)**
