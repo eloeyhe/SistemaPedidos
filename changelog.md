@@ -101,6 +101,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#263](https://github.com/eloeyhe/SistemaPedidos/issues/263)
   PR: [#272](https://github.com/eloeyhe/SistemaPedidos/pull/272) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
+- [fix/rc25-rc30-contratos-cu2-a-cu5] fix: unifico contratos de CU1 a CU5 con el diagrama final y la política de pagos (RC25, RC26, RC27, RC28, RC29, RC30)
+  PR: [#273](https://github.com/eloeyhe/SistemaPedidos/pull/273) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
+
 ### Desvíos del flujo de ramas
 
 **PR #259 mergeada contra `master` en lugar de `develop` (RC5)**

@@ -1,4 +1,5 @@
 @startuml 06-clases-diagrama-final
+scale 0.8
 title Diagrama de Clases Final - Sistema de Pedidos
 top to bottom direction
 skinparam classAttributeIconSize 0
@@ -10,15 +11,22 @@ package "Presentacion e integracion" {
   class PantallaPedidos <<boundary>> {
     + tomarPedido(): void
     + buscarPedido(numeroOReferencia: String): Pedido
-    + modificarPedido(numeroPedido: int): void
+    + seleccionarPedidoParaModificar(numeroPedido: int): void
+    + modificarItems(listaCambios: List<ItemPedido>): void
+    + modificarPersonalizaciones(listaPersonalizaciones: List<PersonalizacionItem>): void
+    + confirmarModificacion(numeroPedido: int): void
+    + seleccionarMedioPago(medioPago: MetodoPago): void
+    + confirmarDevolucion(medioPago: MetodoPago): void
     + solicitarCancelacionPedido(numeroPedido: int): void
     + confirmarCancelacion(motivo: String): void
+    + responderSolicitudCancelacion(numeroPedido: int): void
     + seleccionarPedido(numeroPedido: int): void
+    + consultarPedidosListos(): List<Pedido>
     + iniciarPreparacion(numeroPedido: int): void
     + finalizarPreparacion(numeroPedido: int): void
     + registrarEntrega(numeroPedido: int): void
     + marcarPrioritario(numeroPedido: int): void
-    + consultarPedidosActivos(): void
+    + accederMonitorPedidosActivos(): void
     + consultarDetallePedido(numeroPedido: int): void
   }
 
@@ -50,13 +58,19 @@ package "Aplicacion" {
     + seleccionarMedioPago(medioPago: MetodoPago): String
     + descartarPedidoEnCurso(): void
     + buscarPedido(numeroOReferencia: String): Pedido
-    + modificarPedido(numeroPedido: int): void
+    + consultarEstado(numeroPedido: int): EstadoPedido
+    + modificarItems(numeroPedido: int, listaCambios: List<ItemPedido>): decimal
+    + modificarPersonalizaciones(numeroPedido: int, listaPersonalizaciones: List<PersonalizacionItem>): decimal
+    + registrarAjustePago(numeroPedido: int, medioPago: MetodoPago, diferencia: decimal, usuario: Usuario): boolean
+    + confirmarModificacion(numeroPedido: int, usuario: Usuario): boolean
+    + solicitarAutorizacion(numeroPedido: int): boolean
     + cancelarPedido(numeroPedido: int, motivo: String, actor: Usuario): boolean
     + cancelarPedido(numeroPedido: int, motivo: String, actor: Usuario, autorizante: UsuarioEncargado): boolean
-    + consultarEstado(numeroPedido: int): EstadoPedido
     + solicitarCambioEstado(numeroPedido: int, nuevoEstado: EstadoPedido, actor: Usuario): boolean
     + buscarPedidosPorEstado(estado: EstadoPedido): List<Pedido>
     + consultarPedidosActivos(actorSolicitante: Usuario): Map<EstadoPedido, List<Pedido>>
+    + comprobarDisponibilidadDatos(): boolean
+    + obtenerPedidosPorEstados(estados: List<EstadoPedido>): List<Pedido>
     + agruparPedidosPorEstado(pedidos: List<Pedido>): Map<EstadoPedido, List<Pedido>>
     + ordenarGrupoPorPrioridad(urgentesPrimero: boolean): void
     + seleccionarEstadosVisibles(actor: Usuario): List<EstadoPedido>
@@ -89,6 +103,7 @@ package "Dominio" {
   class UsuarioEncargado {
     - claveSupervision: String
     + autorizarCancelacion(): boolean
+    + solicitarClaveSupervision(numeroPedido: int): boolean
     + validarClaveSupervision(clave: String): boolean
   }
 
@@ -107,12 +122,15 @@ package "Dominio" {
     + obtenerTotal(): decimal
     + priorizar(): void
     + asociarPago(pago: Pago): void
+    + obtenerPagoOriginal(): Pago
     + registrarPedido(numeroPedido: int, fechaHora: DateTime, referenciaRetiro: String, listaItems: List<ItemPedido>, totalPedido: decimal, pago: Pago): boolean
     + obtenerEstado(): EstadoPedido
     + validarTransicion(nuevoEstado: EstadoPedido, actor: Usuario): boolean
     + cambiarEstado(nuevoEstado: EstadoPedido): void
     + cancelarPedido(motivo: String): void
-    + modificar(): void
+    + prepararModificacion(listaCambios: List<ItemPedido>): void
+    + prepararPersonalizaciones(listaPersonalizaciones: List<PersonalizacionItem>): void
+    + actualizarPedido(listaItems: List<ItemPedido>, totalActualizado: decimal): void
     + esPrioritario(): boolean
     + obtenerDetalle(): List<ItemPedido>
   }
@@ -126,13 +144,17 @@ package "Dominio" {
     - conservarPrecioHistorico(precioBase: decimal): void
     + agregarPersonalizacion(descripcion: String): PersonalizacionItem
     + quitarPersonalizacion(personalizacion: PersonalizacionItem): void
-    + calcularSubtotal(): decimal
+    + modificarCantidadYPrecio(cantidad: int, precioUnitario: decimal): void
+    + actualizarPersonalizaciones(listaPersonalizaciones: List<PersonalizacionItem>): void
+    + calcularSubtotal(cantidad: int, precioBase: decimal, costosAdicionales: List<decimal>): decimal
     + recalcularPrecio(): decimal
   }
 
   class PersonalizacionItem {
     - descripcion: String
     - costoAdicional: decimal
+    + obtenerDescripcion(): String
+    + obtenerCostoAdicional(descripcion: String): decimal
     + calcularCosto(): decimal
   }
 
@@ -257,6 +279,16 @@ note right of ItemPedido
   o un Combo, pero no ambos.
   precioUnitario conserva el precio
   vigente al registrar el pedido.
+end note
+
+note bottom of Pago
+  Politica de pagos: cada Pedido registrado
+  tiene un unico Pago original (CU1). Los cobros
+  adicionales y devoluciones de CU2 se registran
+  como movimientos AJUSTE / DEVOLUCION de ese
+  Pago en HistorialPago; no se crean otros Pagos.
+  La validacion del medio de pago es exclusiva
+  de ProcesadorPago (invocado por ServicioPedidos).
 end note
 
 note bottom of Usuario

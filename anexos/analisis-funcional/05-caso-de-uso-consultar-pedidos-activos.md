@@ -76,7 +76,7 @@ La vista `LISTO` del Usuario de Mostrador es la misma en la descripción del CU0
 
 - `accederMonitorPedidosActivos()` → el actor solicita abrir el monitor; la pantalla envía `consultarPedidosActivos(actorSolicitante)` al servicio.
 - `comprobarDisponibilidadDatos()` → comprueba si la consulta cuenta con datos disponibles; el resultado se devuelve como `resultadoDisponibilidad`.
-- `obtenerPedidosPorEstados("RECIBIDO", "EN_PREPARACION", "LISTO")` → obtiene los pedidos activos y devuelve `listaPedidosActivos`.
+- `obtenerPedidosPorEstados(estadosActivos)` → `ServicioPedidos`, que conserva la colección de pedidos, filtra los estados activos (`RECIBIDO`, `EN_PREPARACION`, `LISTO`) y devuelve `listaPedidosActivos`.
 - `obtenerEstado()` y `esPrioritario()` → consultan, para cada pedido, el estado y la marca de urgencia.
 - `agruparPedidosPorEstado(listaPedidosActivos)`, `ordenarGrupoPorPrioridad(urgentesPrimero)` y `seleccionarEstadosVisibles(actorSolicitante)` → agrupan, priorizan y adaptan los estados consultados al actor: para Cocina devuelve `RECIBIDO` y `EN_PREPARACION`; para Mostrador, `LISTO`.
 - `retornarPedidosAgrupadosYOrdenados(vistaAdaptada)` → devuelve a la pantalla el resultado ordenado; la pantalla presenta la vista al actor.
@@ -117,7 +117,7 @@ Fuente PlantUML: [05-clases-consultar-pedidos-activos-05.puml](../../diagramas/0
 | Asociación | PantallaPedidos → ServicioPedidos | La pantalla tiene el atributo `servicio: ServicioPedidos`; es una referencia estructural usada para procesar las consultas. |
 | Asociación | Pedido → EstadoPedido | Cada pedido conserva su estado actual; el enum limita los estados que puede tener. |
 | Composición | Pedido ◆→ ItemPedido (1 a 1..*) | Los ítems son el detalle que integra el pedido y se presentan como parte de éste. La multiplicidad mínima expresa el pedido con uno o más ítems. |
-| Dependencia | ServicioPedidos → Pedido | El servicio solicita el listado por estados y consulta estado, prioridad y detalle de los pedidos; no declara una referencia permanente a cada pedido. |
+| Dependencia | ServicioPedidos → Pedido | El servicio filtra su colección de pedidos por estados con `obtenerPedidosPorEstados(estados)` y consulta estado, prioridad y detalle de los pedidos; no declara una referencia permanente a cada pedido. |
 | Dependencia | ServicioPedidos → EstadoPedido | El servicio usa los valores del enum para filtrar, agrupar y seleccionar estados visibles. |
 | Dependencia | ServicioPedidos → ItemPedido | El tipo de retorno del detalle es una lista de ítems del pedido. |
 | Dependencia | ServicioPedidos → Usuario | El actor solicitante determina cómo se adapta la vista. |
@@ -140,7 +140,7 @@ SI ServicioPedidos.comprobarDisponibilidadDatos() es falso
     PantallaPedidos advierte datos desactualizados
     Retornar "Aviso de datos desactualizados"
 SINO
-    listaPedidosActivos = pedido.obtenerPedidosPorEstados(RECIBIDO, EN_PREPARACION, LISTO)
+    listaPedidosActivos = ServicioPedidos.obtenerPedidosPorEstados([RECIBIDO, EN_PREPARACION, LISTO])
 
     SI listaPedidosActivos está vacía
         // No hay pedidos en curso para presentar.

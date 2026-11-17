@@ -1,5 +1,5 @@
 @startuml
-scale 0.9
+scale 0.8
 title CU02 - Modificar Pedido
 top to bottom direction
 hide circle
@@ -14,15 +14,15 @@ abstract class Usuario {
   -usuario: String
   -passwordHash: String
   -activo: Boolean
-  +autentificar(): Boolean
+  +autentificar(usuario: String, password: String): Boolean
 }
 
 class UsuarioMostrador {
   -numeroCaja: Integer
-  +modificarPedido(): void
+  +modificarPedido(pedido: Pedido): void
 }
 
-class PantallaPedidos {
+class PantallaPedidos <<boundary>> {
   +buscarPedido(numeroOReferencia: String): Pedido
   +seleccionarPedidoParaModificar(numeroPedido: Integer): void
   +modificarItems(listaCambios: List<ItemPedido>): void
@@ -32,19 +32,29 @@ class PantallaPedidos {
   +confirmarDevolucion(medioPago: MetodoPago): void
 }
 
+class ServicioPedidos <<control>> {
+  +buscarPedido(numeroOReferencia: String): Pedido
+  +consultarEstado(numeroPedido: Integer): EstadoPedido
+  +modificarItems(numeroPedido: Integer, listaCambios: List<ItemPedido>): Decimal
+  +modificarPersonalizaciones(numeroPedido: Integer, listaPersonalizaciones: List<PersonalizacionItem>): Decimal
+  +seleccionarMedioPago(medioPago: MetodoPago): String
+  +registrarAjustePago(numeroPedido: Integer, medioPago: MetodoPago, diferencia: Decimal, usuario: Usuario): Boolean
+  +confirmarModificacion(numeroPedido: Integer, usuario: Usuario): Boolean
+}
+
 class Pedido {
-  -fecha: Date
+  -fechaHora: DateTime
   -estado: EstadoPedido
   -prioritario: Boolean
   -numeroPedido: Integer
   -referenciaRetiro: String
-  +buscarPedido(numeroOReferencia: String): Pedido
-  +verificarEstado(numeroPedido: Integer): EstadoPedido
-  +modificar(): void
+  -total: Decimal
+  +obtenerEstado(): EstadoPedido
+  +obtenerTotal(): Decimal
+  +obtenerPagoOriginal(): Pago
   +prepararModificacion(listaCambios: List<ItemPedido>): void
   +prepararPersonalizaciones(listaPersonalizaciones: List<PersonalizacionItem>): void
-  +verificarEstadoAlConfirmar(numeroPedido: Integer): EstadoPedido
-  +actualizarPedido(numeroPedido: Integer, listaItems: List<ItemPedido>, totalActualizado: Decimal): void
+  +actualizarPedido(listaItems: List<ItemPedido>, totalActualizado: Decimal): void
 }
 
 class ItemPedido {
@@ -53,8 +63,8 @@ class ItemPedido {
   -subtotal: Decimal
   +modificarCantidadYPrecio(cantidad: Integer, precioUnitario: Decimal): void
   +actualizarPersonalizaciones(listaPersonalizaciones: List<PersonalizacionItem>): void
-  +calcularSubtotal(cantidad: Integer, precioUnitario: Decimal, listaPersonalizaciones: List<PersonalizacionItem>): Decimal
-  +agregarPersonalizacion(personalizacion: PersonalizacionItem): void
+  +calcularSubtotal(cantidad: Integer, precioBase: Decimal, costosAdicionales: List<Decimal>): Decimal
+  +agregarPersonalizacion(descripcion: String): PersonalizacionItem
   +quitarPersonalizacion(personalizacion: PersonalizacionItem): void
   +recalcularPrecio(): Decimal
 }
@@ -69,30 +79,30 @@ abstract class Producto {
 class PersonalizacionItem {
   -descripcion: String
   -costoAdicional: Decimal
-  +calcularCosto(): Decimal
   +obtenerDescripcion(): String
-  +obtenerCostoAdicional(): Decimal
+  +obtenerCostoAdicional(descripcion: String): Decimal
+  +calcularCosto(): Decimal
 }
 
 class Pago {
   -monto: Decimal
   -metodoDePago: MetodoPago
+  -fechaHora: DateTime
   +calcularDiferencia(totalAnterior: Decimal, totalActualizado: Decimal): Decimal
-  +validarMedioPago(medioPago: MetodoPago): Boolean
-  +consultarPagoOriginal(numeroPedido: Integer): Pago
   +registrarCobroAdicional(medioPago: MetodoPago, diferencia: Decimal): void
   +registrarDevolucion(medioPago: MetodoPago, diferencia: Decimal): void
 }
 
-class ProcesadorPago {
+class ProcesadorPago <<service>> {
   +validarMedioPago(medioPago: MetodoPago): Boolean
+  +procesarCobro(medioPago: MetodoPago, monto: Decimal): Boolean
 }
 
 class HistorialPago {
   -tipo: TipoMovimiento
   -monto: Decimal
   -motivo: String
-  -fechayhora: DateTime
+  -fechaHora: DateTime
   +registrarMovimiento(pago: Pago, tipo: TipoMovimiento, monto: Decimal, motivo: String, usuario: Usuario): void
 }
 
@@ -100,9 +110,9 @@ class HistorialCambioPedido {
   -campo: String
   -valorAnterior: String
   -valorNuevo: String
-  -fechayhora: DateTime
+  -fechaHora: DateTime
   +registrarCambioPedido(pedido: Pedido, campo: String, valorAnterior: String, valorNuevo: String, usuario: Usuario): void
-  }
+}
 
 enum EstadoPedido {
   RECIBIDO
@@ -128,17 +138,18 @@ UsuarioMostrador --|> Usuario
 
 ' Dependencias
 UsuarioMostrador ..> PantallaPedidos : interactua
-PantallaPedidos ..> Pedido
-PantallaPedidos ..> Pago
-Pago ..> ProcesadorPago
+PantallaPedidos ..> ServicioPedidos : solicita operaciones
+ServicioPedidos ..> Pedido : consulta y modifica
+ServicioPedidos ..> Pago : calcula y registra ajustes
+ServicioPedidos ..> ProcesadorPago : valida medio y cobra
 
 ' Composiciones
 Pedido "1" *-- "1..*" ItemPedido : items
 ItemPedido "1" *-- "0..*" PersonalizacionItem : personalizaciones
 
 ' Asociaciones
-ItemPedido "0..*" --> "1" Producto : producto
-Pedido "1" -- "0..*" Pago : pagos
+ItemPedido "0..*" --> "0..1" Producto : producto
+Pedido "1" -- "1" Pago : pago original
 Pago "1" -- "0..*" HistorialPago : movimientos
 Pedido "1" -- "0..*" HistorialCambioPedido : cambios
 
@@ -150,5 +161,11 @@ HistorialCambioPedido "0..*" --> "1" Usuario : usuario
 Pedido --> EstadoPedido
 Pago --> MetodoPago
 HistorialPago --> TipoMovimiento
+
+note bottom of Pago
+  Un unico pago original por pedido (CU1).
+  Cobros adicionales y devoluciones se registran
+  como movimientos AJUSTE / DEVOLUCION en HistorialPago.
+end note
 
 @enduml

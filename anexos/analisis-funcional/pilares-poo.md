@@ -64,7 +64,7 @@ Tanto `Producto` como `Combo` responden a `obtenerNombre()` y `obtenerPrecio()`,
 
 **Ejemplo 1 — Producto:**
 
-`Producto` es una clase abstracta que modela la idea de artículo del catálogo con solo `nombre` y `precio`, y oculta si se trata de algo preparado en cocina o de algo envasado. `ItemPedido` solo necesita pedirle `obtenerNombre()` y `obtenerPrecio()` para calcular su subtotal con `calcularSubtotal()`; no le importa cómo se elaboró el artículo. Esa simplificación evita que la lógica del pedido dependa de cada tipo de producto.
+`Producto` es una clase abstracta que modela la idea de artículo del catálogo con solo `nombre` y `precio`, y oculta si se trata de algo preparado en cocina o de algo envasado. `ItemPedido` solo necesita pedirle `obtenerNombre()` y `obtenerPrecio()` para calcular su subtotal con `calcularSubtotal(cantidad, precioBase, costosAdicionales)`; no le importa cómo se elaboró el artículo. Esa simplificación evita que la lógica del pedido dependa de cada tipo de producto.
 
 ![Abstracción - Ejemplo 1](../../diagramas/01-diagrama-clases/capturas-pilares/poo-abstraccion-ejemplo-1.png)
 

@@ -1,4 +1,5 @@
 @startuml 01-clases-tomar-pedido-01
+scale 0.82
 skinparam dpi 150
 skinparam classAttributeIconSize 0
 skinparam linetype ortho
@@ -160,14 +161,14 @@ ItemPedido "1" *-- "0..*" PersonalizacionItem : aplica >
 ' Asociaciones
 ItemPedido "0..*" --> "0..1" Producto : referencia >
 ItemPedido "0..*" --> "0..1" Combo : referencia >
-Pedido "1" -- "0..1" Pago : se abona con >
+Pedido "1" -- "1" Pago : pago original
 Pedido "0..*" --> "1" UsuarioMostrador : creadoPor >
 ServicioPedidos "1" --> "1" PantallaCocina : notifica >
 
 ' Dependencias
 UsuarioMostrador ..> ServicioPedidos : <<use>>
 ServicioPedidos ..> Pago : <<create>>
-Pago ..> ProcesadorPago : <<use>>
+ServicioPedidos ..> ProcesadorPago : <<use>>
 Pago ..> MetodoPago
 Pedido ..> EstadoPedido
 
