@@ -6,6 +6,7 @@ hide footbox
 
 actor "Usuario de Mostrador" as mostrador
 participant "PantallaPedidos:interfaz" as interfaz
+participant "ServicioPedidos:servicio" as servicio
 participant "Pedido:pedido" as pedido
 participant "ItemPedido:item" as item
 participant "Producto:producto" as producto
@@ -16,89 +17,108 @@ participant "HistorialPago:historialPago" as historialPago
 participant "HistorialCambioPedido:historialCambios" as historialCambios
 
 mostrador -> interfaz : buscarPedido(numeroOReferencia)
-interfaz -> pedido : buscarPedido(numeroOReferencia)
-pedido --> interfaz : detallesPedido
+interfaz -> servicio : buscarPedido(numeroOReferencia)
+servicio --> interfaz : pedido
 interfaz --> mostrador : vistaPedido
 
 mostrador -> interfaz : seleccionarPedidoParaModificar(numeroPedido)
-interfaz -> pedido : verificarEstado(numeroPedido)
-pedido --> interfaz : estado
+interfaz -> servicio : consultarEstado(numeroPedido)
+servicio -> pedido : obtenerEstado()
+pedido --> servicio : estado
+servicio --> interfaz : estado
 interfaz --> mostrador : estado
 
 alt estado inicial == RECIBIDO
     mostrador -> interfaz : modificarItems(listaCambios)
-    interfaz -> pedido : prepararModificacion(listaCambios)
+    interfaz -> servicio : modificarItems(numeroPedido, listaCambios)
+    servicio -> pedido : prepararModificacion(listaCambios)
     pedido -> item : modificarCantidadYPrecio(cantidad, precioUnitario)
     item -> producto : obtenerNombre()
     producto --> item : nombreProducto
     item -> producto : obtenerPrecio()
     producto --> item : precioBase
+    item --> pedido : acuseModificacion
+    pedido --> servicio : acuseModificacion
+    servicio -> pedido : obtenerTotal()
+    pedido --> servicio : totalParcial
+    servicio --> interfaz : totalParcial
+
+    mostrador -> interfaz : modificarPersonalizaciones(listaPersonalizaciones)
+    interfaz -> servicio : modificarPersonalizaciones(numeroPedido, listaPersonalizaciones)
+    servicio -> pedido : prepararPersonalizaciones(listaPersonalizaciones)
+    pedido -> item : actualizarPersonalizaciones(listaPersonalizaciones)
     item -> personalizacion : obtenerDescripcion()
     personalizacion --> item : descripcion
     item -> personalizacion : obtenerCostoAdicional(descripcion)
     personalizacion --> item : costoAdicional
-    item --> pedido : subtotal
-
-    mostrador -> interfaz : modificarPersonalizaciones(listaPersonalizaciones)
-    interfaz -> pedido : prepararPersonalizaciones(listaPersonalizaciones)
-    pedido -> item : actualizarPersonalizaciones(listaPersonalizaciones)
     item --> pedido : acuseActualizacion
-    pedido -> item : calcularSubtotal(cantidad, precioUnitario, listaPersonalizaciones)
+    pedido -> item : calcularSubtotal(cantidad, precioBase, costosAdicionales)
     item --> pedido : subtotalActualizado
-    pedido --> interfaz : totalActualizado
+    pedido --> servicio : acusePersonalizaciones
+    servicio -> pedido : obtenerTotal()
+    pedido --> servicio : totalActualizado
 
-    opt existe pago original
-        pedido -> pago : calcularDiferencia(totalAnterior, totalActualizado)
-        pago --> pedido : diferencia
-        pedido --> interfaz : diferencia
-        interfaz --> mostrador : vistaDiferencia
-    end
+    note over servicio, pago
+      Todo pedido registrado tiene un unico pago original (CU1).
+      Los ajustes se registran como movimientos de ese pago.
+    end note
+    servicio -> pedido : obtenerPagoOriginal()
+    pedido --> servicio : pagoOriginal
+    servicio -> pago : calcularDiferencia(totalAnterior, totalActualizado)
+    pago --> servicio : diferencia
+    servicio --> interfaz : totalActualizado, diferencia
+    interfaz --> mostrador : vistaDiferencia
 
     mostrador -> interfaz : confirmarModificacion(numeroPedido)
-    interfaz -> pedido : verificarEstadoAlConfirmar(numeroPedido)
-    pedido --> interfaz : estadoConfirmacion
-    
+    interfaz -> servicio : consultarEstado(numeroPedido)
+    servicio -> pedido : obtenerEstado()
+    pedido --> servicio : estadoConfirmacion
+    servicio --> interfaz : estadoConfirmacion
+
     alt estadoConfirmacion == RECIBIDO
-        opt existe pago original
-            alt diferencia != 0
-                mostrador -> interfaz : seleccionarMedioPago(medioPago)
-                interfaz -> pago : validarMedioPago(medioPago)
-                pago -> procesadorPago : validarMedioPago(medioPago)
-                procesadorPago --> pago : resultadoValidacion
-                pago --> interfaz : resultadoValidacion
-                alt medioPago válido
-                    alt diferencia > 0
-                        interfaz -> pago : registrarCobroAdicional(medioPago, diferencia)
-                        pago -> historialPago : registrarMovimiento(pagoOriginal, "cobroAdicional", diferencia, motivo, usuario)
-                        historialPago -> pago : consultarPagoOriginal(numeroPedido)
-                        pago --> historialPago : montoOriginal, medioPagoOriginal
-                        historialPago --> pago : acuseRegistro
-                    else diferencia < 0
-                        mostrador -> interfaz : confirmarDevolucion(medioPago)
-                        interfaz -> pago : registrarDevolucion(medioPago, diferencia)
-                        pago -> historialPago : registrarMovimiento(pagoOriginal, "devolucion", diferencia, motivo, usuario)
-                        historialPago -> pago : consultarPagoOriginal(numeroPedido)
-                        pago --> historialPago : montoOriginal, medioPagoOriginal
-                        historialPago --> pago : acuseRegistro
-                    end
-                else medioPago inválido
-                    interfaz --> mostrador : informarMedioPagoInvalido()
-                    break Se descarta la modificación y no se registra el ajuste
-                    end
+        alt diferencia != 0
+            mostrador -> interfaz : seleccionarMedioPago(medioPago)
+            interfaz -> servicio : seleccionarMedioPago(medioPago)
+            servicio -> procesadorPago : validarMedioPago(medioPago)
+            procesadorPago --> servicio : resultadoValidacion
+            servicio --> interfaz : resultadoValidacion
+            alt medioPago válido
+                alt diferencia > 0
+                    interfaz -> servicio : registrarAjustePago(numeroPedido, medioPago, diferencia, usuario)
+                    servicio -> procesadorPago : procesarCobro(medioPago, diferencia)
+                    procesadorPago --> servicio : cobroAprobado
+                    servicio -> pago : registrarCobroAdicional(medioPago, diferencia)
+                    pago -> historialPago : registrarMovimiento(pagoOriginal, AJUSTE, diferencia, motivo, usuario)
+                    historialPago --> pago : acuseRegistro
+                    pago --> servicio : acuseAjuste
+                else diferencia < 0
+                    mostrador -> interfaz : confirmarDevolucion(medioPago)
+                    interfaz -> servicio : registrarAjustePago(numeroPedido, medioPago, diferencia, usuario)
+                    servicio -> pago : registrarDevolucion(medioPago, diferencia)
+                    pago -> historialPago : registrarMovimiento(pagoOriginal, DEVOLUCION, diferencia, motivo, usuario)
+                    historialPago --> pago : acuseRegistro
+                    pago --> servicio : acuseAjuste
                 end
-            else diferencia == 0
-                pago --> pedido : sinAjuste
+                servicio --> interfaz : ajusteRegistrado
+            else medioPago inválido
+                interfaz --> mostrador : informarMedioPagoInvalido()
+                break Se descarta la modificación y no se registra el ajuste
+                end
             end
+        else diferencia == 0
+            servicio --> interfaz : sinAjuste
         end
 
-        interfaz -> pedido : actualizarPedido(numeroPedido, listaItems, totalActualizado)
+        interfaz -> servicio : confirmarModificacion(numeroPedido, usuario)
+        servicio -> pedido : actualizarPedido(listaItems, totalActualizado)
         pedido -> historialCambios : registrarCambioPedido(pedido, "items", valorAnterior, valorNuevo, usuario)
         pedido -> historialCambios : registrarCambioPedido(pedido, "personalizaciones", valorAnterior, valorNuevo, usuario)
         pedido -> historialCambios : registrarCambioPedido(pedido, "total", totalAnterior, totalActualizado, usuario)
-        pedido --> interfaz : confirmacionModificacion
+        pedido --> servicio : confirmacionModificacion
+        servicio --> interfaz : confirmacionModificacion
         interfaz --> mostrador : ticketModificacion
     else estadoConfirmacion != RECIBIDO
-        pedido --> interfaz : motivoRechazo
+        servicio --> interfaz : motivoRechazo
         interfaz --> mostrador : mensajeRechazo
     end
 else estado inicial != RECIBIDO

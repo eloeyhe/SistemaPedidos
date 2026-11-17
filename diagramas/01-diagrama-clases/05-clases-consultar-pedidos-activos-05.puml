@@ -1,4 +1,4 @@
-@startuml 05-clases-consultar-pedidos-activos-05
+@startuml
 title CU05 - Consultar Pedidos Activos
 skinparam classAttributeIconSize 0
 hide empty members
@@ -27,6 +27,7 @@ class PantallaPedidos {
 class ServicioPedidos {
   + consultarPedidosActivos(actorSolicitante: Usuario): Map<EstadoPedido, List<Pedido>>
   + comprobarDisponibilidadDatos(): boolean
+  + obtenerPedidosPorEstados(estados: List<EstadoPedido>): List<Pedido>
   + agruparPedidosPorEstado(listaPedidosActivos: List<Pedido>): Map<EstadoPedido, List<Pedido>>
   + ordenarGrupoPorPrioridad(urgentesPrimero: boolean): void
   + seleccionarEstadosVisibles(actor: Usuario): List<EstadoPedido>
@@ -39,7 +40,6 @@ class Pedido {
   - prioritario: boolean
   - numeroPedido: int
   - referenciaRetiro: String
-  + obtenerPedidosPorEstados(estado1: EstadoPedido, estado2: EstadoPedido, estado3: EstadoPedido): List<Pedido>
   + obtenerEstado(): EstadoPedido
   + esPrioritario(): boolean
   + obtenerDetalle(): List<ItemPedido>

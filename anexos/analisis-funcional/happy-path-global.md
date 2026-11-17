@@ -69,8 +69,8 @@ costoExtra = extra.calcularCosto()
 
 // Cada ítem calcula su subtotal; el pedido acumula cada subtotal con actualizarTotal(subtotal)
 // (operación interna de Pedido) y expone el total con obtenerTotal().
-itemHamburguesa.calcularSubtotal()
-itemCombo.calcularSubtotal()
+itemHamburguesa.calcularSubtotal(1, hamburguesa.obtenerPrecio(), [costoExtra])
+itemCombo.calcularSubtotal(1, comboFamiliar.obtenerPrecio(), [])
 total = pedido.obtenerTotal()
 
 // El cliente prefiere pagar por transferencia: se valida el medio antes de cobrar (RF8).
@@ -101,27 +101,30 @@ pantallaCocina.informarPedidoConfirmado(numeroPedido)
 
 // El cliente se arrepiente y quiere sumar una bebida antes de que Cocina empiece (RF4).
 // Solo se puede modificar mientras el estado es RECIBIDO.
-SI estadoActual == EstadoPedido.RECIBIDO ENTONCES
+SI servicio.consultarEstado(numeroPedido) == EstadoPedido.RECIBIDO ENTONCES
     mostrador.modificarPedido(pedido)
-    servicio.modificarPedido(numeroPedido)
-    pedido.modificar()
 
     ProductoEnvasado bebida = nuevo ProductoEnvasado("Gaseosa 500 cc", 1800.00, fechaElaboracion, fechaVencimiento)
-    pedido.agregarItem(bebida, 1)
+    ItemPedido itemBebida = pedido.agregarItem(bebida, 1)
+    servicio.modificarItems(numeroPedido, [itemBebida])     // invoca pedido.prepararModificacion([itemBebida])
 
-    // El sistema recalcula el total y obtiene la diferencia contra lo ya abonado (RF8).
+    // El sistema recalcula el total y obtiene la diferencia contra el único pago original (RF8).
     totalNuevo = pedido.obtenerTotal()
-    diferencia = pago.calcularDiferencia(total, totalNuevo)
+    pagoOriginal = pedido.obtenerPagoOriginal()
+    diferencia = pagoOriginal.calcularDiferencia(total, totalNuevo)
 
-    // La diferencia es a favor del negocio: se cobra y queda registrada para auditoría.
+    // La diferencia es a favor del negocio: se cobra como movimiento AJUSTE del pago original.
     SI diferencia > 0 ENTONCES
-        procesador.validarMedioPago(MetodoPago.EFECTIVO)
-        procesador.procesarCobro(MetodoPago.EFECTIVO, diferencia)
-        pago.registrarCobroAdicional(MetodoPago.EFECTIVO, diferencia)
-        historialPago.registrarMovimiento(pago, TipoMovimiento.AJUSTE, diferencia, "Se agregó una bebida", mostrador)
+        servicio.seleccionarMedioPago(MetodoPago.EFECTIVO)        // ProcesadorPago valida el medio
+        servicio.registrarAjustePago(numeroPedido, MetodoPago.EFECTIVO, diferencia, mostrador)
+            // procesador.procesarCobro(MetodoPago.EFECTIVO, diferencia)
+            // pagoOriginal.registrarCobroAdicional(MetodoPago.EFECTIVO, diferencia)
+            // historialPago.registrarMovimiento(pagoOriginal, TipoMovimiento.AJUSTE, diferencia, "Se agregó una bebida", mostrador)
     FIN SI
 
-    // Queda trazado qué campo cambió, quién lo cambió y su valor anterior y nuevo.
+    // Se confirma la modificación y queda trazado qué campo cambió, quién lo cambió y su valor anterior y nuevo.
+    servicio.confirmarModificacion(numeroPedido, mostrador)
+        // pedido.actualizarPedido(pedido.obtenerDetalle(), totalNuevo)
     HistorialCambioPedido historialCambios = nuevo HistorialCambioPedido()
     historialCambios.registrarCambioPedido(pedido, "total", total, totalNuevo, mostrador)
 FIN SI

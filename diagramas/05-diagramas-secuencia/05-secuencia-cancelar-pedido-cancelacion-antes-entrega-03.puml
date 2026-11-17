@@ -22,7 +22,7 @@ else iniciador es UsuarioEncargado
     UsuarioEncargado -> pantalla : solicitarCancelacionPedido(numeroPedido)
 end
 
-pantalla -> servicio : consultarPedidoYEstado(numeroPedido)
+pantalla -> servicio : consultarEstado(numeroPedido)
 servicio -> servicio : buscarPedido(numeroPedido)
 servicio -> pedido : obtenerEstado()
 pedido --> servicio : estadoActual
@@ -37,10 +37,10 @@ end
 alt estadoActual == RECIBIDO
     alt iniciador es UsuarioMostrador
         UsuarioMostrador -> pantalla : confirmarCancelacion(motivo)
-        pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioMostrador)
+        pantalla -> servicio : cancelarPedido(numeroPedido, motivo, UsuarioMostrador)
     else iniciador es UsuarioEncargado
         UsuarioEncargado -> pantalla : confirmarCancelacion(motivo)
-        pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioEncargado)
+        pantalla -> servicio : cancelarPedido(numeroPedido, motivo, UsuarioEncargado)
     end
 
     servicio -> pedido : cancelarPedido(motivo)
@@ -81,10 +81,10 @@ else estadoActual == EN_PREPARACION
     alt resultadoAutorizacion == autorizado
         alt iniciador es UsuarioMostrador
             UsuarioMostrador -> pantalla : confirmarCancelacion(motivo)
-            pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioMostrador, UsuarioEncargado)
+            pantalla -> servicio : cancelarPedido(numeroPedido, motivo, UsuarioMostrador, UsuarioEncargado)
         else iniciador es UsuarioEncargado
             UsuarioEncargado -> pantalla : confirmarCancelacion(motivo)
-            pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioEncargado, UsuarioEncargado)
+            pantalla -> servicio : cancelarPedido(numeroPedido, motivo, UsuarioEncargado, UsuarioEncargado)
         end
 
         servicio -> pedido : cancelarPedido(motivo)

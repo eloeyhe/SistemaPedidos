@@ -25,10 +25,11 @@ servicio -> servicio : comprobarDisponibilidadDatos()
 servicio --> pantalla : resultadoDisponibilidad
 
 alt conexión disponible
-    servicio -> pedido : obtenerPedidosPorEstados(RECIBIDO, EN_PREPARACION, LISTO)
-    activate pedido
-    pedido --> servicio : listaPedidosActivos
-    deactivate pedido
+    servicio -> servicio : obtenerPedidosPorEstados(estadosActivos)
+    note right of servicio
+      estadosActivos = RECIBIDO, EN_PREPARACION, LISTO
+    end note
+    servicio --> servicio : listaPedidosActivos
 
     alt existen pedidos activos
         loop por cada pedido activo

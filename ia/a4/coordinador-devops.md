@@ -26,6 +26,14 @@
     3. No se renombraron los registros históricos (`ia/`, entradas previas del changelog, boceto `.excalidraw` de A2), porque documentan lo que se hizo en su momento.
     4. Los `.png` se regeneraron con el servidor de PlantUML. El diagrama del CU2 superaba 4096 px y se le agregó `scale 0.9`. Las capturas de `pilares-poo.md` se regeneraron a partir de fragmentos del diagrama final corregido.
   - **Verificación:** se buscaron con `grep` los nombres con guion bajo y las firmas viejas en `.md` y `.puml` (sin resultados fuera de los registros históricos) y se revisaron visualmente los diagramas regenerados.
+- **Seguimiento de la release de A4 (RC25 a RC30, PR #273):** se usó Claude en modo agente para hacer la verificación transversal de contratos entre las secuencias, los diagramas de clases parciales, los anexos y el diagrama final.
+  - **Prompt:** "tengo que corregir esto", seguido del texto del seguimiento con RC25 a RC30.
+  - **Decisiones revisadas sobre el output de la IA:**
+    1. La pantalla siempre delega en `ServicioPedidos`. El estado se consulta con `ServicioPedidos.consultarEstado` y `Pedido.obtenerEstado()`, en lugar de usar operaciones propias de cada CU (`verificarEstado`, `consultarPedidoYEstado`).
+    2. `ProcesadorPago` es el único validador del medio de pago y lo invoca `ServicioPedidos` en CU1 y en CU2. `Pago` ya no valida.
+    3. Política de pagos (RC30): `Pedido "1" -- "1" Pago` (pago original). En CU1 el `Pago` se crea recién cuando se aprueba el cobro. En CU2 los cobros adicionales y las devoluciones son movimientos `AJUSTE` / `DEVOLUCION` en `HistorialPago`. Se reemplazó `consultarPagoOriginal` por `Pedido.obtenerPagoOriginal()`.
+    4. CU3 usa `cancelarPedido(...)` del diagrama final y CU5 mueve `obtenerPedidosPorEstados(estados)` a `ServicioPedidos`.
+  - **Verificación:** se usó un script que compara cada mensaje de las secuencias, y cada operación de los diagramas parciales, con las operaciones del diagrama final por clase y cantidad de parámetros, sin diferencias. Los `.png` se regeneraron y se revisaron visualmente. Se ajustó la escala de los que superaban 4096 px.
 
 ---
 

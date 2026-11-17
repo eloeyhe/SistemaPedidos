@@ -14,7 +14,7 @@ abstract class Usuario {
   -usuario: String
   -passwordHash: String
   -activo: Boolean
-  +autentificar(): Boolean
+  +autentificar(usuario: String, password: String): Boolean
 }
 
 class UsuarioMostrador {
@@ -35,11 +35,11 @@ class PantallaPedidos {
 }
 
 class ServicioPedidos {
-  +consultarPedidoYEstado(numeroPedido: Integer): Pedido
+  +consultarEstado(numeroPedido: Integer): EstadoPedido
   +buscarPedido(numeroOReferencia: String): Pedido
-  +procesarCancelacion(numeroPedido: Integer, motivo: String, usuario: Usuario): void
-  +procesarCancelacion(numeroPedido: Integer, motivo: String, usuario: Usuario, autorizante: UsuarioEncargado): void
-  +solicitarAutorizacion(numeroPedido: Integer): void
+  +cancelarPedido(numeroPedido: Integer, motivo: String, actor: Usuario): Boolean
+  +cancelarPedido(numeroPedido: Integer, motivo: String, actor: Usuario, autorizante: UsuarioEncargado): Boolean
+  +solicitarAutorizacion(numeroPedido: Integer): Boolean
 }
 
 class Pedido {
@@ -92,7 +92,7 @@ ServicioPedidos ..> Pedido
 ServicioPedidos ..> AuditoriaPedido
 ServicioPedidos ..> UsuarioEncargado
 
-Pedido "1" -- "0..*" Pago : pagos
+Pedido "1" -- "1" Pago : pago original
 Pedido "1" -- "0..*" AuditoriaPedido : auditoria
 
 AuditoriaPedido "0..*" --> "1" Usuario : responsable
