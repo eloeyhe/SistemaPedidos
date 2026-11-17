@@ -1,5 +1,7 @@
 # Informe de Interacción con IA - Analista Funcional del Caso de Uso 1
 
+> **Nota de vigencia de nombres (RC10):** a partir de las correcciones de la release de A4 (PRs #266 y #269), las clases del modelo se nombran en PascalCase: `ItemPedido`, `PersonalizacionItem`, `EstadoPedido`, `MetodoPago`, `TipoMovimiento`, `HistorialPago`, `HistorialCambioPedido` y `AuditoriaPedido`. El texto de este registro usa esos nombres. Los prompts y los outputs de la IA que aparecen en bloques de código se conservan literales, porque documentan lo que se pidió y lo que devolvió la IA en ese momento: las variantes con guion bajo que figuran ahí (por ejemplo `Item_pedido` o `Estado_pedido`) son **contexto histórico no vigente**.
+
 **Rol:** Coordinador de Repositorio + Analista Funcional del Caso de Uso 1
 
 **Autor:** Santiago Medel Marquez
@@ -12,7 +14,7 @@
 
 ## 1. Archivos de contexto referenciados
 
-- `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`: clases, atributos, métodos y multiplicidades del boceto de A1 (Pedido, Item_pedido, Producto abstracto, Personalizacion_item, Pago, Combo, enumerados `Estado_pedido` y `Metodo_pago`, jerarquía de Usuario).
+- `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`: clases, atributos, métodos y multiplicidades del boceto de A1 (Pedido, ItemPedido, Producto abstracto, PersonalizacionItem, Pago, Combo, enumerados `EstadoPedido` y `MetodoPago`, jerarquía de Usuario).
 - `diagramas/02-casos-de-uso/02-caso-uso-tomar-pedido-01.puml`: actores y relaciones `<<include>>`/`<<extend>>` del CU1.
 - `diagramas/03-escenarios-casos-de-uso/03-tomar-pedido-registro-pedido-01.md`: pasos del flujo principal, requisitos asociados (RF1, RF2, RF3, RF6, RF8) y aspectos sobresalientes.
 - `diagramas/04-diagramas-actividades/04-actividad-tomar-pedido-01.puml`: swimlanes, decisiones y flujos alternativos.
@@ -52,10 +54,10 @@ Con ese pedido, la IA leyó los archivos de contexto de la sección 1 y tomó de
 ## 4. Ajustes realizados al output de la IA
 
 1. **Nombres de métodos alineados al diagrama de secuencia.** Los métodos genéricos del boceto (`agregar()`, `registrarPago()`) se reemplazaron por los mensajes reales de A3: `asignarIdentificador(numeroPedido, fechaHora)`, `agregarItem(producto, cantidad)`, `agregarItemCombo(combo, cantidad)`, `conservarPrecioHistorico(precioBase)`, `registrarCobro(medioPago, totalPedido)`, etc.
-2. **Se conservaron los nombres de las tarjetas CRC.** Se mantuvieron `Item_pedido`, `Personalizacion_item`, `Estado_pedido` y `Metodo_pago` con guion bajo, tal como figuran en las tarjetas, aunque no siguen PascalCase, para no romper la trazabilidad.
+2. **Se conservaron los nombres de las tarjetas CRC (decisión no vigente).** En la primera versión se mantuvieron los nombres con guion bajo (`Item_pedido`, `Personalizacion_item`, `Estado_pedido` y `Metodo_pago`), tal como figuraban entonces en las tarjetas, para no romper la trazabilidad. Esta decisión fue reemplazada en la corrección de la release: hoy las clases y sus tarjetas usan PascalCase (`ItemPedido`, `PersonalizacionItem`, `EstadoPedido` y `MetodoPago`), ver la iteración de corrección en la sección 5.
 3. **Clases sin tarjeta CRC.** `SistemaPedidos`, `ProcesadorPago` y `PantallaCocina` aparecen como participantes en la secuencia pero no tienen tarjeta CRC. Se incluyeron con estereotipos `<<control>>`, `<<service>>` y `<<boundary>>` y se dejó constancia en el anexo para que el Arquitecto de Dominio decida cómo unificarlas en el diagrama final.
 4. **Cliente fuera del diagrama.** El boceto inicial tenía una clase `Cliente`, pero RF6 descarta la ficha de cliente. Se dejó al Cliente sólo como actor, igual que en el diagrama de casos de uso.
-5. **Relaciones revisadas.** Se usó composición para Pedido-Item_pedido e Item_pedido-Personalizacion_item, porque la secuencia los destruye juntos ante el rechazo del pago, y agregación para SistemaPedidos-Pedido, porque los pedidos persisten por auditoría (RF5).
+5. **Relaciones revisadas.** Se usó composición para Pedido-ItemPedido e ItemPedido-PersonalizacionItem, porque la secuencia los destruye juntos ante el rechazo del pago, y agregación para SistemaPedidos-Pedido, porque los pedidos persisten por auditoría (RF5).
 6. **Trazabilidad RNF5.** Se agregó el atributo `creadoPor : UsuarioMostrador` en `Pedido` para registrar quién tomó el pedido.
 
 ---

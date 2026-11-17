@@ -91,7 +91,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/rc7-rc8-rc9-rc10-rc14-rc15-rc16-nombres-y-crc] fix: normalizo nombres de clases y agrego tarjetas CRC (RC7, RC8, RC9, RC10, RC14, RC15, RC16)
   PR: [#269](https://github.com/eloeyhe/SistemaPedidos/pull/269) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
-- [fix/rc4-rc18-rc23-cu5-contratos-y-diagrama-final] fix: unifico CU5, contratos de CU2 a CU4 y actualizo el diagrama final (RC4, RC18, RC19, RC20, RC21, RC22, RC23)
+- [fix/rc4-rc18-rc23-cu5-contratos-y-diagrama-final] fix: unifico CU5, contratos de CU2 a CU4 y actualizo el diagrama final
   PR: [#270](https://github.com/eloeyhe/SistemaPedidos/pull/270) - @santimarM (Coordinador de Repositorio + Analista Funcional CU1)
 
 - [fix/rc5-documento-desvio-pr-259-y-changelog] fix: documento el desvío de la PR #259 y actualizo el changelog de A4 (RC5)

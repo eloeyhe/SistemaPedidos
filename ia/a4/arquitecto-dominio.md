@@ -1,5 +1,7 @@
 # Documentación de Uso de IA - Arquitecto de Dominio
 
+> **Nota de vigencia de nombres (RC10):** a partir de las correcciones de la release de A4 (PRs #266 y #269), las clases del modelo se nombran en PascalCase: `ItemPedido`, `PersonalizacionItem`, `EstadoPedido`, `MetodoPago`, `TipoMovimiento`, `HistorialPago`, `HistorialCambioPedido` y `AuditoriaPedido`. El texto de este registro usa esos nombres. Los prompts y los outputs de la IA que aparecen en bloques de código se conservan literales, porque documentan lo que se pidió y lo que devolvió la IA en ese momento: las variantes con guion bajo que figuran ahí (por ejemplo `Item_pedido` o `Estado_pedido`) son **contexto histórico no vigente**.
+
 Este documento registra el uso de IA en la Actividad Obligatoria N°4 para el rol de **Arquitecto de Dominio**: la generación del diagrama de clases final unificado con **GitHub Copilot Agent Mode**.
 
 ---
@@ -35,7 +37,7 @@ Copilot Agent Mode respondió que creó `06-clases-diagrama-final.puml`, consoli
 
 ### 1.4 Revisión y ajustes realizados
 
-- **Contenido generado por la IA:** el .puml que devolvió Copilot se usó como base sin reescribirlo. La única edición manual sobre el diagrama final fue en `Historial_cambio_pedido`: cambié el retorno de `registrarCambioEstado` de `void` a `boolean`, para que coincida con el diagrama de clases y la secuencia del CU4 (que devuelve `acuseRegistro`).
+- **Contenido generado por la IA:** el .puml que devolvió Copilot se usó como base sin reescribirlo. La única edición manual sobre el diagrama final fue en `HistorialCambioPedido`: cambié el retorno de `registrarCambioEstado` de `void` a `boolean`, para que coincida con el diagrama de clases y la secuencia del CU4 (que devuelve `acuseRegistro`).
 - **Comparación contra los diagramas parciales:** como Copilot no pudo renderizar el diagrama, lo abrí en la vista previa de PlantUML de VS Code y comparé cada clase, atributo y método contra los diagramas de clases por caso de uso, las tarjetas CRC y las secuencias de A3. Esa comparación detectó tres inconsistencias entre los parciales, que gestioné con issues y ramas `fix/`:
   - [#247](https://github.com/eloeyhe/SistemaPedidos/issues/247): el CU1 usaba `SistemaPedidos` y el CU2 usaba `InterfazPedido`, mientras que el resto de los casos de uso y el diagrama final usan `ServicioPedidos` y `PantallaPedidos`. Se corrigió en la PR [#257](https://github.com/eloeyhe/SistemaPedidos/pull/257).
   - [#248](https://github.com/eloeyhe/SistemaPedidos/issues/248): `registrarCambioPedido` (CU2) y `registrarCambioEstado` (CU4) recibían el pedido de forma distinta, y el diagrama final usa `pedido: Pedido`. Se corrigió en la PR [#258](https://github.com/eloeyhe/SistemaPedidos/pull/258).
