@@ -6,7 +6,7 @@ El Principio Abierto/Cerrado (Open/Closed Principle) es un principio de diseño 
 ## Motivación
 En el diseño original del sistema, se detectó una fuerte dependencia de estructuras condicionales estáticas en una clase clave del dominio:
 
-1. **Clase `Pago`**: Gestiona el cobro basándose en el atributo `metodoDePago` de tipo `Metodo_pago` (un enum). El Requisito Funcional RF8 establece claramente que **el alcance actual del MVP admite únicamente pagos en EFECTIVO y TRANSFERENCIA**. Sin embargo, los métodos originales `registrarPago()` y `calcularDiferencia()` utilizaban bloques condicionales (`if/else` o `switch`) para procesar el cobro. El problema de este enfoque es que el negocio es dinámico; si en el futuro se desea escalar el sistema, esta estructura obligaría a modificar el código fuente de `Pago` cada vez que se agregue un nuevo medio de pago.
+1. **Clase `Pago`**: Gestiona el cobro basándose en el atributo `metodoDePago` de tipo `MetodoPago` (un enum). El Requisito Funcional RF8 establece claramente que **el alcance actual del MVP admite únicamente pagos en EFECTIVO y TRANSFERENCIA**. Sin embargo, los métodos originales `registrarPago()` y `calcularDiferencia()` utilizaban bloques condicionales (`if/else` o `switch`) para procesar el cobro. El problema de este enfoque es que el negocio es dinámico; si en el futuro se desea escalar el sistema, esta estructura obligaría a modificar el código fuente de `Pago` cada vez que se agregue un nuevo medio de pago.
 
 Este caso representa una clara violación del principio OCP, ya que las variaciones futuras fuerzan la modificación directa de clases estables.
 

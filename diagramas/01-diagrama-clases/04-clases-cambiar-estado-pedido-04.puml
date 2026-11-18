@@ -1,0 +1,80 @@
+@startuml 04-clases-cambiar-estado-pedido-04
+title CU04 - Cambiar Estado de Pedido
+skinparam classAttributeIconSize 0
+hide empty members
+
+abstract class Usuario {
+  - nombre: String
+  - usuario: String
+  - passwordHash: String
+  - activo: boolean
+}
+
+class UsuarioCocina {
+  - estacionTrabajo: String
+}
+
+class UsuarioMostrador {
+  - numeroCaja: int
+}
+
+class PantallaPedidos {
+  - servicio: ServicioPedidos
+  + seleccionarPedido(numeroPedido: int): void
+  + consultarPedidosListos(): List<Pedido>
+  + iniciarPreparacion(numeroPedido: int): void
+  + finalizarPreparacion(numeroPedido: int): void
+  + registrarEntrega(numeroPedido: int): void
+}
+
+class ServicioPedidos {
+  + consultarEstado(numeroPedido: int): EstadoPedido
+  + buscarPedido(numeroOReferencia: String): Pedido
+  + buscarPedidosPorEstado(estado: EstadoPedido): List<Pedido>
+  + solicitarCambioEstado(numeroPedido: int, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+}
+
+class Pedido {
+  - fecha: Date
+  - numeroPedido: int
+  - referenciaRetiro: String
+  - estado: EstadoPedido
+  - prioritario: boolean
+  + obtenerEstado(): EstadoPedido
+  + validarTransicion(nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(nuevoEstado: EstadoPedido): void
+}
+
+class HistorialCambioPedido {
+  - campo: String
+  - valorAnterior: String
+  - valorNuevo: String
+  - fechayhora: DateTime
+  + registrarCambioEstado(pedido: Pedido, estadoAnterior: EstadoPedido, estadoNuevo: EstadoPedido, actor: Usuario): boolean
+}
+
+enum EstadoPedido {
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+Usuario <|-- UsuarioCocina
+Usuario <|-- UsuarioMostrador
+
+UsuarioCocina "0..*" --> "0..*" PantallaPedidos : interactua
+UsuarioMostrador "0..*" --> "0..*" PantallaPedidos : interactua
+
+PantallaPedidos "0..*" --> "1" ServicioPedidos : utiliza
+ServicioPedidos ..> Pedido : consulta y actualiza
+ServicioPedidos ..> HistorialCambioPedido : registra
+
+Pedido "0..*" --> "1" EstadoPedido : estado actual
+Pedido "1" <-- "0..*" HistorialCambioPedido : pedido
+HistorialCambioPedido "0..*" --> "1" Usuario : actor
+
+ServicioPedidos ..> EstadoPedido : valida transicion
+HistorialCambioPedido ..> EstadoPedido : registra estados
+@enduml

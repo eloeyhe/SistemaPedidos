@@ -37,29 +37,13 @@ backward :Bloquear el guardado y sugerir
 cancelar el pedido mediante CU03;
 repeat while (¿El pedido quedó sin ítems?) is (sí) not (no)
 
-if (¿El pedido ya estaba pagado?) then (sí)
-  :Calcular diferencia respecto
-  del pago original;
-  if (¿Existe diferencia?) then (sí)
-    |Usuario de Mostrador|
-    :Seleccionar medio de pago del ajuste
-    (efectivo o transferencia);
-    if (¿Resultado de la diferencia?) then (a cobrar)
-      |Cliente|
-      :Entregar o pagar la diferencia;
-      |Usuario de Mostrador|
-      :Registrar cobro adicional como ajuste;
-    else (a devolver)
-      :Registrar devolución como ajuste;
-      :Devolver diferencia al cliente;
-    endif
-    |Sistema de Pedidos|
-    :Validar medio de pago y asociar
-    el ajuste al historial del pedido;
-  else (no)
-  endif
-else (no)
-endif
+:Obtener el pago original del pedido;
+note right
+  Todo pedido registrado tiene
+  un único pago original (CU1).
+end note
+:Calcular diferencia respecto
+del pago original;
 
 |Usuario de Mostrador|
 :Confirmar modificación;
@@ -70,6 +54,35 @@ if (¿Sigue en estado RECIBIDO?) then (no)
   :Descartar cambios y ajustes no confirmados;
   stop
 else (sí)
+endif
+
+if (¿Existe diferencia?) then (sí)
+  |Usuario de Mostrador|
+  :Seleccionar medio de pago del ajuste
+  (efectivo o transferencia);
+  |Sistema de Pedidos|
+  :Validar medio de pago
+  (ProcesadorPago);
+  if (¿Medio de pago válido?) then (no)
+    :Descartar la modificación
+    sin registrar el ajuste;
+    stop
+  else (sí)
+  endif
+  if (¿Resultado de la diferencia?) then (a cobrar)
+    |Cliente|
+    :Pagar la diferencia;
+    |Sistema de Pedidos|
+    :Registrar cobro adicional como
+    movimiento AJUSTE del pago original;
+  else (a devolver)
+    |Usuario de Mostrador|
+    :Devolver diferencia al cliente;
+    |Sistema de Pedidos|
+    :Registrar devolución como
+    movimiento DEVOLUCION del pago original;
+  endif
+else (no)
 endif
 
 :Actualizar pedido conservando

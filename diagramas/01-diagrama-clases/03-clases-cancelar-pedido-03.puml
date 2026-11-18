@@ -1,0 +1,103 @@
+
+@startuml
+title CU03 - Cancelar Pedido
+top to bottom direction
+hide circle
+skinparam classAttributeIconSize 0
+skinparam defaultFontSize 14
+skinparam classFontSize 15
+skinparam classAttributeFontSize 13
+skinparam dpi 160
+
+abstract class Usuario {
+  -nombre: String
+  -usuario: String
+  -passwordHash: String
+  -activo: Boolean
+  +autentificar(usuario: String, password: String): Boolean
+}
+
+class UsuarioMostrador {
+  -numeroCaja: Integer
+}
+
+class UsuarioEncargado {
+  -claveSupervision: String
+  +autorizarCancelacion(): Boolean
+  +solicitarClaveSupervision(numeroPedido: Integer): Boolean
+  +validarClaveSupervision(claveSupervision: String): Boolean
+}
+
+class PantallaPedidos {
+  +solicitarCancelacionPedido(numeroPedido: Integer): void
+  +confirmarCancelacion(motivo: String): void
+  +responderSolicitudCancelacion(numeroPedido: Integer): void
+}
+
+class ServicioPedidos {
+  +consultarEstado(numeroPedido: Integer): EstadoPedido
+  +buscarPedido(numeroOReferencia: String): Pedido
+  +cancelarPedido(numeroPedido: Integer, motivo: String, actor: Usuario): Boolean
+  +cancelarPedido(numeroPedido: Integer, motivo: String, actor: Usuario, autorizante: UsuarioEncargado): Boolean
+  +solicitarAutorizacion(numeroPedido: Integer): Boolean
+}
+
+class Pedido {
+  -fecha: Date
+  -estado: EstadoPedido
+  -prioritario: Boolean
+  -numeroPedido: Integer
+  -referenciaRetiro: String
+  +obtenerEstado(): EstadoPedido
+  +cancelarPedido(motivo: String): void
+  +cambiarEstado(nuevoEstado: EstadoPedido): void
+}
+
+class Pago {
+  -monto: Decimal
+  -metodoDePago: MetodoPago
+}
+
+class AuditoriaPedido {
+  -accion: String
+  -detalles: String
+  -motivo: String
+  -fechayhora: DateTime
+  +registrarAccion(pedido: Pedido, usuario: Usuario, accion: String, fechaHora: DateTime): void
+  +registrarAccion(pedido: Pedido, usuario: Usuario, autorizante: UsuarioEncargado, accion: String, fechaHora: DateTime): void
+  +registrarDetalles(motivo: String, estadoAnterior: EstadoPedido, estadoNuevo: EstadoPedido): void
+}
+
+enum EstadoPedido {
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+enum MetodoPago {
+  EFECTIVO
+  TRANSFERENCIA
+}
+
+UsuarioMostrador --|> Usuario
+UsuarioEncargado --|> Usuario
+
+UsuarioMostrador ..> PantallaPedidos : interactua
+UsuarioEncargado ..> PantallaPedidos : interactua
+
+PantallaPedidos ..> ServicioPedidos
+ServicioPedidos ..> Pedido
+ServicioPedidos ..> AuditoriaPedido
+ServicioPedidos ..> UsuarioEncargado
+
+Pedido "1" -- "1" Pago : pago original
+Pedido "1" -- "0..*" AuditoriaPedido : auditoria
+
+AuditoriaPedido "0..*" --> "1" Usuario : responsable
+AuditoriaPedido "0..*" --> "0..1" UsuarioEncargado : autorizante
+
+Pedido --> EstadoPedido
+Pago --> MetodoPago
+@enduml
