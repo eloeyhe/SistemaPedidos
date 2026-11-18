@@ -34,7 +34,6 @@ En esta entrega se profundiza el modelado orientado a objetos del Sistema de Ped
   - [Caso de Uso 4 - Cambiar Estado de Pedido](anexos/analisis-funcional/04-caso-de-uso-cambiar-estado-de-pedido.md)
   - [Caso de Uso 5 - Consultar Pedidos Activos](anexos/analisis-funcional/05-caso-de-uso-consultar-pedidos-activos.md)
 - [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_de_clases.md)
-- [Diagrama de Clases Final - Sistema de Pedidos](anexos/analisis-funcional/diagrama-clases-final.md)
 - [Los Cuatro Pilares del Paradigma Orientado a Objetos](anexos/analisis-funcional/pilares-poo.md)
 - [Pseudocódigo - Happy Path Global del Sistema](anexos/analisis-funcional/happy-path-global.md)
 - [Registro de uso de IA - A4](ia/a4/)

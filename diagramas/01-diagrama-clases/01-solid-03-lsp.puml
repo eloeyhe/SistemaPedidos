@@ -34,7 +34,7 @@ class Combo implements IElementoMenu {
     + getPrecio(): Double
 }
 
-class Item_pedido {
+class ItemPedido {
     - cantidad: Integer
     - elemento: IElementoMenu
     + calcularSubtotal(): Double
@@ -44,7 +44,7 @@ class Cocina {
     + prepararItem(item: IElaborable): void
 }
 
-Item_pedido --> IElementoMenu
+ItemPedido --> IElementoMenu
 Cocina ..> IElaborable
 
 @enduml

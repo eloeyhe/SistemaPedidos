@@ -1,5 +1,7 @@
 # Registro de Code Reviews asistidas con IA - Coordinador de Repositorio
 
+> **Nota de vigencia de nombres (RC10):** a partir de las correcciones de la release de A4 (PRs #266 y #269), las clases del modelo se nombran en PascalCase: `ItemPedido`, `PersonalizacionItem`, `EstadoPedido`, `MetodoPago`, `TipoMovimiento`, `HistorialPago`, `HistorialCambioPedido` y `AuditoriaPedido`. El texto de este registro usa esos nombres. Los prompts y los outputs de la IA que aparecen en bloques de código se conservan literales, porque documentan lo que se pidió y lo que devolvió la IA en ese momento: las variantes con guion bajo que figuran ahí (por ejemplo `Item_pedido` o `Estado_pedido`) son **contexto histórico no vigente**.
+
 **Rol:** Coordinador de Repositorio + Analista Funcional del Caso de Uso 1
 
 **Autor:** Santiago Medel Marquez
@@ -16,6 +18,22 @@
 - **Backport:** se creó `backport/release-actividad-obligatoria-3` desde `master` actualizada para llevar las correcciones aprobadas a `develop` y establecer la base de la Actividad Obligatoria N°4 (PR #225, aprobada por otro integrante).
 - **Integración de las correcciones del Arquitecto de Dominio:** se revisaron y mergearon a `develop` las ramas `fix/` de las issues #247, #248 y #249 (PRs #257 y #258). Como `develop` no es la rama por defecto, las issues vinculadas se cerraron a mano.
 - **Merge erróneo contra `master`:** la PR #259 se mergeó por error a `master` y, como su rama salía de `develop`, arrastró todo el trabajo de A4. La PR #261 lo revirtió, pero eso dejaba esos commits como "ya mergeados y revertidos" en `master`, por lo que la release de A4 los hubiera perdido sin mostrar conflicto. Se integró la aclaración en `develop` (PR #260) y se revirtió el revert hacia `develop` (PR #262, sin cambios de archivos y aprobada por otro integrante). Se verificó con `git merge-tree` que el merge `develop` → `master` queda limpio.
+- **Correcciones de la release de A4 (Request Changes de la PR #265):** se usó Claude en modo agente para verificar cada RC contra `release/actividad-obligatoria-4` y para aplicar las correcciones en ramas `fix/`. Las PRs fueron #266, #267 y #268, más #269 (nombres y tarjetas CRC), #270 (CU5, contratos y diagrama final) y #271 (desvío de la #259 y changelog).
+  - **Prompt:** "En este repositorio, fijate cuáles de estas correcciones (RC2 a RC23) ya están hechas y cuáles faltan", seguido de "hacé todo".
+  - **Decisiones revisadas sobre el output de la IA:**
+    1. En CU5 se adoptó la regla del diagrama de casos de uso y de actividades: Mostrador ve solo `LISTO`. La secuencia, el pseudocódigo, la introducción y los diagramas de clases se ajustaron a esa regla.
+    2. Para cada contrato se tomó la firma que ya compartían más artefactos. `calcularDiferencia(totalAnterior, totalActualizado)` viene del parcial y la secuencia del CU2, y `registrarAccion(..., accion, fechaHora)` del CU3. `obtenerEstado()`, `cambiarEstado` y `validarTransicion(nuevoEstado, actor)` vienen del diagrama final.
+    3. No se renombraron los registros históricos (`ia/`, entradas previas del changelog, boceto `.excalidraw` de A2), porque documentan lo que se hizo en su momento.
+    4. Los `.png` se regeneraron con el servidor de PlantUML. El diagrama del CU2 superaba 4096 px y se le agregó `scale 0.9`. Las capturas de `pilares-poo.md` se regeneraron a partir de fragmentos del diagrama final corregido.
+  - **Verificación:** se buscaron con `grep` los nombres con guion bajo y las firmas viejas en `.md` y `.puml` (sin resultados fuera de los registros históricos) y se revisaron visualmente los diagramas regenerados.
+- **Seguimiento de la release de A4 (RC25 a RC30, PR #273):** se usó Claude en modo agente para hacer la verificación transversal de contratos entre las secuencias, los diagramas de clases parciales, los anexos y el diagrama final.
+  - **Prompt:** "tengo que corregir esto", seguido del texto del seguimiento con RC25 a RC30.
+  - **Decisiones revisadas sobre el output de la IA:**
+    1. La pantalla siempre delega en `ServicioPedidos`. El estado se consulta con `ServicioPedidos.consultarEstado` y `Pedido.obtenerEstado()`, en lugar de usar operaciones propias de cada CU (`verificarEstado`, `consultarPedidoYEstado`).
+    2. `ProcesadorPago` es el único validador del medio de pago y lo invoca `ServicioPedidos` en CU1 y en CU2. `Pago` ya no valida.
+    3. Política de pagos (RC30): `Pedido "1" -- "1" Pago` (pago original). En CU1 el `Pago` se crea recién cuando se aprueba el cobro. En CU2 los cobros adicionales y las devoluciones son movimientos `AJUSTE` / `DEVOLUCION` en `HistorialPago`. Se reemplazó `consultarPagoOriginal` por `Pedido.obtenerPagoOriginal()`.
+    4. CU3 usa `cancelarPedido(...)` del diagrama final y CU5 mueve `obtenerPedidosPorEstados(estados)` a `ServicioPedidos`.
+  - **Verificación:** se usó un script que compara cada mensaje de las secuencias, y cada operación de los diagramas parciales, con las operaciones del diagrama final por clase y cantidad de parámetros, sin diferencias. Los `.png` se regeneraron y se revisaron visualmente. Se ajustó la escala de los que superaban 4096 px.
 
 ---
 
@@ -96,8 +114,8 @@ Las reviews se hicieron con Claude en modo agente sobre la rama de cada PR. Los 
 **Prompt utilizado:** prompt base de este documento, cambiando la rama y los archivos.
 
 **Hallazgos de la IA:**
-1. Los enums `Estado_pedido`, `Metodo_pago` y `Tipo_movimiento` estaban en minúscula, a diferencia de CU1, CU4 y CU5.
-2. En CU2, `Historial_pago` e `Historial_cambio_pedido` repetían como atributo lo que ya estaba dibujado como asociación.
+1. Los enums `EstadoPedido`, `MetodoPago` y `TipoMovimiento` estaban en minúscula, a diferencia de CU1, CU4 y CU5.
+2. En CU2, `HistorialPago` e `HistorialCambioPedido` repetían como atributo lo que ya estaba dibujado como asociación.
 3. Typos: "Responsability" en `diagramas_de_clases.md` y "Funcioanal" en el changelog.
 4. Descripción de la PR con año, nombre de archivo y link de la consigna incorrectos, y "Closes" solo en el primer issue.
 5. Sugerencia: en CU3 la clase `Pago` no participa del diagrama de secuencia de cancelación.
@@ -131,7 +149,7 @@ Las reviews se hicieron con Claude en modo agente sobre la rama de cada PR. Los 
 **Prompt utilizado:** prompt base de este documento, cambiando la rama y los archivos.
 
 **Hallazgos de la IA:**
-1. El PNG de clases de CU2 se regeneró en 4096 px de ancho, el límite por defecto de PlantUML, y quedó recortado: la clase `Historial_pago` aparecía cortada a la derecha.
+1. El PNG de clases de CU2 se regeneró en 4096 px de ancho, el límite por defecto de PlantUML, y quedó recortado: la clase `HistorialPago` aparecía cortada a la derecha.
 2. El título de la PR solo menciona CU1, pero también renombra `InterfazPedido` a `PantallaPedidos` en CU2.
 
 **Ajustes al output de la IA:** en lugar de devolver la PR, el coordinador regeneró el PNG con `PLANTUML_LIMIT_SIZE` mayor y lo agregó a la rama. Se verificó que la imagen nueva no estuviera recortada. El hallazgo 2 se consideró no bloqueante porque el changelog ya describe los dos cambios.

@@ -20,7 +20,7 @@
 7. El sistema solicita la confirmación de la operación.
 8. El Usuario de Mostrador confirma la cancelación.
 9. El sistema procesa la solicitud y cambia el estado del pedido a CANCELADO.
-10. El sistema conserva el identificador, los ítems y los pagos asociados al pedido.
+10. El sistema conserva el identificador, los ítems y el pago original del pedido (con sus movimientos en HistorialPago).
 11. El sistema registra la cancelación en la auditoría, incluyendo usuario responsable, fecha, hora, motivo y cambio de estado.
 12. El sistema informa que el pedido fue cancelado correctamente.
 
@@ -39,7 +39,7 @@
 |---|---|---|
 | RF3 | **Seguimiento y visualización del estado del pedido.** El sistema debe permitir al personal visualizar sincronizadamente los pedidos activos y controlar su ciclo de vida mediante un único estado secuencial y restringido: *Recibido*, *En preparación*, *Listo*, *Entregado* y *Cancelado*, garantizando una única fuente de verdad para evitar duplicaciones. | Consulta el estado actual del pedido y registra su transición a CANCELADO cuando corresponde. |
 | RF5 | **Cancelación completa del pedido.** El sistema debe posibilitar la cancelación completa de un pedido activo antes de que sea entregado, asegurando que por razones de auditoría interna de caja el registro nunca se elimine físicamente de la base de datos y que pase de forma definitiva y permanente al estado *Cancelado*. | Cancela el pedido sin eliminarlo físicamente y conserva la información necesaria para auditoría. |
-| RF8 | **Registro de pago.** El sistema debe permitir asociar y registrar el cobro de cada pedido utilizando únicamente efectivo o transferencia bancaria (dejando fuera QR y tarjetas en esta fase); asimismo, si un pedido previamente pagado es modificado en estado *Recibido*, el sistema debe recalcular el total y permitir registrar el cobro o ajuste de la diferencia económica generada. | Conserva los pagos asociados al pedido cancelado para mantener su trazabilidad. La devolución automática no forma parte de este caso de uso. |
+| RF8 | **Registro de pago.** El sistema debe permitir asociar y registrar el cobro de cada pedido utilizando únicamente efectivo o transferencia bancaria (dejando fuera QR y tarjetas en esta fase); asimismo, si un pedido previamente pagado es modificado en estado *Recibido*, el sistema debe recalcular el total y permitir registrar el cobro o ajuste de la diferencia económica generada. | Conserva el pago original del pedido cancelado y sus movimientos para mantener su trazabilidad. La devolución automática no forma parte de este caso de uso. |
 
 ---
 
@@ -110,21 +110,22 @@
 - **PantallaPedidos:** interfaz que recibe las solicitudes, motivos y confirmaciones.
 - **ServicioPedidos:** componente que coordina las validaciones y el procesamiento de la cancelación.
 - **Pedido:** entidad que administra la información y el estado del pedido.
-- **Auditoria_pedido:** entidad que registra la operación, el motivo y los responsables.
+- **AuditoriaPedido:** entidad que registra la operación, el motivo y los responsables.
 
 **Mensajes clave:**
 
 - `solicitarCancelacionPedido(numeroPedido)` → inicia la solicitud de cancelación del pedido.
-- `consultarPedidoYEstado(numeroPedido)` → obtiene el pedido solicitado y consulta su estado actual.
-- `obtenerEstado(numeroPedido)` → devuelve el estado vigente del pedido.
-- `solicitarAutorizacion(numeroPedido)` → solicita la intervención del Encargado cuando el pedido está EN_PREPARACION.
+- `consultarEstado(numeroPedido)` → `ServicioPedidos` localiza el pedido con `buscarPedido(numeroPedido)` y consulta su estado actual (misma operación que en CU02 y CU04).
+- `obtenerEstado()` → `Pedido` devuelve el estado vigente del pedido.
+- `responderSolicitudCancelacion(numeroPedido)` → el Encargado responde en la pantalla al aviso de autorización requerida.
+- `solicitarAutorizacion(numeroPedido)` → solicita la intervención del Encargado cuando el pedido está EN_PREPARACION y devuelve si fue autorizada.
 - `solicitarClaveSupervision(numeroPedido)` → solicita la clave de supervisión del Encargado.
 - `validarClaveSupervision(claveSupervision)` → verifica si la autorización ingresada es válida.
 - `autorizarCancelacion()` → autoriza la cancelación del pedido.
 - `confirmarCancelacion(motivo)` → recibe el motivo y confirma la solicitud de cancelación.
-- `procesarCancelacion(numeroPedido, motivo, usuario)` → procesa una cancelación que no requiere autorización adicional.
-- `procesarCancelacion(numeroPedido, motivo, usuario, autorizante)` → procesa una cancelación supervisada.
-- `cancelarPedido(motivo)` → ejecuta la cancelación del pedido.
+- `ServicioPedidos.cancelarPedido(numeroPedido, motivo, actor)` → procesa una cancelación que no requiere autorización adicional.
+- `ServicioPedidos.cancelarPedido(numeroPedido, motivo, actor, autorizante)` → procesa una cancelación supervisada por el Encargado.
+- `Pedido.cancelarPedido(motivo)` → ejecuta la cancelación sobre el pedido.
 - `cambiarEstado(CANCELADO)` → establece el estado definitivo CANCELADO.
 - `registrarAccion(pedido, usuario, accion, fechaHora)` → registra la operación y el usuario responsable.
 - `registrarAccion(pedido, usuario, autorizante, accion, fechaHora)` → registra la operación y el Encargado que la autorizó.
@@ -146,12 +147,13 @@ No se representa la destrucción explícita de objetos persistentes. El pedido, 
 |---|---|---|
 | Usuario | Representar la identidad y autenticación de los usuarios del sistema. | [Usuario](../../herramientas-agile/tarjetas-crc/13-tarjeta-crc-usuario.md) |
 | UsuarioMostrador | Gestionar solicitudes de cancelación desde el mostrador. | [Usuario de Mostrador](../../herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md) |
-| UsuarioEncargado | Autorizar cancelaciones que requieren supervisión mediante una clave. | Clase especializada de Usuario |
-| PantallaPedidos | Recibir las solicitudes, motivos y confirmaciones de cancelación. | Interfaz específica del caso de uso |
-| ServicioPedidos | Consultar pedidos, validar condiciones y coordinar cancelaciones. | Control del caso de uso |
+| UsuarioEncargado | Autorizar cancelaciones que requieren supervisión mediante una clave. | [Usuario Encargado](../../herramientas-agile/tarjetas-crc/16-tarjeta-crc-usuario-encargado.md) |
+| PantallaPedidos | Recibir las solicitudes, motivos y confirmaciones de cancelación. | [Pantalla Pedidos](../../herramientas-agile/tarjetas-crc/20-tarjeta-crc-pantalla-pedidos.md) |
+| ServicioPedidos | Consultar pedidos, validar condiciones, solicitar autorización y coordinar cancelaciones. | [Servicio Pedidos](../../herramientas-agile/tarjetas-crc/17-tarjeta-crc-servicio-pedidos.md) |
 | Pedido | Mantener la información, el identificador y el estado del pedido. | [Pedido](../../herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md) |
-| Pago | Conservar los pagos asociados al pedido. | [Pago](../../herramientas-agile/tarjetas-crc/05-tarjeta-crc-pago.md) |
-| Auditoria_pedido | Registrar las cancelaciones, motivos, fechas y usuarios responsables. | [Auditoría de Pedido](../../herramientas-agile/tarjetas-crc/11-tarjeta-crc-auditoria-pedido.md) |
+| Pago | Conservar el pago original del pedido. | [Pago](../../herramientas-agile/tarjetas-crc/05-tarjeta-crc-pago.md) |
+| AuditoriaPedido | Registrar las cancelaciones, motivos, fechas y usuarios responsables. | [Auditoría de Pedido](../../herramientas-agile/tarjetas-crc/11-tarjeta-crc-auditoria-pedido.md) |
+| EstadoPedido | Definir el conjunto cerrado de estados del ciclo de vida del pedido | [21-tarjeta-crc-estado-pedido.md](../../herramientas-agile/tarjetas-crc/21-tarjeta-crc-estado-pedido.md) |
 
 **Relaciones UML:**
 
@@ -163,17 +165,17 @@ No se representa la destrucción explícita de objetos persistentes. El pedido, 
 | Dependencia | UsuarioEncargado → PantallaPedidos | El Encargado utiliza la interfaz para autorizar operaciones. |
 | Dependencia | PantallaPedidos → ServicioPedidos | La interfaz delega la lógica de cancelación al servicio. |
 | Dependencia | ServicioPedidos → Pedido | El servicio consulta y solicita cambios sobre el estado del pedido. |
-| Dependencia | ServicioPedidos → Auditoria_pedido | El servicio solicita registrar la operación realizada. |
+| Dependencia | ServicioPedidos → AuditoriaPedido | El servicio solicita registrar la operación realizada. |
 | Dependencia | ServicioPedidos → UsuarioEncargado | El servicio requiere autorización cuando el pedido está EN_PREPARACION. |
-| Asociación | Pedido → Pago | El pedido mantiene vinculados sus pagos registrados. |
-| Asociación | Pedido → Auditoria_pedido | Un pedido puede tener múltiples registros de auditoría. |
-| Asociación | Auditoria_pedido → Usuario | Cada registro identifica al usuario responsable. |
-| Asociación | Auditoria_pedido → UsuarioEncargado | El registro puede identificar al Encargado que autorizó la cancelación. |
+| Asociación | Pedido — Pago (1 a 1) | El pedido conserva su único pago original, igual que en el diagrama final y en CU02 (política de pagos). |
+| Asociación | Pedido → AuditoriaPedido | Un pedido puede tener múltiples registros de auditoría. |
+| Asociación | AuditoriaPedido → Usuario | Cada registro identifica al usuario responsable. |
+| Asociación | AuditoriaPedido → UsuarioEncargado | El registro puede identificar al Encargado que autorizó la cancelación. |
 
 
 **Justificación de la clase Pago:**
 
-La clase `Pago` se mantiene en el diagrama de clases porque representa los pagos asociados al pedido, los cuales deben conservarse incluso después de su cancelación para garantizar la trazabilidad y auditoría.
+La clase `Pago` se mantiene en el diagrama de clases porque representa el único pago original del pedido (multiplicidad `Pedido 1 — 1 Pago`), que debe conservarse incluso después de la cancelación para garantizar la trazabilidad y auditoría. Los ajustes y devoluciones se registran como movimientos de ese pago en `HistorialPago` (CU02); cualquier devolución por cancelación es manual y queda fuera de este flujo.
 
 No participa directamente en el diagrama de secuencia porque el proceso de cancelación no contempla operaciones de cobro ni devolución.
 
@@ -185,14 +187,15 @@ No participa directamente en el diagrama de secuencia porque el proceso de cance
     INICIO Cancelar Pedido
 
         // El Usuario de Mostrador solicita cancelar un pedido.
-        pedido = servicio.consultarPedidoYEstado(numeroPedido)
+        pedido = servicio.buscarPedido(numeroPedido)
 
         SI pedido == NULL
             Retornar "Pedido inexistente"
         FIN SI
 
         // Se consulta el estado actual del pedido.
-        estadoAnterior = pedido.obtenerEstado(numeroPedido)
+        estadoAnterior = servicio.consultarEstado(numeroPedido)
+            // ServicioPedidos obtiene el estado con pedido.obtenerEstado()
 
         SI estadoAnterior == RECIBIDO
 
@@ -202,7 +205,7 @@ No participa directamente en el diagrama de secuencia porque el proceso de cance
 
             SI confirmacion == VERDADERO
 
-                servicio.procesarCancelacion(
+                servicio.cancelarPedido(
                     numeroPedido,
                     motivo,
                     usuario
@@ -237,6 +240,7 @@ No participa directamente en el diagrama de secuencia porque el proceso de cance
         SINO SI estadoAnterior == EN_PREPARACION
 
             // Se solicita autorización del Encargado.
+            encargado responde en PantallaPedidos.responderSolicitudCancelacion(numeroPedido)
             servicio.solicitarAutorizacion(numeroPedido)
 
             claveSupervision = encargado.solicitarClaveSupervision(
@@ -257,7 +261,7 @@ No participa directamente en el diagrama de secuencia porque el proceso de cance
 
                 SI confirmacion == VERDADERO
 
-                    servicio.procesarCancelacion(
+                    servicio.cancelarPedido(
                         numeroPedido,
                         motivo,
                         usuario,

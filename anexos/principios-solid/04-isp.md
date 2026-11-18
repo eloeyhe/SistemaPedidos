@@ -7,7 +7,7 @@ Su propósito principal es establecer que **ninguna clase debe verse obligada a 
 ---
 
 ## Motivación
-En el modelo del **Sistema de Pedidos**, observamos diversos tipos de usuarios operativos que heredan de la clase abstracta `Usuario` (`UsuarioMostrador`, `UsuarioCocina`, `UsuarioEncargado`) y diversas entidades que gestionan registros y trazabilidad (`Historial_pago`, `Auditoria_pedido`, `Historial_cambio_pedido`).
+En el modelo del **Sistema de Pedidos**, observamos diversos tipos de usuarios operativos que heredan de la clase abstracta `Usuario` (`UsuarioMostrador`, `UsuarioCocina`, `UsuarioEncargado`) y diversas entidades que gestionan registros y trazabilidad (`HistorialPago`, `AuditoriaPedido`, `HistorialCambioPedido`).
 
 ### Problema Identificado en el Proyecto
 Si definiéramos una única interfaz monolítica de gestión operativa (por ejemplo, `IProcesamientoSistema` o `IGestionOperativa`) para ser implementada por los usuarios del sistema, esta debería contener métodos como:
@@ -57,7 +57,7 @@ Cualquier código que reciba una `IGestionOperativa` podría invocar uno de esos
 | `UsuarioEncargado` | 10 | 3 | 7 | Implementa `ICancelacionPedido` e `ISupervision` (3 métodos) |
 
 ### Registros y trazabilidad: por qué no se unifican
-Las clases `Historial_pago`, `Auditoria_pedido` e `Historial_cambio_pedido` registran hechos distintos: movimientos de dinero, acciones realizadas sobre un pedido y cambios de campos de un pedido, respectivamente. Aunque las tres exponen una operación de registro, **compartir un nombre de método no justifica una interfaz común**. Unificarlas bajo un contrato genérico (por ejemplo, `IRegistrable`) no aportaría beneficio alguno, porque ningún componente del sistema necesita tratarlas de forma polimórfica, y las obligaría a depender de un contrato que no refleja la naturaleza distinta de cada registro.
+Las clases `HistorialPago`, `AuditoriaPedido` e `HistorialCambioPedido` registran hechos distintos: movimientos de dinero, acciones realizadas sobre un pedido y cambios de campos de un pedido, respectivamente. Aunque las tres exponen una operación de registro, **compartir un nombre de método no justifica una interfaz común**. Unificarlas bajo un contrato genérico (por ejemplo, `IRegistrable`) no aportaría beneficio alguno, porque ningún componente del sistema necesita tratarlas de forma polimórfica, y las obligaría a depender de un contrato que no refleja la naturaleza distinta de cada registro.
 
 Por eso, **no se crea una interfaz para estas clases**: cada una conserva su propia operación cohesiva. Si en el futuro surgiera un consumidor real que necesite usar varias de ellas mediante el mismo contrato, se podría introducir una interfaz específica en ese momento, y no antes.
 

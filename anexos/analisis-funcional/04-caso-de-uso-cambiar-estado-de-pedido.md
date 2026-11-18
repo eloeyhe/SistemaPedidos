@@ -66,16 +66,16 @@
 
 ![Diagrama de Secuencia - Cambiar Estado de Pedido](../../diagramas/05-diagramas-secuencia/05-secuencia-cambiar-estado-pedido-avance-preparacion-04.png)
 
-**Participantes:** `UsuarioCocina` y `UsuarioMostrador` (actores); `PantallaPedidos:pantalla`, `ServicioPedidos:servicio`, `Pedido:pedido` y `Historial_cambio_pedido:historial` (objetos con la notación `Clase:objeto`).
+**Participantes:** `UsuarioCocina` y `UsuarioMostrador` (actores); `PantallaPedidos:pantalla`, `ServicioPedidos:servicio`, `Pedido:pedido` y `HistorialCambioPedido:historial` (objetos con la notación `Clase:objeto`).
 
 **Mensajes clave:**
 
 - `seleccionarPedido(numeroPedido)` → solicita mostrar el estado del pedido seleccionado.
-- `consultarEstado(numeroPedido)` → `ServicioPedidos` solicita a `Pedido` `obtenerEstado(numeroPedido)` y devuelve el estado actual.
+- `consultarEstado(numeroPedido)` → `ServicioPedidos` localiza el pedido con `buscarPedido(numeroPedido)`, le solicita `obtenerEstado()` y devuelve el estado actual.
 - `iniciarPreparacion(numeroPedido)`, `finalizarPreparacion(numeroPedido)` y `registrarEntrega(numeroPedido)` → expresan la acción del actor correspondiente; la pantalla solicita `solicitarCambioEstado(numeroPedido, nuevoEstado, actor)`.
-- `validarTransicion(estadoActual, nuevoEstado, actor)` → comprueba la validez de la transición y la autorización del actor.
-- `actualizarEstado(nuevoEstado)` → cambia el estado cuando la transición es válida.
-- `registrarCambioEstado(pedido, estadoAnterior, estadoNuevo, actor)` → registra el cambio en `Historial_cambio_pedido`.
+- `validarTransicion(nuevoEstado, actor)` → `Pedido` compara su estado vigente con el nuevo estado y comprueba la validez de la transición y la autorización del actor.
+- `cambiarEstado(nuevoEstado)` → cambia el estado cuando la transición es válida.
+- `registrarCambioEstado(pedido, estadoAnterior, estadoNuevo, actor)` → registra el cambio en `HistorialCambioPedido`.
 - `motivoRechazo` y `rechazoTransicion` → devuelven el rechazo sin modificar el estado cuando la solicitud no es válida o autorizada.
 
 **Objetos temporales destruidos:** no se representan objetos temporales ni mensajes de destrucción en esta secuencia.
@@ -95,11 +95,11 @@ Fuente PlantUML: [04-clases-cambiar-estado-pedido-04.puml](../../diagramas/01-di
 | Usuario | Autentificar el acceso al sistema | [13-tarjeta-crc-usuario.md](../../herramientas-agile/tarjetas-crc/13-tarjeta-crc-usuario.md) |
 | UsuarioCocina | Comenzar preparaciones y marcar pedidos como listos | [15-tarjeta-crc-usuario-cocina.md](../../herramientas-agile/tarjetas-crc/15-tarjeta-crc-usuario-cocina.md) |
 | UsuarioMostrador | Registrar y modificar pedidos, y marcarlos como entregados | [14-tarjeta-crc-usuario-mostrador.md](../../herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md) |
-| PantallaPedidos | Frontera participante de A3: recibe selección y acciones del actor, y envía solicitudes a `ServicioPedidos` | Sin tarjeta CRC; participante del [diagrama de secuencia A3](../../diagramas/05-diagramas-secuencia/05-secuencia-cambiar-estado-pedido-avance-preparacion-04.puml) |
-| ServicioPedidos | Control participante de A3: consulta el estado y coordina la solicitud de cambio con `Pedido` y el registro en el historial | Sin tarjeta CRC; participante del [diagrama de secuencia A3](../../diagramas/05-diagramas-secuencia/05-secuencia-cambiar-estado-pedido-avance-preparacion-04.puml) |
+| PantallaPedidos | Frontera participante de A3: recibe selección y acciones del actor, y envía solicitudes a `ServicioPedidos` | [Pantalla Pedidos](../../herramientas-agile/tarjetas-crc/20-tarjeta-crc-pantalla-pedidos.md) |
+| ServicioPedidos | Control participante de A3: consulta el estado y coordina la solicitud de cambio con `Pedido` y el registro en el historial | [Servicio Pedidos](../../herramientas-agile/tarjetas-crc/17-tarjeta-crc-servicio-pedidos.md) |
 | Pedido | Agregar, modificar y cancelar la orden. Cambiar mi estado operativo y gestionar la prioridad del pedido | [01-tarjeta-crc-pedido.md](../../herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md) |
-| Historial_cambio_pedido | Registrar alteraciones específicas de campos | [12-tarjeta-crc-historial-cambio-pedido.md](../../herramientas-agile/tarjetas-crc/12-tarjeta-crc-historial-cambio-pedido.md) |
-| Estado_pedido | Enumeración del boceto inicial que restringe los estados del ciclo de vida del pedido | [Boceto inicial](../../diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw); no tiene tarjeta CRC |
+| HistorialCambioPedido | Registrar alteraciones específicas de campos | [12-tarjeta-crc-historial-cambio-pedido.md](../../herramientas-agile/tarjetas-crc/12-tarjeta-crc-historial-cambio-pedido.md) |
+| EstadoPedido | Definir el conjunto cerrado de estados del ciclo de vida del pedido | [21-tarjeta-crc-estado-pedido.md](../../herramientas-agile/tarjetas-crc/21-tarjeta-crc-estado-pedido.md) |
 
 **Relaciones UML:**
 
@@ -109,10 +109,10 @@ Fuente PlantUML: [04-clases-cambiar-estado-pedido-04.puml](../../diagramas/01-di
 | Asociación | UsuarioCocina / UsuarioMostrador → PantallaPedidos | Los actores interactúan con la pantalla para seleccionar pedidos y solicitar acciones; la secuencia no indica que sean partes de su ciclo de vida. |
 | Asociación | PantallaPedidos → ServicioPedidos | `PantallaPedidos` mantiene el atributo `servicio: ServicioPedidos`; es una referencia estructural y no sólo un uso puntual. |
 | Dependencia | ServicioPedidos → Pedido | El servicio consulta el pedido y coordina la validación y actualización solicitadas, sin declarar una referencia permanente al pedido. |
-| Dependencia | ServicioPedidos → Historial_cambio_pedido | El servicio invoca `registrarCambioEstado` cuando el estado se actualiza. |
-| Asociación | Pedido → Estado_pedido | `Pedido` conserva `estado: Estado_pedido` como su estado vigente único. |
-| Asociación | Historial_cambio_pedido → Pedido y Usuario | La tarjeta CRC declara a `Pedido` y `Usuario` como colaboradores y propiedades del historial; cada registro corresponde a un pedido y a un actor. |
-| Dependencia | ServicioPedidos / Historial_cambio_pedido → Estado_pedido | El enum tipa las transiciones que valida el servicio y los valores anterior y nuevo que registra el historial. |
+| Dependencia | ServicioPedidos → HistorialCambioPedido | El servicio invoca `registrarCambioEstado` cuando el estado se actualiza. |
+| Asociación | Pedido → EstadoPedido | `Pedido` conserva `estado: EstadoPedido` como su estado vigente único. |
+| Asociación | HistorialCambioPedido → Pedido y Usuario | La tarjeta CRC declara a `Pedido` y `Usuario` como colaboradores y propiedades del historial; cada registro corresponde a un pedido y a un actor. |
+| Dependencia | ServicioPedidos / HistorialCambioPedido → EstadoPedido | El enum tipa las transiciones que valida el servicio y los valores anterior y nuevo que registra el historial. |
 
 ---
 
@@ -127,7 +127,7 @@ INICIO Cambiar Estado de Pedido
 
 actorSolicitante selecciona un pedido mediante PantallaPedidos.seleccionarPedido(numeroPedido)
 estadoActual = ServicioPedidos.consultarEstado(numeroPedido)
-    // ServicioPedidos consulta Pedido.obtenerEstado(numeroPedido)
+    // ServicioPedidos localiza el pedido con buscarPedido(numeroPedido) y consulta Pedido.obtenerEstado()
 
 SI actorSolicitante es Cocina Y estadoActual es RECIBIDO
     PantallaPedidos.iniciarPreparacion(numeroPedido)
@@ -145,13 +145,13 @@ FIN SI
 
 // ServicioPedidos coordina la comprobación y el cambio solicitado por la pantalla.
 resultado = ServicioPedidos.solicitarCambioEstado(numeroPedido, nuevoEstado, actorSolicitante)
-    // Pedido.validarTransicion(estadoActual, nuevoEstado, actorSolicitante)
+    // Pedido.validarTransicion(nuevoEstado, actorSolicitante)
 
 SI la transición es válida y el actor está autorizado
     // Pedido actualiza su único estado vigente.
-    Pedido.actualizarEstado(nuevoEstado)
+    Pedido.cambiarEstado(nuevoEstado)
     // El servicio registra los valores anterior y nuevo junto con el actor.
-    Historial_cambio_pedido.registrarCambioEstado(pedido, estadoActual, nuevoEstado, actorSolicitante)
+    HistorialCambioPedido.registrarCambioEstado(pedido, estadoActual, nuevoEstado, actorSolicitante)
     Retornar "Cambio confirmado"
 SINO SI la transición no está permitida
     // Se informa el rechazo y el pedido conserva el estado anterior.

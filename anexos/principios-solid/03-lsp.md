@@ -16,7 +16,7 @@ La herencia es un mecanismo de la Programación Orientada a Objetos que crea una
 ## Justificación Técnica
 El diagrama UML ilustra la corrección estructural para separar claramente los contratos y garantizar el cumplimiento del LSP:
 
-1. **Contrato Comercial (Precio)**: Entidades como `Producto` (o agrupaciones como `Combo`) se rigen por un contrato estrictamente comercial a través de interfaces como `IElementoMenu` (la cual define `getPrecio()`). Esto garantiza que, desde el punto de vista de la clase `Item_pedido` o la Caja, cualquier elemento de compra pueda ser sustituido perfectamente para calcular subtotales, sin importar su naturaleza.
+1. **Contrato Comercial (Precio)**: Entidades como `Producto` (o agrupaciones como `Combo`) se rigen por un contrato estrictamente comercial a través de interfaces como `IElementoMenu` (la cual define `getPrecio()`). Esto garantiza que, desde el punto de vista de la clase `ItemPedido` o la Caja, cualquier elemento de compra pueda ser sustituido perfectamente para calcular subtotales, sin importar su naturaleza.
 
 2. **Contrato Operativo (Preparación)**: Se establece una frontera conceptual clara respecto a la cocina. La capacidad de ser cocinado se ha extraído a una interfaz específica llamada `IElaborable` (que define `iniciarPreparacion()`). Esta interfaz **solo** es implementada por `ProductoPreparado`. Un `Combo` o un `ProductoEnvasado` pueden ser elementos del menú para ser cobrados, pero no son elementos preparables.
 

@@ -9,7 +9,7 @@ actor UsuarioEncargado
 participant "PantallaPedidos:pantalla" as pantalla
 participant "ServicioPedidos:servicio" as servicio
 participant "Pedido:pedido" as pedido
-participant "Auditoria_pedido:auditoria" as auditoria
+participant "AuditoriaPedido:auditoria" as auditoria
 
 note over servicio, pedido
     La cancelacion conserva el pedido y sus pagos.
@@ -22,8 +22,9 @@ else iniciador es UsuarioEncargado
     UsuarioEncargado -> pantalla : solicitarCancelacionPedido(numeroPedido)
 end
 
-pantalla -> servicio : consultarPedidoYEstado(numeroPedido)
-servicio -> pedido : obtenerEstado(numeroPedido)
+pantalla -> servicio : consultarEstado(numeroPedido)
+servicio -> servicio : buscarPedido(numeroPedido)
+servicio -> pedido : obtenerEstado()
 pedido --> servicio : estadoActual
 servicio --> pantalla : datosPedido, estadoActual
 
@@ -36,10 +37,10 @@ end
 alt estadoActual == RECIBIDO
     alt iniciador es UsuarioMostrador
         UsuarioMostrador -> pantalla : confirmarCancelacion(motivo)
-        pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioMostrador)
+        pantalla -> servicio : cancelarPedido(numeroPedido, motivo, UsuarioMostrador)
     else iniciador es UsuarioEncargado
         UsuarioEncargado -> pantalla : confirmarCancelacion(motivo)
-        pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioEncargado)
+        pantalla -> servicio : cancelarPedido(numeroPedido, motivo, UsuarioEncargado)
     end
 
     servicio -> pedido : cancelarPedido(motivo)
@@ -80,10 +81,10 @@ else estadoActual == EN_PREPARACION
     alt resultadoAutorizacion == autorizado
         alt iniciador es UsuarioMostrador
             UsuarioMostrador -> pantalla : confirmarCancelacion(motivo)
-            pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioMostrador, UsuarioEncargado)
+            pantalla -> servicio : cancelarPedido(numeroPedido, motivo, UsuarioMostrador, UsuarioEncargado)
         else iniciador es UsuarioEncargado
             UsuarioEncargado -> pantalla : confirmarCancelacion(motivo)
-            pantalla -> servicio : procesarCancelacion(numeroPedido, motivo, UsuarioEncargado, UsuarioEncargado)
+            pantalla -> servicio : cancelarPedido(numeroPedido, motivo, UsuarioEncargado, UsuarioEncargado)
         end
 
         servicio -> pedido : cancelarPedido(motivo)

@@ -1,6 +1,6 @@
 |  |  |  |  |
 |---|---|---|---|
-| **Nombre de la Clase:** |Auditoria_pedido  | | |
+| **Nombre de la Clase:** |AuditoriaPedido  | | |
 | **Superclase:** |Ninguna | | |
 | **Subclase:** |Ninguna | | |
 | **Responsabilidades** | **Colaboradores** | **Pensamiento del objeto** | **Propiedad** |

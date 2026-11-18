@@ -1,4 +1,4 @@
-@startuml 05-clases-consultar-pedidos-activos-05
+@startuml
 title CU05 - Consultar Pedidos Activos
 skinparam classAttributeIconSize 0
 hide empty members
@@ -25,34 +25,33 @@ class PantallaPedidos {
 }
 
 class ServicioPedidos {
-  + consultarPedidosActivos(actorSolicitante: Usuario): Map<Estado_pedido, List<Pedido>>
+  + consultarPedidosActivos(actorSolicitante: Usuario): Map<EstadoPedido, List<Pedido>>
   + comprobarDisponibilidadDatos(): boolean
-  + agruparPedidosPorEstado(listaPedidosActivos: List<Pedido>): Map<Estado_pedido, List<Pedido>>
+  + obtenerPedidosPorEstados(estados: List<EstadoPedido>): List<Pedido>
+  + agruparPedidosPorEstado(listaPedidosActivos: List<Pedido>): Map<EstadoPedido, List<Pedido>>
   + ordenarGrupoPorPrioridad(urgentesPrimero: boolean): void
-  + seleccionarEstadosVisibles(estado1: Estado_pedido, estado2: Estado_pedido): List<Estado_pedido>
-  + seleccionarEstadosVisibles(estado1: Estado_pedido, estado2: Estado_pedido, estado3: Estado_pedido): List<Estado_pedido>
-  + obtenerDetallePedido(numeroPedido: int): List<Item_pedido>
+  + seleccionarEstadosVisibles(actor: Usuario): List<EstadoPedido>
+  + obtenerDetallePedido(numeroPedido: int): List<ItemPedido>
 }
 
 class Pedido {
   - fecha: Date
-  - estado: Estado_pedido
+  - estado: EstadoPedido
   - prioritario: boolean
   - numeroPedido: int
   - referenciaRetiro: String
-  + obtenerPedidosPorEstados(estado1: Estado_pedido, estado2: Estado_pedido, estado3: Estado_pedido): List<Pedido>
-  + obtenerEstado(): Estado_pedido
+  + obtenerEstado(): EstadoPedido
   + esPrioritario(): boolean
-  + obtenerDetalle(): List<Item_pedido>
+  + obtenerDetalle(): List<ItemPedido>
 }
 
-class Item_pedido {
+class ItemPedido {
   - cantidad: int
   - precioUnitario: Decimal
   - subtotal: Decimal
 }
 
-enum Estado_pedido {
+enum EstadoPedido {
   RECIBIDO
   EN_PREPARACION
   LISTO
@@ -67,11 +66,11 @@ UsuarioCocina "0..*" --> "0..*" PantallaPedidos : consulta
 UsuarioMostrador "0..*" --> "0..*" PantallaPedidos : consulta
 
 PantallaPedidos "0..*" --> "1" ServicioPedidos : consulta
-Pedido "0..*" --> "1" Estado_pedido : estado
-Pedido "1" *-- "1..*" Item_pedido : detalle
+Pedido "0..*" --> "1" EstadoPedido : estado
+Pedido "1" *-- "1..*" ItemPedido : detalle
 
 ServicioPedidos ..> Pedido : filtra y consulta
-ServicioPedidos ..> Estado_pedido : agrupa y filtra
-ServicioPedidos ..> Item_pedido : obtiene detalle
+ServicioPedidos ..> EstadoPedido : agrupa y filtra
+ServicioPedidos ..> ItemPedido : obtiene detalle
 ServicioPedidos ..> Usuario : adapta vista
 @enduml

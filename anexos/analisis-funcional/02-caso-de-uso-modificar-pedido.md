@@ -17,11 +17,13 @@
 4. Agrega, elimina o modifica productos y cantidades.
 5. Modifica las personalizaciones necesarias.
 6. El sistema recalcula los subtotales y el total del pedido.
-7. Si existe un pago previo, el sistema conserva el pago original, calcula la diferencia y permite registrar un cobro adicional o una devolución.
-8. El Usuario de Mostrador selecciona el medio de pago correspondiente, cuando sea necesario.
-9. El Usuario de Mostrador confirma la modificación.
-10. El sistema vuelve a verificar que el pedido continúe en estado RECIBIDO.
+7. El sistema obtiene el pago original del pedido (todo pedido registrado tiene exactamente uno, creado en CU01) y calcula la diferencia contra el nuevo total.
+8. El Usuario de Mostrador confirma la modificación.
+9. El sistema vuelve a verificar que el pedido continúe en estado RECIBIDO.
+10. Si hay diferencia, el Usuario de Mostrador selecciona el medio de pago; el sistema lo valida mediante `ProcesadorPago` y registra el cobro adicional o la devolución como movimiento (`AJUSTE` o `DEVOLUCION`) del pago original en `HistorialPago`.
 11. El sistema actualiza el pedido conservando su identificador y registra los cambios realizados.
+
+**Política de pagos:** cada pedido tiene un único `Pago` original (multiplicidad `Pedido 1 — 1 Pago`). Una modificación no crea pagos nuevos: los cobros adicionales y las devoluciones quedan como movimientos de ese pago en `HistorialPago`, con su tipo, monto, motivo y usuario responsable.
 
 **Flujos alternativos:**
 
@@ -50,12 +52,12 @@
 - **Usuario de Mostrador:** busca el pedido, solicita su modificación, modifica ítems y personalizaciones y confirma la operación.
 - **Validación del estado:** la modificación solo puede realizarse mientras el pedido se encuentre en RECIBIDO.
 - **Recálculo del total:** forma parte del proceso de modificación cuando cambian los ítems o sus personalizaciones.
-- **Ajuste de pago:** se realiza de manera condicional cuando existe un pago previo y el nuevo total genera una diferencia económica.
+- **Ajuste de pago:** se realiza de manera condicional cuando el nuevo total genera una diferencia económica respecto del pago original del pedido.
 
 **Include/Extend:**
 
 - La validación del estado y el recálculo del total son comportamientos necesarios para completar la modificación.
-- El ajuste económico es un comportamiento condicionado por la existencia de un pago previo y una diferencia de importe.
+- El ajuste económico es un comportamiento condicionado por la existencia de una diferencia de importe respecto del pago original.
 
 ---
 
@@ -83,22 +85,19 @@
   - **Sí:** el flujo continúa hacia el recálculo del total.
   - **No:** se rechaza la modificación, se sugiere cancelar el pedido mediante CU03 y finaliza el flujo.
 
-- **¿Existe un pago previo?**
-  - **Sí:** el flujo se dirige al cálculo de la diferencia económica.
-  - **No:** el flujo continúa hacia la confirmación de la modificación.
-
-- **¿Existe una diferencia económica?**
-  - **Positiva:** el flujo se dirige a la gestión de un cobro adicional.
-  - **Negativa:** el flujo se dirige a la gestión de una devolución.
-  - **Igual a cero:** el flujo continúa hacia la confirmación sin ajustes económicos.
-
-- **¿El medio de pago seleccionado es válido?**
-  - **Sí:** el flujo continúa hacia la confirmación de la modificación.
-  - **No:** se rechaza el ajuste económico y finaliza el flujo sin guardar los cambios.
+- Después del recálculo, el sistema obtiene el pago original y calcula la diferencia. No hay decisión "¿existe un pago previo?": todo pedido registrado tiene un único pago original (CU01).
 
 - **¿El pedido continúa en estado RECIBIDO al confirmar?**
-  - **Sí:** el flujo continúa hacia la actualización del pedido y el registro de los cambios, y luego finaliza.
+  - **Sí:** el flujo continúa hacia el ajuste económico (si corresponde) y la actualización del pedido.
   - **No:** se descartan los cambios pendientes y finaliza el flujo.
+
+- **¿Existe una diferencia económica?**
+  - **Sí:** el Usuario de Mostrador selecciona el medio de pago del ajuste.
+  - **No:** el flujo continúa hacia la actualización del pedido sin ajustes económicos.
+
+- **¿El medio de pago seleccionado es válido?** (validación de `ProcesadorPago`)
+  - **Sí:** se registra el cobro adicional (diferencia positiva) o la devolución (diferencia negativa) como movimiento del pago original.
+  - **No:** se descarta la modificación sin registrar el ajuste y finaliza el flujo.
 
 ---
 
@@ -109,37 +108,31 @@
 **Participantes:**
 
 - **UsuarioMostrador:** actor que inicia la modificación.
-- **PantallaPedidos:** interfaz utilizada para buscar y modificar pedidos.
+- **PantallaPedidos:** interfaz utilizada para buscar y modificar pedidos; delega cada operación en `ServicioPedidos`.
+- **ServicioPedidos:** control que localiza el pedido, consulta su estado, coordina la modificación, el ajuste de pago y la confirmación.
 - **Pedido:** entidad que mantiene el estado y la identidad del pedido.
-- **Item_pedido:** entidad que administra cantidades, precios y subtotales.
+- **ItemPedido:** entidad que administra cantidades, precios y subtotales.
 - **Producto:** entidad que proporciona información de los productos.
-- **Personalizacion_item:** entidad que representa modificaciones y costos adicionales.
-- **Pago:** entidad que administra los importes y diferencias económicas.
-- **ProcesadorPago:** componente encargado de validar el medio de pago.
-- **Historial_pago:** registro de movimientos económicos.
-- **Historial_cambio_pedido:** registro de modificaciones realizadas.
+- **PersonalizacionItem:** entidad que representa modificaciones y costos adicionales.
+- **Pago:** pago original del pedido; calcula la diferencia y registra cobros adicionales y devoluciones.
+- **ProcesadorPago:** único responsable de validar el medio de pago y de procesar el cobro adicional.
+- **HistorialPago:** registro de movimientos económicos del pago original.
+- **HistorialCambioPedido:** registro de modificaciones realizadas.
 
-**Mensajes clave:**
+**Mensajes clave** (todas las operaciones figuran con la misma firma en el diagrama de clases del CU2 y en el diagrama final):
 
-- `buscarPedido(numeroOReferencia)` → localiza el pedido solicitado.
-- `verificarEstado()` → comprueba si el pedido se encuentra en RECIBIDO.
-- `modificarItems(listaCambios)` → recibe los cambios sobre los productos y cantidades.
-- `modificarPersonalizaciones(listaPersonalizaciones)` → recibe los cambios de personalización.
-- `prepararModificacion()` → prepara los cambios sobre el pedido.
-- `prepararPersonalizaciones()` → prepara los cambios de personalización.
-- `modificarCantidadYPrecio()` → actualiza cantidades y precios de los ítems.
-- `actualizarPersonalizaciones()` → modifica las personalizaciones asociadas.
-- `calcularSubtotal(...)` → obtiene el subtotal correspondiente a cada ítem.
-- `recalcularPrecio()` → actualiza el importe del ítem.
-- `consultarPagoOriginal()` → obtiene la información del pago anterior.
-- `calcularDiferencia()` → determina la diferencia entre el pago anterior y el nuevo total.
-- `validarMedioPago()` → comprueba que el medio seleccionado sea válido.
-- `registrarCobroAdicional()` → registra un importe adicional.
-- `registrarDevolucion()` → registra una devolución.
-- `verificarEstadoAlConfirmar()` → vuelve a comprobar que el pedido esté RECIBIDO.
-- `actualizarPedido()` → confirma los cambios del pedido.
-- `registrarMovimiento()` → registra el movimiento económico.
-- `registrarCambioPedido()` → conserva la modificación en el historial.
+- `ServicioPedidos.buscarPedido(numeroOReferencia)` → localiza el pedido solicitado.
+- `ServicioPedidos.consultarEstado(numeroPedido)` → el servicio pide a `Pedido` `obtenerEstado()` y devuelve el estado; se usa al seleccionar el pedido y otra vez al confirmar.
+- `ServicioPedidos.modificarItems(numeroPedido, listaCambios)` → invoca `Pedido.prepararModificacion(listaCambios)`, que actualiza cada ítem con `ItemPedido.modificarCantidadYPrecio(cantidad, precioUnitario)`.
+- `ServicioPedidos.modificarPersonalizaciones(numeroPedido, listaPersonalizaciones)` → invoca `Pedido.prepararPersonalizaciones(listaPersonalizaciones)`, que usa `ItemPedido.actualizarPersonalizaciones(listaPersonalizaciones)` y recalcula `ItemPedido.calcularSubtotal(cantidad, precioBase, costosAdicionales)`.
+- `Pedido.obtenerTotal()` → devuelve el total actualizado.
+- `Pedido.obtenerPagoOriginal()` → devuelve el único pago original del pedido.
+- `Pago.calcularDiferencia(totalAnterior, totalActualizado)` → determina la diferencia entre el total ya abonado (`totalAnterior`) y el nuevo total del pedido (`totalActualizado`).
+- `ServicioPedidos.seleccionarMedioPago(medioPago)` → delega la validación en `ProcesadorPago.validarMedioPago(medioPago)`.
+- `ServicioPedidos.registrarAjustePago(numeroPedido, medioPago, diferencia, usuario)` → si la diferencia es positiva procesa el cobro con `ProcesadorPago.procesarCobro(medioPago, diferencia)` y llama a `Pago.registrarCobroAdicional(medioPago, diferencia)`; si es negativa llama a `Pago.registrarDevolucion(medioPago, diferencia)`.
+- `HistorialPago.registrarMovimiento(pago, tipo, monto, motivo, usuario)` → registra el movimiento `AJUSTE` o `DEVOLUCION` del pago original.
+- `ServicioPedidos.confirmarModificacion(numeroPedido, usuario)` → invoca `Pedido.actualizarPedido(listaItems, totalActualizado)`.
+- `HistorialCambioPedido.registrarCambioPedido(pedido, campo, valorAnterior, valorNuevo, usuario)` → conserva cada modificación en el historial.
 
 **Objetos temporales destruidos:**
 
@@ -157,15 +150,17 @@ No se representa la destrucción explícita de objetos persistentes. Los cambios
 |---|---|---|
 | Usuario | Representar la identidad y autenticación de los usuarios del sistema. | [Usuario](../../herramientas-agile/tarjetas-crc/13-tarjeta-crc-usuario.md) |
 | UsuarioMostrador | Realizar operaciones de gestión de pedidos desde el mostrador. | [Usuario de Mostrador](../../herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md) |
-| PantallaPedidos | Recibir las acciones del usuario y comunicar las operaciones relacionadas con el pedido. | Interfaz específica del caso de uso |
+| PantallaPedidos | Recibir las acciones del usuario y comunicar las operaciones relacionadas con el pedido. | [Pantalla Pedidos](../../herramientas-agile/tarjetas-crc/20-tarjeta-crc-pantalla-pedidos.md) |
+| ServicioPedidos | Localizar el pedido, consultar su estado y coordinar la modificación, el ajuste de pago y la confirmación. | [Servicio Pedidos](../../herramientas-agile/tarjetas-crc/17-tarjeta-crc-servicio-pedidos.md) |
 | Pedido | Mantener el estado, la identidad y la información del pedido. | [Pedido](../../herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md) |
-| Item_pedido | Administrar los productos, cantidades, personalizaciones y subtotales del pedido. | [Ítem de Pedido](../../herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md) |
+| ItemPedido | Administrar los productos, cantidades, personalizaciones y subtotales del pedido. | [Ítem de Pedido](../../herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md) |
 | Producto | Proporcionar los datos y precios de los productos. | [Producto](../../herramientas-agile/tarjetas-crc/03-tarjeta-crc-producto.md) |
-| Personalizacion_item | Representar las personalizaciones y sus costos adicionales. | [Personalización de Ítem](../../herramientas-agile/tarjetas-crc/04-tarjeta-crc-personalizacion-item.md) |
+| PersonalizacionItem | Representar las personalizaciones y sus costos adicionales. | [Personalización de Ítem](../../herramientas-agile/tarjetas-crc/04-tarjeta-crc-personalizacion-item.md) |
 | Pago | Administrar los importes, medios de pago y ajustes económicos. | [Pago](../../herramientas-agile/tarjetas-crc/05-tarjeta-crc-pago.md) |
-| ProcesadorPago | Validar el medio de pago seleccionado. | Componente de apoyo del caso de uso |
-| Historial_pago | Conservar los movimientos económicos asociados a un pago. | [Historial de Pago](../../herramientas-agile/tarjetas-crc/10-tarjeta-crc-historial-pago.md) |
-| Historial_cambio_pedido | Registrar los cambios realizados sobre un pedido. | [Historial de Cambio de Pedido](../../herramientas-agile/tarjetas-crc/12-tarjeta-crc-historial-cambio-pedido.md) |
+| ProcesadorPago | Validar el medio de pago seleccionado y procesar el cobro adicional (única responsable de la validación). | [Procesador Pago](../../herramientas-agile/tarjetas-crc/18-tarjeta-crc-procesador-pago.md) |
+| HistorialPago | Conservar los movimientos económicos asociados a un pago. | [Historial de Pago](../../herramientas-agile/tarjetas-crc/10-tarjeta-crc-historial-pago.md) |
+| HistorialCambioPedido | Registrar los cambios realizados sobre un pedido. | [Historial de Cambio de Pedido](../../herramientas-agile/tarjetas-crc/12-tarjeta-crc-historial-cambio-pedido.md) |
+| EstadoPedido | Definir el conjunto cerrado de estados del ciclo de vida del pedido | [21-tarjeta-crc-estado-pedido.md](../../herramientas-agile/tarjetas-crc/21-tarjeta-crc-estado-pedido.md) |
 
 **Relaciones UML:**
 
@@ -173,17 +168,18 @@ No se representa la destrucción explícita de objetos persistentes. Los cambios
 |---|---|---|
 | Herencia | UsuarioMostrador → Usuario | UsuarioMostrador especializa a Usuario y hereda sus características generales. |
 | Dependencia | UsuarioMostrador → PantallaPedidos | El actor utiliza la interfaz para modificar pedidos. |
-| Dependencia | PantallaPedidos → Pedido | La interfaz consulta y solicita operaciones sobre el pedido. |
-| Dependencia | PantallaPedidos → Pago | La interfaz participa en la gestión de ajustes económicos. |
-| Dependencia | Pago → ProcesadorPago | El pago utiliza el procesador para validar el medio seleccionado. |
-| Composición | Pedido → Item_pedido | Los ítems forman parte del pedido y dependen de él. |
-| Asociación | Item_pedido → Producto | Cada ítem corresponde a un producto. |
-| Composición | Item_pedido → Personalizacion_item | Las personalizaciones pertenecen al ítem correspondiente. |
-| Asociación | Pedido → Pago | Un pedido puede tener pagos asociados. |
-| Asociación | Pago → Historial_pago | Los movimientos económicos se relacionan con el pago correspondiente. |
-| Asociación | Pedido → Historial_cambio_pedido | El pedido conserva registros de sus modificaciones. |
-| Asociación | Historial_pago → Usuario | Permite identificar al usuario responsable del movimiento. |
-| Asociación | Historial_cambio_pedido → Usuario | Permite identificar al usuario responsable de la modificación. |
+| Dependencia | PantallaPedidos → ServicioPedidos | La interfaz delega en el servicio todas las operaciones de la modificación. |
+| Dependencia | ServicioPedidos → Pedido | El servicio consulta el estado y aplica los cambios sobre el pedido. |
+| Dependencia | ServicioPedidos → Pago | El servicio calcula la diferencia y registra el ajuste sobre el pago original. |
+| Dependencia | ServicioPedidos → ProcesadorPago | El servicio valida el medio de pago y procesa el cobro adicional mediante el procesador. |
+| Composición | Pedido → ItemPedido | Los ítems forman parte del pedido y dependen de él. |
+| Asociación | ItemPedido → Producto (0..* a 0..1) | Cada ítem referencia un producto o un combo, como en el diagrama final. |
+| Composición | ItemPedido → PersonalizacionItem | Las personalizaciones pertenecen al ítem correspondiente. |
+| Asociación | Pedido — Pago (1 a 1) | Cada pedido tiene un único pago original; los ajustes no crean pagos nuevos (política de pagos). |
+| Asociación | Pago → HistorialPago (1 a 0..*) | Los cobros adicionales (`AJUSTE`) y las devoluciones (`DEVOLUCION`) se registran como movimientos del pago original. |
+| Asociación | Pedido → HistorialCambioPedido | El pedido conserva registros de sus modificaciones. |
+| Asociación | HistorialPago → Usuario | Permite identificar al usuario responsable del movimiento. |
+| Asociación | HistorialCambioPedido → Usuario | Permite identificar al usuario responsable de la modificación. |
 
 
 
@@ -193,88 +189,80 @@ No se representa la destrucción explícita de objetos persistentes. Los cambios
 
     INICIO Modificar Pedido
 
-        // El Usuario de Mostrador solicita modificar un pedido.
-        pedido = interfaz.buscarPedido(numeroOReferencia)
+        // El Usuario de Mostrador busca el pedido; la pantalla delega en ServicioPedidos.
+        pedido = ServicioPedidos.buscarPedido(numeroOReferencia)
 
         SI pedido == NULL
             Retornar "Pedido inexistente"
         FIN SI
 
         // Se verifica que el pedido permita modificaciones.
-        estado = pedido.verificarEstado()
+        estado = ServicioPedidos.consultarEstado(numeroPedido)
+            // ServicioPedidos obtiene el estado con pedido.obtenerEstado()
 
         SI estado != RECIBIDO
             Retornar "No se permite modificar el pedido"
         FIN SI
 
-        // Se preparan los cambios solicitados.
-        pedido.prepararModificacion(listaCambios)
-        pedido.prepararPersonalizaciones(listaPersonalizaciones)
+        // Se preparan los cambios de productos y cantidades.
+        ServicioPedidos.modificarItems(numeroPedido, listaCambios)
+            // pedido.prepararModificacion(listaCambios)
+            //   PARA CADA item modificado: item.modificarCantidadYPrecio(cantidad, precioUnitario)
 
-        PARA CADA item EN pedido.items
-            item.modificarCantidadYPrecio()
-            item.actualizarPersonalizaciones()
-            item.recalcularPrecio()
-        FIN PARA
+        // Se preparan los cambios de personalización y se recalculan los subtotales.
+        ServicioPedidos.modificarPersonalizaciones(numeroPedido, listaPersonalizaciones)
+            // pedido.prepararPersonalizaciones(listaPersonalizaciones)
+            //   PARA CADA item afectado:
+            //     item.actualizarPersonalizaciones(listaPersonalizaciones)
+            //     subtotal = item.calcularSubtotal(cantidad, precioBase, costosAdicionales)
 
         // No se permite confirmar un pedido sin ítems.
         SI pedido.items está vacío
             Retornar "El pedido debe tener al menos un ítem"
         FIN SI
 
-        totalNuevo = SUMAR subtotales de pedido.items
+        totalAnterior = total registrado antes de la modificación
+        totalActualizado = pedido.obtenerTotal()
 
-        // Se consulta el pago anterior, si existe.
-        pagoOriginal = pago.consultarPagoOriginal()
-
-        diferencia = 0
-
-        SI pagoOriginal existe
-
-            diferencia = pago.calcularDiferencia(
-                totalNuevo, pagoOriginal.monto
-            )
-
-            SI diferencia != 0
-
-                medio = interfaz.seleccionarMedioPago()
-                valido = procesadorPago.validarMedioPago(medio)
-
-                SI valido == FALSO
-                    Descartar cambios pendientes
-                    Retornar "Medio de pago inválido"
-                FIN SI
-
-            FIN SI
-
-        FIN SI
+        // Todo pedido registrado tiene un único pago original (CU01).
+        pagoOriginal = pedido.obtenerPagoOriginal()
+        diferencia = pagoOriginal.calcularDiferencia(totalAnterior, totalActualizado)
 
         // Antes de confirmar, se vuelve a validar el estado.
-        estadoActual = pedido.verificarEstadoAlConfirmar()
+        estadoActual = ServicioPedidos.consultarEstado(numeroPedido)
 
         SI estadoActual != RECIBIDO
-            Descartar cambios y ajustes pendientes
+            Descartar cambios pendientes
             Retornar "El pedido cambió de estado"
         FIN SI
 
-        // Se actualiza el pedido conservando su identificador.
-        pedido.actualizarPedido()
+        // Ajuste económico sobre el pago original (sin crear pagos nuevos).
+        SI diferencia != 0
 
-        // Se registra el ajuste económico correspondiente.
-        SI pagoOriginal existe Y diferencia > 0
+            resultado = ServicioPedidos.seleccionarMedioPago(medioPago)
+                // ProcesadorPago.validarMedioPago(medioPago) es el único validador
 
-            pago.registrarCobroAdicional(diferencia)
-            historialPago.registrarMovimiento()
+            SI resultado es inválido
+                Descartar cambios pendientes
+                Retornar "Medio de pago inválido"
+            FIN SI
 
-        SINO SI pagoOriginal existe Y diferencia < 0
-
-            pago.registrarDevolucion(ABS(diferencia))
-            historialPago.registrarMovimiento()
+            ServicioPedidos.registrarAjustePago(numeroPedido, medioPago, diferencia, usuario)
+                // SI diferencia > 0:
+                //   ProcesadorPago.procesarCobro(medioPago, diferencia)
+                //   pagoOriginal.registrarCobroAdicional(medioPago, diferencia)
+                //   historialPago.registrarMovimiento(pagoOriginal, AJUSTE, diferencia, motivo, usuario)
+                // SINO (diferencia < 0):
+                //   pagoOriginal.registrarDevolucion(medioPago, diferencia)
+                //   historialPago.registrarMovimiento(pagoOriginal, DEVOLUCION, diferencia, motivo, usuario)
 
         FIN SI
 
-        // Se conserva el historial de modificaciones.
-        historialCambio.registrarCambioPedido()
+        // Se actualiza el pedido conservando su identificador y se registra el historial.
+        ServicioPedidos.confirmarModificacion(numeroPedido, usuario)
+            // pedido.actualizarPedido(listaItems, totalActualizado)
+            // historialCambios.registrarCambioPedido(pedido, campo, valorAnterior, valorNuevo, usuario)
+            //   para "items", "personalizaciones" y "total"
 
         Retornar "Pedido modificado correctamente"
 

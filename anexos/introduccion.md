@@ -29,7 +29,7 @@ Representación visual:
 |               Pedido               |
 +------------------------------------+
 | - fecha: Date                      |
-| - estado: Estado_pedido            |
+| - estado: EstadoPedido            |
 | - prioritario: boolean
 | - numeroPedido: int   
 | - referenciaRetiro: String         |
@@ -52,7 +52,7 @@ Representación visual:
 +------------------------------------+
 | 
 | - fecha: Date                      |
-| - estado: Estado_pedio             | <---- Atributos ocultos (Privados)     
+| - estado: EstadoPedido             | <---- Atributos ocultos (Privados)     
 | - proritario: boolean
 | - numeroPedido: int  
 | - referenciaRetiro: string         |
@@ -172,12 +172,12 @@ Permite al Usuario de Mostrador registrar un nuevo pedido, seleccionando product
 1. El Usuario de Mostrador inicia la creación de un nuevo pedido.
 2. El sistema genera automáticamente un número de pedido único y registra la fecha y hora actual.
 3. El usuario ingresa una referencia o nombre para el retiro (ej. "Matías") para identificar la comanda del pedido.
-4. El usuario selecciona ítems de catálogo (Producto individual o Combo predefinido con su precio propio) y especifica las cantidades, agregándolos al pedido como ítems de línea (Item_pedido).
-5. El usuario agrega las personalizaciones (Personalizacion_item) a cada Item_pedido, indicando ingredientes a quitar o adicionales a agregar con su costo extra.
-6. El sistema calcula en tiempo real el subtotal de cada Item_pedido (precio base de catálogo del Producto/Combo + suma de adicionales de personalización) por su cantidad, y obtiene el total general del pedido derivado de la suma de dichos subtotales.
+4. El usuario selecciona ítems de catálogo (Producto individual o Combo predefinido con su precio propio) y especifica las cantidades, agregándolos al pedido como ítems de línea (ItemPedido).
+5. El usuario agrega las personalizaciones (PersonalizacionItem) a cada ItemPedido, indicando ingredientes a quitar o adicionales a agregar con su costo extra.
+6. El sistema calcula en tiempo real el subtotal de cada ItemPedido (precio base de catálogo del Producto/Combo + suma de adicionales de personalización) por su cantidad, y obtiene el total general del pedido derivado de la suma de dichos subtotales.
 7. El usuario selecciona y valida el medio de pago permitido (EFECTIVO o TRANSFERENCIA) ingresado para abonar el monto total.
 8. El sistema crea y asocia la entidad Pago (monto, método de pago y fecha/hora) al pedido, manteniendo la relación 1 a 1 para la auditoría de caja.
-9. El sistema congela y guarda el precio histórico unitario de cada Item_pedido y sus personalizaciones, y establece el estado del pedido como RECIBIDO.
+9. El sistema congela y guarda el precio histórico unitario de cada ItemPedido y sus personalizaciones, y establece el estado del pedido como RECIBIDO.
 10. El sistema envía automáticamente el pedido a la pantalla de cocina.
 
 __Flujos Alternativos__
@@ -318,7 +318,7 @@ __Flujo principal de eventos:__
 1. El actor accede a la pantalla de monitoreo de pedidos.
 2. El sistema obtiene los pedidos activos registrados.
 3. El sistema muestra los pedidos agrupados o filtrados según su estado.
-4. El sistema obtiene los pedidos en los estados activos (RECIBIDO, EN_PREPARACION y LISTO), diferenciando la vista según el actor (Cocina visualiza RECIBIDO y EN_PREPARACION; Mostrador visualiza todos los activos para el seguimiento y entrega).
+4. El sistema obtiene los pedidos en los estados activos (RECIBIDO, EN_PREPARACION y LISTO), diferenciando la vista según el actor (Cocina visualiza RECIBIDO y EN_PREPARACION; Mostrador visualiza únicamente los pedidos LISTO para su entrega).
 5. El sistema lee el atributo de dominio de prioridad del pedido (prioritario = true) y ordena la lista anteponiendo los pedidos urgentes sobre el resto dentro de su mismo estado, garantizando que el orden de atención en cocina cambie sin alterar la máquina de estados del pedido.
 6. El actor consulta la información de los pedidos según sus necesidades.
 7. El sistema garantiza que cada pedido figure en un único estado a la vez.
