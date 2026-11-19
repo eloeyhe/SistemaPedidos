@@ -19,10 +19,10 @@ Todos los aportes fueron revisados por el Coordinador y DevOps y mergeados en `d
 
 | Nombre completo | Rol asignado en esta entrega | Usuario GitHub |
 |-----------------|------------------------------|----------------|
-| | Especialista en Patrón de Diseño Creacional | |
-| | Especialista en Patrón de Diseño Estructural | |
-| | Especialista en Patrón de Diseño de Comportamiento | |
-| | Coordinador y DevOps | |
+| Leandro Dominguez | Especialista en Patrón de Diseño Creacional | @Leandro2107 |
+| Ignacio Velesquen | Especialista en Patrón de Diseño Estructural | @nachovelesquen7-rgb |
+| Eloy Eyheramendy | Especialista en Patrón de Diseño de Comportamiento | @eloeyhe |
+| Santiago Marquez | Coordinador y DevOps | @santimarM |
 
 ---
 
