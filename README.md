@@ -25,7 +25,7 @@ Este proyecto tiene como objetivo el diseño orientado a objetos de una aplicaci
   - [Análisis Funcional por Caso de Uso](anexos/analisis-funcional/analisis_casos_uso.md)
   - [Patrones de Diseño](anexos/patrones-diseno/patrones_diseno.md)
 - [Diagramas UML](diagramas/diagramasUML.md)
-  - [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_de_clases.md)
+  - [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_clases.md)
   - [Diagramas de Casos de Uso](diagramas/02-casos-de-uso/diagramas_de_casos_de_uso.md)
   - [Escenarios de Casos de Uso](diagramas/03-escenarios-casos-de-uso/escenarios_de_casos_de_uso.md)
   - [Diagramas de Actividades](diagramas/04-diagramas-actividades/diagramas_de_actividades.md)
@@ -42,7 +42,7 @@ En esta entrega se aplica un patrón de diseño GoF de cada categoría (creacion
   - [Patrón de Diseño Creacional – «PATRON_CREACIONAL»](anexos/patrones-diseno/patron-de-diseno-creacional.md)
   - [Patrón de Diseño Estructural – «PATRON_ESTRUCTURAL»](anexos/patrones-diseno/patron-de-diseno-estructural.md)
   - [Patrón de Diseño de Comportamiento – «PATRON_COMPORTAMIENTO»](anexos/patrones-diseno/patron-de-diseno-de-comportamiento.md)
-- [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_de_clases.md) (incluye los tres diagramas de patrones)
+- [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_clases.md) (incluye los tres diagramas de patrones)
 - [Registro de uso de IA - Segundo Parcial](ia/segundo-parcial/)
 
 ## Actividad Obligatoria N°4 - Diagrama de Clases
@@ -55,7 +55,7 @@ En esta entrega se profundiza el modelado orientado a objetos del Sistema de Ped
   - [Caso de Uso 3 - Cancelar Pedido](anexos/analisis-funcional/03-caso-de-uso-cancelar-pedido.md)
   - [Caso de Uso 4 - Cambiar Estado de Pedido](anexos/analisis-funcional/04-caso-de-uso-cambiar-estado-de-pedido.md)
   - [Caso de Uso 5 - Consultar Pedidos Activos](anexos/analisis-funcional/05-caso-de-uso-consultar-pedidos-activos.md)
-- [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_de_clases.md)
+- [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_clases.md)
 - [Los Cuatro Pilares del Paradigma Orientado a Objetos](anexos/analisis-funcional/pilares-poo.md)
 - [Pseudocódigo - Happy Path Global del Sistema](anexos/analisis-funcional/happy-path-global.md)
 - [Registro de uso de IA - A4](ia/a4/)

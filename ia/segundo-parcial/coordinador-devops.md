@@ -14,8 +14,12 @@
 
 - **Correcciones de la Actividad Obligatoria N°4 (tarea crítica):** se resolvieron todos los Request Changes del docente sobre `release/actividad-obligatoria-4` mediante ramas `fix/` (PRs #266 a #273). La release se aprobó con LGTM y se mergeó a `master` (PR #265).
 - **Backport a `develop`:** se creó `backport/release-actividad-obligatoria-4` desde `master` actualizada y se integró en `develop` (PR #274, aprobada por otro integrante). Así `develop` quedó idéntica a `master` como base del Segundo Parcial.
-- **Estructura de la Parte 1:** se comparó el repositorio contra el árbol de archivos esperados de la consigna. Se renombraron `01_boceto_inicial.png` a `01-boceto-inicial.png` y `ia/a2/diseniador-tarjetas-crc.md` a `disenador-tarjetas-crc.md`, actualizando sus referencias.
-- **Índices de navegación:** se creó `anexos/patrones-diseno/patrones_diseno.md` y se actualizaron `diagramas/01-diagrama-clases/diagramas_de_clases.md`, `diagramas/diagramasUML.md`, `anexos/anexos.md` y `README.md` con los tres patrones de diseño.
+- **Estructura de la Parte 1:** se comparó el repositorio, archivo por archivo, contra el árbol de archivos esperados de la consigna y se corrigió lo que no coincidía:
+  - `01_boceto_inicial.png` → `01-boceto-inicial.png` e `ia/a2/diseniador-tarjetas-crc.md` → `disenador-tarjetas-crc.md` (PR #276).
+  - Los cinco escenarios terminaban en `-01`; se renumeraron del `-01` al `-05` en secuencia por caso de uso, igual que los demás diagramas.
+  - El índice de diagramas de clases se renombró a `diagramas_clases.md`, que es el nombre que usan la estructura final del proyecto y las tareas del rol de Coordinador y DevOps.
+  - Se tuvieron en cuenta las observaciones del docente de la Actividad Obligatoria N°4: títulos literales de las PRs en el changelog, nombres de clase en PascalCase, tarjetas CRC para todas las clases usadas, ningún archivo fuera de la estructura pedida, issues cerradas y solo las ramas pedidas al momento de la entrega.
+- **Índices de navegación:** se creó `anexos/patrones-diseno/patrones_diseno.md` y se actualizaron `diagramas/01-diagrama-clases/diagramas_clases.md`, `diagramas/diagramasUML.md`, `anexos/anexos.md` y `README.md` con los tres patrones de diseño.
 
 ---
 
