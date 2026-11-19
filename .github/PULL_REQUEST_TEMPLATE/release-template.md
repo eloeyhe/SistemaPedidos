@@ -29,7 +29,7 @@ Todos los aportes fueron revisados por el Coordinador y DevOps y mergeados en `d
 ## 📂 Archivos y entregables principales incluidos
 
 - `anexos/patrones-diseno/`: índice `patrones_diseno.md` y un documento explicativo por categoría.
-- `diagramas/01-diagrama-clases/`: diagramas `.puml` y `.png` de los tres patrones e índice `diagramas_clases.md` actualizado.
+- `diagramas/01-diagrama-clases/`: diagramas `.puml` y `.png` de los tres patrones e índice `diagramas_de_clases.md` actualizado.
 - `ia/segundo-parcial/`: registro del uso de IA de cada rol.
 - `README.md`, `anexos/anexos.md`, `diagramas/diagramasUML.md` y `changelog.md` actualizados.
 
