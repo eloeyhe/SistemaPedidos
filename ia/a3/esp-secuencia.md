@@ -1,5 +1,7 @@
 # Registro de Uso de IA - Especialista en Diagramas de Secuencia
 
+> **Nota de numeración de escenarios (Segundo Parcial):** para respetar la estructura de la consigna, los escenarios se renumeraron en secuencia por caso de uso: `03-tomar-pedido-registro-pedido-01.md`, `03-modificar-pedido-modificacion-recibido-02.md`, `03-cancelar-pedido-cancelacion-antes-entrega-03.md`, `03-cambiar-estado-pedido-avance-preparacion-04.md` y `03-consultar-pedidos-activos-prioridad-urgentes-05.md`. Los prompts que aparecen en bloques de código se conservan literales y por eso pueden mencionar el nombre anterior, terminado en `-01`.
+
 En este documento se registra el proceso de colaboración con **GitHub Copilot** para la generación de los 5 diagramas de secuencia correspondientes a los escenarios de casos de uso definidos en la Actividad N°2.
 
 ---
@@ -44,7 +46,7 @@ Por favor, cumple estrictamente con los siguientes requisitos técnicos para el 
 
 Para otorgar contexto preciso a GitHub Copilot, se mantuvieron abiertos y referenciados los siguientes archivos de la Actividad N°2:
 
-- `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-01.md`
+- `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-02.md`
 - `herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md`
 - `herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md`
 - `herramientas-agile/tarjetas-crc/03-tarjeta-crc-producto.md`
@@ -78,7 +80,7 @@ Por favor, cumple estrictamente con los siguientes requisitos técnicos para el 
 
 Para otorgar contexto preciso a GitHub Copilot, se mantuvieron abiertos y referenciados los siguientes archivos de la Actividad N°2:
 
-* `diagramas/03-escenarios-casos-de-uso/03-cancelar-pedido-cancelacion-antes-entrega-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-cancelar-pedido-cancelacion-antes-entrega-03.md`
 * `herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md`
 * `herramientas-agile/tarjetas-crc/11-tarjeta-crc-auditoria-pedido.md`
 * `herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md`
@@ -106,7 +108,7 @@ Por favor, cumple estrictamente con los siguientes requisitos técnicos para el 
 
 Para otorgar contexto preciso a GitHub Copilot, se mantuvieron abiertos y referenciados los siguientes archivos de la Actividad N°2:
 
-* `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-04.md`
 * `herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md`
 * `herramientas-agile/tarjetas-crc/12-tarjeta-crc-historial-cambio-pedido.md`
 * `herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md`
@@ -134,7 +136,7 @@ Por favor, cumple estrictamente con los siguientes requisitos técnicos para el 
 
 Para otorgar contexto preciso a GitHub Copilot, se mantuvieron abiertos y referenciados los siguientes archivos de la Actividad N°2:
 
-* `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-05.md`
 * `herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md`
 * `herramientas-agile/tarjetas-crc/13-tarjeta-crc-usuario.md`
 * `herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md`
