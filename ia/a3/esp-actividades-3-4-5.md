@@ -11,17 +11,17 @@
 ### CU03 - Cancelar Pedido
 
 - `diagramas/02-casos-de-uso/02-caso-uso-cancelar-pedido-03.puml`
-- `diagramas/03-escenarios-casos-de-uso/03-cancelar-pedido-cancelacion-antes-entrega-01.md`
+- `diagramas/03-escenarios-casos-de-uso/03-cancelar-pedido-cancelacion-antes-entrega-03.md`
 
 ### CU04 - Cambiar Estado de Pedido
 
 - `diagramas/02-casos-de-uso/02-caso-uso-cambiar-estado-pedido-04.puml`
-- `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-01.md`
+- `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-04.md`
 
 ### CU05 - Consultar Pedidos Activos
 
 - `diagramas/02-casos-de-uso/02-caso-uso-consultar-pedidos-activos-05.puml`
-- `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-01.md`
+- `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-05.md`
 
 
 ---

@@ -4,6 +4,8 @@
 
 > **Nota de vigencia de nombres (RC10):** a partir de las correcciones de la release de A4 (PRs #266 y #269), las clases del modelo se nombran en PascalCase: `ItemPedido`, `PersonalizacionItem`, `EstadoPedido`, `MetodoPago`, `TipoMovimiento`, `HistorialPago`, `HistorialCambioPedido` y `AuditoriaPedido`. El texto de este registro usa esos nombres. Los prompts y los outputs de la IA que aparecen en bloques de código se conservan literales, porque documentan lo que se pidió y lo que devolvió la IA en ese momento: las variantes con guion bajo que figuran ahí (por ejemplo `Item_pedido` o `Estado_pedido`) son **contexto histórico no vigente**.
 
+> **Nota de numeración de escenarios (Segundo Parcial):** para respetar la estructura de la consigna, los escenarios se renumeraron en secuencia por caso de uso: `03-tomar-pedido-registro-pedido-01.md`, `03-modificar-pedido-modificacion-recibido-02.md`, `03-cancelar-pedido-cancelacion-antes-entrega-03.md`, `03-cambiar-estado-pedido-avance-preparacion-04.md` y `03-consultar-pedidos-activos-prioridad-urgentes-05.md`. Los prompts que aparecen en bloques de código se conservan literales y por eso pueden mencionar el nombre anterior, terminado en `-01`.
+
 ---
 
 
@@ -66,7 +68,7 @@ No inventes clases ni funcionalidades que no estén justificadas por los documen
 
 - `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`
 - `diagramas/02-casos-de-uso/02-caso-uso-modificar-pedido-02.puml`
-- `03-modificar-pedido-modificacion-recibido-01.md`
+- `03-modificar-pedido-modificacion-recibido-02.md`
 - `diagramas/04-diagramas-actividades/04-actividad-modificar-pedido-02.puml`
 - `05-secuencia-modificar-pedido-modificacion-recibido-02.puml`
 - `herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md`
@@ -82,7 +84,7 @@ No inventes clases ni funcionalidades que no estén justificadas por los documen
 ### CU03 — Cancelar Pedido
 
 - `diagramas/02-casos-de-uso/02-caso-uso-cancelar-pedido-03.puml`
-- `03-cancelar-pedido-cancelacion-antes-entrega-01.md`
+- `03-cancelar-pedido-cancelacion-antes-entrega-03.md`
 - `diagramas/04-diagramas-actividades/04-actividad-cancelar-pedido-03.puml`
 - `05-secuencia-cancelar-pedido-cancelacion-antes-entrega-03.puml`
 - `herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md`

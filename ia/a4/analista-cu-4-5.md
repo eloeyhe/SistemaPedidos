@@ -2,6 +2,8 @@
 
 > **Nota de vigencia de nombres (RC10):** a partir de las correcciones de la release de A4 (PRs #266 y #269), las clases del modelo se nombran en PascalCase: `ItemPedido`, `PersonalizacionItem`, `EstadoPedido`, `MetodoPago`, `TipoMovimiento`, `HistorialPago`, `HistorialCambioPedido` y `AuditoriaPedido`. El texto de este registro usa esos nombres. Los prompts y los outputs de la IA que aparecen en bloques de código se conservan literales, porque documentan lo que se pidió y lo que devolvió la IA en ese momento: las variantes con guion bajo que figuran ahí (por ejemplo `Item_pedido` o `Estado_pedido`) son **contexto histórico no vigente**.
 
+> **Nota de numeración de escenarios (Segundo Parcial):** para respetar la estructura de la consigna, los escenarios se renumeraron en secuencia por caso de uso: `03-tomar-pedido-registro-pedido-01.md`, `03-modificar-pedido-modificacion-recibido-02.md`, `03-cancelar-pedido-cancelacion-antes-entrega-03.md`, `03-cambiar-estado-pedido-avance-preparacion-04.md` y `03-consultar-pedidos-activos-prioridad-urgentes-05.md`. Los prompts que aparecen en bloques de código se conservan literales y por eso pueden mencionar el nombre anterior, terminado en `-01`.
+
 Este documento registra el proceso de generación asistida con **GitHub Copilot Agent Mode** y la posterior revisión y refinamiento manual para el diseño de los diagramas de clases específicos correspondientes al **Caso de Uso 4 (Cambiar Estado de Pedido)** y al **Caso de Uso 5 (Consultar Pedidos Activos)** en la Actividad Obligatoria N°4.
 
 ---
@@ -13,7 +15,7 @@ Para la generación del diagrama `diagramas/01-diagrama-clases/04-clases-cambiar
 
 - **Boceto inicial de clases (A1):** `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`
 - **Diagrama de caso de uso (A2):** `diagramas/02-casos-de-uso/02-caso-uso-cambiar-estado-pedido-04.puml`
-- **Escenario de caso de uso (A2):** `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-01.md`
+- **Escenario de caso de uso (A2):** `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-04.md`
 - **Diagrama de actividades (A3):** `diagramas/04-diagramas-actividades/04-actividad-cambiar-estado-pedido-04.puml`
 - **Diagrama de secuencia (A3):** `diagramas/05-diagramas-secuencia/05-secuencia-cambiar-estado-pedido-avance-preparacion-04.puml`
 - **Tarjetas CRC involucradas (A2):**
@@ -56,7 +58,7 @@ Para la generación del diagrama `diagramas/01-diagrama-clases/05-clases-consult
 
 - **Boceto inicial de clases (A1):** `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`
 - **Diagrama de caso de uso (A2):** `diagramas/02-casos-de-uso/02-caso-uso-consultar-pedidos-activos-05.puml`
-- **Escenario de caso de uso (A2):** `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-01.md`
+- **Escenario de caso de uso (A2):** `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-05.md`
 - **Diagrama de actividades (A3):** `diagramas/04-diagramas-actividades/04-actividad-consultar-pedidos-activos-05.puml`
 - **Diagrama de secuencia (A3):** `diagramas/05-diagramas-secuencia/05-secuencia-consultar-pedidos-activos-prioridad-urgentes-05.puml`
 - **Tarjetas CRC involucradas (A2):**

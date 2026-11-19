@@ -96,7 +96,7 @@ No modifiques ningún archivo.
   Primero se calcula el subtotal utilizando el precio vigente del catálogo.
   Luego, al confirmar el pedido, se congela y guarda el precio histórico del ítem y sus personalizaciones.
 
-* Falta explicitar el registro histórico de los ajustes de pago en 03-modificar-pedido-modificacion-recibido-01.md
+* Falta explicitar el registro histórico de los ajustes de pago en 03-modificar-pedido-modificacion-recibido-02.md
   Se registra la diferencia de pago, pero falta aclarar que el pago original se conserva y cada cobro adicional o devolución queda registrado por separado.
   
 * No hay una sección explícita de flujos alternativos en los escenarios
@@ -111,7 +111,7 @@ No modifiques ningún archivo.
     Primero se calcula el subtotal utilizando el precio vigente del catálogo.
     Luego, al confirmar el pedido, se congela y guarda el precio histórico del ítem y sus personalizaciones.
 
-* Falta explicitar el registro histórico de los ajustes de pago en 03-modificar-pedido-modificacion-recibido-01.md
+* Falta explicitar el registro histórico de los ajustes de pago en 03-modificar-pedido-modificacion-recibido-02.md
    En el paso 7, se registra la diferencia de pago, pero falta aclarar que el pago original se conserva y cada cobro adicional o devolución queda registrado por separado.
 
 * **Sugerencias descartadas o modificadas:** 

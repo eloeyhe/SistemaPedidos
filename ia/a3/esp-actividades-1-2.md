@@ -15,7 +15,7 @@
 - `diagramas/02-casos-de-uso/02-caso-uso-tomar-pedido-01.puml`: actores, límite del sistema y relaciones `<<include>>`/`<<extend>>` del CU1.
 - `diagramas/02-casos-de-uso/02-caso-uso-modificar-pedido-02.puml`: actores, límite del sistema y relaciones `<<include>>`/`<<extend>>` del CU2.
 - `diagramas/03-escenarios-casos-de-uso/03-tomar-pedido-registro-pedido-01.md`: pasos del flujo principal, precondiciones y aspectos sobresalientes del CU1.
-- `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-01.md`: pasos del flujo principal, precondiciones y aspectos sobresalientes del CU2.
+- `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-02.md`: pasos del flujo principal, precondiciones y aspectos sobresalientes del CU2.
 - `ACTIVIDAD_OBLIGATORIA_N_3.pdf`: consigna de la actividad, adjuntada al chat (requisitos mínimos, nomenclatura de archivos y formato del índice).
 
 ---
