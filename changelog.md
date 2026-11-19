@@ -4,6 +4,13 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [Segundo Parcial]
+
+### Changed
+
+- [backport/release-actividad-obligatoria-4] Backport release/actividad-obligatoria-4 hacia develop
+  PR: [#274](https://github.com/eloeyhe/SistemaPedidos/pull/274) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added
