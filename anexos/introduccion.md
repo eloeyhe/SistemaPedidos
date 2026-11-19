@@ -342,7 +342,7 @@ __Postcondiciones:__
 
 Gracias a los requisitos funcionales, no funcionales y a los casos de uso, podremos realizar un boceto inicial del diseño de clases.
 
-![imagen del diseño](../diagramas/01-diagrama-clases/01_boceto_inicial.png)
+![imagen del diseño](../diagramas/01-diagrama-clases/01-boceto-inicial.png)
 
 
 
