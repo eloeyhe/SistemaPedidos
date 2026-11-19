@@ -17,11 +17,33 @@ Este proyecto tiene como objetivo el diseño orientado a objetos de una aplicaci
 | Eloy Eyheramendy  | 164391    | eloeyhe           |
 | Santiago Marquez  | 154076    | santimarM           |
 
-# Diagramas y Diseños
+# Índices del proyecto
 
 - [Anexos](anexos/anexos.md)
+  - [Introducción al Diseño Orientado a Objetos](anexos/introduccion.md)
+  - [Principios SOLID](anexos/principios-solid/principios_solid.md)
+  - [Análisis Funcional por Caso de Uso](anexos/analisis-funcional/analisis_casos_uso.md)
+  - [Patrones de Diseño](anexos/patrones-diseno/patrones_diseno.md)
 - [Diagramas UML](diagramas/diagramasUML.md)
+  - [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_de_clases.md)
+  - [Diagramas de Casos de Uso](diagramas/02-casos-de-uso/diagramas_de_casos_de_uso.md)
+  - [Escenarios de Casos de Uso](diagramas/03-escenarios-casos-de-uso/escenarios_de_casos_de_uso.md)
+  - [Diagramas de Actividades](diagramas/04-diagramas-actividades/diagramas_de_actividades.md)
+  - [Diagramas de Secuencia](diagramas/05-diagramas-secuencia/diagramas_de_secuencias.md)
 - [Herramientas Agile](herramientas-agile/herramientas_agile.md)
+  - [Tarjetas CRC](herramientas-agile/tarjetas-crc/tarjetas-crc.md)
+- [Changelog](changelog.md)
+
+## Segundo Parcial - Patrones de Diseño
+
+En esta entrega se aplica un patrón de diseño GoF de cada categoría (creacional, estructural y de comportamiento) sobre el diagrama de clases final del Sistema de Pedidos, para que el diseño sea más fácil de modificar, extender y mantener. Cada patrón tiene su documento explicativo con el problema detectado, la motivación, el diagrama de clases en PlantUML y la justificación técnica. Además, se reentregaron las Actividades Obligatorias N°3 y N°4 con todas las correcciones del docente.
+
+- [Anexo - Patrones de Diseño](anexos/patrones-diseno/patrones_diseno.md)
+  - [Patrón de Diseño Creacional – «PATRON_CREACIONAL»](anexos/patrones-diseno/patron-de-diseno-creacional.md)
+  - [Patrón de Diseño Estructural – «PATRON_ESTRUCTURAL»](anexos/patrones-diseno/patron-de-diseno-estructural.md)
+  - [Patrón de Diseño de Comportamiento – «PATRON_COMPORTAMIENTO»](anexos/patrones-diseno/patron-de-diseno-de-comportamiento.md)
+- [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_de_clases.md) (incluye los tres diagramas de patrones)
+- [Registro de uso de IA - Segundo Parcial](ia/segundo-parcial/)
 
 ## Actividad Obligatoria N°4 - Diagrama de Clases
 
