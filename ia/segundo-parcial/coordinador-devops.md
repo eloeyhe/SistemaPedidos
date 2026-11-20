@@ -18,8 +18,13 @@
   - `01_boceto_inicial.png` → `01-boceto-inicial.png` e `ia/a2/diseniador-tarjetas-crc.md` → `disenador-tarjetas-crc.md` (PR #276).
   - Los cinco escenarios terminaban en `-01`; se renumeraron del `-01` al `-05` en secuencia por caso de uso, igual que los demás diagramas (PR #281).
   - Las PRs #276 y #281 no vinculaban sus issues con `Closes`. Por eso las Issues #275 y #282 se cerraron a mano, con un comentario que apunta a la PR que las resolvió, y se borraron las ramas `fix/` ya mergeadas.
-  - El índice de diagramas de clases se mantiene como `diagramas_de_clases.md`: así figura en el árbol de la Parte 1 y es el nombre aprobado por el docente en la Actividad Obligatoria N°4 (aunque otras secciones de la consigna lo nombran `diagramas_clases.md`).
+  - El índice de diagramas de clases se mantiene como `diagramas_de_clases.md`: así figura en el árbol de la Parte 1, es el nombre aprobado en la Actividad Obligatoria N°4 y el docente lo confirmó en la consulta del 20/11 (la mención a `diagramas_clases.md` era un error de la consigna, ya corregido).
   - Se tuvieron en cuenta las observaciones del docente de la Actividad Obligatoria N°4: títulos literales de las PRs en el changelog, nombres de clase en PascalCase, tarjetas CRC para todas las clases usadas, ningún archivo fuera de la estructura pedida, issues cerradas y solo las ramas pedidas al momento de la entrega.
+- **Consulta al docente (20/11) y decisiones tomadas:**
+  - *Ramas para las correcciones de la Parte 1:* el docente indicó que van en la feature del Coordinador (`feature/coord-devops-update-docs`) y que las ramas `fix/` quedan reservadas para la release. Las PRs #276 y #281 ya se habían integrado como ramas `fix/` hacia `develop` antes de la respuesta. Como el historial no se reescribe, se dejan documentadas así, y toda corrección posterior de la Parte 1 se hace en `feature/coord-devops-update-docs`.
+  - *Matrices CLAE y análisis JAD:* el docente confirmó que quedaron en la consigna por error y que no se entregan, porque el análisis funcional de la Actividad Obligatoria N°4 ya cubre ese trabajo.
+  - *`ia/a4/analista-cu-1.md`:* se mantiene; su ausencia en el árbol era un error de tipeo de la consigna.
+  - *Code reviews:* el mínimo de 4 se cumple con las PRs de los tres especialistas más la revisión de una PR de correcciones. Además, se pidió que la PR del Coordinador también la revise con IA otro integrante, y no solo la apruebe.
 - **Índices de navegación:** se creó `anexos/patrones-diseno/patrones_diseno.md` y se actualizaron `diagramas/01-diagrama-clases/diagramas_de_clases.md`, `diagramas/diagramasUML.md`, `anexos/anexos.md` y `README.md` con los tres patrones de diseño.
 
 ---
@@ -83,9 +88,9 @@ Al final, indica la decisión sugerida para la PR (Approve o Request changes) y 
 | # | PR | Rama | Autor | Resultado |
 |---|----|------|-------|-----------|
 | 1 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-5987153385) (9 hallazgos) |
-| 2 | Pendiente | — | — | — |
-| 3 | Pendiente | — | — | — |
-| 4 | Pendiente | — | — | — |
+| 2 | Pendiente | `feature/esp-patron-creacional-add-patron-<nombre>` | @Leandro2107 | Pendiente |
+| 3 | Pendiente | `feature/esp-patron-comportamiento-add-patron-<nombre>` | @eloeyhe | Pendiente |
+| 4 | Pendiente | PR de correcciones (re-revisión de la #289 u otra PR de correcciones) | — | Pendiente |
 
 ### Code Review 1 — PR #289 (Patrón estructural Decorator)
 
