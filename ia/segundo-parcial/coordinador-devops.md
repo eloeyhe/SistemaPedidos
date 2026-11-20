@@ -60,6 +60,9 @@ Revisa especialmente:
 - Que el diagrama muestre los roles del patrón (por ejemplo Context/Strategy, Creator/Product, Component/Composite)
   con atributos tipados, métodos con parámetros y retorno, y relaciones UML correctas con multiplicidades.
 - Que el .png corresponda al .puml y que la imagen y el enlace del documento funcionen.
+- Que cada clase nueva del patrón (que no esté en 06-clases-diagrama-final.puml) tenga su tarjeta CRC en
+  herramientas-agile/tarjetas-crc/ y figure en el índice tarjetas-crc.md.
+- Que los "Closes #N" de la PR apunten a las issues del especialista para esta entrega y estén abiertas.
 - Que el registro de IA tenga el prompt en bloque de código, los archivos de contexto, los ajustes y las iteraciones.
 - Que la rama siga el formato feature/esp-patron-<categoria>-add-patron-<nombre> y que el changelog tenga la entrada
   con el título literal de la PR, la rama, el Issue y el autor con su rol.
@@ -126,3 +129,12 @@ Decisión sugerida: Request changes (los hallazgos 1 a 5 bloquean el merge).
 - Se verificó que el `.png` corresponde al `.puml`. La IA no lo había comprobado y no hubo hallazgo sobre eso.
 - Se bajó a *Baja* y se marcó como opcional el pedido de quitar del diagrama las clases que no participan del patrón: no rompe la consigna, solo la mejora.
 - Se agregó al hallazgo 5 una redacción alternativa concreta, basada en `ItemPedido.calcularSubtotal(cantidad, precioBase, costosAdicionales)` del diagrama final, para que el especialista no tenga que reinventar el problema.
+
+**Ampliación de la review 1 (20/11) — hallazgos que la primera pasada no detectó:**
+
+Al auditar el repositorio con los criterios de corrección del docente (rúbrica del rol y Request Changes de la Actividad Obligatoria N°4), se volvió a revisar la PR #289 sin código nuevo del especialista (último commit `0d5e993`). Se agregaron dos hallazgos y se publicaron como comentario en la PR:
+
+10. *Alta.* Las cuatro clases nuevas del patrón (`IElementoMenu`, línea 13; `PrecioBaseHistorico`, línea 50; `DecoradorElementoMenu`, línea 56; `DecoradorPersonalizacion`, línea 61 de `01-patron-estructural-decorator.puml`) no tienen tarjeta CRC. En la Actividad Obligatoria N°4 el docente exigió tarjeta CRC indexada y enlazada para toda clase usada en un diagrama (RC11 a RC15). Se asignaron las tarjetas 22 a 25.
+11. *Media.* La descripción de la PR incluye `Closes #236`, una issue de la Actividad Obligatoria N°4 que ya está cerrada, y no vincula la issue principal del especialista (#283).
+
+**Por qué no se detectaron en la primera pasada:** el prompt base no pedía verificar tarjetas CRC para las clases nuevas ni contrastar los `Closes` con las issues del especialista. Se agregaron esas dos verificaciones al prompt base para las reviews siguientes.
