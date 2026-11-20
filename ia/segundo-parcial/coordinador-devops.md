@@ -16,7 +16,8 @@
 - **Backport a `develop`:** se creó `backport/release-actividad-obligatoria-4` desde `master` actualizada y se integró en `develop` (PR #274, aprobada por otro integrante). Así `develop` quedó idéntica a `master` como base del Segundo Parcial.
 - **Estructura de la Parte 1:** se comparó el repositorio, archivo por archivo, contra el árbol de archivos esperados de la consigna y se corrigió lo que no coincidía:
   - `01_boceto_inicial.png` → `01-boceto-inicial.png` e `ia/a2/diseniador-tarjetas-crc.md` → `disenador-tarjetas-crc.md` (PR #276).
-  - Los cinco escenarios terminaban en `-01`; se renumeraron del `-01` al `-05` en secuencia por caso de uso, igual que los demás diagramas.
+  - Los cinco escenarios terminaban en `-01`; se renumeraron del `-01` al `-05` en secuencia por caso de uso, igual que los demás diagramas (PR #281).
+  - Las PRs #276 y #281 no vinculaban sus issues con `Closes`. Por eso las Issues #275 y #282 se cerraron a mano, con un comentario que apunta a la PR que las resolvió, y se borraron las ramas `fix/` ya mergeadas.
   - El índice de diagramas de clases se mantiene como `diagramas_de_clases.md`: así figura en el árbol de la Parte 1 y es el nombre aprobado por el docente en la Actividad Obligatoria N°4 (aunque otras secciones de la consigna lo nombran `diagramas_clases.md`).
   - Se tuvieron en cuenta las observaciones del docente de la Actividad Obligatoria N°4: títulos literales de las PRs en el changelog, nombres de clase en PascalCase, tarjetas CRC para todas las clases usadas, ningún archivo fuera de la estructura pedida, issues cerradas y solo las ramas pedidas al momento de la entrega.
 - **Índices de navegación:** se creó `anexos/patrones-diseno/patrones_diseno.md` y se actualizaron `diagramas/01-diagrama-clases/diagramas_de_clases.md`, `diagramas/diagramasUML.md`, `anexos/anexos.md` y `README.md` con los tres patrones de diseño.
@@ -66,11 +67,13 @@ INSTRUCCIONES IMPORTANTES:
 - No modifiques ningún archivo
 
 Para cada hallazgo usa esta estructura:
-HALLAZGO #<número>
+HALLAZGO #<número> — Severidad: Alta | Media | Baja
 Archivo:
 Línea:
 Problema:
 Sugerencia:
+
+Al final, indica la decisión sugerida para la PR (Approve o Request changes) y qué hallazgos la bloquean.
 ```
 
 ---
@@ -79,7 +82,42 @@ Sugerencia:
 
 | # | PR | Rama | Autor | Resultado |
 |---|----|------|-------|-----------|
-| 1 | «PR_1» | «RAMA_1» | «AUTOR_1» | «RESULTADO_1» |
-| 2 | «PR_2» | «RAMA_2» | «AUTOR_2» | «RESULTADO_2» |
-| 3 | «PR_3» | «RAMA_3» | «AUTOR_3» | «RESULTADO_3» |
-| 4 | «PR_4» | «RAMA_4» | «AUTOR_4» | «RESULTADO_4» |
+| 1 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-5987153385) (9 hallazgos) |
+| 2 | Pendiente | — | — | — |
+| 3 | Pendiente | — | — | — |
+| 4 | Pendiente | — | — | — |
+
+### Code Review 1 — PR #289 (Patrón estructural Decorator)
+
+**Prompt utilizado:** el prompt base de la sección 2, con `<CATEGORIA>` = estructural y los archivos de la PR:
+
+```text
+<CATEGORIA> = estructural
+Rama: feature/esp-patron-estructural-add-patron-decorator
+Archivos de la PR:
+- patrones-diseno/patron-de-diseño-estructural.md
+- diagramas/01-diagrama-clases/01-patron-estructural-decorator.puml y .png
+- ia/segundo-parcial/especialista-patron-estructural.md
+- changelog.md
+Compara además la ruta y el nombre de cada archivo contra la estructura de carpetas de la consigna
+y contra las Issues #283 a #288 de la PR.
+```
+
+**Output generado por la IA (resumen):**
+1. *Alta.* El anexo está en `patrones-diseno/` (raíz) y con "ñ" en el nombre. La consigna y la Issue #286 piden `anexos/patrones-diseno/patron-de-diseno-estructural.md`.
+2. *Alta.* Los enlaces `../diagramas/...` se rompen al mover el archivo.
+3. *Media.* Los títulos no siguen la plantilla de la consigna (Propósito y Tipo, Motivación, Estructura de Clases, Justificación Técnica).
+4. *Media.* Falta el enlace "Ver diagrama en tamaño completo" debajo de la imagen.
+5. *Media.* El problema se plantea como hipotético ("si en el futuro…", "el diagrama no demuestra errores").
+6. *Media.* Falta la explicación del flujo estructural paso a paso.
+7. *Media.* Changelog: `## Added` en lugar de `### Added`, título no literal (punto final), falta la Issue #283 y el rol está sin tilde.
+8. *Media.* La PR no vincula las Issues #283–#288 con `Closes`.
+9. *Baja.* El `.puml` empieza con una línea vacía y tiene un nombre que no coincide con el archivo; incluye clases que no participan del patrón; el registro de IA cita `01-diagrama-clases-final.puml.`, que no existe.
+
+Decisión sugerida: Request changes (los hallazgos 1 a 5 bloquean el merge).
+
+**Ajustes aplicados antes de publicar el comentario:**
+- Se verificó cada hallazgo contra el contenido de la rama y se agregaron los números de línea reales.
+- Se verificó que el `.png` corresponde al `.puml`. La IA no lo había comprobado y no hubo hallazgo sobre eso.
+- Se bajó a *Baja* y se marcó como opcional el pedido de quitar del diagrama las clases que no participan del patrón: no rompe la consigna, solo la mejora.
+- Se agregó al hallazgo 5 una redacción alternativa concreta, basada en `ItemPedido.calcularSubtotal(cantidad, precioBase, costosAdicionales)` del diagrama final, para que el especialista no tenga que reinventar el problema.

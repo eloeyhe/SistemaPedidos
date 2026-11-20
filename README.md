@@ -40,7 +40,7 @@ En esta entrega se aplica un patrón de diseño GoF de cada categoría (creacion
 
 - [Anexo - Patrones de Diseño](anexos/patrones-diseno/patrones_diseno.md)
   - [Patrón de Diseño Creacional – «PATRON_CREACIONAL»](anexos/patrones-diseno/patron-de-diseno-creacional.md)
-  - [Patrón de Diseño Estructural – «PATRON_ESTRUCTURAL»](anexos/patrones-diseno/patron-de-diseno-estructural.md)
+  - [Patrón de Diseño Estructural – Decorator](anexos/patrones-diseno/patron-de-diseno-estructural.md)
   - [Patrón de Diseño de Comportamiento – «PATRON_COMPORTAMIENTO»](anexos/patrones-diseno/patron-de-diseno-de-comportamiento.md)
 - [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_de_clases.md) (incluye los tres diagramas de patrones)
 - [Registro de uso de IA - Segundo Parcial](ia/segundo-parcial/)

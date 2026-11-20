@@ -20,5 +20,5 @@
 
 - Patrones de Diseño
     - [Diagrama de Clases - Patrón Creacional - «PATRON_CREACIONAL»](./01-patron-creacional-«ARCHIVO_CREACIONAL».png) ([fuente PlantUML](./01-patron-creacional-«ARCHIVO_CREACIONAL».puml))
-    - [Diagrama de Clases - Patrón Estructural - «PATRON_ESTRUCTURAL»](./01-patron-estructural-«ARCHIVO_ESTRUCTURAL».png) ([fuente PlantUML](./01-patron-estructural-«ARCHIVO_ESTRUCTURAL».puml))
+    - [Diagrama de Clases - Patrón Estructural - Decorator](./01-patron-estructural-decorator.png) ([fuente PlantUML](./01-patron-estructural-decorator.puml))
     - [Diagrama de Clases - Patrón de Comportamiento - «PATRON_COMPORTAMIENTO»](./01-patron-comportamiento-«ARCHIVO_COMPORTAMIENTO».png) ([fuente PlantUML](./01-patron-comportamiento-«ARCHIVO_COMPORTAMIENTO».puml))
