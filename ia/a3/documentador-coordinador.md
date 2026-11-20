@@ -57,10 +57,10 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
 * `diagramas/03-escenarios-casos-de-uso/03-tomar-pedido-registro-pedido-01.md`
-* `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-01.md`
-* `diagramas/03-escenarios-casos-de-uso/03-cancelar-pedido-cancelacion-antes-entrega-01.md`
-* `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-01.md`
-* `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-02.md`
+* `diagramas/03-escenarios-casos-de-uso/03-cancelar-pedido-cancelacion-antes-entrega-03.md`
+* `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-04.md`
+* `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-05.md`
 * `herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md`
 * `herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md`
 * `herramientas-agile/tarjetas-crc/03-tarjeta-crc-producto.md`
@@ -93,7 +93,7 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 * **Línea:** 7-8, 14
 * **Tipo de problema:** Trazabilidad
 * **Severidad:** Media
-* **Explicación técnica:** El diagrama inicia la solicitud exclusivamente desde `UsuarioMostrador`. `UsuarioEncargado` aparece solo para responder a una solicitud en estado `EN_PREPARACION`. En cambio, el escenario A2 establece que el Usuario de Mostrador o el Encargado puede seleccionar el pedido y solicitar la cancelación, incluyendo el flujo principal. La secuencia no contempla el inicio por el Encargado, aunque esa responsabilidad también es coherente con su tarjeta CRC: `03-cancelar-pedido-cancelacion-antes-entrega-01.md` y `16-tarjeta-crc-usuario-encargado.md`.
+* **Explicación técnica:** El diagrama inicia la solicitud exclusivamente desde `UsuarioMostrador`. `UsuarioEncargado` aparece solo para responder a una solicitud en estado `EN_PREPARACION`. En cambio, el escenario A2 establece que el Usuario de Mostrador o el Encargado puede seleccionar el pedido y solicitar la cancelación, incluyendo el flujo principal. La secuencia no contempla el inicio por el Encargado, aunque esa responsabilidad también es coherente con su tarjeta CRC: `03-cancelar-pedido-cancelacion-antes-entrega-03.md` y `16-tarjeta-crc-usuario-encargado.md`.
 * **Sugerencia de mejora:** Incorporar el inicio de la solicitud por `UsuarioEncargado` y conectarlo con el flujo de consulta, confirmación y cancelación que corresponda.
 
 ---
@@ -195,7 +195,7 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 * `diagramas/02-casos-de-uso/02-caso-uso-tomar-pedido-01.puml`
 * `diagramas/02-casos-de-uso/02-caso-uso-modificar-pedido-02.puml`
 * `diagramas/03-escenarios-casos-de-uso/03-tomar-pedido-registro-pedido-01.md`
-* `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-02.md`
 
 ### 3. Output obtenido de Copilot
 
@@ -326,9 +326,9 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 * `diagramas/02-casos-de-uso/02-caso-uso-cancelar-pedido-03.puml`
 * `diagramas/02-casos-de-uso/02-caso-uso-cambiar-estado-pedido-04.puml`
 * `diagramas/02-casos-de-uso/02-caso-uso-consultar-pedidos-activos-05.puml`
-* `diagramas/03-escenarios-casos-de-uso/03-cancelar-pedido-cancelacion-antes-entrega-01.md`
-* `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-01.md`
-* `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-cancelar-pedido-cancelacion-antes-entrega-03.md`
+* `diagramas/03-escenarios-casos-de-uso/03-cambiar-estado-pedido-avance-preparacion-04.md`
+* `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-05.md`
 
 ### 3. Output obtenido de Copilot
 
@@ -349,7 +349,7 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 * **Línea:** 5-7
 * **Tipo de problema:** Trazabilidad
 * **Severidad:** Baja
-* **Explicación técnica:** La selección del pedido y el nodo inicial están asignados exclusivamente al carril `Cocina`, aunque el escenario indica que tanto `Cocina` como `UsuarioMostrador` pueden iniciar el cambio de estado (`03-cambiar-estado-pedido-avance-preparacion-01.md`, línea 8). El carril de `UsuarioMostrador` aparece únicamente para registrar la entrega, así que el diagrama no refleja su participación al iniciar esa transición.
+* **Explicación técnica:** La selección del pedido y el nodo inicial están asignados exclusivamente al carril `Cocina`, aunque el escenario indica que tanto `Cocina` como `UsuarioMostrador` pueden iniciar el cambio de estado (`03-cambiar-estado-pedido-avance-preparacion-04.md`, línea 8). El carril de `UsuarioMostrador` aparece únicamente para registrar la entrega, así que el diagrama no refleja su participación al iniciar esa transición.
 * **Sugerencia de mejora:** Modelar la selección como una acción iniciable por cualquiera de los actores autorizados, o representar las alternativas de inicio en sus respectivos carriles.
 
 ---
@@ -360,7 +360,7 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 * **Línea:** 4-6
 * **Tipo de problema:** Trazabilidad
 * **Severidad:** Baja
-* **Explicación técnica:** El diagrama ubica el inicio y la actividad de acceso al monitor únicamente en el carril `Cocina`, pero `CU05` identifica también a `UsuarioMostrador` como actor iniciador (`03-consultar-pedidos-activos-prioridad-urgentes-01.md`, líneas 5 y 8). Aunque luego aparece un carril para Mostrador, su actividad está limitada a consultar pedidos `LISTO`; no se muestra cómo inicia la consulta.
+* **Explicación técnica:** El diagrama ubica el inicio y la actividad de acceso al monitor únicamente en el carril `Cocina`, pero `CU05` identifica también a `UsuarioMostrador` como actor iniciador (`03-consultar-pedidos-activos-prioridad-urgentes-05.md`, líneas 5 y 8). Aunque luego aparece un carril para Mostrador, su actividad está limitada a consultar pedidos `LISTO`; no se muestra cómo inicia la consulta.
 * **Sugerencia de mejora:** Representar el acceso al monitor como una acción disponible para ambos actores, o mostrar explícitamente las alternativas de inicio desde `Cocina` y `UsuarioMostrador`.
 
 ---
@@ -452,8 +452,8 @@ Al final, agrega una línea con la decisión final sugerida (aprobar o solicitar
 ### 2. Archivos de contexto referenciados
 * `anexos/introduccion.md`
 * `diagramas/03-escenarios-casos-de-uso/03-tomar-pedido-registro-pedido-01.md`
-* `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-01.md`
-* `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-01.md`
+* `diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-modificacion-recibido-02.md`
+* `diagramas/03-escenarios-casos-de-uso/03-consultar-pedidos-activos-prioridad-urgentes-05.md`
 * `herramientas-agile/tarjetas-crc/01-tarjeta-crc-pedido.md`
 * `herramientas-agile/tarjetas-crc/02-tarjeta-crc-item-pedido.md`
 * `herramientas-agile/tarjetas-crc/04-tarjeta-crc-personalizacion-item.md`

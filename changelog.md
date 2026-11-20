@@ -4,6 +4,19 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [Segundo Parcial]
+
+### Changed
+
+- [backport/release-actividad-obligatoria-4] Backport release/actividad-obligatoria-4 hacia develop
+  PR: [#274](https://github.com/eloeyhe/SistemaPedidos/pull/274) - @santimarM (Coordinador y DevOps)
+
+### Fixed
+
+- [fix/coord-devops-estructura-parte-1] fix: ajusto nombres de archivos a la estructura de la Parte 1 y abro la sección del Segundo Parcial en el changelog
+  Issue: [#275](https://github.com/eloeyhe/SistemaPedidos/issues/275)
+  PR: [#276](https://github.com/eloeyhe/SistemaPedidos/pull/276) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added

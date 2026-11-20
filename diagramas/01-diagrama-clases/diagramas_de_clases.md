@@ -1,6 +1,6 @@
 # Diagramas de Clases
 
-- [Diagrama de Clases - Boceto Inicial](./01_boceto_inicial.png)
+- [Diagrama de Clases - Boceto Inicial](./01-boceto-inicial.png)
 
 - Principios Solid
     - [Diagrama de Clases - SOLID SRP (Single Responsibility Principle)](./01-solid-01-srp.png)
