@@ -92,7 +92,7 @@ Al final, indica la decisión sugerida para la PR (Approve o Request changes) y 
 | # | PR | Rama | Autor | Resultado |
 |---|----|------|-------|-----------|
 | 1 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-5987153385) (9 hallazgos) |
-| 2 | [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) | `feature/esp-patron-creacional-add-patron-builder` | @Leandro2107 | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6002643258) (4 hallazgos) |
+| 2 | [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) | `feature/esp-patron-creacional-add-patron-builder` | @Leandro2107 | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6002643258) (4 hallazgos) → [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6008020072) tras `28899d3` (2–4 corregidos; changelog y conflicto pendientes) |
 | 3 | [#305](https://github.com/eloeyhe/SistemaPedidos/pull/305) → [#306](https://github.com/eloeyhe/SistemaPedidos/pull/306) | `feature/esp-patron-comportamiento-add-patron-state` (antes `...-observer`) | @eloeyhe | [Request changes en #305](https://github.com/eloeyhe/SistemaPedidos/pull/305#pullrequestreview-6006440774) (6 hallazgos) → [Request changes en #306](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6006826721) (rama corregida; pendientes 1, 3–6 + hallazgo 7) |
 | 4 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) (correcciones, commit `b0e7b71`) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-6003111880) (3 hallazgos nuevos; 8 de 11 anteriores corregidos) → [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-6006440899) tras `5873628` y `17bc019` |
 
@@ -173,6 +173,12 @@ Decisión sugerida: Request changes (hallazgos 1 y 2).
 - En el hallazgo 2 se agregó una alternativa concreta: conservar `marcarPrioritario(numeroPedido: int)` y nombrar distinto la operación de construcción.
 - En el hallazgo 4 se tomó como referencia la decisión vigente del CU1: el `Pago` se crea cuando se aprueba el cobro.
 - La IA había propuesto como hallazgo que las Issues no se cerrarían solas por ir a `develop`. Se pasó a "nota informativa": no es un error del especialista, y el cierre manual lo hace el coordinador después del merge.
+
+**Re-revisión de las correcciones (commit `28899d3`):** se usó el mismo prompt, sumando el diff contra `d0ae449` y el pedido de verificar el estado de merge con `develop`. La IA marcó como corregidos los hallazgos 2, 3 y 4 y detectó dos nuevos:
+5. *Alta.* La línea del changelog dejó de describir el cambio: contiene un texto sobre haber actualizado el título de la PR, que parece una respuesta al review pegada en el archivo.
+6. *Alta.* La PR está en conflicto con `develop` en `changelog.md`, porque ya se mergearon la #289 y la #306.
+
+Ajustes aplicados antes de publicar: se renderizó el `.png` nuevo (1409 × 1420 px) para confirmar que coincide con el `.puml`, y se agregaron los comandos exactos para resolver el conflicto dejando las entradas en orden de merge. Decisión: [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6008020072).
 
 ### Code Review 4 — PR #289, re-revisión de las correcciones (commit `b0e7b71`)
 
