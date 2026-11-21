@@ -120,6 +120,11 @@ package "Dominio" {
     ENTREGADO
     CANCELADO
   }
+
+  enum MetodoPago {
+    EFECTIVO
+    TRANSFERENCIA
+  }
 }
 
 IPedidoBuilder <|.. PedidoBuilder

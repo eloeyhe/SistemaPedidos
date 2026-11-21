@@ -88,7 +88,7 @@ En ellos integró `IPedidoBuilder` y `PedidoBuilder` y eliminó las referencias 
 2. El diagrama final y los diagramas del CU1 ya fueron aprobados en la Actividad Obligatoria N°4. Modificarlos excede el alcance del rol y no regeneraba sus PNG.
 3. Los especialistas en patrones estructural y de comportamiento usan el mismo diagrama final como base. Cambiarlo en esta rama generaría inconsistencias y conflictos con sus PR.
 
-El cambio que Copilot hizo en `01-patron-creacional-builder.puml` en este paso se evaluó junto con la iteración 2.
+Solo se conservó el resultado sobre `01-patron-creacional-builder.puml`, que se revisó en la iteración 2.
 
 ---
 
@@ -117,7 +117,14 @@ a la construcción de Pedido en el CU1 (Tomar pedido). Requisitos:
 
 ### 3.2 Resultado de la IA
 
-Copilot leyó el diagrama final (líneas de `ServicioPedidos` a `Pedido` y las `skinparam` iniciales) y el diagrama Builder existente, y propuso reemplazar `01-patron-creacional-builder.puml` por una versión limitada a las clases requeridas. Informó que:
+Copilot leyó el diagrama final (líneas de `ServicioPedidos` a `Pedido` y las `skinparam` iniciales) y el diagrama Builder existente, y reemplazó `01-patron-creacional-builder.puml` por una versión limitada a las clases requeridas. Respecto de la versión previa:
+
+- agregó `scale 0.8`;
+- sumó a `ServicioPedidos` el atributo `ultimoNumeroPedido` y la operación `confirmarPedido(): Pedido`;
+- completó `ItemPedido`, `PersonalizacionItem` y `Producto` con más operaciones tomadas del diagrama final;
+- agregó la dependencia `Pago ..> MetodoPago`.
+
+Informó que:
 
 - Incluye Director, Builder, ConcreteBuilder, Product y las clases de dominio necesarias.
 - `ServicioPedidos` recibe `IPedidoBuilder` por constructor y ya no tiene `pedidoEnCurso` ni `itemEnCurso`.
@@ -127,8 +134,9 @@ Copilot buscó un ejecutable de PlantUML en el repositorio, pero no lo encontró
 
 ### 3.3 Revisión y ajustes realizados
 
-- Se revisó la propuesta de Copilot y se la descartó con **Undo**, conservando la versión previa del diagrama. La propuesta no agregaba clases, relaciones ni validaciones nuevas, y la versión previa ya cumplía todos los requisitos del prompt: las clases participantes, los estereotipos, la inyección de `IPedidoBuilder`, el constructor con visibilidad de paquete y las notas de validación.
-- Al conservarse el `.puml`, el PNG exportado no necesitó cambios. Como Copilot no pudo renderizar el diagrama, se verificó en la vista previa de PlantUML de VS Code que la imagen se viera completa.
+- Se aceptó la versión de Copilot. Se verificó que mantuviera los nombres, tipos y multiplicidades del diagrama final, la inyección de `IPedidoBuilder` por constructor, el constructor de `Pedido` con visibilidad de paquete y las notas de validación. `confirmarPedido()` hace explícito el paso en el que el Director invoca `construir()`.
+- **Ajuste manual:** Copilot agregó la dependencia `Pago ..> MetodoPago`, pero no declaró la enumeración. Al no estar declarada, PlantUML genera automáticamente una clase vacía `MetodoPago`. Se agregó `enum MetodoPago { EFECTIVO, TRANSFERENCIA }` dentro del paquete `Dominio`, igual que en el diagrama final.
+- Como Copilot no pudo renderizar el diagrama, se abrió en la vista previa de PlantUML de VS Code y se volvió a exportar `01-patron-creacional-builder.png`, comprobando que la imagen se viera completa y coincidiera con el `.puml`.
 
 ---
 
@@ -165,17 +173,23 @@ Para mantener la terminología y el formato del proyecto, Copilot revisó:
 - el diagrama final;
 - la existencia del PNG.
 
-Después propuso reescribir `anexos/patrones-diseno/patron-de-diseno-creacional.md` con la estructura solicitada, la imagen incrustada y el enlace al diagrama completo. Además, buscó referencias a clases ajenas al patrón (`ProcesadorPago`, `Usuario`, `Pantalla*`, `IRepositorio*`, `ICatalogo*`, `IPublicador*`) para controlar que no se incluyeran clases fuera del diagrama. `git diff --check` no reportó errores.
+Después reescribió `anexos/patrones-diseno/patron-de-diseno-creacional.md` con la estructura solicitada, la imagen incrustada y el enlace al diagrama completo. Además, buscó referencias a clases ajenas al patrón (`ProcesadorPago`, `Usuario`, `Pantalla*`, `IRepositorio*`, `ICatalogo*`, `IPublicador*`) para controlar que no se incluyeran clases fuera del diagrama. `git diff --check` no reportó errores.
 
 ### 4.3 Revisión y ajustes realizados
 
-- Se revisó la propuesta de Copilot y se la descartó con **Undo**, conservando la versión previa del anexo. La versión previa ya respetaba los apartados de la plantilla de la consigna, describía únicamente las clases del diagrama y detallaba el flujo de creación paso a paso, incluyendo el descarte del pedido en curso.
+Se aceptó la versión de Copilot: respeta los apartados de la plantilla de la consigna, describe únicamente las clases del diagrama y desarrolla con más detalle que la versión previa la relación con SOLID, las limitaciones originales y cada clase del patrón. Al revisarla se hicieron las siguientes correcciones manuales:
+
+- **Concordancia:** "El multiplicidad cero a muchos" → "La multiplicidad cero a muchos".
+- **Párrafo contradictorio:** en "Problemas de mantenibilidad", Copilot afirmaba que se podrían agregar pasos sin modificar el proceso "si no existiera" una clase que encapsule el armado, lo cual invierte el argumento. Se reescribió para indicar que, sin esa clase, cada paso nuevo obliga a modificar el proceso completo.
+- **Redacción:** "agrega temporalmente hasta cero o más ítems" → "agrega temporalmente cero o más ítems".
+- **Flujo, paso 6:** decía que `confirmarPedido()` "solicita a `ServicioPedidos`" el número, cuando `confirmarPedido()` es un método del propio `ServicioPedidos`. Se corrigió para indicar que el Director genera el número con `generarNumeroPedido()` e invoca `construir(numeroPedido, fechaHora)`.
+- **Flujo, paso 9 (agregado):** Copilot no describía `descartarPedidoEnCurso()`, aunque figura en el diagrama. Se agregó el paso de descarte, que solo reinicia el builder porque el `Pedido` nunca llegó a instanciarse.
 - Se verificó que la ruta relativa de la imagen (`../../diagramas/01-diagrama-clases/01-patron-creacional-builder.png`) se visualizara correctamente en la vista previa de Markdown.
 
 ---
 
 ## 5. Conclusión
 
-Copilot Agent Mode fue útil para validar la elección del patrón y para contrastar el diagrama y el anexo contra el diagrama de clases final y los diagramas SOLID. Sus propuestas para el diagrama y el anexo no aportaban mejoras sobre la versión previa, por lo que se descartaron y se conservó esa versión.
+Copilot Agent Mode fue útil para validar la elección del patrón y para completar el diagrama y el anexo con más detalle a partir del diagrama de clases final y de los diagramas SOLID. Sus resultados se aceptaron, pero requirieron revisión manual: una enumeración sin declarar en el diagrama y errores de redacción y de lógica en el anexo.
 
 En modo agente, Copilot tendió a ampliar el alcance de los cambios más allá de lo pedido: llegó a modificar el diagrama final, el diagrama del CU1 y su secuencia, que no correspondían a este rol. Como consecuencia, también se eliminó el PNG de esa secuencia. Por eso fue necesario revisar cada cambio, revertir con `git restore` los archivos fuera del alcance (incluido el PNG eliminado) y verificar manualmente el renderizado del diagrama, ya que Copilot no tenía PlantUML disponible en su entorno.

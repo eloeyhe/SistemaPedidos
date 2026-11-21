@@ -26,47 +26,19 @@ class UsuarioMostrador {
 }
 
 ' ===================== Control / frontera (diagrama de secuencia) =====================
-class ServicioPedidos <<control>> <<Director>> {
+class ServicioPedidos <<control>> {
   - pedidos : List<Pedido>
-  - builder : IPedidoBuilder
+  - pedidoEnCurso : Pedido
+  - itemEnCurso : ItemPedido
   - ultimoNumeroPedido : int
-  + ServicioPedidos(builder : IPedidoBuilder)
-  + iniciarNuevoPedido() : void
+  + iniciarNuevoPedido() : Pedido
   + ingresarReferenciaRetiro(referenciaRetiro : String) : void
   + seleccionarProducto(producto : Producto, cantidad : int) : void
   + seleccionarCombo(combo : Combo, cantidad : int) : void
   + ingresarPersonalizacion(descripcion : String) : void
   + seleccionarMedioPago(medioPago : MetodoPago) : String
-  + confirmarPedido() : Pedido
   - generarNumeroPedido() : int
   + descartarPedidoEnCurso() : void
-}
-
-interface IPedidoBuilder <<Builder>> {
-  + reiniciar() : void
-  + conReferenciaRetiro(referenciaRetiro : String) : IPedidoBuilder
-  + agregarProducto(producto : Producto, cantidad : int) : IPedidoBuilder
-  + agregarCombo(combo : Combo, cantidad : int) : IPedidoBuilder
-  + agregarPersonalizacion(descripcion : String) : IPedidoBuilder
-  + conPago(pago : Pago) : IPedidoBuilder
-  + obtenerTotalParcial() : decimal
-  + construir(numeroPedido : int, fechaHora : DateTime) : Pedido
-}
-
-class PedidoBuilder <<ConcreteBuilder>> {
-  - referenciaRetiro : String
-  - items : List<ItemPedido>
-  - itemEnCurso : ItemPedido
-  - pago : Pago
-  + reiniciar() : void
-  + conReferenciaRetiro(referenciaRetiro : String) : IPedidoBuilder
-  + agregarProducto(producto : Producto, cantidad : int) : IPedidoBuilder
-  + agregarCombo(combo : Combo, cantidad : int) : IPedidoBuilder
-  + agregarPersonalizacion(descripcion : String) : IPedidoBuilder
-  + conPago(pago : Pago) : IPedidoBuilder
-  + obtenerTotalParcial() : decimal
-  + construir(numeroPedido : int, fechaHora : DateTime) : Pedido
-  - validar() : void
 }
 
 class PantallaCocina <<boundary>> {
@@ -101,7 +73,7 @@ class Pedido {
   + priorizar() : void
   + asociarPago(pago : Pago) : void
   + cambiarEstado(nuevoEstado : EstadoPedido) : void
-  ~ Pedido(numeroPedido : int, fechaHora : DateTime, referenciaRetiro : String, listaItems : List<ItemPedido>, prioritario : boolean, pago : Pago)
+  + registrarPedido(numeroPedido : int, fechaHora : DateTime, referenciaRetiro : String, listaItems : List<ItemPedido>, totalPedido : decimal, pago : Pago) : boolean
 }
 
 class ItemPedido {
@@ -181,11 +153,6 @@ Producto <|-- ProductoEnvasado
 
 ' Agregación: el sistema agrupa los pedidos, pero estos persisten por auditoría (RF5)
 ServicioPedidos "1" o-- "0..*" Pedido : gestiona >
-IPedidoBuilder <|.. PedidoBuilder
-ServicioPedidos "1" --> "1" IPedidoBuilder : dirige >
-PedidoBuilder ..> Pedido : <<create>>
-PedidoBuilder ..> ItemPedido : <<create>>
-PedidoBuilder "1" o-- "0..*" ItemPedido : items en construccion >
 
 ' Composición: los ítems y sus personalizaciones no existen fuera de su todo
 Pedido "1" *-- "1..*" ItemPedido : contiene >

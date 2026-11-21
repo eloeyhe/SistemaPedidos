@@ -69,7 +69,7 @@ Al finalizar, `Pedido` dispone de `registrarPedido(numeroPedido, fechaHora, refe
 
 Mantener el armado dentro de `ServicioPedidos` aumenta su acoplamiento y reduce su cohesión. Si se incorpora un dato nuevo al pedido, se modificarían simultáneamente el estado temporal del servicio, el método de registro y el llamador. Las validaciones también podrían quedar dispersas e impedir que el sistema garantice que toda instancia de `Pedido` sea válida desde el momento de su creación.
 
-La construcción también sería difícil de extender. Se podrían agregar nuevos pasos o datos sin modificar el proceso completo si no existiera una clase que encapsule de forma independiente cada representación de la secuencia de armado.
+La construcción también sería difícil de extender: sin una clase que encapsule la secuencia de armado, cualquier paso o dato nuevo obligaría a modificar el proceso completo.
 
 ### Nuevas clases y reorganización de la arquitectura
 
@@ -117,7 +117,7 @@ Es implementada por `PedidoBuilder`. Esta relación permite sustituir la impleme
 
 `PedidoBuilder` es la implementación concreta del Builder. Reúne la referencia de retiro, la lista de ítems, el ítem en curso, la prioridad y el pago. También contiene el método privado `validar()`, que concentra las reglas necesarias antes de crear el producto.
 
-Implementa `IPedidoBuilder`, crea instancias de `Pedido` e `ItemPedido`, agrega temporalmente hasta cero o más ítems y registra un pago opcional durante la construcción. Esta clase es necesaria porque encapsula el estado mutable del armado y evita que dicho estado pertenezca a `ServicioPedidos`.
+Implementa `IPedidoBuilder`, crea instancias de `Pedido` e `ItemPedido`, agrega temporalmente cero o más ítems y registra un pago opcional durante la construcción. Esta clase es necesaria porque encapsula el estado mutable del armado y evita que dicho estado pertenezca a `ServicioPedidos`.
 
 **`Pedido` – Product**
 
@@ -143,7 +143,7 @@ Es necesaria porque una personalización forma parte de la construcción del `It
 
 `Producto` representa un elemento individual del menú. En el diagrama es una clase abstracta con `nombre` y `precio`, y proporciona operaciones para obtener ambos datos y cambiar el precio.
 
-Es una entrada de construcción: `PedidoBuilder.agregarProducto(...)` utiliza el producto y la cantidad para crear un `ItemPedido`. El multiplicidad cero a muchos indica que un producto puede aparecer en distintos ítems.
+Es una entrada de construcción: `PedidoBuilder.agregarProducto(...)` utiliza el producto y la cantidad para crear un `ItemPedido`. La multiplicidad cero a muchos indica que un producto puede aparecer en distintos ítems.
 
 **`Combo`**
 
@@ -172,8 +172,9 @@ El flujo comienza en `ServicioPedidos`, que actúa como Director:
 3. **Armado de ítems:** `seleccionarProducto(...)` delega en `agregarProducto(...)`; `seleccionarCombo(...)` delega en `agregarCombo(...)`. `PedidoBuilder` crea un `ItemPedido` en cada operación.
 4. **Personalización:** `ingresarPersonalizacion(...)` delega en `agregarPersonalizacion(...)`. `PedidoBuilder` aplica la personalización al `itemEnCurso`.
 5. **Opciones finales:** `marcarPrioritario()` delega en el Builder y `seleccionarMedioPago(...)` proporciona el medio para obtener el pago asociado.
-6. **Total y confirmación:** `confirmarPedido()` solicita a `ServicioPedidos` el número y la fecha que necesita `construir(numeroPedido, fechaHora)`.
+6. **Total y confirmación:** en `confirmarPedido()`, `ServicioPedidos` genera el número con `generarNumeroPedido()`, toma la fecha y hora actuales e invoca `construir(numeroPedido, fechaHora)`.
 7. **Validación e instanciación:** `PedidoBuilder.construir(...)` ejecuta `validar()`. Comprueba que la referencia de retiro no esté vacía, que exista al menos un `ItemPedido` y que el `Pago` esté registrado con un monto igual al total. Si todas las condiciones se cumplen, instancia `Pedido` en estado `RECIBIDO`.
 8. **Entrega del resultado:** el método `construir()` devuelve el `Pedido` final a `ServicioPedidos`, que lo agrega a `pedidos`.
+9. **Descarte:** si el usuario abandona la toma antes de confirmar, `descartarPedidoEnCurso()` solo invoca `builder.reiniciar()`; como el `Pedido` nunca llegó a instanciarse, no queda ningún objeto incompleto.
 
 En resumen, **`ServicioPedidos` inicia y ordena el flujo, `IPedidoBuilder` define el contrato de construcción, `PedidoBuilder` reúne los datos parciales y valida las reglas, y `Pedido` es instanciado por `PedidoBuilder` como objeto final**.

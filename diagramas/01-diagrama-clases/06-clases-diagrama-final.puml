@@ -44,19 +44,18 @@ package "Presentacion e integracion" {
 }
 
 package "Aplicacion" {
-  class ServicioPedidos <<control>> <<Director>> {
+  class ServicioPedidos <<control>> {
     - pedidos: List<Pedido>
-    - builder: IPedidoBuilder
+    - pedidoEnCurso: Pedido
+    - itemEnCurso: ItemPedido
     - ultimoNumeroPedido: int
-    + ServicioPedidos(builder: IPedidoBuilder)
-    + iniciarNuevoPedido(): void
+    + iniciarNuevoPedido(): Pedido
     + ingresarReferenciaRetiro(referenciaRetiro: String): void
     + seleccionarProducto(producto: Producto, cantidad: int): void
     + seleccionarCombo(combo: Combo, cantidad: int): void
     + ingresarPersonalizacion(descripcion: String): void
     + marcarPrioritario(numeroPedido: int): void
     + seleccionarMedioPago(medioPago: MetodoPago): String
-    + confirmarPedido(): Pedido
     + descartarPedidoEnCurso(): void
     + buscarPedido(numeroOReferencia: String): Pedido
     + consultarEstado(numeroPedido: int): EstadoPedido
@@ -77,38 +76,6 @@ package "Aplicacion" {
     + seleccionarEstadosVisibles(actor: Usuario): List<EstadoPedido>
     + obtenerDetallePedido(numeroPedido: int): List<ItemPedido>
     - generarNumeroPedido(): int
-  }
-}
-
-package "Creacion de Pedido (Builder)" {
-  interface IPedidoBuilder <<Builder>> {
-    + reiniciar(): void
-    + conReferenciaRetiro(referenciaRetiro: String): IPedidoBuilder
-    + agregarProducto(producto: Producto, cantidad: int): IPedidoBuilder
-    + agregarCombo(combo: Combo, cantidad: int): IPedidoBuilder
-    + agregarPersonalizacion(descripcion: String): IPedidoBuilder
-    + marcarPrioritario(): IPedidoBuilder
-    + conPago(pago: Pago): IPedidoBuilder
-    + obtenerTotalParcial(): decimal
-    + construir(numeroPedido: int, fechaHora: DateTime): Pedido
-  }
-
-  class PedidoBuilder <<ConcreteBuilder>> {
-    - referenciaRetiro: String
-    - items: List<ItemPedido>
-    - itemEnCurso: ItemPedido
-    - prioritario: boolean
-    - pago: Pago
-    + reiniciar(): void
-    + conReferenciaRetiro(referenciaRetiro: String): IPedidoBuilder
-    + agregarProducto(producto: Producto, cantidad: int): IPedidoBuilder
-    + agregarCombo(combo: Combo, cantidad: int): IPedidoBuilder
-    + agregarPersonalizacion(descripcion: String): IPedidoBuilder
-    + marcarPrioritario(): IPedidoBuilder
-    + conPago(pago: Pago): IPedidoBuilder
-    + obtenerTotalParcial(): decimal
-    + construir(numeroPedido: int, fechaHora: DateTime): Pedido
-    - validar(): void
   }
 }
 
@@ -156,7 +123,7 @@ package "Dominio" {
     + priorizar(): void
     + asociarPago(pago: Pago): void
     + obtenerPagoOriginal(): Pago
-    ~ Pedido(numeroPedido: int, fechaHora: DateTime, referenciaRetiro: String, listaItems: List<ItemPedido>, prioritario: boolean, pago: Pago)
+    + registrarPedido(numeroPedido: int, fechaHora: DateTime, referenciaRetiro: String, listaItems: List<ItemPedido>, totalPedido: decimal, pago: Pago): boolean
     + obtenerEstado(): EstadoPedido
     + validarTransicion(nuevoEstado: EstadoPedido, actor: Usuario): boolean
     + cambiarEstado(nuevoEstado: EstadoPedido): void
@@ -283,12 +250,6 @@ ServicioPedidos "1" o-- "0..*" Pedido : gestiona
 UsuarioMostrador --> PantallaPedidos : opera
 UsuarioCocina --> PantallaPedidos : consulta y actualiza
 UsuarioEncargado --> PantallaPedidos : autoriza
-IPedidoBuilder <|.. PedidoBuilder
-ServicioPedidos "1" --> "1" IPedidoBuilder : dirige la construccion
-PedidoBuilder ..> Pedido : <<create>>
-PedidoBuilder ..> ItemPedido : <<create>>
-PedidoBuilder "1" o-- "0..*" ItemPedido : items en construccion
-PedidoBuilder "1" o-- "0..1" Pago : pago registrado
 Pedido "1" *-- "1..*" ItemPedido : contiene
 ItemPedido "1" *-- "0..*" PersonalizacionItem : personalizaciones
 ItemPedido "0..*" --> "0..1" Producto : producto
@@ -328,13 +289,6 @@ note bottom of Pago
   Pago en HistorialPago; no se crean otros Pagos.
   La validacion del medio de pago es exclusiva
   de ProcesadorPago (invocado por ServicioPedidos).
-end note
-
-note right of PedidoBuilder
-  construir() valida que exista referencia,
-  al menos un ItemPedido y un Pago cuyo
-  monto coincida con el total. Solo entonces
-  crea un Pedido en estado RECIBIDO.
 end note
 
 note bottom of Usuario

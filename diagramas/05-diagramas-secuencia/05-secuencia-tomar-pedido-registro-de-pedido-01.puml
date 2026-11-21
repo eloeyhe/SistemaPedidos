@@ -6,26 +6,25 @@ hide footbox
 
 actor "Usuario de Mostrador" as mostrador
 participant "ServicioPedidos:sistema" as sistema
-participant "PedidoBuilder:builder" as builder
 participant "Producto:producto" as producto
 participant "Combo:combo" as combo
 participant "ProcesadorPago:procesadorPago" as procesadorPago
 participant "PantallaCocina:pantallaCocina" as cocina
 
 mostrador -> sistema : iniciarNuevoPedido()
-sistema -> builder : reiniciar()
-builder --> sistema : builder listo
+create "Pedido:pedido" as pedido
+sistema -> pedido : asignarIdentificador(numeroPedido, fechaHora)
+pedido --> sistema : numeroPedido
 
 mostrador -> sistema : ingresarReferenciaRetiro(referenciaRetiro)
-sistema -> builder : conReferenciaRetiro(referenciaRetiro)
-builder --> sistema : builder actualizado
+sistema -> pedido : asignarReferenciaRetiro(referenciaRetiro)
 
 loop por cada ítem seleccionado
     alt selección de producto individual
         mostrador -> sistema : seleccionarProducto(producto, cantidad)
-        sistema -> builder : agregarProducto(producto, cantidad)
+        sistema -> pedido : agregarItem(producto, cantidad)
         create "ItemPedido:itemProducto" as itemProducto
-        builder -> itemProducto : establecerProductoYCantidad(producto, cantidad)
+        pedido -> itemProducto : establecerProductoYCantidad(producto, cantidad)
         itemProducto -> producto : obtenerNombre()
         producto --> itemProducto : nombreProducto
         itemProducto -> producto : obtenerPrecio()
@@ -34,8 +33,7 @@ loop por cada ítem seleccionado
 
         loop por cada personalizacion seleccionada
             mostrador -> sistema : ingresarPersonalizacion(descripcion)
-            sistema -> builder : agregarPersonalizacion(descripcion)
-            builder -> itemProducto : agregarPersonalizacion(descripcion)
+            sistema -> itemProducto : agregarPersonalizacion(descripcion)
             create "PersonalizacionItem:personalizacion" as personalizacion
             itemProducto -> personalizacion : obtenerDescripcion()
             personalizacion --> itemProducto : descripcion
@@ -44,13 +42,13 @@ loop por cada ítem seleccionado
         end
 
         itemProducto -> itemProducto : calcularSubtotal(cantidad, precioBase, listaCostosAdicionales)
-        itemProducto --> builder : subtotal
+        itemProducto --> pedido : subtotal
 
     else selección de combo
         mostrador -> sistema : seleccionarCombo(combo, cantidad)
-        sistema -> builder : agregarCombo(combo, cantidad)
+        sistema -> pedido : agregarItemCombo(combo, cantidad)
         create "ItemPedido:itemCombo" as itemCombo
-        builder -> itemCombo : establecerComboYCantidad(combo, cantidad)
+        pedido -> itemCombo : establecerComboYCantidad(combo, cantidad)
         itemCombo -> combo : obtenerNombre()
         combo --> itemCombo : nombreCombo
         itemCombo -> combo : obtenerPrecio()
@@ -58,12 +56,14 @@ loop por cada ítem seleccionado
         itemCombo -> itemCombo : conservarPrecioHistorico(precioBase)
 
         itemCombo -> itemCombo : calcularSubtotal(cantidad, precioBase, ceroCostosAdicionales)
-        itemCombo --> builder : subtotal
+        itemCombo --> pedido : subtotal
     end
+
+    pedido -> pedido : actualizarTotal(subtotal)
 end
 
-sistema -> builder : obtenerTotalParcial()
-builder --> sistema : totalPedido
+sistema -> pedido : obtenerTotal()
+pedido --> sistema : totalPedido
 mostrador -> sistema : seleccionarMedioPago(medioPago)
 sistema -> procesadorPago : validarMedioPago(medioPago)
 procesadorPago --> sistema : resultadoValidacion
@@ -74,17 +74,26 @@ alt transferencia rechazada
     sistema -> procesadorPago : obtenerMotivoRechazo()
     procesadorPago --> sistema : motivoRechazo
     sistema --> mostrador : mensajeRechazo
-    sistema -> builder : reiniciar()
+    sistema -> sistema : descartarPedidoEnCurso()
+    loop por cada ítem temporal creado
+        alt ítem de producto individual
+            loop por cada personalización creada para el ítem
+                destroy personalizacion
+            end
+            destroy itemProducto
+        else ítem de combo
+            destroy itemCombo
+        end
+    end
+    destroy pedido
 else medio de pago aprobado
     procesadorPago --> sistema : comprobanteAprobacion
     create "Pago:pago" as pago
     sistema -> pago : registrarCobro(medioPago, totalPedido)
     pago --> sistema : confirmacionPago
-    sistema -> builder : conPago(pago)
-    create "Pedido:pedido" as pedido
-    sistema -> builder : construir(numeroPedido, fechaHora)
-    builder -> pedido : crearPedidoValidado(...)
-    pedido --> sistema : pedidoConfirmado
+    sistema -> pedido : asociarPago(pago)
+    sistema -> pedido : cambiarEstado(RECIBIDO)
+    sistema -> pedido : registrarPedido(numeroPedido, fechaHora, referenciaRetiro, listaItems, totalPedido, pago)
     sistema -> cocina : enviarCabeceraPedido(numeroPedido, fechaHora, referenciaRetiro)
     sistema -> cocina : enviarDetallePedido(listaItems, totalPedido)
     sistema -> cocina : informarPedidoConfirmado(numeroPedido)
