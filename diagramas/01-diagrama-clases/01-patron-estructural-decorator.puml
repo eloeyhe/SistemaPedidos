@@ -1,5 +1,4 @@
-
-@startuml 07-solucion-decorator-personalizacion
+@startuml
 title SistemaPedidos - Patron estructural Decorator
 top to bottom direction
 

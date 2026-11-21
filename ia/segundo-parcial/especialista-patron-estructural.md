@@ -10,7 +10,7 @@
 
 ## 1. Archivos referenciados
 
-`diagramas/01-diagrama-clases/01-diagrama-clases-final.puml.`
+`diagramas/01-diagrama-clases/06-clases-diagrama-final.puml`
 `diagramas/01-diagrama-clases/01-solid-01-srp.puml`
 `diagramas/01-diagrama-clases/01-solid-02-ocp.puml`
 `diagramas/01-diagrama-clases/01-solid-03-lsp.puml`
