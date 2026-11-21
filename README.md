@@ -39,7 +39,7 @@ Este proyecto tiene como objetivo el diseño orientado a objetos de una aplicaci
 En esta entrega se aplica un patrón de diseño GoF de cada categoría (creacional, estructural y de comportamiento) sobre el diagrama de clases final del Sistema de Pedidos, para que el diseño sea más fácil de modificar, extender y mantener. Cada patrón tiene su documento explicativo con el problema detectado, la motivación, el diagrama de clases en PlantUML y la justificación técnica. Además, se reentregaron las Actividades Obligatorias N°3 y N°4 con todas las correcciones del docente.
 
 - [Anexo - Patrones de Diseño](anexos/patrones-diseno/patrones_diseno.md)
-  - [Patrón de Diseño Creacional – «PATRON_CREACIONAL»](anexos/patrones-diseno/patron-de-diseno-creacional.md)
+  - [Patrón de Diseño Creacional – Builder](anexos/patrones-diseno/patron-de-diseno-creacional.md)
   - [Patrón de Diseño Estructural – Decorator](anexos/patrones-diseno/patron-de-diseno-estructural.md)
   - [Patrón de Diseño de Comportamiento – «PATRON_COMPORTAMIENTO»](anexos/patrones-diseno/patron-de-diseno-de-comportamiento.md)
 - [Diagramas de Clases](diagramas/01-diagrama-clases/diagramas_de_clases.md) (incluye los tres diagramas de patrones)

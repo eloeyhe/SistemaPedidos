@@ -4,6 +4,6 @@ Los Patrones de Diseño son soluciones probadas y reutilizables a problemas de d
 
 Siguiendo la clasificación del catálogo GoF, se aplicó un patrón de cada categoría:
 
-- [Patrón de Diseño Creacional – «PATRON_CREACIONAL»](./patron-de-diseno-creacional.md)
+- [Patrón de Diseño Creacional – Builder](./patron-de-diseno-creacional.md)
 - [Patrón de Diseño Estructural – Decorator](./patron-de-diseno-estructural.md)
 - [Patrón de Diseño de Comportamiento – «PATRON_COMPORTAMIENTO»](./patron-de-diseno-de-comportamiento.md)

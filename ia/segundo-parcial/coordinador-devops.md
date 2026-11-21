@@ -92,7 +92,7 @@ Al final, indica la decisión sugerida para la PR (Approve o Request changes) y 
 | # | PR | Rama | Autor | Resultado |
 |---|----|------|-------|-----------|
 | 1 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-5987153385) (9 hallazgos) |
-| 2 | Pendiente | `feature/esp-patron-creacional-add-patron-<nombre>` | @Leandro2107 | Pendiente |
+| 2 | [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) | `feature/esp-patron-creacional-add-patron-builder` | @Leandro2107 | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6002643258) (4 hallazgos) |
 | 3 | Pendiente | `feature/esp-patron-comportamiento-add-patron-<nombre>` | @eloeyhe | Pendiente |
 | 4 | Pendiente | PR de correcciones (re-revisión de la #289 u otra PR de correcciones) | — | Pendiente |
 
@@ -141,3 +141,35 @@ Al auditar el repositorio con los criterios de corrección del docente (rúbrica
 **Por qué no se detectaron en la primera pasada:** el prompt base no pedía verificar tarjetas CRC para las clases nuevas ni contrastar los `Closes` con las issues del especialista. Se agregaron esas dos verificaciones al prompt base para las reviews siguientes.
 
 **Corrección del hallazgo 10 (20/11):** al contrastar el hallazgo con la consigna del Segundo Parcial, se comprobó que ni las responsabilidades del especialista ni su rúbrica piden tarjetas CRC para las clases nuevas del patrón. En el árbol de archivos, `herramientas-agile/tarjetas-crc/` no figura como nuevo ni actualizado. El hallazgo venía del criterio que el docente aplicó en la Actividad Obligatoria N°4 (RC11 a RC15), no de la consigna. Por eso se bajó a *Baja*, como recomendación opcional y no bloqueante, y se informó en la PR. El contenido de las tarjetas 22 a 25 queda redactado, por si el docente lo pide en la corrección de la release.
+
+### Code Review 2 — PR #298 (Patrón creacional Builder)
+
+**Prompt utilizado:** el prompt base de la sección 2, ya con las verificaciones agregadas después de la review 1. Valores usados:
+
+```text
+<CATEGORIA> = creacional
+Rama: feature/esp-patron-creacional-add-patron-builder
+Archivos de la PR:
+- anexos/patrones-diseno/patron-de-diseno-creacional.md
+- diagramas/01-diagrama-clases/01-patron-creacional-builder.puml y .png
+- ia/segundo-parcial/especialista-patron-creacional.md
+- changelog.md
+Compara cada firma de las clases existentes en el diagrama del patrón contra
+06-clases-diagrama-final.puml y señala si el anexo justifica cada cambio.
+Verifica que los Closes apunten a las Issues #291 a #297 del especialista.
+```
+
+**Output generado por la IA (resumen):**
+1. *Media.* La entrada del changelog no reproduce literalmente el título de la PR.
+2. *Media.* `iniciarNuevoPedido()` pasa de devolver `Pedido` a devolver `void`, y `marcarPrioritario(numeroPedido: int)` pasa a `marcarPrioritario()`, sin justificación en el anexo. En el diagrama final, `marcarPrioritario` actúa sobre un pedido ya registrado y `PantallaPedido` la sigue invocando con el número.
+3. *Baja.* `**Propósito**` y `**Tipo**` no llevan los dos puntos de la plantilla.
+4. *Baja.* El paso 5 del flujo no indica quién crea el `Pago` ni quién invoca `conPago(pago)`.
+
+Decisión sugerida: Request changes (hallazgos 1 y 2).
+
+**Ajustes aplicados antes de publicar el comentario:**
+- Se comprobó visualmente que el `.png` coincide con el `.puml`, y no hubo hallazgo sobre eso.
+- Se marcó en cada hallazgo si lo exige la consigna o si es una recomendación. Es la lección del hallazgo 10 de la review 1.
+- En el hallazgo 2 se agregó una alternativa concreta: conservar `marcarPrioritario(numeroPedido: int)` y nombrar distinto la operación de construcción.
+- En el hallazgo 4 se tomó como referencia la decisión vigente del CU1: el `Pago` se crea cuando se aprueba el cobro.
+- La IA había propuesto como hallazgo que las Issues no se cerrarían solas por ir a `develop`. Se pasó a "nota informativa": no es un error del especialista, y el cierre manual lo hace el coordinador después del merge.

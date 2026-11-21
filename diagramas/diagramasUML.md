@@ -7,6 +7,6 @@
 * [Diagramas de Clases](./01-diagrama-clases/diagramas_de_clases.md)
   * [Diagrama de Clases - Final Unificado](./01-diagrama-clases/06-clases-diagrama-final.png)
   * Patrones de Diseño:
-    * [Patrón Creacional - «PATRON_CREACIONAL»](./01-diagrama-clases/01-patron-creacional-«ARCHIVO_CREACIONAL».png)
+    * [Patrón Creacional - Builder](./01-diagrama-clases/01-patron-creacional-builder.png)
     * [Patrón Estructural - Decorator](./01-diagrama-clases/01-patron-estructural-decorator.png)
     * [Patrón de Comportamiento - «PATRON_COMPORTAMIENTO»](./01-diagrama-clases/01-patron-comportamiento-«ARCHIVO_COMPORTAMIENTO».png)
