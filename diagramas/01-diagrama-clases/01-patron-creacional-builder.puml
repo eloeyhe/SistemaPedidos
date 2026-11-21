@@ -1,0 +1,172 @@
+@startuml 01-patron-creacional-builder
+scale 0.8
+title Patron de Diseno Creacional - Builder - Tomar Pedido (CU1)
+top to bottom direction
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam packageStyle rectangle
+hide empty members
+
+package "Aplicacion" {
+  class ServicioPedidos <<control>> <<Director>> {
+    - pedidos: List<Pedido>
+    - builder: IPedidoBuilder
+    - ultimoNumeroPedido: int
+    + ServicioPedidos(builder: IPedidoBuilder)
+    + iniciarNuevoPedido(): void
+    + ingresarReferenciaRetiro(referenciaRetiro: String): void
+    + seleccionarProducto(producto: Producto, cantidad: int): void
+    + seleccionarCombo(combo: Combo, cantidad: int): void
+    + ingresarPersonalizacion(descripcion: String): void
+    + marcarPrioritario(): void
+    + seleccionarMedioPago(medioPago: MetodoPago): String
+    + confirmarPedido(): Pedido
+    + descartarPedidoEnCurso(): void
+    - generarNumeroPedido(): int
+  }
+}
+
+package "Creacion de Pedido (Builder)" {
+  interface IPedidoBuilder <<Builder>> {
+    + reiniciar(): void
+    + conReferenciaRetiro(referenciaRetiro: String): IPedidoBuilder
+    + agregarProducto(producto: Producto, cantidad: int): IPedidoBuilder
+    + agregarCombo(combo: Combo, cantidad: int): IPedidoBuilder
+    + agregarPersonalizacion(descripcion: String): IPedidoBuilder
+    + marcarPrioritario(): IPedidoBuilder
+    + conPago(pago: Pago): IPedidoBuilder
+    + obtenerTotalParcial(): decimal
+    + construir(numeroPedido: int, fechaHora: DateTime): Pedido
+  }
+
+  class PedidoBuilder <<ConcreteBuilder>> {
+    - referenciaRetiro: String
+    - items: List<ItemPedido>
+    - itemEnCurso: ItemPedido
+    - prioritario: boolean
+    - pago: Pago
+    + reiniciar(): void
+    + conReferenciaRetiro(referenciaRetiro: String): IPedidoBuilder
+    + agregarProducto(producto: Producto, cantidad: int): IPedidoBuilder
+    + agregarCombo(combo: Combo, cantidad: int): IPedidoBuilder
+    + agregarPersonalizacion(descripcion: String): IPedidoBuilder
+    + marcarPrioritario(): IPedidoBuilder
+    + conPago(pago: Pago): IPedidoBuilder
+    + obtenerTotalParcial(): decimal
+    + construir(numeroPedido: int, fechaHora: DateTime): Pedido
+    - validar(): void
+  }
+}
+
+package "Dominio" {
+  class Pedido <<Product>> {
+    - fechaHora: DateTime
+    - numeroPedido: int
+    - referenciaRetiro: String
+    - estado: EstadoPedido
+    - prioritario: boolean
+    - total: decimal
+    ~ Pedido(numeroPedido: int, fechaHora: DateTime, referenciaRetiro: String, items: List<ItemPedido>, prioritario: boolean, pago: Pago)
+    + obtenerTotal(): decimal
+    + obtenerEstado(): EstadoPedido
+    + obtenerDetalle(): List<ItemPedido>
+  }
+
+  class ItemPedido {
+    - cantidad: int
+    - precioUnitario: decimal
+    - subtotal: decimal
+    + establecerProductoYCantidad(producto: Producto, cantidad: int): void
+    + establecerComboYCantidad(combo: Combo, cantidad: int): void
+    + agregarPersonalizacion(descripcion: String): PersonalizacionItem
+    + quitarPersonalizacion(personalizacion: PersonalizacionItem): void
+    + recalcularPrecio(): decimal
+  }
+
+  class PersonalizacionItem {
+    - descripcion: String
+    - costoAdicional: decimal
+    + obtenerDescripcion(): String
+    + obtenerCostoAdicional(descripcion: String): decimal
+    + calcularCosto(): decimal
+  }
+
+  abstract class Producto {
+    # nombre: String
+    # precio: decimal
+    + obtenerNombre(): String
+    + obtenerPrecio(): decimal
+    + cambiarPrecio(nuevoPrecio: decimal): void
+  }
+
+  class Combo {
+    - nombre: String
+    - precio: decimal
+    + obtenerNombre(): String
+    + obtenerPrecio(): decimal
+  }
+
+  class Pago {
+    - monto: decimal
+    - metodoDePago: MetodoPago
+    - fechaHora: DateTime
+    + registrarCobro(medioPago: MetodoPago, monto: decimal): boolean
+  }
+
+  enum EstadoPedido {
+    RECIBIDO
+    EN_PREPARACION
+    LISTO
+    ENTREGADO
+    CANCELADO
+  }
+
+  enum MetodoPago {
+    EFECTIVO
+    TRANSFERENCIA
+  }
+}
+
+IPedidoBuilder <|.. PedidoBuilder
+ServicioPedidos "1" --> "1" IPedidoBuilder : dirige la construccion
+ServicioPedidos "1" o-- "0..*" Pedido : gestiona
+PedidoBuilder ..> Pedido : <<create>>
+PedidoBuilder ..> ItemPedido : <<create>>
+PedidoBuilder "1" o-- "0..*" ItemPedido : items en construccion
+PedidoBuilder "1" o-- "0..1" Pago : pago registrado
+
+Pedido "1" *-- "1..*" ItemPedido : contiene
+Pedido "1" -- "1" Pago : pago original
+Pedido ..> EstadoPedido
+ItemPedido "1" *-- "0..*" PersonalizacionItem : personalizaciones
+ItemPedido "0..*" --> "0..1" Producto : producto
+ItemPedido "0..*" --> "0..1" Combo : combo
+Pago ..> MetodoPago
+
+note right of IPedidoBuilder
+  Los metodos con* / agregar* devuelven
+  el mismo builder (interfaz fluida).
+  ServicioPedidos depende solo de esta
+  abstraccion (DIP): el builder concreto
+  se inyecta por constructor.
+end note
+
+note right of PedidoBuilder
+  construir() invoca validar():
+  - referencia de retiro no vacia
+  - al menos un ItemPedido
+  - Pago registrado y monto = total
+  Si todo es valido crea el Pedido en
+  estado RECIBIDO y llama a reiniciar().
+  Si no, lanza una excepcion y no crea
+  ningun Pedido incompleto.
+end note
+
+note bottom of Pedido
+  El constructor tiene visibilidad de paquete (~):
+  solo PedidoBuilder puede crear instancias.
+  Reemplaza a registrarPedido(...) de 6 parametros
+  del diagrama de clases final.
+end note
+
+@enduml
