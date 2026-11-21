@@ -8,7 +8,25 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Added
 
-- [feature/esp-patron-creacional-add-patron-builder] actualicé el título de la PR para que coincida literalmente con la descripción de la entrada en changelog.md ("Aplico el patrón creacional Builder a la construcción de Pedido (CU1): diagrama .puml/.png, anexo del patrón y registro de uso de IA"). No requirió cambios en archivos.
+- [feature/esp-patron-estructural-add-patron-decorator] incorporo rama feature, patron de diseño, utilizacion de ia, puml y png
+  Issue: [#283](https://github.com/eloeyhe/SistemaPedidos/issues/283)
+  Issue: [#284](https://github.com/eloeyhe/SistemaPedidos/issues/284)
+  Issue: [#285](https://github.com/eloeyhe/SistemaPedidos/issues/285)
+  Issue: [#286](https://github.com/eloeyhe/SistemaPedidos/issues/286)
+  Issue: [#287](https://github.com/eloeyhe/SistemaPedidos/issues/287)
+  Issue: [#288](https://github.com/eloeyhe/SistemaPedidos/issues/288)
+  PR: [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) - @nachovelesquen7-rgb (Especialista en Patrón de Diseño Estructural)
+
+- [feature/esp-patron-comportamiento-add-patron-state] [Patrón de comportamiento] aplico patrón State en Pedido
+  Issue: [#299](https://github.com/eloeyhe/SistemaPedidos/issues/299)
+  Issue: [#300](https://github.com/eloeyhe/SistemaPedidos/issues/300)
+  Issue: [#301](https://github.com/eloeyhe/SistemaPedidos/issues/301)
+  Issue: [#302](https://github.com/eloeyhe/SistemaPedidos/issues/302)
+  Issue: [#303](https://github.com/eloeyhe/SistemaPedidos/issues/303)
+  Issue: [#304](https://github.com/eloeyhe/SistemaPedidos/issues/304)
+  PR: [#306](https://github.com/eloeyhe/SistemaPedidos/pull/306) - @eloeyhe (Especialista en Patrón de Diseño de Comportamiento)
+
+- [feature/esp-patron-creacional-add-patron-builder] Aplico patrón Builder a la construcción de Pedido
   Issue: [#291](https://github.com/eloeyhe/SistemaPedidos/issues/291)
   Issue: [#292](https://github.com/eloeyhe/SistemaPedidos/issues/292)
   Issue: [#293](https://github.com/eloeyhe/SistemaPedidos/issues/293)
