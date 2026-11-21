@@ -251,3 +251,12 @@ Ignacio revisó esta PR con IA y la documentó en `ia/segundo-parcial/especialis
 - 9. *Baja.* La descripción de la PR todavía dice `changelo.md`, tiene la ruta del anexo cortada y no menciona que reemplaza a la #305.
 
 [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007010103), bloqueado solo por el hallazgo 8.
+
+**Cierre de la review 3 (21/11):** Eloy corrigió el hallazgo 8 en `7da0f29` y actualizó la descripción de la PR (hallazgo 9). Antes de aprobar se verificó la PR contra la consigna:
+- Rutas y nombres de los entregables.
+- Nombre de la rama.
+- Plantilla del anexo.
+- Contexto IA obligatorio: diagrama final y los cinco `01-solid-0X`.
+- Entrada del changelog.
+
+Decisión: [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007050620).
