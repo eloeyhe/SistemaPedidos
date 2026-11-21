@@ -8,6 +8,15 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Added
 
+- [feature/esp-patron-estructural-add-patron-decorator] incorporo rama feature, patron de diseño, utilizacion de ia, puml y png
+  Issue: [#283](https://github.com/eloeyhe/SistemaPedidos/issues/283)
+  Issue: [#284](https://github.com/eloeyhe/SistemaPedidos/issues/284)
+  Issue: [#285](https://github.com/eloeyhe/SistemaPedidos/issues/285)
+  Issue: [#286](https://github.com/eloeyhe/SistemaPedidos/issues/286)
+  Issue: [#287](https://github.com/eloeyhe/SistemaPedidos/issues/287)
+  Issue: [#288](https://github.com/eloeyhe/SistemaPedidos/issues/288)
+  PR: [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) - @nachovelesquen7-rgb (Especialista en Patrón de Diseño Estructural)
+
 - [feature/coord-devops-update-docs] Actualizo README, índices y plantillas de PR para el Segundo Parcial y documento las code reviews
   Issue: [#277](https://github.com/eloeyhe/SistemaPedidos/issues/277)
   Issue: [#278](https://github.com/eloeyhe/SistemaPedidos/issues/278)
