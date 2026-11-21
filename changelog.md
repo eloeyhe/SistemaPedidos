@@ -58,6 +58,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#282](https://github.com/eloeyhe/SistemaPedidos/issues/282)
   PR: [#281](https://github.com/eloeyhe/SistemaPedidos/pull/281) - @santimarM (Coordinador y DevOps)
 
+- [fix/esp-patron-estructural-plantilla-anexo] realizo correcciones asignadas por el coordinador
+  Issue: [#309](https://github.com/eloeyhe/SistemaPedidos/issues/309)
+  PR: [#310](https://github.com/eloeyhe/SistemaPedidos/pull/310) - @nachovelesquen7-rgb (Especialista en Patrón de Diseño Estructural)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added
