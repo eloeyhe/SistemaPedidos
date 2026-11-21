@@ -1,0 +1,116 @@
+@startuml 01-patron-comportamiento-state
+title Patrón de Comportamiento State - Ciclo de Vida de Pedido
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+hide empty members
+
+class ServicioPedidos <<control>> {
+  - pedidos: List<Pedido>
+  - pedidoEnCurso: Pedido
+  - ultimoNumeroPedido: int
+  + solicitarCambioEstado(numeroPedido: int, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cancelarPedido(numeroPedido: int, motivo: String, actor: Usuario): boolean
+  + buscarPedido(numeroOReferencia: String): Pedido
+  + consultarEstado(numeroPedido: int): EstadoPedido
+}
+
+class Pedido {
+  - fechaHora: DateTime
+  - numeroPedido: int
+  - referenciaRetiro: String
+  - estadoActual: IEstadoPedido
+  - prioritario: boolean
+  - total: decimal
+  + obtenerEstado(): EstadoPedido
+  + establecerEstado(nuevoEstado: IEstadoPedido): void
+  + validarTransicion(nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(nuevoEstado: EstadoPedido): void
+  + cambiarEstado(nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(motivo: String): void
+  + cancelarPedido(motivo: String, actor: Usuario): void
+}
+
+interface IEstadoPedido {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+class EstadoRecibido {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+class EstadoEnPreparacion {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+class EstadoListo {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+class EstadoEntregado {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+class EstadoCancelado {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+enum EstadoPedido {
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+abstract class Usuario {
+  # nombre: String
+  # usuario: String
+  # passwordHash: String
+  # activo: boolean
+  + autentificar(usuario: String, password: String): boolean
+}
+
+ServicioPedidos "1" --> "0..*" Pedido : gestiona y solicita operaciones
+ServicioPedidos ..> EstadoPedido : envía estado destino
+ServicioPedidos ..> Usuario : identifica al actor
+
+Pedido "1" o--> "1" IEstadoPedido : estado actual
+Pedido ..> EstadoPedido : expone estado compatible
+Pedido ..> Usuario : valida el actor
+
+IEstadoPedido ..> Pedido : actualiza estado en contexto
+IEstadoPedido ..> EstadoPedido : consulta o devuelve estado
+IEstadoPedido ..> Usuario : aplica restricciones por rol
+
+EstadoRecibido ..|> IEstadoPedido
+EstadoEnPreparacion ..|> IEstadoPedido
+EstadoListo ..|> IEstadoPedido
+EstadoEntregado ..|> IEstadoPedido
+EstadoCancelado ..|> IEstadoPedido
+
+note right of Pedido
+  estadoActual es la única referencia
+  al estado vigente. EstadoPedido se
+  conserva como vista de compatibilidad
+  para el resto del sistema.
+end note
+
+@enduml
