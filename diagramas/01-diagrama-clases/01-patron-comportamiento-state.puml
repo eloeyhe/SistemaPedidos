@@ -1,4 +1,5 @@
 @startuml 01-patron-comportamiento-state
+scale max 3800 width
 title Patrón de Comportamiento State - Ciclo de Vida de Pedido
 skinparam classAttributeIconSize 0
 skinparam linetype ortho
@@ -6,7 +7,6 @@ hide empty members
 
 class ServicioPedidos <<control>> {
   - pedidos: List<Pedido>
-  - pedidoEnCurso: Pedido
   - ultimoNumeroPedido: int
   + solicitarCambioEstado(numeroPedido: int, nuevoEstado: EstadoPedido, actor: Usuario): boolean
   + cancelarPedido(numeroPedido: int, motivo: String, actor: Usuario): boolean
@@ -86,6 +86,7 @@ abstract class Usuario {
   # passwordHash: String
   # activo: boolean
   + autentificar(usuario: String, password: String): boolean
+  + puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
 }
 
 ServicioPedidos "1" --> "0..*" Pedido : gestiona y solicita operaciones
@@ -99,6 +100,7 @@ Pedido ..> Usuario : valida el actor
 IEstadoPedido ..> Pedido : actualiza estado en contexto
 IEstadoPedido ..> EstadoPedido : consulta o devuelve estado
 IEstadoPedido ..> Usuario : aplica restricciones por rol
+Usuario ..> EstadoPedido : autoriza el estado solicitado
 
 EstadoRecibido ..|> IEstadoPedido
 EstadoEnPreparacion ..|> IEstadoPedido

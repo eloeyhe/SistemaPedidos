@@ -1,4 +1,4 @@
-# Anexo - Aplicación de Patrón de Diseño de Comportamiento - State
+# Anexo – Aplicación de Patrón de Diseño de Comportamiento – State
 
 ## Patrones de Diseño de Comportamiento y su relación con SOLID
 
@@ -10,7 +10,7 @@ La aplicación de State mantiene una relación directa con los principios SOLID:
 - **OCP:** permite incorporar o modificar comportamientos para un estado mediante nuevas implementaciones de `IEstadoPedido`, sin reemplazar toda la lógica central.
 - **LSP:** cada estado concreto puede sustituir a `IEstadoPedido` siempre que respete el contrato de validación, transición, cancelación y consulta del estado.
 - **ISP:** la interfaz `IEstadoPedido` contiene únicamente operaciones relacionadas con el ciclo de vida de `Pedido`; no obliga a las clases consumidoras a implementar responsabilidades ajenas.
-- **DIP:** `Pedido` depende de la abstracción `IEstadoPedido` en lugar de acoplarse a las clases concretas de estado, mientras que `ServicioPedidos`, `Pedido` e `IEstadoPedido` operan sobre la abstracción `Usuario` sin depender de subclases de roles específicos.
+- **DIP:** `Pedido` depende de la abstracción `IEstadoPedido` en lugar de acoplarse a las clases concretas de estado, mientras que `ServicioPedidos`, `Pedido` e `IEstadoPedido` operan sobre la abstracción `Usuario` sin depender de subclases de roles específicos. `Usuario.puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean` permite delegar la autorización por rol de forma polimórfica.
 
 ---
 
@@ -80,6 +80,8 @@ Sus métodos delegan en `estadoActual`; `establecerEstado(...)` permite a un est
 
 Se conservan las firmas originales `cambiarEstado(nuevoEstado: EstadoPedido): void` y `cancelarPedido(motivo: String): void`, junto con sus sobrecargas que reciben `actor: Usuario`, para mantener compatibilidad con los artefactos previos del sistema y habilitar la validación por rol en la delegación al estado actual.
 
+La sobrecarga `cancelarPedido(numeroPedido: int, motivo: String, actor: Usuario, autorizante: UsuarioEncargado): boolean` del diagrama final también delega la cancelación en el estado actual, conservando al autorizante como actor responsable de la operación especial.
+
 ### IEstadoPedido
 
 `IEstadoPedido` es la interfaz común del patrón State. Define `validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean`, `cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void`, `cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void` y `obtenerEstado(): EstadoPedido`.
@@ -114,7 +116,7 @@ No mantiene atributos paralelos en `Pedido`; por tanto, el enum no duplica ni su
 
 ### Usuario
 
-`Usuario` es la abstracción utilizada para validar quién solicita una operación. Permite que los estados distingan la autorización sin conocer las clases concretas de los roles. Aunque `UsuarioMostrador`, `UsuarioCocina` y `UsuarioEncargado` no aparecen en el diagrama de detalle, sus responsabilidades se aplican conceptualmente:
+`Usuario` es la abstracción utilizada para validar quién solicita una operación. La operación `puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean` permite que cada tipo de usuario concrete las operaciones de estado que puede solicitar, de modo que los estados consulten la autorización mediante la abstracción y sin utilizar verificaciones sobre tipos concretos. Cada subclase redefine este comportamiento según su rol. Aunque `UsuarioMostrador`, `UsuarioCocina` y `UsuarioEncargado` no aparecen en el diagrama de detalle, sus responsabilidades se aplican conceptualmente:
 
 - `UsuarioMostrador`: operación desde atención y entrega.
 - `UsuarioCocina`: inicio y finalización de preparación.
@@ -129,7 +131,7 @@ Esto reduce el acoplamiento a implementaciones concretas y respeta DIP.
 1. `ServicioPedidos.solicitarCambioEstado(...)` recibe el número del pedido, `EN_PREPARACION` y un `UsuarioCocina` que actúa como actor.
 2. `ServicioPedidos` obtiene el `Pedido` correspondiente y solicita `Pedido.validarTransicion(EN_PREPARACION, actor)`.
 3. `Pedido` delega la validación a `estadoActual`, que en este momento es una instancia de `EstadoRecibido`.
-4. `EstadoRecibido` verifica el estado destino y si el rol permite iniciar preparación. Si la operación es válida, devuelve `true`.
+4. `EstadoRecibido` verifica el estado destino y solicita `actor.puedeSolicitarEstado(EN_PREPARACION)`. Esta operación polimórfica permite que la subclase concreta del usuario indique si puede iniciar preparación sin que `EstadoRecibido` conozca su tipo. Si la operación es válida, devuelve `true`.
 5. `ServicioPedidos` solicita `Pedido.cambiarEstado(EN_PREPARACION, actor)`.
 6. `Pedido.cambiarEstado(...)` delega en `estadoActual.cambiarEstado(pedido, EN_PREPARACION, actor)`.
 7. `EstadoRecibido` solicita `Pedido.establecerEstado(...)`, pasando una nueva instancia de `EstadoEnPreparacion`.
