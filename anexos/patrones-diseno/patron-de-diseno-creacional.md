@@ -184,7 +184,7 @@ El flujo comienza en `ServicioPedidos`, que actúa como Director:
 2. **Datos básicos:** `ingresarReferenciaRetiro()` delega en `IPedidoBuilder.conReferenciaRetiro(...)`.
 3. **Armado de ítems:** `seleccionarProducto(...)` delega en `agregarProducto(...)`; `seleccionarCombo(...)` delega en `agregarCombo(...)`. `PedidoBuilder` crea un `ItemPedido` en cada operación.
 4. **Personalización:** `ingresarPersonalizacion(...)` delega en `agregarPersonalizacion(...)`. `PedidoBuilder` aplica la personalización al `itemEnCurso`.
-5. **Opciones finales:** `marcarPedidoEnCursoPrioritario()` delega en `builder.marcarPrioritario()` y `seleccionarMedioPago(...)` proporciona el medio para obtener el pago asociado.
+5. **Opciones finales y pago:** `marcarPedidoEnCursoPrioritario()` delega en `builder.marcarPrioritario()`. En `seleccionarMedioPago(...)`, `ServicioPedidos` consulta `builder.obtenerTotalParcial()` para procesar el cobro por ese monto. Aprobado el cobro, `ServicioPedidos` registra el `Pago` y lo entrega al builder con `conPago(pago)`; el monto se valida contra `obtenerTotalParcial()` cuando `construir()` ejecuta `validar()`.
 6. **Total y confirmación:** en `confirmarPedido()`, `ServicioPedidos` genera el número con `generarNumeroPedido()`, toma la fecha y hora actuales e invoca `construir(numeroPedido, fechaHora)`.
 7. **Validación e instanciación:** `PedidoBuilder.construir(...)` ejecuta `validar()`. Comprueba que la referencia de retiro no esté vacía, que exista al menos un `ItemPedido` y que el `Pago` esté registrado con un monto igual al total. Si todas las condiciones se cumplen, instancia `Pedido` en estado `RECIBIDO`.
 8. **Entrega del resultado:** el método `construir()` devuelve el `Pedido` final a `ServicioPedidos`, que lo agrega a `pedidos`.
