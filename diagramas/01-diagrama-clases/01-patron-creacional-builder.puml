@@ -18,7 +18,8 @@ package "Aplicacion" {
     + seleccionarProducto(producto: Producto, cantidad: int): void
     + seleccionarCombo(combo: Combo, cantidad: int): void
     + ingresarPersonalizacion(descripcion: String): void
-    + marcarPrioritario(): void
+    + marcarPrioritario(numeroPedido: int): void
+    + marcarPedidoEnCursoPrioritario(): void
     + seleccionarMedioPago(medioPago: MetodoPago): String
     + confirmarPedido(): Pedido
     + descartarPedidoEnCurso(): void

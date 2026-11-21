@@ -85,6 +85,19 @@ Las responsabilidades existentes cambian de esta manera:
 - `PedidoBuilder` pasa a crear temporalmente los `ItemPedido` y a agrupar el `Pago` como parte de la construcción.
 - `ItemPedido`, `PersonalizacionItem`, `Producto`, `Combo` y `EstadoPedido` conservan sus responsabilidades de dominio dentro del objeto construido.
 
+#### Firmas que cambian respecto del diagrama de clases final
+
+| Clase | Diagrama de clases final | Con el patrón Builder | Motivo |
+|---|---|---|---|
+| `ServicioPedidos` | `iniciarNuevoPedido(): Pedido` | `iniciarNuevoPedido(): void` | Con Builder, el `Pedido` todavía no existe al iniciar la toma: la operación solo invoca `builder.reiniciar()`, por lo que no hay objeto que devolver. |
+| `ServicioPedidos` | — | `marcarPedidoEnCursoPrioritario(): void` | Operación nueva: marca como prioritario el pedido **en construcción** delegando en `builder.marcarPrioritario()`. Convive con `marcarPrioritario(numeroPedido: int): void`, que se mantiene sin cambios para marcar un pedido **ya registrado** (invocada desde `PantallaPedidos`). |
+| `ServicioPedidos` | — | `confirmarPedido(): Pedido` | Operación nueva: genera el número, invoca `construir()` y devuelve el `Pedido` creado. Hace explícito el paso final del Director. |
+| `ServicioPedidos` | `descartarPedidoEnCurso(): void` | `descartarPedidoEnCurso(): void` | Misma firma; cambia su implementación: ya no limpia `pedidoEnCurso` e `itemEnCurso`, sino que invoca `builder.reiniciar()`. |
+| `ServicioPedidos` | `ServicioPedidos()` (implícito) | `ServicioPedidos(builder: IPedidoBuilder)` | Constructor nuevo para inyectar el builder (DIP). |
+| `Pedido` | `registrarPedido(numeroPedido, fechaHora, referenciaRetiro, listaItems, totalPedido, pago): boolean` | `~Pedido(numeroPedido, fechaHora, referenciaRetiro, items, prioritario, pago)` | El constructor de visibilidad de paquete reemplaza al método de registro: solo `PedidoBuilder` crea instancias. |
+
+Las demás operaciones de `ServicioPedidos` que figuran en el diagrama final (búsqueda, modificación, cancelación, cambio de estado y consulta de pedidos activos) no participan del patrón y se mantienen sin cambios, por lo que no se muestran en el diagrama del patrón.
+
 La arquitectura se reorganiza de modo que el estado intermedio queda encapsulado en `PedidoBuilder`. El pedido no se instancia hasta que el Director solicita `construir()` y el ConcreteBuilder comprueba que el pedido esté completo.
 
 ## Estructura de Clases
@@ -105,7 +118,7 @@ El diagrama incluye únicamente las clases que participan en la aplicación del 
 
 Su constructor recibe `IPedidoBuilder`, de modo que el Director depende de una abstracción y no de `PedidoBuilder`. También mantiene `generarNumeroPedido()` para asignar el identificador que se entrega al construir el pedido.
 
-Inicia y controla las operaciones `iniciarNuevoPedido()`, `ingresarReferenciaRetiro()`, `seleccionarProducto()`, `seleccionarCombo()`, `ingresarPersonalizacion()`, `marcarPrioritario()`, `seleccionarMedioPago()`, `confirmarPedido()` y `descartarPedidoEnCurso()`. Las operaciones de construcción se delegan al builder; por ello, la clase ya no contiene `pedidoEnCurso` ni `itemEnCurso`.
+Inicia y controla las operaciones `iniciarNuevoPedido()`, `ingresarReferenciaRetiro()`, `seleccionarProducto()`, `seleccionarCombo()`, `ingresarPersonalizacion()`, `marcarPedidoEnCursoPrioritario()`, `seleccionarMedioPago()`, `confirmarPedido()` y `descartarPedidoEnCurso()`. Las operaciones de construcción se delegan al builder; por ello, la clase ya no contiene `pedidoEnCurso` ni `itemEnCurso`. Además conserva `marcarPrioritario(numeroPedido: int)` del diagrama final para marcar pedidos ya registrados, que no forma parte de la construcción.
 
 **`IPedidoBuilder` – Builder**
 
@@ -167,11 +180,11 @@ En el Builder, un pedido creado por `construir()` debe quedar en estado `RECIBID
 
 El flujo comienza en `ServicioPedidos`, que actúa como Director:
 
-1. **Inicio:** `iniciarNuevoPedido()` llama a `builder.reiniciar()` y prepara un nuevo proceso de construcción.
+1. **Inicio:** `iniciarNuevoPedido()` llama a `builder.reiniciar()` y prepara un nuevo proceso de construcción. A diferencia del diagrama final, no devuelve un `Pedido`, porque este todavía no existe.
 2. **Datos básicos:** `ingresarReferenciaRetiro()` delega en `IPedidoBuilder.conReferenciaRetiro(...)`.
 3. **Armado de ítems:** `seleccionarProducto(...)` delega en `agregarProducto(...)`; `seleccionarCombo(...)` delega en `agregarCombo(...)`. `PedidoBuilder` crea un `ItemPedido` en cada operación.
 4. **Personalización:** `ingresarPersonalizacion(...)` delega en `agregarPersonalizacion(...)`. `PedidoBuilder` aplica la personalización al `itemEnCurso`.
-5. **Opciones finales:** `marcarPrioritario()` delega en el Builder y `seleccionarMedioPago(...)` proporciona el medio para obtener el pago asociado.
+5. **Opciones finales:** `marcarPedidoEnCursoPrioritario()` delega en `builder.marcarPrioritario()` y `seleccionarMedioPago(...)` proporciona el medio para obtener el pago asociado.
 6. **Total y confirmación:** en `confirmarPedido()`, `ServicioPedidos` genera el número con `generarNumeroPedido()`, toma la fecha y hora actuales e invoca `construir(numeroPedido, fechaHora)`.
 7. **Validación e instanciación:** `PedidoBuilder.construir(...)` ejecuta `validar()`. Comprueba que la referencia de retiro no esté vacía, que exista al menos un `ItemPedido` y que el `Pago` esté registrado con un monto igual al total. Si todas las condiciones se cumplen, instancia `Pedido` en estado `RECIBIDO`.
 8. **Entrega del resultado:** el método `construir()` devuelve el `Pedido` final a `ServicioPedidos`, que lo agrega a `pedidos`.
