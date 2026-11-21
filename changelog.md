@@ -6,6 +6,18 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Segundo Parcial]
 
+### Added
+
+- [feature/esp-patron-creacional-add-patron-builder] Aplico el patrón creacional Builder a la construcción de Pedido (CU1): diagrama .puml/.png, anexo del patrón y registro de uso de IA
+  Issue: [#291](https://github.com/eloeyhe/SistemaPedidos/issues/291)
+  Issue: [#292](https://github.com/eloeyhe/SistemaPedidos/issues/292)
+  Issue: [#293](https://github.com/eloeyhe/SistemaPedidos/issues/293)
+  Issue: [#294](https://github.com/eloeyhe/SistemaPedidos/issues/294)
+  Issue: [#295](https://github.com/eloeyhe/SistemaPedidos/issues/295)
+  Issue: [#296](https://github.com/eloeyhe/SistemaPedidos/issues/296)
+  Issue: [#297](https://github.com/eloeyhe/SistemaPedidos/issues/297)
+  PR: [#M](https://github.com/eloeyhe/SistemaPedidos/pull/M) - @Leandro2107 (Especialista en Patrón de Diseño Creacional)
+
 ### Changed
 
 - [backport/release-actividad-obligatoria-4] Backport release/actividad-obligatoria-4 hacia develop
