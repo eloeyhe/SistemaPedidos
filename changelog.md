@@ -4,7 +4,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
-## [Segundo Parcial]
+## [Segundo Parcial] - 2026-11-21
 
 ### Added
 
