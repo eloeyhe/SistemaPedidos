@@ -16,7 +16,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#295](https://github.com/eloeyhe/SistemaPedidos/issues/295)
   Issue: [#296](https://github.com/eloeyhe/SistemaPedidos/issues/296)
   Issue: [#297](https://github.com/eloeyhe/SistemaPedidos/issues/297)
-  PR: [#M](https://github.com/eloeyhe/SistemaPedidos/pull/M) - @Leandro2107 (Especialista en Patrón de Diseño Creacional)
+  PR: [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) - @Leandro2107 (Especialista en Patrón de Diseño Creacional)
 
 ### Changed
 
