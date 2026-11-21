@@ -29,11 +29,7 @@ La utilización de estos principios no se garantiza automáticamente por aplicar
 
 ## Propósito y Tipo del Patrón
 
-**Tipo**
-
-Se seleccionó el patrón **Decorator (Decorador)**, perteneciente a la categoría de patrones estructurales GoF.
-
-**Proposito**
+**Propósito:**
 
 El propósito de Decorator es agregar responsabilidades o comportamientos a un objeto de forma dinámica, envolviéndolo en otro objeto que implementa la misma interfaz.
 
@@ -46,6 +42,12 @@ Por ejemplo, un cliente puede seleccionar una hamburguesa y agregar queso extra 
 Con Decorator, cada costo adicional se representa mediante un decorador que envuelve al elemento anterior y agrega su importe al precio acumulado.
 
 Esto permite construir una cadena de decoradores y obtener el precio unitario final mediante una única operación: `obtenerPrecio()`.
+
+**Tipo:**
+
+Se seleccionó el patrón **Decorator (Decorador)**, perteneciente a la categoría de patrones estructurales GoF.
+
+Decorator es adecuado porque cada personalización agrega un costo al precio de un ítem de forma acumulativa y combinable, sin necesidad de crear una subclase por cada combinación posible de adicionales.
 
 ## Motivación
 

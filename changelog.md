@@ -8,7 +8,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Added
 
-- [feature/esp-patron-estructural-add-patron-decorator] incorporo rama feature, patron de diseño, utilizacion de ia, puml y png
+- [feature/esp-patron-estructural-add-patron-decorator] Aplico patrón Decorator al cálculo de precios con personalizaciones
   Issue: [#283](https://github.com/eloeyhe/SistemaPedidos/issues/283)
   Issue: [#284](https://github.com/eloeyhe/SistemaPedidos/issues/284)
   Issue: [#285](https://github.com/eloeyhe/SistemaPedidos/issues/285)
