@@ -6,16 +6,6 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Segundo Parcial]
 
-### Added
-- [feature/esp-patron-comportamiento-add-patron-state] [Patrón de comportamiento] aplico patrón State en Pedido
-  Issue: [#299](https://github.com/eloeyhe/SistemaPedidos/issues/299)
-  Issue: [#300](https://github.com/eloeyhe/SistemaPedidos/issues/300)
-  Issue: [#301](https://github.com/eloeyhe/SistemaPedidos/issues/301)
-  Issue: [#302](https://github.com/eloeyhe/SistemaPedidos/issues/302)
-  Issue: [#303](https://github.com/eloeyhe/SistemaPedidos/issues/303)
-  Issue: [#304](https://github.com/eloeyhe/SistemaPedidos/issues/304)
-  PR: [#306](https://github.com/eloeyhe/SistemaPedidos/pull/306) - @eloeyhe (Especialista en Patrón de Diseño de Comportamiento)
-
 ### Changed
 
 - [backport/release-actividad-obligatoria-4] Backport release/actividad-obligatoria-4 hacia develop
