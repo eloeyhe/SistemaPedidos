@@ -17,7 +17,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#288](https://github.com/eloeyhe/SistemaPedidos/issues/288)
   PR: [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) - @nachovelesquen7-rgb (Especialista en Patrón de Diseño Estructural)
 
-  - [feature/esp-patron-comportamiento-add-patron-state] [Patrón de comportamiento] aplico patrón State en Pedido
+- [feature/esp-patron-comportamiento-add-patron-state] [Patrón de comportamiento] aplico patrón State en Pedido
   Issue: [#299](https://github.com/eloeyhe/SistemaPedidos/issues/299)
   Issue: [#300](https://github.com/eloeyhe/SistemaPedidos/issues/300)
   Issue: [#301](https://github.com/eloeyhe/SistemaPedidos/issues/301)
