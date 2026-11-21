@@ -94,7 +94,7 @@ Al final, indica la decisión sugerida para la PR (Approve o Request changes) y 
 | 1 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-5987153385) (9 hallazgos) |
 | 2 | [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) | `feature/esp-patron-creacional-add-patron-builder` | @Leandro2107 | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6002643258) (4 hallazgos) |
 | 3 | Pendiente | `feature/esp-patron-comportamiento-add-patron-<nombre>` | @eloeyhe | Pendiente |
-| 4 | Pendiente | PR de correcciones (re-revisión de la #289 u otra PR de correcciones) | — | Pendiente |
+| 4 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) (correcciones, commit `b0e7b71`) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-6003111880) (3 hallazgos nuevos; 8 de 11 anteriores corregidos) |
 
 ### Code Review 1 — PR #289 (Patrón estructural Decorator)
 
@@ -173,3 +173,28 @@ Decisión sugerida: Request changes (hallazgos 1 y 2).
 - En el hallazgo 2 se agregó una alternativa concreta: conservar `marcarPrioritario(numeroPedido: int)` y nombrar distinto la operación de construcción.
 - En el hallazgo 4 se tomó como referencia la decisión vigente del CU1: el `Pago` se crea cuando se aprueba el cobro.
 - La IA había propuesto como hallazgo que las Issues no se cerrarían solas por ir a `develop`. Se pasó a "nota informativa": no es un error del especialista, y el cierre manual lo hace el coordinador después del merge.
+
+### Code Review 4 — PR #289, re-revisión de las correcciones (commit `b0e7b71`)
+
+**Prompt utilizado:**
+
+```text
+Re-revisá la PR #289 después del commit b0e7b71 "Realizo correcciones solicitadas por el coordinador".
+Para cada hallazgo de la review anterior (1 a 11) indicá si quedó Corregido, Parcial o Pendiente,
+citando la línea actual. Después buscá hallazgos nuevos introducidos por las correcciones con el
+mismo formato (Severidad / Archivo / Línea / Problema / Sugerencia) y verificá que los enlaces
+de los índices (patrones_diseno.md, README) apunten al nombre real del anexo.
+```
+
+**Output generado por la IA (resumen):**
+- **Corregidos:** 2, 4, 5, 6, 7, 8/11 y 9 (a) y (c). El punto 9 (b) y el 10 eran opcionales.
+- **Parciales:** el 1 (el anexo se movió, pero el nombre sigue con "ñ") y el 3.
+- **Nuevos:**
+  - 12. *Alta.* Por el nombre con "ñ" se rompe el enlace del índice `patrones_diseno.md` y del README.
+  - 13. *Media.* "Problema identificado" está duplicado, queda la numeración vieja en "3.3. Solución propuesta" y faltan los apartados **Propósito:** y **Tipo:**.
+  - 14. *Baja.* La lista de archivos de la descripción de la PR está desactualizada y #283 figura como `Related to`.
+
+**Ajustes aplicados antes de publicar el comentario:**
+- Se comprobó que el `.png` no necesitaba regenerarse: el cambio del `.puml` solo quitó la línea vacía y el nombre del `@startuml`, y ninguno de los dos afecta al render.
+- La IA marcaba como hallazgo el "si en el futuro…" de la línea 192. Se descartó, porque ahí se usa para ilustrar OCP y no para plantear el problema, que ya es concreto.
+- Se agregó al hallazgo 12 el comando `git mv` exacto.
