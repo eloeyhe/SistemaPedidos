@@ -245,3 +245,9 @@ Ignacio revisó esta PR con IA y la documentó en `ia/segundo-parcial/especialis
 2. **Mínimo de 4 reviews: no aplica.** Según la respuesta del docente en el foro, las 4 reviews son las 3 PRs de especialistas más 1 PR de correcciones, y la tabla quedó completa.
 
 **Continuación de la review 3 (21/11):** Eloy cerró la #305 y abrió la #306 desde `feature/esp-patron-comportamiento-add-patron-state`, con el mismo commit `1ad321a`. Así quedó corregido el hallazgo 2. Los demás hallazgos se trasladaron a la #306 en una tabla de estado. Se agregó el hallazgo 7, *Media*: la descripción de la PR sigue nombrando la rama `observer`, lista archivos con placeholders y no menciona que reemplaza a la #305.
+
+**Re-review de la #306 (21/11, commit `ac08b5a`):** Eloy corrigió los hallazgos 2 a 5. Usó `scale max 3800 width` para el PNG, agregó `Usuario.puedeSolicitarEstado(...)`, cambió el título a `–`, sacó `pedidoEnCurso` y mencionó la cancelación con autorizante. Se verificó visualmente el PNG nuevo (3769 × 1133 px). Quedaron pendientes dos hallazgos:
+- 8. *Media.* El changelog nombra la rama vieja `...-observer`.
+- 9. *Baja.* La descripción de la PR todavía dice `changelo.md`, tiene la ruta del anexo cortada y no menciona que reemplaza a la #305.
+
+[Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007010103), bloqueado solo por el hallazgo 8.
