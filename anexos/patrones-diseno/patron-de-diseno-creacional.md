@@ -14,7 +14,7 @@ La aplicación de estos patrones se relaciona con SOLID de la siguiente manera:
 
 ## Propósito y Tipo del Patrón
 
-**Propósito**
+**Propósito:**
 
 Construir el objeto complejo `Pedido` paso a paso durante el caso de uso CU1 – Tomar pedido, evitando que exista un pedido incompleto o que las reglas de construcción queden repartidas entre varias clases.
 
@@ -28,7 +28,7 @@ La construcción original del diagrama de clases final muestra una configuració
 
 El Builder separa estos datos parciales del producto final y garantiza que el pedido solo pueda instanciarse cuando se verifica su integridad.
 
-**Tipo**
+**Tipo:**
 
 Patrón de diseño **creacional – Builder**.
 

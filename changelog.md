@@ -8,7 +8,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Added
 
-- [feature/esp-patron-creacional-add-patron-builder] Aplico el patrón creacional Builder a la construcción de Pedido (CU1): diagrama .puml/.png, anexo del patrón y registro de uso de IA
+- [feature/esp-patron-creacional-add-patron-builder] actualicé el título de la PR para que coincida literalmente con la descripción de la entrada en changelog.md ("Aplico el patrón creacional Builder a la construcción de Pedido (CU1): diagrama .puml/.png, anexo del patrón y registro de uso de IA"). No requirió cambios en archivos.
   Issue: [#291](https://github.com/eloeyhe/SistemaPedidos/issues/291)
   Issue: [#292](https://github.com/eloeyhe/SistemaPedidos/issues/292)
   Issue: [#293](https://github.com/eloeyhe/SistemaPedidos/issues/293)
