@@ -93,8 +93,10 @@ Al final, indica la decisión sugerida para la PR (Approve o Request changes) y 
 |---|----|------|-------|-----------|
 | 1 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-5987153385) (9 hallazgos) |
 | 2 | [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) | `feature/esp-patron-creacional-add-patron-builder` | @Leandro2107 | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6002643258) (4 hallazgos) → [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6008020072) tras `28899d3` (2–4 corregidos; changelog y conflicto pendientes) → [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6008243885) tras `19356b1` |
-| 3 | [#305](https://github.com/eloeyhe/SistemaPedidos/pull/305) → [#306](https://github.com/eloeyhe/SistemaPedidos/pull/306) | `feature/esp-patron-comportamiento-add-patron-state` (antes `...-observer`) | @eloeyhe | [Request changes en #305](https://github.com/eloeyhe/SistemaPedidos/pull/305#pullrequestreview-6006440774) (6 hallazgos) → [Request changes en #306](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6006826721) (rama corregida; pendientes 1, 3–6 + hallazgo 7) |
+| 3 | [#305](https://github.com/eloeyhe/SistemaPedidos/pull/305) → [#306](https://github.com/eloeyhe/SistemaPedidos/pull/306) | `feature/esp-patron-comportamiento-add-patron-state` (antes `...-observer`) | @eloeyhe | [Request changes en #305](https://github.com/eloeyhe/SistemaPedidos/pull/305#pullrequestreview-6006440774) (6 hallazgos) → [Request changes en #306](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6006826721) (hallazgo 7) → [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007010103) tras `ac08b5a` → [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007050620) tras `7da0f29` → [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007224732) tras `055f4d2` |
 | 4 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) (correcciones, commit `b0e7b71`) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-6003111880) (3 hallazgos nuevos; 8 de 11 anteriores corregidos) → [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-6006440899) tras `5873628` y `17bc019` |
+
+Se revisaron **cuatro PRs distintas**, de los tres especialistas: [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) (Decorator), [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) (Builder), [#305](https://github.com/eloeyhe/SistemaPedidos/pull/305) y [#306](https://github.com/eloeyhe/SistemaPedidos/pull/306) (State). La #305 se cerró sin merge para renombrar la rama y la revisión continuó en la #306. La review 4 es la re-revisión de las correcciones de la #289, que el docente indicó que cuenta para el mínimo de 4. Las cuatro PRs terminaron con Approve del coordinador antes del merge.
 
 ### Code Review 1 — PR #289 (Patrón estructural Decorator)
 
@@ -182,6 +184,57 @@ Ajustes aplicados antes de publicar: se renderizó el `.png` nuevo (1409 × 1420
 
 **Cierre (commit `19356b1`):** se verificó que la línea del changelog coincide con el título de la PR y que el conflicto quedó resuelto con las entradas en orden de merge (#289, #306, #298) y sin marcas de conflicto. También se verificó que la PR solo toca los cinco archivos del rol. Decisión: [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6008243885).
 
+### Code Review 3 — PRs #305 y #306 (Patrón de comportamiento State)
+
+**Prompt utilizado:** el prompt base de la sección 2, con estos valores:
+
+```text
+<CATEGORIA> = de comportamiento
+Rama: feature/esp-patron-comportamiento-add-patron-observer
+Archivos de la PR:
+- anexos/patrones-diseno/patron-de-diseno-de-comportamiento.md
+- diagramas/01-diagrama-clases/01-patron-comportamiento-state.puml y .png
+- ia/segundo-parcial/especialista-patron-comportamiento.md
+Compara el nombre de la rama con el patrón aplicado, cada firma contra
+06-clases-diagrama-final.puml y verifica que el .png esté completo (sin recorte).
+Verifica que los Closes apunten a las Issues #299 a #304 y que exista la entrada del changelog.
+```
+
+**Output generado por la IA (resumen):**
+1. *Alta.* Falta la entrada del changelog, que es la Issue #304.
+2. *Media.* La rama dice `observer`, pero el patrón aplicado es State.
+3. *Media.* El PNG mide 4096 px de ancho y la nota de `Pedido` aparece recortada.
+4. *Media.* Los estados validan por rol dependiendo solo de `Usuario`, pero `Usuario` no expone ninguna operación de rol. Sin ella habría que usar `instanceof`, lo que contradice el DIP que declara el anexo.
+5. *Baja.* El título usa `-` en lugar de `–`, aparece `pedidoEnCurso` en el diagrama y falta mencionar la cancelación con autorizante.
+6. *Baja.* La descripción de la PR tiene placeholders y un enlace a otro repositorio, #299 figura como `Related to` y el commit no es descriptivo.
+
+Decisión sugerida: Request changes (hallazgos 1 a 3).
+
+**Ajustes aplicados antes de publicar el comentario:**
+- Se midió el PNG (4096 × 903 px) y se comprobó visualmente el recorte. La IA lo había inferido solo por el ancho.
+- En el hallazgo 2 se agregó el comando de renombrado desde GitHub, que mantiene abierta la PR.
+- En el hallazgo 4 se agregó una alternativa sin cambiar el modelo: aclarar en el anexo que la validación por rol queda fuera del alcance del patrón.
+- Se descartó un hallazgo de la IA que pedía tarjetas CRC para los estados concretos: la consigna no lo exige (lección del hallazgo 10 de la review 1).
+
+**Continuación de la review 3 (21/11):** Eloy cerró la #305 y abrió la #306 desde `feature/esp-patron-comportamiento-add-patron-state`, con el mismo commit `1ad321a`. Así quedó corregido el hallazgo 2. Los demás hallazgos se trasladaron a la #306 en una tabla de estado. Se agregó el hallazgo 7, *Media*: la descripción de la PR sigue nombrando la rama `observer`, lista archivos con placeholders y no menciona que reemplaza a la #305.
+
+**Re-review de la #306 (21/11, commit `ac08b5a`):** Eloy corrigió los hallazgos 2 a 5. Usó `scale max 3800 width` para el PNG, agregó `Usuario.puedeSolicitarEstado(...)`, cambió el título a `–`, sacó `pedidoEnCurso` y mencionó la cancelación con autorizante. Se verificó visualmente el PNG nuevo (3769 × 1133 px). Quedaron pendientes dos hallazgos:
+- 8. *Media.* El changelog nombra la rama vieja `...-observer`.
+- 9. *Baja.* La descripción de la PR todavía dice `changelo.md`, tiene la ruta del anexo cortada y no menciona que reemplaza a la #305.
+
+[Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007010103), bloqueado solo por el hallazgo 8.
+
+**Cierre de la review 3 (21/11):** Eloy corrigió el hallazgo 8 en `7da0f29` y actualizó la descripción de la PR (hallazgo 9). Antes de aprobar se verificó la PR contra la consigna:
+- Rutas y nombres de los entregables.
+- Nombre de la rama.
+- Plantilla del anexo.
+- Contexto IA obligatorio: diagrama final y los cinco `01-solid-0X`.
+- Entrada del changelog.
+
+Decisión: [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007050620).
+
+**Re-aprobación de la #306 (21/11):** Eloy trajo develop a su rama y subió `cdf7cca` y `b5bca35` para resolver el conflicto, y con eso se cayó la aprobación anterior. Se le marcó el hallazgo 10, *Media*: la entrada del changelog tenía sangría y quedaba anidada dentro de la de la #289. Lo corrigió en `055f4d2`. Decisión: [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007224732).
+
 ### Code Review 4 — PR #289, re-revisión de las correcciones (commit `b0e7b71`)
 
 **Prompt utilizado:**
@@ -214,59 +267,8 @@ de los índices (patrones_diseno.md, README) apunten al nombre real del anexo.
 
 Quedó un solo hallazgo nuevo, el 15, de severidad *Baja*: `**Tipo**` y `**Proposito**` están sin los dos puntos, sin tilde y en orden invertido. No bloquea el merge, así que la decisión pasó a **Approve**.
 
-### Code Review 3 — PR #305 (Patrón de comportamiento State)
-
-**Prompt utilizado:** el prompt base de la sección 2, con estos valores:
-
-```text
-<CATEGORIA> = de comportamiento
-Rama: feature/esp-patron-comportamiento-add-patron-observer
-Archivos de la PR:
-- anexos/patrones-diseno/patron-de-diseno-de-comportamiento.md
-- diagramas/01-diagrama-clases/01-patron-comportamiento-state.puml y .png
-- ia/segundo-parcial/especialista-patron-comportamiento.md
-Compara el nombre de la rama con el patrón aplicado, cada firma contra
-06-clases-diagrama-final.puml y verifica que el .png esté completo (sin recorte).
-Verifica que los Closes apunten a las Issues #299 a #304 y que exista la entrada del changelog.
-```
-
-**Output generado por la IA (resumen):**
-1. *Alta.* Falta la entrada del changelog, que es la Issue #304.
-2. *Media.* La rama dice `observer`, pero el patrón aplicado es State.
-3. *Media.* El PNG mide 4096 px de ancho y la nota de `Pedido` aparece recortada.
-4. *Media.* Los estados validan por rol dependiendo solo de `Usuario`, pero `Usuario` no expone ninguna operación de rol. Sin ella habría que usar `instanceof`, lo que contradice el DIP que declara el anexo.
-5. *Baja.* El título usa `-` en lugar de `–`, aparece `pedidoEnCurso` en el diagrama y falta mencionar la cancelación con autorizante.
-6. *Baja.* La descripción de la PR tiene placeholders y un enlace a otro repositorio, #299 figura como `Related to` y el commit no es descriptivo.
-
-Decisión sugerida: Request changes (hallazgos 1 a 3).
-
-**Ajustes aplicados antes de publicar el comentario:**
-- Se midió el PNG (4096 × 903 px) y se comprobó visualmente el recorte. La IA lo había inferido solo por el ancho.
-- En el hallazgo 2 se agregó el comando de renombrado desde GitHub, que mantiene abierta la PR.
-- En el hallazgo 4 se agregó una alternativa sin cambiar el modelo: aclarar en el anexo que la validación por rol queda fuera del alcance del patrón.
-- Se descartó un hallazgo de la IA que pedía tarjetas CRC para los estados concretos: la consigna no lo exige (lección del hallazgo 10 de la review 1).
-
 ### Code review recibida — PR #290 (por @nachovelesquen7-rgb)
 
 Ignacio revisó esta PR con IA y la documentó en `ia/segundo-parcial/especialista-patron-estructural.md`. Su revisión tuvo dos hallazgos. La respuesta quedó en la PR ([comentario](https://github.com/eloeyhe/SistemaPedidos/pull/290#issuecomment-7065364797)):
 1. **Enlaces sin destino: aceptado con ajuste.** Se completaron los marcadores con **State** y se fijó el orden de integración: primero las tres PRs de especialistas y después la #290.
 2. **Mínimo de 4 reviews: no aplica.** Según la respuesta del docente en el foro, las 4 reviews son las 3 PRs de especialistas más 1 PR de correcciones, y la tabla quedó completa.
-
-**Continuación de la review 3 (21/11):** Eloy cerró la #305 y abrió la #306 desde `feature/esp-patron-comportamiento-add-patron-state`, con el mismo commit `1ad321a`. Así quedó corregido el hallazgo 2. Los demás hallazgos se trasladaron a la #306 en una tabla de estado. Se agregó el hallazgo 7, *Media*: la descripción de la PR sigue nombrando la rama `observer`, lista archivos con placeholders y no menciona que reemplaza a la #305.
-
-**Re-review de la #306 (21/11, commit `ac08b5a`):** Eloy corrigió los hallazgos 2 a 5. Usó `scale max 3800 width` para el PNG, agregó `Usuario.puedeSolicitarEstado(...)`, cambió el título a `–`, sacó `pedidoEnCurso` y mencionó la cancelación con autorizante. Se verificó visualmente el PNG nuevo (3769 × 1133 px). Quedaron pendientes dos hallazgos:
-- 8. *Media.* El changelog nombra la rama vieja `...-observer`.
-- 9. *Baja.* La descripción de la PR todavía dice `changelo.md`, tiene la ruta del anexo cortada y no menciona que reemplaza a la #305.
-
-[Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007010103), bloqueado solo por el hallazgo 8.
-
-**Cierre de la review 3 (21/11):** Eloy corrigió el hallazgo 8 en `7da0f29` y actualizó la descripción de la PR (hallazgo 9). Antes de aprobar se verificó la PR contra la consigna:
-- Rutas y nombres de los entregables.
-- Nombre de la rama.
-- Plantilla del anexo.
-- Contexto IA obligatorio: diagrama final y los cinco `01-solid-0X`.
-- Entrada del changelog.
-
-Decisión: [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007050620).
-
-**Re-aprobación de la #306 (21/11):** Eloy trajo develop a su rama y subió `cdf7cca` y `b5bca35` para resolver el conflicto, y con eso se cayó la aprobación anterior. Se le marcó el hallazgo 10, *Media*: la entrada del changelog tenía sangría y quedaba anidada dentro de la de la #289. Lo corrigió en `055f4d2`. Decisión: [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007224732).
