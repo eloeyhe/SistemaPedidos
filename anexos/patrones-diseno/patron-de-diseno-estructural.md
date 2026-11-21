@@ -29,8 +29,11 @@ La utilización de estos principios no se garantiza automáticamente por aplicar
 
 ## Propósito y Tipo del Patrón
 
+**Tipo**
+
 Se seleccionó el patrón **Decorator (Decorador)**, perteneciente a la categoría de patrones estructurales GoF.
 
+**Proposito**
 
 El propósito de Decorator es agregar responsabilidades o comportamientos a un objeto de forma dinámica, envolviéndolo en otro objeto que implementa la misma interfaz.
 
@@ -70,7 +73,6 @@ Por su parte, `PersonalizacionItem` contiene la descripción y el costo adiciona
 
 El diagrama original establece que cada `ItemPedido` referencia un `Producto` o un `Combo`, pero nunca ambos. También indica que `precioUnitario` conserva el precio vigente al registrar el pedido.
 
-### Problema identificado
 
 ### Problema identificado
 
@@ -86,7 +88,7 @@ Para mejorar esta estructura, se propone aplicar el patrón **Decorator**, separ
 
 De esta manera, se favorece la separación de responsabilidades y la extensibilidad del diseño, en relación con los principios SRP y OCP.
 
-### 3.3. Solución propuesta
+### Solución propuesta
 
 Se propone aplicar Decorator para encapsular la incorporación de los costos adicionales.
 
