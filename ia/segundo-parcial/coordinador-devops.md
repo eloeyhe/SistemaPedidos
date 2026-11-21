@@ -93,8 +93,8 @@ Al final, indica la decisión sugerida para la PR (Approve o Request changes) y 
 |---|----|------|-------|-----------|
 | 1 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-5987153385) (9 hallazgos) |
 | 2 | [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) | `feature/esp-patron-creacional-add-patron-builder` | @Leandro2107 | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6002643258) (4 hallazgos) |
-| 3 | Pendiente | `feature/esp-patron-comportamiento-add-patron-<nombre>` | @eloeyhe | Pendiente |
-| 4 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) (correcciones, commit `b0e7b71`) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-6003111880) (3 hallazgos nuevos; 8 de 11 anteriores corregidos) |
+| 3 | [#305](https://github.com/eloeyhe/SistemaPedidos/pull/305) | `feature/esp-patron-comportamiento-add-patron-observer` | @eloeyhe | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/305#pullrequestreview-6006440774) (6 hallazgos) |
+| 4 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) (correcciones, commit `b0e7b71`) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-6003111880) (3 hallazgos nuevos; 8 de 11 anteriores corregidos) → [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-6006440899) tras `5873628` y `17bc019` |
 
 ### Code Review 1 — PR #289 (Patrón estructural Decorator)
 
@@ -198,3 +198,48 @@ de los índices (patrones_diseno.md, README) apunten al nombre real del anexo.
 - Se comprobó que el `.png` no necesitaba regenerarse: el cambio del `.puml` solo quitó la línea vacía y el nombre del `@startuml`, y ninguno de los dos afecta al render.
 - La IA marcaba como hallazgo el "si en el futuro…" de la línea 192. Se descartó, porque ahí se usa para ilustrar OCP y no para plantear el problema, que ya es concreto.
 - Se agregó al hallazgo 12 el comando `git mv` exacto.
+
+**Cierre de la review 4 (21/11):** Ignacio subió `5873628` y `17bc019`. Se volvió a verificar cada hallazgo:
+- 12: corregido. El anexo pasó a llamarse `patron-de-diseno-estructural.md`.
+- 13: (a) y (b) corregidos.
+- 14: corregido. La descripción de la PR quedó actualizada y tiene `Closes #283`.
+
+Quedó un solo hallazgo nuevo, el 15, de severidad *Baja*: `**Tipo**` y `**Proposito**` están sin los dos puntos, sin tilde y en orden invertido. No bloquea el merge, así que la decisión pasó a **Approve**.
+
+### Code Review 3 — PR #305 (Patrón de comportamiento State)
+
+**Prompt utilizado:** el prompt base de la sección 2, con estos valores:
+
+```text
+<CATEGORIA> = de comportamiento
+Rama: feature/esp-patron-comportamiento-add-patron-observer
+Archivos de la PR:
+- anexos/patrones-diseno/patron-de-diseno-de-comportamiento.md
+- diagramas/01-diagrama-clases/01-patron-comportamiento-state.puml y .png
+- ia/segundo-parcial/especialista-patron-comportamiento.md
+Compara el nombre de la rama con el patrón aplicado, cada firma contra
+06-clases-diagrama-final.puml y verifica que el .png esté completo (sin recorte).
+Verifica que los Closes apunten a las Issues #299 a #304 y que exista la entrada del changelog.
+```
+
+**Output generado por la IA (resumen):**
+1. *Alta.* Falta la entrada del changelog, que es la Issue #304.
+2. *Media.* La rama dice `observer`, pero el patrón aplicado es State.
+3. *Media.* El PNG mide 4096 px de ancho y la nota de `Pedido` aparece recortada.
+4. *Media.* Los estados validan por rol dependiendo solo de `Usuario`, pero `Usuario` no expone ninguna operación de rol. Sin ella habría que usar `instanceof`, lo que contradice el DIP que declara el anexo.
+5. *Baja.* El título usa `-` en lugar de `–`, aparece `pedidoEnCurso` en el diagrama y falta mencionar la cancelación con autorizante.
+6. *Baja.* La descripción de la PR tiene placeholders y un enlace a otro repositorio, #299 figura como `Related to` y el commit no es descriptivo.
+
+Decisión sugerida: Request changes (hallazgos 1 a 3).
+
+**Ajustes aplicados antes de publicar el comentario:**
+- Se midió el PNG (4096 × 903 px) y se comprobó visualmente el recorte. La IA lo había inferido solo por el ancho.
+- En el hallazgo 2 se agregó el comando de renombrado desde GitHub, que mantiene abierta la PR.
+- En el hallazgo 4 se agregó una alternativa sin cambiar el modelo: aclarar en el anexo que la validación por rol queda fuera del alcance del patrón.
+- Se descartó un hallazgo de la IA que pedía tarjetas CRC para los estados concretos: la consigna no lo exige (lección del hallazgo 10 de la review 1).
+
+### Code review recibida — PR #290 (por @nachovelesquen7-rgb)
+
+Ignacio revisó esta PR con IA y la documentó en `ia/segundo-parcial/especialista-patron-estructural.md`. Su revisión tuvo dos hallazgos. La respuesta quedó en la PR ([comentario](https://github.com/eloeyhe/SistemaPedidos/pull/290#issuecomment-7065364797)):
+1. **Enlaces sin destino: aceptado con ajuste.** Se completaron los marcadores con **State** y se fijó el orden de integración: primero las tres PRs de especialistas y después la #290.
+2. **Mínimo de 4 reviews: no aplica.** Según la respuesta del docente en el foro, las 4 reviews son las 3 PRs de especialistas más 1 PR de correcciones, y la tabla quedó completa.
