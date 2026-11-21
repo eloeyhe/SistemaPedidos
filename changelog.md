@@ -6,6 +6,15 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ## [Segundo Parcial]
 
+### Added
+
+- [feature/coord-devops-update-docs] Actualizo README, índices y plantillas de PR para el Segundo Parcial y documento las code reviews
+  Issue: [#277](https://github.com/eloeyhe/SistemaPedidos/issues/277)
+  Issue: [#278](https://github.com/eloeyhe/SistemaPedidos/issues/278)
+  Issue: [#279](https://github.com/eloeyhe/SistemaPedidos/issues/279)
+  Issue: [#280](https://github.com/eloeyhe/SistemaPedidos/issues/280)
+  PR: [#290](https://github.com/eloeyhe/SistemaPedidos/pull/290) - @santimarM (Coordinador y DevOps)
+
 ### Changed
 
 - [backport/release-actividad-obligatoria-4] Backport release/actividad-obligatoria-4 hacia develop
@@ -16,6 +25,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/coord-devops-estructura-parte-1] fix: ajusto nombres de archivos a la estructura de la Parte 1 y abro la sección del Segundo Parcial en el changelog
   Issue: [#275](https://github.com/eloeyhe/SistemaPedidos/issues/275)
   PR: [#276](https://github.com/eloeyhe/SistemaPedidos/pull/276) - @santimarM (Coordinador y DevOps)
+
+- [fix/coord-devops-numeracion-escenarios] fix: renumero los escenarios de casos de uso del 01 al 05 según la estructura de la Parte 1
+  Issue: [#282](https://github.com/eloeyhe/SistemaPedidos/issues/282)
+  PR: [#281](https://github.com/eloeyhe/SistemaPedidos/pull/281) - @santimarM (Coordinador y DevOps)
 
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
