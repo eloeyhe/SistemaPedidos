@@ -58,6 +58,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#282](https://github.com/eloeyhe/SistemaPedidos/issues/282)
   PR: [#281](https://github.com/eloeyhe/SistemaPedidos/pull/281) - @santimarM (Coordinador y DevOps)
 
+- [fix/coord-devops-registro-reviews] fix: ordeno el registro de code reviews y completo el estado final de la PR #306
+  Issue: [#307](https://github.com/eloeyhe/SistemaPedidos/issues/307)
+  PR: [#308](https://github.com/eloeyhe/SistemaPedidos/pull/308) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added
