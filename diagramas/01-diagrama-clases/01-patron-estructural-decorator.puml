@@ -1,0 +1,194 @@
+@startuml
+title SistemaPedidos - Patron estructural Decorator
+top to bottom direction
+
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam packageStyle rectangle
+hide empty members
+
+package "Dominio - elementos de menu" {
+
+  interface IElementoMenu {
+    + obtenerPrecio(): decimal
+  }
+
+  abstract class Producto {
+    # nombre: String
+    # precio: decimal
+    + obtenerNombre(): String
+    + obtenerPrecio(): decimal
+    + cambiarPrecio(nuevoPrecio: decimal): void
+  }
+
+  class ProductoPreparado {
+    - tiempoPreparacion: int
+    + iniciarPreparacion(): void
+  }
+
+  class ProductoEnvasado {
+    - fechaElaboracion: Date
+    - fechaVencimiento: Date
+  }
+
+  class Combo {
+    - nombre: String
+    - precio: decimal
+    + obtenerNombre(): String
+    + obtenerPrecio(): decimal
+  }
+
+  class PersonalizacionItem {
+    - descripcion: String
+    - costoAdicional: decimal
+    + obtenerDescripcion(): String
+    + obtenerCostoAdicional(descripcion: String): decimal
+    + calcularCosto(): decimal
+  }
+
+  class PrecioBaseHistorico <<snapshot>> {
+    - precioBase: decimal
+    + PrecioBaseHistorico(precioBase: decimal)
+    + obtenerPrecio(): decimal
+  }
+
+  abstract class DecoradorElementoMenu {
+    # elemento: IElementoMenu
+    + obtenerPrecio(): decimal
+  }
+
+  class DecoradorPersonalizacion {
+    - costoAdicional: decimal
+    + DecoradorPersonalizacion(elemento: IElementoMenu, costoAdicional: decimal)
+    + obtenerPrecio(): decimal
+  }
+
+  IElementoMenu <|.. Producto
+  IElementoMenu <|.. Combo
+  IElementoMenu <|.. PrecioBaseHistorico
+  IElementoMenu <|.. DecoradorElementoMenu
+
+  Producto <|-- ProductoPreparado
+  Producto <|-- ProductoEnvasado
+
+  DecoradorElementoMenu <|-- DecoradorPersonalizacion
+
+  DecoradorElementoMenu --> "1" IElementoMenu : envuelve
+}
+
+package "Dominio - pedidos" {
+
+  class ItemPedido {
+    - cantidad: int
+    - precioUnitario: decimal
+    - subtotal: decimal
+
+    + establecerProductoYCantidad(producto: Producto, cantidad: int): void
+    + establecerComboYCantidad(combo: Combo, cantidad: int): void
+    - conservarPrecioHistorico(precioBase: decimal): void
+    + agregarPersonalizacion(descripcion: String): PersonalizacionItem
+    + quitarPersonalizacion(personalizacion: PersonalizacionItem): void
+    + modificarCantidadYPrecio(cantidad: int, precioUnitario: decimal): void
+    + actualizarPersonalizaciones(listaPersonalizaciones: List<PersonalizacionItem>): void
+    + calcularSubtotal(cantidad: int, precioBase: decimal, costosAdicionales: List<decimal>): decimal
+    + recalcularPrecio(): decimal
+
+    - construirElementoDecorado(precioBase: decimal, costosAdicionales: List<decimal>): IElementoMenu
+  }
+
+  class Pedido {
+    - fechaHora: DateTime
+    - numeroPedido: int
+    - referenciaRetiro: String
+    - estado: EstadoPedido
+    - prioritario: boolean
+    - total: decimal
+
+    + agregarItem(producto: Producto, cantidad: int): ItemPedido
+    + agregarItemCombo(combo: Combo, cantidad: int): ItemPedido
+    - actualizarTotal(subtotal: decimal): void
+    + obtenerTotal(): decimal
+  }
+
+  enum EstadoPedido {
+    RECIBIDO
+    EN_PREPARACION
+    LISTO
+    ENTREGADO
+    CANCELADO
+  }
+
+  Pedido "1" *-- "1..*" ItemPedido : contiene
+  ItemPedido "1" *-- "0..*" PersonalizacionItem : personalizaciones
+
+  ItemPedido "0..*" --> "0..1" Producto : producto
+  ItemPedido "0..*" --> "0..1" Combo : combo
+
+  Pedido ..> EstadoPedido
+
+  ItemPedido ..> PrecioBaseHistorico : conserva el precio base
+  ItemPedido ..> DecoradorPersonalizacion : construye cadena
+  ItemPedido ..> IElementoMenu : calcula precio decorado
+}
+
+note right of ItemPedido
+  Se conservan precioUnitario y las firmas
+  publicas existentes de ItemPedido. Se
+  agrega construirElementoDecorado() como
+  helper privado. El decorador cambia la
+  implementacion, no la regla de negocio.
+
+  Restriccion {xor}: cada ItemPedido
+  referencia exactamente un Producto o
+  un Combo, nunca ambos.
+
+  Elementos nuevos de la solucion:
+  IElementoMenu, PrecioBaseHistorico,
+  DecoradorElementoMenu y
+  DecoradorPersonalizacion. Producto y
+  Combo implementan IElementoMenu.
+
+  calcularSubtotal(cantidad, precioBase,
+  costosAdicionales):
+
+  1. Usa precioBase como base historica
+     sin personalizaciones.
+  2. Envuelve PrecioBaseHistorico con
+     un decorador por cada costo adicional.
+  3. Multiplica el precio decorado por
+     cantidad.
+
+  recalcularPrecio() usa precioUnitario
+  y los costos de las personalizaciones
+  del ItemPedido con la misma cadena.
+end note
+
+note right of DecoradorPersonalizacion
+  obtenerPrecio() devuelve el precio
+  del elemento envuelto mas costoAdicional.
+
+  Cada decorador suma una
+  personalizacion adicional.
+end note
+
+note bottom of ItemPedido
+  precioBase y precioUnitario son precios
+  base historicos, no incluyen adicionales.
+  costosAdicionales contiene costos por unidad.
+  El subtotal se calcula una sola vez como
+  cantidad por el precio decorado.
+end note
+
+note bottom of Combo
+  Combo conserva su precio propio.
+  No se modela como composicion
+  de productos.
+end note
+
+note bottom of Pedido
+  Se mantienen sin cambios la validacion
+  de modificaciones en estado RECIBIDO,
+  las reglas de pago y los estados.
+end note
+
+@enduml
