@@ -17,3 +17,8 @@
 
 - Diagrama Final
     - [Diagrama de Clases - Final Unificado](./06-clases-diagrama-final.png) ([fuente PlantUML](./06-clases-diagrama-final.puml))
+
+- Patrones de Diseño
+    - [Diagrama de Clases - Patrón Creacional - Builder](./01-patron-creacional-builder.png) ([fuente PlantUML](./01-patron-creacional-builder.puml))
+    - [Diagrama de Clases - Patrón Estructural - Decorator](./01-patron-estructural-decorator.png) ([fuente PlantUML](./01-patron-estructural-decorator.puml))
+    - [Diagrama de Clases - Patrón de Comportamiento - State](./01-patron-comportamiento-state.png) ([fuente PlantUML](./01-patron-comportamiento-state.puml))
