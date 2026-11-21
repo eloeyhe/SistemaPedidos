@@ -92,7 +92,7 @@ Al final, indica la decisión sugerida para la PR (Approve o Request changes) y 
 | # | PR | Rama | Autor | Resultado |
 |---|----|------|-------|-----------|
 | 1 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-5987153385) (9 hallazgos) |
-| 2 | [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) | `feature/esp-patron-creacional-add-patron-builder` | @Leandro2107 | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6002643258) (4 hallazgos) → [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6008020072) tras `28899d3` (2–4 corregidos; changelog y conflicto pendientes) |
+| 2 | [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) | `feature/esp-patron-creacional-add-patron-builder` | @Leandro2107 | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6002643258) (4 hallazgos) → [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6008020072) tras `28899d3` (2–4 corregidos; changelog y conflicto pendientes) → [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6008243885) tras `19356b1` |
 | 3 | [#305](https://github.com/eloeyhe/SistemaPedidos/pull/305) → [#306](https://github.com/eloeyhe/SistemaPedidos/pull/306) | `feature/esp-patron-comportamiento-add-patron-state` (antes `...-observer`) | @eloeyhe | [Request changes en #305](https://github.com/eloeyhe/SistemaPedidos/pull/305#pullrequestreview-6006440774) (6 hallazgos) → [Request changes en #306](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6006826721) (rama corregida; pendientes 1, 3–6 + hallazgo 7) |
 | 4 | [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) (correcciones, commit `b0e7b71`) | `feature/esp-patron-estructural-add-patron-decorator` | @nachovelesquen7-rgb | [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-6003111880) (3 hallazgos nuevos; 8 de 11 anteriores corregidos) → [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/289#pullrequestreview-6006440899) tras `5873628` y `17bc019` |
 
@@ -179,6 +179,8 @@ Decisión sugerida: Request changes (hallazgos 1 y 2).
 6. *Alta.* La PR está en conflicto con `develop` en `changelog.md`, porque ya se mergearon la #289 y la #306.
 
 Ajustes aplicados antes de publicar: se renderizó el `.png` nuevo (1409 × 1420 px) para confirmar que coincide con el `.puml`, y se agregaron los comandos exactos para resolver el conflicto dejando las entradas en orden de merge. Decisión: [Request changes](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6008020072).
+
+**Cierre (commit `19356b1`):** se verificó que la línea del changelog coincide con el título de la PR y que el conflicto quedó resuelto con las entradas en orden de merge (#289, #306, #298) y sin marcas de conflicto. También se verificó que la PR solo toca los cinco archivos del rol. Decisión: [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/298#pullrequestreview-6008243885).
 
 ### Code Review 4 — PR #289, re-revisión de las correcciones (commit `b0e7b71`)
 
