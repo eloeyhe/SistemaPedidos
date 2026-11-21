@@ -260,3 +260,5 @@ Ignacio revisó esta PR con IA y la documentó en `ia/segundo-parcial/especialis
 - Entrada del changelog.
 
 Decisión: [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007050620).
+
+**Re-aprobación de la #306 (21/11):** Eloy trajo develop a su rama y subió `cdf7cca` y `b5bca35` para resolver el conflicto, y con eso se cayó la aprobación anterior. Se le marcó el hallazgo 10, *Media*: la entrada del changelog tenía sangría y quedaba anidada dentro de la de la #289. Lo corrigió en `055f4d2`. Decisión: [Approve](https://github.com/eloeyhe/SistemaPedidos/pull/306#pullrequestreview-6007224732).
