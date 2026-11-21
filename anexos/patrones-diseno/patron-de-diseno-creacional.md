@@ -2,153 +2,178 @@
 
 ## Patrones de Diseño Creacionales y su relación con SOLID
 
-Los patrones de diseño creacionales abstraen el proceso de instanciación de objetos. Su objetivo es que el sistema no dependa de cómo se crean, componen y representan sus objetos, de modo que la lógica de creación quede separada de la lógica que los utiliza. El catálogo GoF reúne cinco patrones creacionales: **Singleton**, **Factory Method**, **Abstract Factory**, **Builder** y **Prototype**.
+Los patrones de diseño creacionales abstraen el proceso de instanciación de objetos. Su finalidad consiste en separar la lógica que crea y compone una entidad de la lógica que posteriormente la utiliza. En el catálogo GoF, la categoría creacional incluye Singleton, Factory Method, Abstract Factory, Builder y Prototype. Cada patrón resuelve una necesidad distinta de creación; en el presente sistema, la alternativa seleccionada se fundamenta en la complejidad progresiva de la construcción de un pedido.
 
-Estos patrones se relacionan directamente con los principios SOLID:
+La aplicación de estos patrones se relaciona con SOLID de la siguiente manera:
 
-- **SRP (Responsabilidad Única):** la responsabilidad de crear un objeto, con sus validaciones y pasos de armado, se traslada a una clase dedicada. La clase que usa el objeto ya no necesita saber cómo construirlo.
-- **OCP (Abierto/Cerrado):** al encapsular la creación, se pueden agregar nuevas formas de construir objetos (nuevas fábricas o nuevos builders) sin modificar el código cliente.
-- **LSP (Sustitución de Liskov):** cuando la creación se expresa mediante una abstracción, cualquier implementación concreta puede reemplazar a otra sin alterar el comportamiento esperado por el cliente.
-- **ISP (Segregación de Interfaces):** las interfaces de creación exponen solo las operaciones necesarias para construir el objeto, sin mezclar operaciones de uso.
-- **DIP (Inversión de Dependencias):** el cliente depende de una abstracción de creación (interfaz) y no de las clases concretas que instancia. La implementación concreta se inyecta desde afuera.
-
----
+- **SRP:** asigna la responsabilidad de construir y validar el pedido a una clase especializada, separándola de la gestión general de pedidos.
+- **OCP:** permite incorporar otro ConcreteBuilder sin modificar el Director ni el contrato que utiliza el cliente.
+- **LSP:** toda implementación compatible con `IPedidoBuilder` puede sustituir a otra porque conserva el comportamiento esperado por `ServicioPedidos`.
+- **ISP:** `IPedidoBuilder` concentra exclusivamente las operaciones necesarias para construir pedidos.
+- **DIP:** `ServicioPedidos`, como clase de alto nivel, depende de `IPedidoBuilder` y recibe su implementación concreta por constructor.
 
 ## Propósito y Tipo del Patrón
 
-**Propósito:**
+**Propósito**
 
-En el caso de uso **CU1 – Tomar pedido**, el `Pedido` no se crea de una sola vez: el usuario de mostrador lo arma paso a paso. Primero ingresa la referencia de retiro, después agrega productos y combos, carga personalizaciones a cada ítem, eventualmente lo marca como prioritario y, por último, selecciona el medio de pago. Recién cuando el cobro se confirma, el pedido debe quedar registrado y enviarse a cocina.
+Construir el objeto complejo `Pedido` paso a paso durante el caso de uso CU1 – Tomar pedido, evitando que exista un pedido incompleto o que las reglas de construcción queden repartidas entre varias clases.
 
-En el diagrama de clases final, este armado está repartido entre dos clases:
+La construcción original del diagrama de clases final muestra una configuración progresiva:
 
-- `ServicioPedidos` guarda el estado intermedio de la construcción (`pedidoEnCurso`, `itemEnCurso`) además de todas sus responsabilidades de gestión (búsquedas, modificaciones, cancelaciones, cambios de estado, monitor de pedidos activos).
-- `Pedido` expone `registrarPedido(numeroPedido, fechaHora, referenciaRetiro, listaItems, totalPedido, pago)`, un método de **seis parámetros** que recibe todo junto y depende de que el llamador haya armado correctamente cada parte.
+- `ServicioPedidos` conserva `pedidoEnCurso` e `itemEnCurso`.
+- `Pedido` se completa mediante operaciones dispersas y un método `registrarPedido(...)` con seis parámetros.
+- `ItemPedido` contiene la cantidad, el precio unitario y el subtotal, y puede incorporar personalizaciones.
+- `Producto` y `Combo` representan los elementos seleccionados para cada ítem.
+- `Pago` representa el cobro asociado al pedido.
 
-La instanciación tradicional (un constructor o un método con todos los datos) no alcanza porque el pedido se compone en varios pasos que ocurren en momentos distintos de la interacción, y porque un pedido solo es válido cuando cumple un conjunto de reglas (referencia de retiro, al menos un ítem, pago cuyo monto coincide con el total). Mientras tanto, existe un objeto `Pedido` "a medio hacer" dentro del servicio, que podría quedar en un estado inconsistente.
+El Builder separa estos datos parciales del producto final y garantiza que el pedido solo pueda instanciarse cuando se verifica su integridad.
 
-**Tipo:**
+**Tipo**
 
-Se aplica el patrón creacional **Builder**. Su intención, según GoF, es *separar la construcción de un objeto complejo de su representación, de forma que el mismo proceso de construcción pueda crear diferentes representaciones*.
+Patrón de diseño **creacional – Builder**.
 
-Encaja con el problema porque:
+El patrón Builder corresponde a la categoría creacional porque controla cuándo y cómo se instancia un objeto. Además, permite que el mismo proceso de construcción incorpore datos en sucesivas etapas y produzca un objeto final válido. En este diseño:
 
-- El `Pedido` es un objeto complejo, compuesto por `ItemPedido`, `PersonalizacionItem` y `Pago`.
-- Se construye **incrementalmente** y el resultado solo se obtiene al final (`construir()`).
-- Permite **validar el objeto completo** antes de crearlo, de modo que nunca exista un `Pedido` inválido.
+- `ServicioPedidos` actúa como Director.
+- `IPedidoBuilder` define el contrato del Builder.
+- `PedidoBuilder` implementa el ConcreteBuilder.
+- `Pedido` es el Product.
 
-Se descartaron las demás alternativas creacionales:
-
-- **Factory Method** y **Abstract Factory** resuelven la elección de *qué clase* instanciar (o qué familia de objetos), pero crean el objeto en un solo paso. Acá la clase es siempre `Pedido`; lo complejo es el armado.
-- **Singleton** garantiza una única instancia y no aplica: hay muchos pedidos.
-- **Prototype** crea objetos clonando uno existente y no hay un caso de uso que requiera duplicar pedidos.
-
----
+El patrón es preferible a los demás creacionales en este caso porque la clase de resultado siempre es `Pedido`, no se requieren familias de objetos y el objeto no se obtiene clonando una instancia existente. Su dificultad principal no consiste en seleccionar una clase concreta, sino en ensamblar un objeto complejo mediante pasos sucesivos y validarlo antes de crear la instancia final.
 
 ## Motivación
 
-**Cómo funcionaba originalmente el sistema y sus limitaciones**
+### Funcionamiento original y limitaciones
 
-En el diagrama de clases final, `ServicioPedidos` actúa como controlador de todos los casos de uso y, además, es quien va armando el pedido durante la toma:
+En el diagrama de clases final, el proceso de tomar un pedido combina coordinación, estado temporal y construcción del dominio dentro de `ServicioPedidos`. El servicio mantiene `pedidoEnCurso` e `itemEnCurso` y ofrece operaciones para ingresar la referencia de retiro, seleccionar productos o combos, cargar personalizaciones y asociar el pago.
 
-1. `iniciarNuevoPedido()` crea un `Pedido` vacío y lo guarda en `pedidoEnCurso`.
-2. `ingresarReferenciaRetiro()`, `seleccionarProducto()`, `seleccionarCombo()` e `ingresarPersonalizacion()` modifican ese objeto, usando también `itemEnCurso` para saber a qué ítem aplicar la personalización.
-3. `seleccionarMedioPago()` procesa el cobro con `ProcesadorPago` y, si se aprueba, llama a `Pedido.registrarPedido(...)` con los seis parámetros.
-4. `descartarPedidoEnCurso()` tiene que limpiar manualmente `pedidoEnCurso` e `itemEnCurso`.
+Al finalizar, `Pedido` dispone de `registrarPedido(numeroPedido, fechaHora, referenciaRetiro, listaItems, totalPedido, pago)` para recibir los datos completos en una única operación. Esta forma de construir el pedido presenta las siguientes limitaciones:
 
-**Clases involucradas y cómo interactuaban**
+1. **Estado intermedio dentro del Director:** `pedidoEnCurso` e `itemEnCurso` mantienen temporalmente el objeto a medio construir y hacen que el controlador también administre datos internos de creación.
+2. **Responsabilidad excesiva:** `ServicioPedidos` concentra la coordinación de numerosos casos de uso junto con el armado del pedido.
+3. **Construcción dependiente del orden:** si el objeto se modifica directamente desde varios métodos, la integridad final depende de que cada llamada se produzca en la secuencia correcta.
+4. **Método con muchos parámetros:** `registrarPedido(...)` recibe seis datos relacionados y exige que el llamador haya construido previamente un estado consistente.
+5. **Posibilidad de pedidos incompletos:** antes de confirmar la construcción podrían existir referencias, ítems o pagos ausentes o incoherentes.
 
-- `ServicioPedidos`: controla el flujo y mantiene el estado intermedio de construcción.
-- `Pedido`: se crea vacío y se completa desde afuera; `registrarPedido(...)` recibe todos los datos juntos.
-- `ItemPedido` y `PersonalizacionItem`: se crean y se asocian al pedido en curso.
-- `Producto` y `Combo`: elementos que referencia cada ítem.
-- `Pago`: se asocia al pedido una vez aprobado el cobro.
+### Clases involucradas originalmente
 
-**Por qué este diseño generaba problemas**
+- `ServicioPedidos` orquesta el caso de uso y administraba el estado temporal.
+- `Pedido` representaba el producto y ofrecía el método monolítico de registro.
+- `ItemPedido` representaba una línea del pedido.
+- `PersonalizacionItem` representaba una modificación con costo adicional.
+- `Producto` y `Combo` eran los elementos que podían formar un ítem.
+- `Pago` contenía el método y el monto asociado al pedido.
+- `EstadoPedido` representaba el estado del pedido.
 
-- **Rigidez y baja cohesión (viola SRP):** `ServicioPedidos` ya tiene más de 25 operaciones. Sumarle el estado temporal de construcción (`pedidoEnCurso`, `itemEnCurso`) mezcla la gestión de pedidos con el armado de uno nuevo.
-- **Objetos inconsistentes:** entre `iniciarNuevoPedido()` y la confirmación del pago existe un `Pedido` sin número, sin pago y quizás sin ítems. Nada impide que otro método lo use en ese estado.
-- **Validación dispersa:** las reglas para que un pedido sea válido no están en un único lugar; dependen del orden en que el servicio llama a cada método.
-- **Método con muchos parámetros:** `registrarPedido(...)` con seis parámetros es propenso a errores (orden de argumentos, total calculado afuera que puede no coincidir con los ítems).
-- **Mantenibilidad:** cualquier dato nuevo en la toma del pedido (por ejemplo, un descuento o un canal de venta) obligaría a modificar `ServicioPedidos`, `Pedido.registrarPedido(...)` y todos sus llamadores.
+### Problemas de mantenibilidad
 
-**Nuevas clases que incorpora el patrón y su función**
+Mantener el armado dentro de `ServicioPedidos` aumenta su acoplamiento y reduce su cohesión. Si se incorpora un dato nuevo al pedido, se modificarían simultáneamente el estado temporal del servicio, el método de registro y el llamador. Las validaciones también podrían quedar dispersas e impedir que el sistema garantice que toda instancia de `Pedido` sea válida desde el momento de su creación.
 
-- `IPedidoBuilder` (**Builder**): interfaz que define los pasos de construcción de un pedido y la operación final `construir()`.
-- `PedidoBuilder` (**ConcreteBuilder**): implementa los pasos, acumula el estado intermedio (`referenciaRetiro`, `items`, `itemEnCurso`, `prioritario`, `pago`), calcula el total parcial y valida el pedido antes de crearlo.
+La construcción también sería difícil de extender. Se podrían agregar nuevos pasos o datos sin modificar el proceso completo si no existiera una clase que encapsule de forma independiente cada representación de la secuencia de armado.
 
-Además, cambian los roles de dos clases existentes:
+### Nuevas clases y reorganización de la arquitectura
 
-- `ServicioPedidos` pasa a cumplir el rol de **Director**: decide el orden de los pasos según la interacción del usuario, pero delega el armado en el builder.
-- `Pedido` es el **Product**: su constructor pasa a tener visibilidad de paquete y reemplaza a `registrarPedido(...)`.
+Las únicas nuevas clases que introduce el patrón son:
 
-**Cómo el patrón reorganiza la arquitectura**
+- `IPedidoBuilder`: establece el contrato de construcción y permite que `ServicioPedidos` dependa de una abstracción.
+- `PedidoBuilder`: implementa los pasos, reúne el estado temporal y ejecuta la validación antes de instanciar `Pedido`.
 
-El estado intermedio sale de `ServicioPedidos` y queda encapsulado en `PedidoBuilder`. El `Pedido` ya no existe hasta que todos sus datos están completos y validados: se crea de una sola vez en `construir()`, directamente en estado `RECIBIDO`. `ServicioPedidos` recibe el builder por constructor, a través de la interfaz `IPedidoBuilder`, de la misma forma que en el diagrama de DIP se inyectan `IRepositorioPedidos`, `ICatalogoMenu` e `IPublicadorComandasCocina`.
+Las responsabilidades existentes cambian de esta manera:
 
----
+- `ServicioPedidos` deja de conservar `pedidoEnCurso` e `itemEnCurso` y pasa a ser el Director.
+- `Pedido` pasa a ser el Product y su constructor de paquete reemplaza a `registrarPedido(...)`.
+- `PedidoBuilder` pasa a crear temporalmente los `ItemPedido` y a agrupar el `Pago` como parte de la construcción.
+- `ItemPedido`, `PersonalizacionItem`, `Producto`, `Combo` y `EstadoPedido` conservan sus responsabilidades de dominio dentro del objeto construido.
+
+La arquitectura se reorganiza de modo que el estado intermedio queda encapsulado en `PedidoBuilder`. El pedido no se instancia hasta que el Director solicita `construir()` y el ConcreteBuilder comprueba que el pedido esté completo.
 
 ## Estructura de Clases
 
-El diagrama incluye únicamente las clases que participan en la implementación del patrón, para mantenerlo claro y centrado en la solución. El resto de las clases del sistema no se modifica.
+El diagrama incluye únicamente las clases que participan en la aplicación del patrón al CU1.
 
-![Diagrama de clases - Patrón Builder](../../diagramas/01-diagrama-clases/01-patron-creacional-builder.png)
+![Diagrama de clases – Patrón Builder](../../diagramas/01-diagrama-clases/01-patron-creacional-builder.png)
 
 [Ver diagrama en tamaño completo](../../diagramas/01-diagrama-clases/01-patron-creacional-builder.png)
 
----
-
 ## Justificación Técnica de la Estructura de Clases
 
-### Descripción de cada clase incluida en el diagrama
-
-**`IPedidoBuilder` – Builder (interfaz)**
-
-- **Responsabilidad:** definir los pasos para construir un pedido: `conReferenciaRetiro`, `agregarProducto`, `agregarCombo`, `agregarPersonalizacion`, `marcarPrioritario`, `conPago`, `obtenerTotalParcial`, `reiniciar` y `construir`.
-- **Relaciones:** es implementada por `PedidoBuilder` y utilizada por `ServicioPedidos`.
-- **Por qué es necesaria:** permite que el Director dependa de una abstracción y no de la clase concreta (DIP). Si en el futuro se necesita otra forma de construir pedidos (por ejemplo, reconstruirlos desde persistencia o armar pedidos de prueba), se agrega un nuevo builder sin modificar `ServicioPedidos` (OCP). Los métodos de armado devuelven el propio builder, lo que permite encadenar llamadas (interfaz fluida).
-
-**`PedidoBuilder` – ConcreteBuilder**
-
-- **Responsabilidad:** acumular los datos del pedido en construcción, crear los `ItemPedido`, aplicar las personalizaciones al ítem en curso, calcular el total parcial y, en `construir()`, validar y crear el `Pedido`.
-- **Relaciones:** implementa `IPedidoBuilder`; crea (`<<create>>`) instancias de `Pedido` e `ItemPedido`; agrega temporalmente los ítems y el `Pago` hasta que se construye el producto.
-- **Por qué es necesaria:** es la clase que concentra en un único lugar la lógica de armado y las reglas de validez del pedido, que antes estaban repartidas entre `ServicioPedidos` y `Pedido`. El método privado `validar()` verifica que exista referencia de retiro, al menos un ítem y un pago registrado cuyo monto coincida con el total. Si alguna regla falla, lanza una excepción y no se crea ningún pedido.
+### Descripción de cada clase
 
 **`ServicioPedidos` – Director**
 
-- **Responsabilidad:** coordinar el CU1 según las acciones del usuario de mostrador y decidir en qué orden se invocan los pasos del builder. Conserva la generación del número de pedido (`generarNumeroPedido()`) y el registro de los pedidos creados.
-- **Relaciones:** depende de `IPedidoBuilder` (inyectado por constructor) y gestiona la colección de `Pedido`.
-- **Por qué es necesaria:** en el patrón, el Director conoce la secuencia de construcción pero no los detalles de armado. Con este cambio, `ServicioPedidos` deja de tener los atributos `pedidoEnCurso` e `itemEnCurso`.
+`ServicioPedidos` pertenece a la capa de aplicación y coordina el flujo de CU1. En el diagrama conserva la colección `pedidos`, una referencia al builder y el número del último pedido.
+
+Su constructor recibe `IPedidoBuilder`, de modo que el Director depende de una abstracción y no de `PedidoBuilder`. También mantiene `generarNumeroPedido()` para asignar el identificador que se entrega al construir el pedido.
+
+Inicia y controla las operaciones `iniciarNuevoPedido()`, `ingresarReferenciaRetiro()`, `seleccionarProducto()`, `seleccionarCombo()`, `ingresarPersonalizacion()`, `marcarPrioritario()`, `seleccionarMedioPago()`, `confirmarPedido()` y `descartarPedidoEnCurso()`. Las operaciones de construcción se delegan al builder; por ello, la clase ya no contiene `pedidoEnCurso` ni `itemEnCurso`.
+
+**`IPedidoBuilder` – Builder**
+
+`IPedidoBuilder` es la interfaz que establece el contrato de construcción. Define `reiniciar()`, los pasos para agregar los datos del pedido, `obtenerTotalParcial()` y `construir()`.
+
+Es implementada por `PedidoBuilder`. Esta relación permite sustituir la implementación concreta y mantiene en `ServicioPedidos` una dependencia dirigida hacia una abstracción. Los métodos con prefijos `con*` y `agregar*` devuelven `IPedidoBuilder`, lo que permite encadenar el proceso de construcción.
+
+**`PedidoBuilder` – ConcreteBuilder**
+
+`PedidoBuilder` es la implementación concreta del Builder. Reúne la referencia de retiro, la lista de ítems, el ítem en curso, la prioridad y el pago. También contiene el método privado `validar()`, que concentra las reglas necesarias antes de crear el producto.
+
+Implementa `IPedidoBuilder`, crea instancias de `Pedido` e `ItemPedido`, agrega temporalmente hasta cero o más ítems y registra un pago opcional durante la construcción. Esta clase es necesaria porque encapsula el estado mutable del armado y evita que dicho estado pertenezca a `ServicioPedidos`.
 
 **`Pedido` – Product**
 
-- **Responsabilidad:** representar el pedido registrado con su número, fecha y hora, referencia de retiro, estado, prioridad y total.
-- **Relaciones:** compone uno o más `ItemPedido` y tiene un `Pago` original.
-- **Por qué es necesaria:** es el objeto complejo que produce el patrón. Su constructor con visibilidad de paquete (`~`) garantiza que solo el builder pueda instanciarlo, por lo que todo `Pedido` existente es válido.
+`Pedido` representa el objeto complejo obtenido al finalizar la construcción. Contiene `fechaHora`, `numeroPedido`, `referenciaRetiro`, `estado`, `prioritario` y `total`.
 
-**`ItemPedido` y `PersonalizacionItem` – Partes del producto**
+Su constructor tiene visibilidad de paquete (`~`) y recibe el identificador, la fecha, la referencia, la lista de ítems, la prioridad y el pago. Esta visibilidad impide que otras clases construyan pedidos fuera del Builder. El constructor reemplaza a `registrarPedido(...)` del diagrama de clases final.
 
-- **Responsabilidad:** representar cada línea del pedido (producto o combo, cantidad, precio histórico y subtotal) y sus personalizaciones con costo adicional.
-- **Relaciones:** `ItemPedido` referencia un `Producto` o un `Combo` y compone sus `PersonalizacionItem`.
-- **Por qué son necesarias:** son las partes que el builder va ensamblando. `PedidoBuilder` crea cada `ItemPedido` en `agregarProducto()` o `agregarCombo()` y lo deja como `itemEnCurso` para que `agregarPersonalizacion()` sepa a qué ítem aplicarla.
+El pedido compone entre uno y muchos `ItemPedido`, mantiene un único `Pago` original y utiliza `EstadoPedido` para representar su estado. Expone métodos para obtener el total, el estado y el detalle de ítems.
 
-**`Producto`, `Combo` y `Pago`**
+**`ItemPedido`**
 
-- `Producto` y `Combo` son los elementos del menú que se reciben como parámetro de los pasos de armado; no cambian.
-- `Pago` se registra cuando `ProcesadorPago` aprueba el cobro y se entrega al builder con `conPago()`; el builder verifica que su monto coincida con el total.
+`ItemPedido` representa una línea del pedido. Sus atributos son `cantidad`, `precioUnitario` y `subtotal`.
 
-### Explicación del flujo de creación de objetos
+El builder lo crea al agregar un producto o un combo. Puede establecer un producto individual o un combo, agregar o quitar personalizaciones y recalcular su precio. Cada ítem contiene cero o más `PersonalizacionItem` y referencia cero o un `Producto` o `Combo`; de acuerdo con la composición de la línea, uno de los dos elementos debe estar asociado.
 
-1. **Inicio:** el usuario de mostrador inicia un pedido. `ServicioPedidos.iniciarNuevoPedido()` llama a `builder.reiniciar()`, que deja el builder vacío. Todavía no existe ningún `Pedido`.
-2. **Armado incremental:** cada acción del usuario se traduce en un paso del builder:
-   - `ingresarReferenciaRetiro()` → `builder.conReferenciaRetiro(referencia)`
-   - `seleccionarProducto()` → `builder.agregarProducto(producto, cantidad)`, que crea un `ItemPedido` y lo deja como ítem en curso
-   - `seleccionarCombo()` → `builder.agregarCombo(combo, cantidad)`
-   - `ingresarPersonalizacion()` → `builder.agregarPersonalizacion(descripcion)`, aplicada al ítem en curso
-   - `marcarPrioritario()` → `builder.marcarPrioritario()`
-3. **Cobro:** en `seleccionarMedioPago()`, `ServicioPedidos` consulta `builder.obtenerTotalParcial()` y se lo pasa a `ProcesadorPago` para validar el medio de pago y procesar el cobro. Si el cobro se aprueba, crea el `Pago` y lo entrega con `builder.conPago(pago)`.
-4. **Construcción final:** `ServicioPedidos` genera el número y llama a `builder.construir(numeroPedido, fechaHora)`. `PedidoBuilder` ejecuta `validar()`, **instancia el `Pedido`** en estado `RECIBIDO` con todos sus ítems y su pago, y se reinicia para el siguiente pedido.
-5. **Registro:** `ServicioPedidos` agrega el pedido a su colección y lo envía a cocina mediante `PantallaCocina`, igual que en el diseño original.
-6. **Descarte:** si el usuario cancela la toma antes de pagar, `descartarPedidoEnCurso()` solo llama a `builder.reiniciar()`. Como el pedido nunca llegó a crearse, no queda ningún objeto inconsistente que limpiar.
+**`PersonalizacionItem`**
 
-En resumen: **`ServicioPedidos` inicia el flujo y decide el orden de los pasos (Director), `IPedidoBuilder` define el contrato de construcción y `PedidoBuilder` es quien delega en `ItemPedido` el armado de cada línea e instancia el `Pedido` final.**
+`PersonalizacionItem` representa una modificación aplicada a un ítem. Define `descripcion` y `costoAdicional`, y permite obtener ambos datos y calcular su costo.
+
+Es necesaria porque una personalización forma parte de la construcción del `ItemPedido`, no del pedido completo. El ConcreteBuilder conserva el `itemEnCurso` para delegarle la incorporación de cada personalización.
+
+**`Producto`**
+
+`Producto` representa un elemento individual del menú. En el diagrama es una clase abstracta con `nombre` y `precio`, y proporciona operaciones para obtener ambos datos y cambiar el precio.
+
+Es una entrada de construcción: `PedidoBuilder.agregarProducto(...)` utiliza el producto y la cantidad para crear un `ItemPedido`. El multiplicidad cero a muchos indica que un producto puede aparecer en distintos ítems.
+
+**`Combo`**
+
+`Combo` representa un conjunto comercializado como una sola opción del menú. Contiene `nombre` y `precio`, y ofrece operaciones para obtenerlos.
+
+Al igual que `Producto`, no conoce el proceso de creación del pedido. El Builder recibe el combo seleccionado y delega en `ItemPedido.establecerComboYCantidad(...)` la creación de la línea correspondiente.
+
+**`Pago`**
+
+`Pago` representa el pago original asociado al pedido. Contiene `monto`, `metodoDePago` y `fechaHora`, y ofrece `registrarCobro(...)`.
+
+`PedidoBuilder` recibe el pago mediante `conPago(pago)`. El pago es necesario para validar que su monto coincida con el total construido y, una vez creado el pedido, se mantiene como su pago original.
+
+**`EstadoPedido`**
+
+`EstadoPedido` es una enumeración que establece los estados posibles: `RECIBIDO`, `EN_PREPARACION`, `LISTO`, `ENTREGADO` y `CANCELADO`.
+
+En el Builder, un pedido creado por `construir()` debe quedar en estado `RECIBIDO`. La enumeración permite que `Pedido` represente ese estado y los estados posteriores sin incorporar cadenas de texto en sus atributos.
+
+### Flujo de creación del objeto final
+
+El flujo comienza en `ServicioPedidos`, que actúa como Director:
+
+1. **Inicio:** `iniciarNuevoPedido()` llama a `builder.reiniciar()` y prepara un nuevo proceso de construcción.
+2. **Datos básicos:** `ingresarReferenciaRetiro()` delega en `IPedidoBuilder.conReferenciaRetiro(...)`.
+3. **Armado de ítems:** `seleccionarProducto(...)` delega en `agregarProducto(...)`; `seleccionarCombo(...)` delega en `agregarCombo(...)`. `PedidoBuilder` crea un `ItemPedido` en cada operación.
+4. **Personalización:** `ingresarPersonalizacion(...)` delega en `agregarPersonalizacion(...)`. `PedidoBuilder` aplica la personalización al `itemEnCurso`.
+5. **Opciones finales:** `marcarPrioritario()` delega en el Builder y `seleccionarMedioPago(...)` proporciona el medio para obtener el pago asociado.
+6. **Total y confirmación:** `confirmarPedido()` solicita a `ServicioPedidos` el número y la fecha que necesita `construir(numeroPedido, fechaHora)`.
+7. **Validación e instanciación:** `PedidoBuilder.construir(...)` ejecuta `validar()`. Comprueba que la referencia de retiro no esté vacía, que exista al menos un `ItemPedido` y que el `Pago` esté registrado con un monto igual al total. Si todas las condiciones se cumplen, instancia `Pedido` en estado `RECIBIDO`.
+8. **Entrega del resultado:** el método `construir()` devuelve el `Pedido` final a `ServicioPedidos`, que lo agrega a `pedidos`.
+
+En resumen, **`ServicioPedidos` inicia y ordena el flujo, `IPedidoBuilder` define el contrato de construcción, `PedidoBuilder` reúne los datos parciales y valida las reglas, y `Pedido` es instanciado por `PedidoBuilder` como objeto final**.
