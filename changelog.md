@@ -26,6 +26,16 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#304](https://github.com/eloeyhe/SistemaPedidos/issues/304)
   PR: [#306](https://github.com/eloeyhe/SistemaPedidos/pull/306) - @eloeyhe (Especialista en Patrón de Diseño de Comportamiento)
 
+- [feature/esp-patron-creacional-add-patron-builder] Aplico patrón Builder a la construcción de Pedido
+  Issue: [#291](https://github.com/eloeyhe/SistemaPedidos/issues/291)
+  Issue: [#292](https://github.com/eloeyhe/SistemaPedidos/issues/292)
+  Issue: [#293](https://github.com/eloeyhe/SistemaPedidos/issues/293)
+  Issue: [#294](https://github.com/eloeyhe/SistemaPedidos/issues/294)
+  Issue: [#295](https://github.com/eloeyhe/SistemaPedidos/issues/295)
+  Issue: [#296](https://github.com/eloeyhe/SistemaPedidos/issues/296)
+  Issue: [#297](https://github.com/eloeyhe/SistemaPedidos/issues/297)
+  PR: [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) - @Leandro2107 (Especialista en Patrón de Diseño Creacional)
+
 - [feature/coord-devops-update-docs] Actualizo README, índices y plantillas de PR para el Segundo Parcial y documento las code reviews
   Issue: [#277](https://github.com/eloeyhe/SistemaPedidos/issues/277)
   Issue: [#278](https://github.com/eloeyhe/SistemaPedidos/issues/278)
