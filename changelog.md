@@ -66,6 +66,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#309](https://github.com/eloeyhe/SistemaPedidos/issues/309)
   PR: [#310](https://github.com/eloeyhe/SistemaPedidos/pull/310) - @nachovelesquen7-rgb (Especialista en Patrón de Diseño Estructural)
 
+- [fix/rc9-rc13-rc16-readme-crc] fix: reduzco el README y completo las tarjetas CRC de ProductoPreparado, ProductoEnvasado, Combo y Usuario (RC9, RC13, RC14, RC15, RC16)
+  Issue: [#312](https://github.com/eloeyhe/SistemaPedidos/issues/312)
+  PR: [#313](https://github.com/eloeyhe/SistemaPedidos/pull/313) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added
