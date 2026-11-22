@@ -105,7 +105,7 @@ Fuente PlantUML: [01-clases-tomar-pedido-01.puml](../../diagramas/01-diagrama-cl
 | Pago | Registrar el cobro efectuado. Calcular diferencias de dinero asociadas a la transacción | [05-tarjeta-crc-pago.md](../../herramientas-agile/tarjetas-crc/05-tarjeta-crc-pago.md) |
 | ProductoPreparado | Subclase de Producto para los alimentos que se preparan en cocina (`tiempoPreparacion`) | [07-tarjeta-crc-producto-preparado.md](../../herramientas-agile/tarjetas-crc/07-tarjeta-crc-producto-preparado.md) |
 | ProductoEnvasado | Subclase de Producto para los artículos de góndola (`fechaElaboracion`, `fechaVencimiento`) | [08-tarjeta-crc-producto-envasado.md](../../herramientas-agile/tarjetas-crc/08-tarjeta-crc-producto-envasado.md) |
-| Combo | Agregar y eliminar combos del catálogo | [09-tarjeta-crc-combo.md](../../herramientas-agile/tarjetas-crc/09-tarjeta-crc-combo.md) |
+| Combo | Proveer mi nombre y mi precio propio cuando el cliente me elige; mi precio no se calcula sumando productos | [09-tarjeta-crc-combo.md](../../herramientas-agile/tarjetas-crc/09-tarjeta-crc-combo.md) |
 | Usuario | Autentificar el acceso al sistema | [13-tarjeta-crc-usuario.md](../../herramientas-agile/tarjetas-crc/13-tarjeta-crc-usuario.md) |
 | UsuarioMostrador | Registrar y modificar pedidos, y marcarlos como entregados | [14-tarjeta-crc-usuario-mostrador.md](../../herramientas-agile/tarjetas-crc/14-tarjeta-crc-usuario-mostrador.md) |
 | ServicioPedidos | Coordinar la carga del pedido, gestionar el cobro y registrar el pedido confirmado, y notificar a Cocina | [17-tarjeta-crc-servicio-pedidos.md](../../herramientas-agile/tarjetas-crc/17-tarjeta-crc-servicio-pedidos.md) |
