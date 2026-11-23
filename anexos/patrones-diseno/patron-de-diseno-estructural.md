@@ -102,9 +102,9 @@ A partir de esta interfaz se incorporan los siguientes componentes:
 
 **PrecioBaseHistorico:** representa el precio base registrado para un ítem. Permite iniciar el cálculo sin consultar nuevamente el precio actual del catálogo.
 
-**DecoradorElementoMenu:** clase abstracta que implementa `IElementoMenu` y mantiene una referencia a otro elemento de la misma interfaz.
+**DecoradorElementoMenu:** clase abstracta que implementa `IElementoMenu` y mantiene una referencia protegida (`elemento`) a otro elemento de la misma interfaz. Su constructor protegido `DecoradorElementoMenu(elemento: IElementoMenu)` recibe el componente a decorar e inicializa esa referencia, que no puede quedar en `null`. Su `obtenerPrecio()` delega en `elemento.obtenerPrecio()`, de modo que cualquier decorador puede reenviar la llamada al componente envuelto.
 
-**DecoradorPersonalizacion:** clase concreta que hereda de `DecoradorElementoMenu` y agrega un costo adicional al precio del elemento envuelto.
+**DecoradorPersonalizacion:** clase concreta que hereda de `DecoradorElementoMenu` y agrega un costo adicional al precio del elemento envuelto. Su constructor `DecoradorPersonalizacion(elemento, costoAdicional)` invoca `super(elemento)` para que la clase abstracta inicialice el componente envuelto, y guarda `costoAdicional`. Redefine `obtenerPrecio()` como `super.obtenerPrecio() + costoAdicional`.
 
 La clase `ItemPedido` incorpora el método privado:
 
@@ -131,7 +131,7 @@ La siguiente imagen representa la propuesta de aplicación del patrón Decorator
 |---|---|---|
 | Component | `IElementoMenu` | Define la operación común `obtenerPrecio()`. |
 | ConcreteComponent | `PrecioBaseHistorico` | Proporciona el precio base utilizado en el cálculo del pedido. |
-| Decorator | `DecoradorElementoMenu` | Mantiene la referencia al elemento que se está decorando. |
+| Decorator | `DecoradorElementoMenu` | Mantiene la referencia al elemento que se está decorando y la inicializa en su constructor protegido. |
 | ConcreteDecorator | `DecoradorPersonalizacion` | Suma un costo adicional al precio del elemento envuelto. |
 | Client | `ItemPedido` | Construye la cadena y obtiene el precio resultante. |
 
@@ -229,7 +229,7 @@ El proceso funciona de la siguiente manera:
 
 1. `ItemPedido` recibe el precio base, la cantidad y los costos adicionales.
 2. Se crea un objeto `PrecioBaseHistorico` que conserva el precio original del ítem.
-3. Por cada costo adicional, se crea un `DecoradorPersonalizacion` que envuelve al elemento anterior.
+3. Por cada costo adicional, se crea un `DecoradorPersonalizacion(elementoAnterior, costo)`. Su constructor invoca `super(elementoAnterior)`, y así `DecoradorElementoMenu` guarda en `elemento` el componente envuelto.
 4. Al ejecutar `obtenerPrecio()`, cada decorador suma su costo al precio del objeto envuelto.
 5. Finalmente, `ItemPedido` multiplica el precio unitario obtenido por la cantidad para calcular el subtotal.
 
