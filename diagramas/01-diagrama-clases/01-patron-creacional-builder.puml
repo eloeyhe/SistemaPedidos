@@ -27,7 +27,7 @@ package "Aplicacion" {
   }
 }
 
-package "Creacion de Pedido (Builder)" {
+package "Dominio" {
   interface IPedidoBuilder <<Builder>> {
     + reiniciar(): void
     + conReferenciaRetiro(referenciaRetiro: String): IPedidoBuilder
@@ -57,9 +57,7 @@ package "Creacion de Pedido (Builder)" {
     + construir(numeroPedido: int, fechaHora: DateTime): Pedido
     - validar(): void
   }
-}
 
-package "Dominio" {
   class Pedido <<Product>> {
     - fechaHora: DateTime
     - numeroPedido: int
@@ -158,16 +156,30 @@ note right of PedidoBuilder
   - al menos un ItemPedido
   - Pago registrado y monto = total
   Si todo es valido crea el Pedido en
-  estado RECIBIDO y llama a reiniciar().
-  Si no, lanza una excepcion y no crea
-  ningun Pedido incompleto.
+  estado RECIBIDO pasandole una COPIA de
+  items (new ArrayList<>(items)), y recien
+  despues llama a reiniciar().
+  reiniciar() asigna colecciones nuevas
+  (items = new ArrayList<>(), y itemEnCurso
+  y pago en null) en lugar de vaciar
+  las existentes: el Pedido construido no
+  comparte ninguna referencia mutable con
+  el builder.
+  Si la validacion falla, lanza una
+  excepcion y no crea ningun Pedido.
 end note
 
 note bottom of Pedido
-  El constructor tiene visibilidad de paquete (~):
-  solo PedidoBuilder puede crear instancias.
+  El constructor tiene visibilidad de paquete (~).
+  Pedido y PedidoBuilder estan en el mismo paquete
+  (Dominio), por lo que el builder puede invocarlo
+  y ninguna clase de otro paquete (por ejemplo,
+  ServicioPedidos en Aplicacion) puede crear un
+  Pedido sin pasar por el builder.
+  El constructor guarda su propia lista de items:
+  el Pedido es el unico propietario de esa coleccion.
   Reemplaza a registrarPedido(...) de 6 parametros
-  del diagrama de clases final.
+  del diagrama de clases final (variante de diseno).
 end note
 
 @enduml
