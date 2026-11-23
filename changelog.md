@@ -66,6 +66,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#309](https://github.com/eloeyhe/SistemaPedidos/issues/309)
   PR: [#310](https://github.com/eloeyhe/SistemaPedidos/pull/310) - @nachovelesquen7-rgb (Especialista en Patrón de Diseño Estructural)
 
+- [fix/rc3-patron-decorator] fix: completo la inicialización del componente decorado en Decorator (RC3)
+  Issue: [#316](https://github.com/eloeyhe/SistemaPedidos/issues/316)
+  PR: [#317](https://github.com/eloeyhe/SistemaPedidos/pull/317) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added
