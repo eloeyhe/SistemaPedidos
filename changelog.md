@@ -70,6 +70,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#312](https://github.com/eloeyhe/SistemaPedidos/issues/312)
   PR: [#313](https://github.com/eloeyhe/SistemaPedidos/pull/313) - @santimarM (Coordinador y DevOps)
 
+- [fix/rc1-rc2-rc10-patron-builder] fix: ubico PedidoBuilder en el paquete de Pedido, documento la copia de ítems y el alcance de la variante Builder (RC1, RC2, RC10)
+  Issue: [#314](https://github.com/eloeyhe/SistemaPedidos/issues/314)
+  PR: [#315](https://github.com/eloeyhe/SistemaPedidos/pull/315) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added
