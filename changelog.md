@@ -66,6 +66,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#309](https://github.com/eloeyhe/SistemaPedidos/issues/309)
   PR: [#310](https://github.com/eloeyhe/SistemaPedidos/pull/310) - @nachovelesquen7-rgb (Especialista en Patrón de Diseño Estructural)
 
+- [fix/rc9-rc13-rc16-readme-crc] fix: reduzco el README y completo las tarjetas CRC de ProductoPreparado, ProductoEnvasado, Combo y Usuario (RC9, RC13, RC14, RC15, RC16)
+  Issue: [#312](https://github.com/eloeyhe/SistemaPedidos/issues/312)
+  PR: [#313](https://github.com/eloeyhe/SistemaPedidos/pull/313) - @santimarM (Coordinador y DevOps)
 - [fix/rc1-rc2-rc10-patron-builder] fix: ubico PedidoBuilder en el paquete de Pedido, documento la copia de ítems y el alcance de la variante Builder (RC1, RC2, RC10)
   Issue: [#314](https://github.com/eloeyhe/SistemaPedidos/issues/314)
   PR: [#315](https://github.com/eloeyhe/SistemaPedidos/pull/315) - @santimarM (Coordinador y DevOps)
