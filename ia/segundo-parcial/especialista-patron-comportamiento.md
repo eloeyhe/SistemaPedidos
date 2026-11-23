@@ -94,7 +94,7 @@ Creá el archivo:
 - Justificación Técnica de la Estructura de Clases (detalle de cada clase y flujo paso a paso en dos escenarios reales)
 
 ### Restricciones
-- NO modifiques `README.md`, `anexos/anexos.md`, `anexos/patrones-diseno/patrones_diseno.md` ni `diagramas/01-diagrama-clases/diagramas_clases.md`.
+- NO modifiques `README.md`, `anexos/anexos.md`, `anexos/patrones-diseno/patrones_diseno.md` ni `diagramas/01-diagrama-clases/diagramas_de_clases.md`.
 ```
 
 ---
@@ -272,3 +272,10 @@ end note
 **Justificación:**
 
 - Los ajustes garantizaron la fidelidad técnica con la estructura clásica del patrón GoF State, evitaron acoplamientos indebidos del cliente (`ServicioPedidos`) hacia la interfaz interna de estados, aseguraron consistencia total entre el diagrama UML y el texto del anexo, y mejoraron la claridad visual y la precisión académica de los entregables finales.
+
+---
+
+## 5. Correcciones posteriores a la revisión docente
+
+- **RC8:** la restricción del prompt de la iteración 2 citaba el índice de diagramas de clases con un nombre que no existe en el repositorio (sin el `_de_`). Se corrigió por `diagramas/01-diagrama-clases/diagramas_de_clases.md` y se verificó que las demás rutas citadas en este registro existan. La única excepción es `01-diagrama-clases-final.puml`, que es el nombre que usa la consigna y que el mismo prompt aclara que corresponde a `06-clases-diagrama-final.puml`.
+- Los RC4 a RC7 y RC11 del patrón se resolvieron en el diagrama y en el anexo, sin una nueva iteración con IA: inicialización del estado, autorización de la cancelación, contrato de `puedeSolicitarEstado(...)`, historial y auditoría.

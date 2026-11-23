@@ -78,6 +78,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#316](https://github.com/eloeyhe/SistemaPedidos/issues/316)
   PR: [#317](https://github.com/eloeyhe/SistemaPedidos/pull/317) - @santimarM (Coordinador y DevOps)
 
+- [fix/rc4-rc8-rc11-patron-state] fix: completo inicialización, autorización, historial y contratos del patrón State (RC4, RC5, RC6, RC7, RC8, RC11)
+  Issue: [#318](https://github.com/eloeyhe/SistemaPedidos/issues/318)
+  PR: [#319](https://github.com/eloeyhe/SistemaPedidos/pull/319) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added
