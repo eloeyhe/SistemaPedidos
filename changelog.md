@@ -66,6 +66,18 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#309](https://github.com/eloeyhe/SistemaPedidos/issues/309)
   PR: [#310](https://github.com/eloeyhe/SistemaPedidos/pull/310) - @nachovelesquen7-rgb (Especialista en Patrón de Diseño Estructural)
 
+- [fix/rc9-rc13-rc16-readme-crc] fix: reduzco el README y completo las tarjetas CRC de ProductoPreparado, ProductoEnvasado, Combo y Usuario (RC9, RC13, RC14, RC15, RC16)
+  Issue: [#312](https://github.com/eloeyhe/SistemaPedidos/issues/312)
+  PR: [#313](https://github.com/eloeyhe/SistemaPedidos/pull/313) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc1-rc2-rc10-patron-builder] fix: ubico PedidoBuilder en el paquete de Pedido, documento la copia de ítems y el alcance de la variante Builder (RC1, RC2, RC10)
+  Issue: [#314](https://github.com/eloeyhe/SistemaPedidos/issues/314)
+  PR: [#315](https://github.com/eloeyhe/SistemaPedidos/pull/315) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc3-patron-decorator] fix: completo la inicialización del componente decorado en Decorator (RC3)
+  Issue: [#316](https://github.com/eloeyhe/SistemaPedidos/issues/316)
+  PR: [#317](https://github.com/eloeyhe/SistemaPedidos/pull/317) - @santimarM (Coordinador y DevOps)
+
 - [fix/rc4-rc8-rc11-patron-state] fix: completo inicialización, autorización, historial y contratos del patrón State (RC4, RC5, RC6, RC7, RC8, RC11)
   Issue: [#318](https://github.com/eloeyhe/SistemaPedidos/issues/318)
   PR: [#319](https://github.com/eloeyhe/SistemaPedidos/pull/319) - @santimarM (Coordinador y DevOps)

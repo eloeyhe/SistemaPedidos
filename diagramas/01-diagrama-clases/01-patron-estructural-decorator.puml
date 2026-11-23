@@ -54,6 +54,7 @@ package "Dominio - elementos de menu" {
 
   abstract class DecoradorElementoMenu {
     # elemento: IElementoMenu
+    # DecoradorElementoMenu(elemento: IElementoMenu)
     + obtenerPrecio(): decimal
   }
 
@@ -164,8 +165,13 @@ note right of ItemPedido
 end note
 
 note right of DecoradorPersonalizacion
-  obtenerPrecio() devuelve el precio
-  del elemento envuelto mas costoAdicional.
+  El constructor invoca super(elemento):
+  DecoradorElementoMenu inicializa el atributo
+  protegido elemento con el componente envuelto,
+  que no puede ser null.
+
+  obtenerPrecio() devuelve super.obtenerPrecio()
+  (el precio del elemento envuelto) mas costoAdicional.
 
   Cada decorador suma una
   personalizacion adicional.
@@ -189,6 +195,13 @@ note bottom of Pedido
   Se mantienen sin cambios la validacion
   de modificaciones en estado RECIBIDO,
   las reglas de pago y los estados.
+end note
+
+note left of DecoradorElementoMenu
+  El constructor protegido recibe el componente
+  a decorar y lo guarda en elemento.
+  obtenerPrecio() delega en elemento.obtenerPrecio():
+  las subclases lo redefinen para agregar su costo.
 end note
 
 @enduml
