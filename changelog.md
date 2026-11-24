@@ -82,6 +82,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#318](https://github.com/eloeyhe/SistemaPedidos/issues/318)
   PR: [#319](https://github.com/eloeyhe/SistemaPedidos/pull/319) - @santimarM (Coordinador y DevOps)
 
+- [fix/rc17-rc20-principios-solid] fix: alineo los principios SOLID con el diagrama de clases final y documento sus variantes (RC17, RC18, RC19, RC20)
+  Issue: [#320](https://github.com/eloeyhe/SistemaPedidos/issues/320)
+  PR: [#321](https://github.com/eloeyhe/SistemaPedidos/pull/321) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added
