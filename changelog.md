@@ -94,6 +94,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#324](https://github.com/eloeyhe/SistemaPedidos/issues/324)
   PR: [#326](https://github.com/eloeyhe/SistemaPedidos/pull/326) - @santimarM (Coordinador y DevOps)
 
+- [fix/rc23-rc24-variantes-state-decorator] fix: marco State y Decorator como variantes de diseño no integradas y documento su correspondencia con el diagrama de clases final (RC23, RC24)
+  Issue: [#325](https://github.com/eloeyhe/SistemaPedidos/issues/325)
+  PR: [#327](https://github.com/eloeyhe/SistemaPedidos/pull/327) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added

@@ -1,5 +1,5 @@
 @startuml
-title SistemaPedidos - Patron estructural Decorator
+title SistemaPedidos - Patron estructural Decorator - Variante de diseno
 top to bottom direction
 
 skinparam classAttributeIconSize 0
@@ -131,6 +131,16 @@ package "Dominio - pedidos" {
   ItemPedido ..> DecoradorPersonalizacion : construye cadena
   ItemPedido ..> IElementoMenu : calcula precio decorado
 }
+
+note as Alcance
+  <b>Alcance:</b> variante de diseno no integrada
+  al diagrama de clases final
+  (06-clases-diagrama-final.puml).
+  IElementoMenu, PrecioBaseHistorico,
+  DecoradorElementoMenu y DecoradorPersonalizacion
+  no existen en ese modelo. La correspondencia
+  se documenta en el anexo del patron.
+end note
 
 note right of ItemPedido
   Se conservan precioUnitario y las firmas
