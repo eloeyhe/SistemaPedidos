@@ -1,6 +1,6 @@
 @startuml 01-patron-comportamiento-state
 scale max 3800 width
-title Patrón de Comportamiento State - Ciclo de Vida de Pedido
+title Patrón de Comportamiento State - Ciclo de Vida de Pedido - Variante de diseño
 skinparam classAttributeIconSize 0
 skinparam linetype ortho
 hide empty members
@@ -160,6 +160,17 @@ EstadoEnPreparacion ..|> IEstadoPedido
 EstadoListo ..|> IEstadoPedido
 EstadoEntregado ..|> IEstadoPedido
 EstadoCancelado ..|> IEstadoPedido
+
+note as Alcance
+  <b>Alcance:</b> variante de diseño no integrada
+  al diagrama de clases final
+  (06-clases-diagrama-final.puml).
+  IEstadoPedido, los estados concretos y
+  estadoActual no existen en ese modelo.
+  Solo Usuario.puedeSolicitarEstado(...)
+  está integrada. La correspondencia se
+  documenta en el anexo del patrón.
+end note
 
 note right of Pedido
   estadoActual es la única referencia

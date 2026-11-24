@@ -1,5 +1,7 @@
 # Anexo – Aplicación de Patrón de Diseño de Comportamiento – State
 
+> **Alcance:** este anexo presenta una **variante de diseño no integrada** al diagrama de clases final (`06-clases-diagrama-final.puml`). `IEstadoPedido`, los estados concretos (`EstadoRecibido`, `EstadoEnPreparacion`, `EstadoListo`, `EstadoEntregado` y `EstadoCancelado`) y el atributo `estadoActual` no existen en ese modelo, que representa el estado con `Pedido.estado: EstadoPedido` y valida las transiciones en `Pedido.validarTransicion(...)`. La única parte integrada es `Usuario.puedeSolicitarEstado(...)`. La sección [Correspondencia con el diagrama de clases final](#correspondencia-con-el-diagrama-de-clases-final) relaciona cada elemento de la variante con el modelo entregado.
+
 ## Patrones de Diseño de Comportamiento y su relación con SOLID
 
 Los patrones de diseño de comportamiento definen formas de organizar la interacción, la delegación y la distribución de responsabilidades entre objetos. Estos patrones permiten que el sistema pueda realizar operaciones variables sin que sus clientes conozcan todas las implementaciones posibles, reduciendo el acoplamiento y facilitando cambios controlados.
@@ -53,6 +55,29 @@ Las restricciones por rol continúan perteneciendo al dominio mediante `Usuario`
 - `UsuarioEncargado` puede intervenir en cancelaciones o autorizaciones especiales.
 
 Los estados terminales `ENTREGADO` y `CANCELADO` rechazan transiciones y cancelaciones posteriores. Los demás estados pueden restringir operaciones por estado y tipo de usuario.
+
+### Correspondencia con el diagrama de clases final
+
+El patrón State se presenta como una **variante de diseño**, no como un cambio ya integrado en los artefactos de la Parte 1. El diagrama de clases final (`06-clases-diagrama-final.puml`), los casos de uso, las secuencias del CU3 y el CU4 y las tarjetas CRC conservan el modelo original: `Pedido` guarda el estado como `estado: EstadoPedido` y valida las transiciones en `validarTransicion(...)`.
+
+| Elemento de la variante State | Equivalente en el diagrama de clases final | Observación |
+|---|---|---|
+| `IEstadoPedido` | Sin equivalente | Las reglas de transición están dentro de `Pedido.validarTransicion(nuevoEstado, actor)`. |
+| `EstadoRecibido`, `EstadoEnPreparacion`, `EstadoListo`, `EstadoEntregado` y `EstadoCancelado` | Valores `RECIBIDO`, `EN_PREPARACION`, `LISTO`, `ENTREGADO` y `CANCELADO` del enum `EstadoPedido` | El modelo final usa el enum; la variante usa una clase por estado. |
+| `Pedido.estadoActual: IEstadoPedido` | `Pedido.estado: EstadoPedido` | La variante reemplaza el atributo; no conviven los dos. |
+| Constructor `Pedido()`, que asigna `EstadoRecibido` | `Pedido.registrarPedido(...)` y `cambiarEstado(RECIBIDO)` del CU1 | En los dos casos el pedido nace en `RECIBIDO`. |
+| `Pedido.establecerEstado(nuevoEstado: IEstadoPedido): void` | Sin equivalente | `Pedido.cambiarEstado(...)` asigna el valor del enum. |
+| `Pedido.obtenerEstado(): EstadoPedido` | Misma firma | En la variante delega en `estadoActual.obtenerEstado()`. |
+| `Pedido.validarTransicion(nuevoEstado: EstadoPedido, actor: Usuario): boolean` | Misma firma | En la variante delega en el estado actual. |
+| `Pedido.cambiarEstado(nuevoEstado: EstadoPedido): void` | Misma firma | En la variante delega en el estado actual. |
+| `Pedido.cambiarEstado(nuevoEstado: EstadoPedido, actor: Usuario): void` | Sin equivalente | Sobrecarga nueva de la variante, para validar el rol en la delegación. |
+| `Pedido.cancelarPedido(motivo: String): void` | Misma firma | En la variante delega en el estado actual. |
+| `Pedido.cancelarPedido(motivo: String, actor: Usuario): void` | Sin equivalente | Sobrecarga nueva de la variante, para validar el rol en la delegación. |
+| `Usuario.puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean` y sus redefiniciones en las subclases | Misma firma en `Usuario`, `UsuarioMostrador`, `UsuarioCocina` y `UsuarioEncargado` | **Integrada** al diagrama final y a la tarjeta CRC de `Usuario`. |
+| Operaciones usadas de `ServicioPedidos`, `UsuarioEncargado`, `HistorialCambioPedido` y `AuditoriaPedido` | Mismas firmas | Sin cambios. |
+| `EstadoPedido` (enum) | Mismo enum | Representación pública del estado en los dos modelos. |
+
+Integrar la variante al modelo final implicaría agregar `IEstadoPedido` y los cinco estados concretos a `06-clases-diagrama-final.puml`, reemplazar `Pedido.estado` por `estadoActual`, agregar `establecerEstado(...)` y las sobrecargas con `actor`, y crear las tarjetas CRC de las clases nuevas. Las secuencias del CU3 y el CU4 no cambian, porque `ServicioPedidos` sigue invocando las mismas operaciones de `Pedido`.
 
 ---
 
@@ -179,4 +204,4 @@ Esto reduce el acoplamiento a implementaciones concretas y respeta DIP.
 4. `Pedido` delega en `estadoActual`, que es `EstadoEnPreparacion`. Como la autorización ya fue validada por el servicio, el estado admite la cancelación y solicita `Pedido.establecerEstado(...)` con una nueva instancia de `EstadoCancelado`.
 5. `ServicioPedidos` registra la acción con `AuditoriaPedido.registrarAccion(pedido, actor, autorizante, "CANCELACION", fechaHora)` y el detalle con `registrarDetalles(motivo, EN_PREPARACION, CANCELADO)`, como en la secuencia del CU3.
 6. Si el encargado deniega la autorización (flujo alternativo A2), `ServicioPedidos` no delega la cancelación: el estado del pedido no cambia y no se registra ninguna acción.
-6. El flujo evita condicionales globales dentro de `Pedido` y garantiza que no se pueda cancelar un pedido desde un estado terminal.
+7. El flujo evita condicionales globales dentro de `Pedido` y garantiza que no se pueda cancelar un pedido desde un estado terminal.
