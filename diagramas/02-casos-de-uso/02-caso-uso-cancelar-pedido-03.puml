@@ -26,8 +26,8 @@ rectangle "Sistema de Pedidos" {
 	end note
 	usecase "Bloquear cancelacion (LISTO/ENTREGADO)" as Bloquear
 	note right of Bloquear
-		La devolucion manual del Encargado
-		queda fuera de este flujo.
+		La cancelacion queda bloqueada y el pedido
+		mantiene su estado. No se modelan devoluciones.
 	end note
 }
 

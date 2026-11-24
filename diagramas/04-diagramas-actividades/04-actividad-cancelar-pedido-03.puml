@@ -33,9 +33,9 @@ else (No)
       stop
     endif
   else (No)
-    :Bloquear cancelacion automatica;
+    :Bloquear cancelacion;
+    :Mantener estado original del pedido;
     :Informar que el estado no permite cancelar;
-    :Informar que la devolucion manual queda fuera de este flujo;
     stop
   endif
 endif

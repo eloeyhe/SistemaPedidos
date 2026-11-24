@@ -98,12 +98,14 @@ Representación visual:
                  +---------------+---------------+
                  |                               |
                  v                               v
-          [ PagoEfectivo ]               [ PagoDigital ]
+          [ PagoEfectivo ]            [ PagoTransferencia ]
                  |                               |
                  v                               v
-     "Registra ingreso en caja y      "Sincroniza con pasarela QR
-     calcula vuelto en efectivo"      y valida la acreditación online"
+     "Registra ingreso en caja y      "Registra la transferencia
+     calcula vuelto en efectivo"      y verifica su acreditación"
 ```
+
+Los dos medios del ejemplo son los únicos del alcance actual (RF8: efectivo y transferencia). Un pago con QR o con tarjeta sería una **extensión futura, fuera del alcance de esta fase**: bastaría con agregar una nueva clase que responda al mismo mensaje `procesarCobro()`, como muestra el diagrama del principio Abierto/Cerrado (OCP).
 
 # Requisitos iniciales del sistema
 ## Requisitos funcionales :
@@ -256,7 +258,7 @@ __Flujo principal de eventos:__
 
 __Flujos Alternativos:__
 1. Pedido en Preparación: Si Cocina ya inició la preparación (estado EN_PREPARACION), la cancelación se bloquea para el Usuario de Mostrador y requiere la autorización/intervención del Encargado.
-2. Pedido Listo o Entregado: El sistema impide la cancelación automática en los estados LISTO o ENTREGADO, requiriendo intervención y registro de devolución manual por parte del Encargado.
+2. Pedido Listo o Entregado: El sistema bloquea la cancelación en los estados LISTO o ENTREGADO; el pedido mantiene su estado y el sistema no modela devoluciones por cancelación.
 3. Desistimiento de Cancelación: Si el usuario o Encargado cancela la solicitud en el paso de confirmación, el sistema mantiene el pedido en su estado original sin aplicar cambios.
 
 

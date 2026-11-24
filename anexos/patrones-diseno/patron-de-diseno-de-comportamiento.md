@@ -111,7 +111,7 @@ Los métodos que provocan transición reciben `pedido` para que el objeto concre
 
 ### EstadoEntregado
 
-`EstadoEntregado` es un estado terminal. `validarTransicion(...)` rechaza cambios posteriores y `cancelarPedido(...)` impide devoluciones o cancelaciones mediante el cambio de estado ordinario. Esta restricción conserva la integridad del pedido una vez entregado. Implementa `obtenerEstado()` devolviendo `EstadoPedido.ENTREGADO`.
+`EstadoEntregado` es un estado terminal. `validarTransicion(...)` rechaza cambios posteriores y `cancelarPedido(...)` impide la cancelación (flujo alternativo A3 del CU3); el sistema no modela devoluciones por cancelación. Esta restricción conserva la integridad del pedido una vez entregado. Implementa `obtenerEstado()` devolviendo `EstadoPedido.ENTREGADO`.
 
 ### EstadoCancelado
 
