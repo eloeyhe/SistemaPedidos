@@ -1,81 +1,81 @@
 @startuml
-title Sistema de Pedidos - Refactorización aplicando SRP
+title Sistema de Pedidos - Refactorizacion aplicando SRP - Variante conceptual
 
 skinparam classAttributeIconSize 0
 hide empty members
 
 class Pedido {
-  - numeroPedido: String
-  - fecha: DateTime
+  - numeroPedido: int
+  - fechaHora: DateTime
   - referenciaRetiro: String
   - estado: EstadoPedido
-  - prioritario: Boolean
+  - prioritario: boolean
   + agregarItem(item: ItemPedido): void
   + modificarItem(item: ItemPedido): void
   + cancelar(): void
   + cambiarEstado(nuevoEstado: EstadoPedido): void
   + marcarPrioritario(): void
-  + calcularTotal(): Decimal
+  + calcularTotal(): decimal
 }
 
 class ItemPedido {
   - cantidad: int
   - elemento: IElementoMenu
-  - precioUnitarioHistorico: Decimal
+  - precioUnitarioHistorico: decimal
   + agregarPersonalizacion(personalizacion: PersonalizacionItem): void
   + quitarPersonalizacion(personalizacion: PersonalizacionItem): void
-  + calcularSubtotal(): Decimal
+  + calcularSubtotal(): decimal
 }
 
 interface IElementoMenu {
-  + getPrecio(): Decimal
+  + obtenerPrecio(): decimal
 }
 
-class Producto implements IElementoMenu {
+abstract class Producto implements IElementoMenu {
   - nombre: String
-  - precioBase: Decimal
-  + getPrecio(): Decimal
+  - precio: decimal
+  + obtenerPrecio(): decimal
 }
 
 class Combo implements IElementoMenu {
   - nombre: String
-  - precioPropio: Decimal
-  + getPrecio(): Decimal
+  - precio: decimal
+  + obtenerPrecio(): decimal
 }
 
 class PersonalizacionItem {
   - descripcion: String
-  - costoAdicional: Decimal
-  + calcularCosto(): Decimal
+  - costoAdicional: decimal
+  + calcularCosto(): decimal
 }
 
 class Pago {
-  - monto: Decimal
+  - monto: decimal
   - metodoDePago: MetodoPago
   - fechaHora: DateTime
 }
 
 class HistorialPago {
   - tipo: TipoMovimiento
-  - monto: Decimal
+  - monto: decimal
   - motivo: String
   - fechaHora: DateTime
-  + registrar(): void
+  + registrarMovimiento(pago: Pago, tipo: TipoMovimiento, monto: decimal, motivo: String, usuario: Usuario): void
 }
 
 class PoliticaCicloPedido <<policy>> {
   + validarModificacion(pedido: Pedido): void
-  + validarTransicion(actual: EstadoPedido, nuevo: EstadoPedido): Boolean
+  + validarTransicion(actual: EstadoPedido, nuevo: EstadoPedido): boolean
   + validarCancelacion(pedido: Pedido): void
 }
 
 class ServicioRegistroPago <<service>> {
-  + registrarCobro(pedido: Pedido, monto: Decimal, metodo: MetodoPago): Pago
-  + registrarAjuste(pago: Pago, diferencia: Decimal): HistorialPago
+  + registrarCobro(pedido: Pedido, monto: decimal, metodo: MetodoPago): Pago
+  + registrarAjuste(pago: Pago, diferencia: decimal): HistorialPago
 }
 
 class CalculadorAjustePago <<service>> {
-  + calcularDiferencia(totalAnterior: Decimal, totalNuevo: Decimal): Decimal
+  + calcularDiferencia(totalAnterior: decimal, totalNuevo: decimal): decimal
 }
 
 enum EstadoPedido {
@@ -99,11 +99,9 @@ enum TipoMovimiento {
 
 Pedido "1" *-- "1..*" ItemPedido : contiene
 ItemPedido "0..*" --> "1" IElementoMenu : elemento seleccionado
-Producto ..|> IElementoMenu
-Combo ..|> IElementoMenu
 ItemPedido "1" *-- "0..*" PersonalizacionItem : personalizaciones
-Pedido "1" -- "0..1" Pago : pago
-Pago "1" *-- "1..*" HistorialPago : movimientos
+Pedido "1" -- "1" Pago : pago original
+Pago "1" -- "0..*" HistorialPago : movimientos
 
 Pedido ..> PoliticaCicloPedido : solicitar validacion
 
@@ -120,5 +118,15 @@ ServicioRegistroPago ..> CalculadorAjustePago : solicita cálculo
 
 
 
+
+
+note as Alcance
+  Variante conceptual, no integrada al diagrama de clases final.
+  IElementoMenu, PoliticaCicloPedido, ServicioRegistroPago y
+  CalculadorAjustePago no existen en el modelo final: alli las
+  responsabilidades las cubren Producto, Combo, Pedido,
+  ServicioPedidos, Pago y ProcesadorPago.
+  Ver la matriz de correspondencia en el anexo SRP.
+end note
 
 @enduml

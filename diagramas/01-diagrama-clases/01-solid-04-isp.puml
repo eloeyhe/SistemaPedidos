@@ -1,22 +1,24 @@
 @startuml 01-solid-04-isp
+title Sistema de Pedidos - Principio de Segregacion de Interfaces (ISP) - Variante conceptual
 
 skinparam classAttributeIconSize 0
 skinparam style strictuml
-!option handwritten false
+hide empty members
 
 package "Segregacion de Interfaces - Sistema de Pedidos" {
 
     ' ==========================================
     ' INTERFACES SEGREGADAS (ISP) - UNA POR ROL
+    ' Las firmas son las del diagrama de clases final.
     ' ==========================================
     interface IAtencionCliente <<interface>> {
-        + registrarPedido(items: List<ItemPedido>): Pedido
-        + modificarPedido(idPedido: string, items: List<ItemPedido>): void
-        + marcarComoEntregado(idPedido: string): void
+        + tomarPedido(): void
+        + modificarPedido(pedido: Pedido): void
+        + marcarComoEntregado(pedido: Pedido): void
     }
 
     interface ICancelacionPedido <<interface>> {
-        + cancelarPedido(idPedido: string, motivo: string): void
+        + solicitarCancelacionPedido(numeroPedido: int): void
     }
 
     interface IConsultaEntregas <<interface>> {
@@ -24,54 +26,60 @@ package "Segregacion de Interfaces - Sistema de Pedidos" {
     }
 
     interface IPreparacionCocina <<interface>> {
-        + comenzarPreparacion(idPedido: string): void
-        + marcarPedidoListo(idPedido: string): void
+        + iniciarPreparacion(pedido: Pedido): void
+        + marcarPedidoListo(pedido: Pedido): void
     }
 
     interface IConsultaComandas <<interface>> {
-        + consultarComandasActivas(): List<Pedido>
+        + accederMonitorPedidosActivos(): void
     }
 
     interface ISupervision <<interface>> {
-        + autorizarCancelacion(idPedido: string): boolean
-        + registrarDevolucionManual(idPedido: string, monto: decimal): void
+        + autorizarCancelacion(): boolean
+        + solicitarClaveSupervision(numeroPedido: int): boolean
+        + validarClaveSupervision(clave: String): boolean
     }
 
     ' ==========================================
-    ' CLASES BASE / ABSTRACTAS
+    ' CLASE BASE ABSTRACTA
     ' ==========================================
     abstract class Usuario {
-        - nombre: string
-        - usuario: string
-        - passwordHash: string
-        - activo: boolean
-        + autenticar(): boolean
+        # nombre: String
+        # usuario: String
+        # passwordHash: String
+        # activo: boolean
+        + autentificar(usuario: String, password: String): boolean
+        + {abstract} puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
     }
 
     ' ==========================================
-    ' IMPLEMENTACIÓN DE INTERFACES EN USUARIOS
+    ' IMPLEMENTACION DE INTERFACES EN USUARIOS
     ' ==========================================
     class UsuarioMostrador {
         - numeroCaja: int
-        + registrarPedido(items: List<ItemPedido>): Pedido
-        + modificarPedido(idPedido: string, items: List<ItemPedido>): void
-        + cancelarPedido(idPedido: string, motivo: string): void
-        + marcarComoEntregado(idPedido: string): void
+        + tomarPedido(): void
+        + modificarPedido(pedido: Pedido): void
+        + marcarComoEntregado(pedido: Pedido): void
+        + solicitarCancelacionPedido(numeroPedido: int): void
         + consultarPedidosListos(): List<Pedido>
+        + puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
     }
 
     class UsuarioCocina {
-        - estacionTrabajo: string
-        + comenzarPreparacion(idPedido: string): void
-        + marcarPedidoListo(idPedido: string): void
-        + consultarComandasActivas(): List<Pedido>
+        - estacionTrabajo: String
+        + iniciarPreparacion(pedido: Pedido): void
+        + marcarPedidoListo(pedido: Pedido): void
+        + accederMonitorPedidosActivos(): void
+        + puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
     }
 
     class UsuarioEncargado {
-        - claveSupervision: string
-        + cancelarPedido(idPedido: string, motivo: string): void
-        + autorizarCancelacion(idPedido: string): boolean
-        + registrarDevolucionManual(idPedido: string, monto: decimal): void
+        - claveSupervision: String
+        + solicitarCancelacionPedido(numeroPedido: int): void
+        + autorizarCancelacion(): boolean
+        + solicitarClaveSupervision(numeroPedido: int): boolean
+        + validarClaveSupervision(clave: String): boolean
+        + puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
     }
 
     Usuario <|-- UsuarioMostrador
@@ -90,36 +98,49 @@ package "Segregacion de Interfaces - Sistema de Pedidos" {
     ' REGISTROS / HISTORIALES
     ' Sin interfaz comun: registran hechos distintos y ningun
     ' componente los consume de forma polimorfica.
+    ' Firmas y atributos del diagrama de clases final.
     ' ==========================================
     class HistorialPago {
-        - pago: Pago
-        - tipo: string
+        - tipo: TipoMovimiento
         - monto: decimal
-        - motivo: string
-        - fechayhora: datetime
-        - usuario: Usuario
-        + registrar(): void
+        - motivo: String
+        - fechaHora: DateTime
+        + registrarMovimiento(pago: Pago, tipo: TipoMovimiento, monto: decimal, motivo: String, usuario: Usuario): void
     }
 
     class AuditoriaPedido {
-        - pedido: Pedido
-        - usuario: Usuario
-        - accion: string
-        - detalles: string
-        - fechayhora: datetime
-        + registrar(): void
+        - accion: String
+        - detalles: String
+        - motivo: String
+        - fechaHora: DateTime
+        + registrarAccion(pedido: Pedido, usuario: Usuario, accion: String, fechaHora: DateTime): void
+        + registrarAccion(pedido: Pedido, usuario: Usuario, autorizante: UsuarioEncargado, accion: String, fechaHora: DateTime): void
+        + registrarDetalles(motivo: String, estadoAnterior: EstadoPedido, estadoNuevo: EstadoPedido): void
     }
 
     class HistorialCambioPedido {
-        - pedido: Pedido
-        - campo: string
-        - valorAnterior: string
-        - valorNuevo: string
-        - fechayhora: datetime
-        - usuario: Usuario
-        + registrarCambio(): void
+        - campo: String
+        - valorAnterior: String
+        - valorNuevo: String
+        - fechaHora: DateTime
+        + registrarCambioPedido(pedido: Pedido, campo: String, valorAnterior: String, valorNuevo: String, usuario: Usuario): void
+        + registrarCambioEstado(pedido: Pedido, estadoAnterior: EstadoPedido, estadoNuevo: EstadoPedido, actor: Usuario): boolean
     }
 
+    HistorialPago "0..*" --> "1" Usuario : responsable
+    AuditoriaPedido "0..*" --> "1" Usuario : responsable
+    AuditoriaPedido "0..*" --> "0..1" UsuarioEncargado : autorizante
+    HistorialCambioPedido "0..*" --> "1" Usuario : actor
 }
+
+note as Alcance
+  Variante conceptual, no integrada al diagrama de clases final.
+  Todas las operaciones usan las firmas del diagrama final, pero
+  las seis interfaces de rol no existen en el: tomarPedido(),
+  solicitarCancelacionPedido(...), consultarPedidosListos() y
+  accederMonitorPedidosActivos() las ofrece PantallaPedidos,
+  que es la frontera que usan los tres roles.
+  Ver la matriz de correspondencia en el anexo ISP.
+end note
 
 @enduml

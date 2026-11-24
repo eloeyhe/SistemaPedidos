@@ -1,32 +1,31 @@
 @startuml 01-solid-05-dip
+title Sistema de Pedidos - Inversion de Dependencias (DIP) - Arquitectura propuesta
 skinparam classAttributeIconSize 0
 
 ' Dominio y Abstracción del Catálogo
 interface IElementoMenu {
-    + getNombre(): String
-    + getPrecio(): Double
+    + obtenerNombre(): String
+    + obtenerPrecio(): decimal
 }
 
-class Producto implements IElementoMenu {
-    - Producto: String
+abstract class Producto implements IElementoMenu {
     - nombre: String
-    - precioBase: Double
-    + getNombre(): String
-    + getPrecio(): Double
+    - precio: decimal
+    + obtenerNombre(): String
+    + obtenerPrecio(): decimal
 }
 
 class Combo implements IElementoMenu {
-    - Combo: String
     - nombre: String
-    - descuento: Double
-    + getNombre(): String
-    + getPrecio(): Double
+    - precio: decimal
+    + obtenerNombre(): String
+    + obtenerPrecio(): decimal
 }
 
 class ItemPedido {
-    - cantidad: Integer
+    - cantidad: int
     - elemento: IElementoMenu
-    + calcularSubtotal(): Double
+    + calcularSubtotal(): decimal
 
 }
 
@@ -35,7 +34,7 @@ ItemPedido --> IElementoMenu
 ' Puertos de Infraestructura (Interfaces)
 
 interface IRepositorioPedidos {
-    + guardar(pedido: Pedido): Boolean
+    + guardar(pedido: Pedido): boolean
 }
 
 interface ICatalogoMenu {
@@ -59,5 +58,16 @@ class ServicioTomarPedido {
 ServicioTomarPedido --> IRepositorioPedidos
 ServicioTomarPedido --> ICatalogoMenu
 ServicioTomarPedido --> IPublicadorComandasCocina
+
+
+note as Alcance
+  Arquitectura propuesta (variante conceptual), no integrada al
+  diagrama de clases final. ServicioTomarPedido, IElementoMenu,
+  IRepositorioPedidos, ICatalogoMenu e IPublicadorComandasCocina
+  no existen en el modelo final: alli el CU1 lo resuelve
+  ServicioPedidos, que envia el pedido a PantallaCocina y
+  usa ProcesadorPago.
+  Ver la matriz de correspondencia en el anexo DIP.
+end note
 
 @enduml
