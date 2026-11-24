@@ -1,4 +1,7 @@
 # Principio de Responsabilidad Única (SRP)
+
+> **Alcance:** este anexo presenta una **variante conceptual no integrada** al diagrama de clases final (`06-clases-diagrama-final.puml`). Las abstracciones `IElementoMenu`, `PoliticaCicloPedido`, `ServicioRegistroPago` y `CalculadorAjustePago` no existen en ese modelo, que resuelve las mismas responsabilidades con `Producto`, `Combo`, `Pedido`, `ServicioPedidos`, `Pago` y `ProcesadorPago`. La sección [Correspondencia con el diagrama de clases final](#correspondencia-con-el-diagrama-de-clases-final) relaciona cada elemento con el modelo entregado.
+
 ## Propósito y Tipo de Principio SOLID
 En el diseño inicial del Sistema de Pedidos, clases principales como **Pedido**, **Pago** e **ItemPedido** acumulaban **múltiples responsabilidades no relacionadas** dentro de una misma estructura. esto es un problema ya que hacía que el sistema fuera frágil y difícil de mantener (al modificar algo podías romper la estructura del pedido).
 
@@ -35,11 +38,11 @@ Para resolver el problema en el **Sistema de Pedidos**, se distribuyen las respo
 ┌────────────────────────────────────────────────────────┐
 │ Pedido                                                 │
 ├────────────────────────────────────────────────────────┤
-│ - numeroPedido, fecha, referenciaRetiro, estado                      │
+│ - numeroPedido, fechaHora, referenciaRetiro, estado    │
 ├────────────────────────────────────────────────────────┤
 │ + agregarItem(), cancelar()                            │  &lt;-- Estructura
 │ + cambiarEstado(), validarModificacionEnRecibido()     │  &lt;-- Ciclo de Vida
-│ + priorizar()                                         │  &lt;-- Marcado manual de prioridad
+│ + priorizar()                                          │  &lt;-- Marcado manual de prioridad
 └────────────────────────────────────────────────────────┘
 
 ```
@@ -62,7 +65,7 @@ ItemPedido
   - contiene PersonalizacionItem
 
 IElementoMenu
-  - define getPrecio()
+  - define obtenerPrecio()
   - Producto obtiene su precio base
   - Combo obtiene su precio propio, independiente de sus componentes
 
@@ -102,6 +105,31 @@ En el **Módulo Pedido**, la entidad **Pedido** mantiene la estructura de la ord
 
 En el **Módulo Pago**, la clase **Pago** representa el cobro asociado al pedido. **ServicioRegistroPago** registra los cobros y ajustes, y **CalculadorAjustePago** calcula la diferencia entre el total anterior y el nuevo; el servicio registra el movimiento correspondiente en **HistorialPago**.
  
-  En el **Módulo Ítem Pedido**, **ItemPedido** referencia un elemento del catálogo mediante **IElementoMenu**, implementada por **Producto** y **Combo**. Cada elemento proporciona su precio con `getPrecio()`; **Combo** usa su precio propio, sin derivarlo de la suma de sus componentes, como requiere RF1. Al agregar un elemento, `ItemPedido` conserva ese valor como `precioUnitarioHistorico`, para que cambios posteriores en el catálogo no alteren el precio acordado. `ItemPedido.calcularSubtotal()` calcula el subtotal con ese precio histórico, la cantidad y los adicionales de sus personalizaciones. **Pedido.calcularTotal()** suma los subtotales, sin conocer las reglas internas de precio de productos o combos.
+  En el **Módulo Ítem Pedido**, **ItemPedido** referencia un elemento del catálogo mediante **IElementoMenu**, implementada por **Producto** y **Combo**. Cada elemento proporciona su precio con `obtenerPrecio()`; **Combo** usa su precio propio, sin derivarlo de la suma de sus componentes, como requiere RF1. Al agregar un elemento, `ItemPedido` conserva ese valor como `precioUnitarioHistorico`, para que cambios posteriores en el catálogo no alteren el precio acordado. `ItemPedido.calcularSubtotal()` calcula el subtotal con ese precio histórico, la cantidad y los adicionales de sus personalizaciones. **Pedido.calcularTotal()** suma los subtotales, sin conocer las reglas internas de precio de productos o combos.
 
 Desde un punto de vista técnico, las reglas del ciclo de vida y el cálculo de ajustes se mantienen en componentes especializados, mientras que cada entidad protege la coherencia de sus propios datos. Esta separación facilita probar las reglas y los cálculos de forma aislada y conserva el precio histórico acordado para los ítems.
+
+
+## Correspondencia con el diagrama de clases final
+
+La refactorización SRP es una **variante conceptual**: muestra cómo separar responsabilidades, pero el diagrama de clases final (`06-clases-diagrama-final.puml`) las distribuye entre las clases que usan los casos de uso y las secuencias. La siguiente matriz relaciona cada elemento de la variante con su equivalente en el modelo entregado.
+
+| Elemento de la variante SRP | Equivalente en el diagrama de clases final | Observación |
+|---|---|---|
+| `Pedido` (datos, estado, prioridad e ítems) | `Pedido` | Mismas responsabilidades y atributos (`numeroPedido: int`, `fechaHora`, `referenciaRetiro`, `estado`, `prioritario`). |
+| `Pedido.agregarItem(item)` | `Pedido.agregarItem(producto, cantidad)` y `Pedido.agregarItemCombo(combo, cantidad)` | El modelo final distingue producto y combo porque no tiene una interfaz común. |
+| `Pedido.modificarItem(item)` | `Pedido.prepararModificacion(listaCambios)` y `Pedido.actualizarPedido(listaItems, totalActualizado)` | Operaciones del CU2. |
+| `Pedido.cancelar()` | `Pedido.cancelarPedido(motivo)` | Operación del CU3. |
+| `Pedido.cambiarEstado(nuevoEstado)` | `Pedido.cambiarEstado(nuevoEstado)` | Igual. |
+| `Pedido.marcarPrioritario()` | `Pedido.priorizar()`, invocada por `ServicioPedidos.marcarPrioritario(numeroPedido)` | Marca manual (RF7). |
+| `Pedido.calcularTotal()` | `Pedido.obtenerTotal()` y `Pedido.actualizarTotal(subtotal)` | |
+| `ItemPedido.elemento: IElementoMenu` | Asociaciones `ItemPedido --> Producto` (0..1) e `ItemPedido --> Combo` (0..1) | Cada ítem referencia un producto o un combo, pero no ambos. |
+| `ItemPedido.precioUnitarioHistorico` | `ItemPedido.precioUnitario` y `ItemPedido.conservarPrecioHistorico(precioBase)` | Mismo criterio de precio histórico. |
+| `ItemPedido.calcularSubtotal()` | `ItemPedido.calcularSubtotal(cantidad, precioBase, costosAdicionales)` | |
+| `IElementoMenu.obtenerPrecio()` | `Producto.obtenerPrecio()` y `Combo.obtenerPrecio()` | La interfaz solo existe en esta variante y en la variante del patrón Decorator. |
+| `PoliticaCicloPedido` | `Pedido.validarTransicion(nuevoEstado, actor)` y `ServicioPedidos.solicitarCambioEstado(...)` | En el patrón State, las reglas pasan a los estados concretos. |
+| `ServicioRegistroPago` | `ServicioPedidos.registrarAjustePago(...)`, `Pago.registrarCobro(...)`, `Pago.registrarCobroAdicional(...)`, `Pago.registrarDevolucion(...)` y `ProcesadorPago.procesarCobro(...)` | La validación del medio de pago es exclusiva de `ProcesadorPago`. |
+| `CalculadorAjustePago.calcularDiferencia(...)` | `Pago.calcularDiferencia(totalAnterior, totalActualizado)` | |
+| `Pago`, `HistorialPago`, `PersonalizacionItem` y los enums | Mismas clases y enums | `Pedido "1" -- "1" Pago` y `HistorialPago.registrarMovimiento(...)`, igual que en el modelo final. |
+
+Integrar la variante al modelo final implicaría agregar las cuatro abstracciones y actualizar los casos de uso, las secuencias y las tarjetas CRC que hoy usan las operaciones de la columna central.

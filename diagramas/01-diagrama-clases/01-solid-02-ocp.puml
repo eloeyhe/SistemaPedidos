@@ -1,50 +1,58 @@
 @startuml 01-solid-02-ocp
+title Sistema de Pedidos - Principio Abierto/Cerrado (OCP) - Variante conceptual
 skinparam classAttributeIconSize 0
 
 class Pago {
-    - Pago: String
-    - monto: Double
+    - monto: decimal
     - estrategiaPago: IEstrategiaPago
     + registrarPago(): void
 }
 
 interface IEstrategiaPago {
-    + procesarCobro(monto: Double): Boolean
+    + procesarCobro(monto: decimal): boolean
 }
 
 class PagoEfectivo implements IEstrategiaPago {
-    + procesarCobro(monto: Double): Boolean
+    + procesarCobro(monto: decimal): boolean
 }
 
 class PagoTransferencia implements IEstrategiaPago {
-    + procesarCobro(monto: Double): Boolean
+    + procesarCobro(monto: decimal): boolean
 }
 
 class PagoQR implements IEstrategiaPago {
-    + procesarCobro(monto: Double): Boolean
+    + procesarCobro(monto: decimal): boolean
 }
 note bottom of PagoQR : Extensión futura para demostrar OCP (No en RF8)
 
 Pago --> IEstrategiaPago
 
 class Pedido {
-    - Pedido: String
     - estrategiaDescuento: IEstrategiaDescuento
-    + calcularTotal(): Double
+    + calcularTotal(): decimal
 }
 
 interface IEstrategiaDescuento {
-    + aplicarDescuento(montoBase: Double): Double
+    + aplicarDescuento(montoBase: decimal): decimal
 }
 
 class DescuentoSocio implements IEstrategiaDescuento {
-    + aplicarDescuento(montoBase: Double): Double
+    + aplicarDescuento(montoBase: decimal): decimal
 }
 
 class DescuentoPromocional implements IEstrategiaDescuento {
-    + aplicarDescuento(montoBase: Double): Double
+    + aplicarDescuento(montoBase: decimal): decimal
 }
 
 Pedido --> IEstrategiaDescuento
+
+
+note as Alcance
+  Variante conceptual, no integrada al diagrama de clases final.
+  En el modelo final el medio de pago es el enum MetodoPago
+  (EFECTIVO, TRANSFERENCIA) y lo valida y procesa ProcesadorPago.
+  Las estrategias de pago y de descuento son extensiones futuras.
+  Ver la matriz de correspondencia en el anexo OCP.
+end note
 
 @enduml

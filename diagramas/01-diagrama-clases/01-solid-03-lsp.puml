@@ -1,21 +1,24 @@
 @startuml 01-solid-03-lsp
+title Sistema de Pedidos - Principio de Sustitucion de Liskov (LSP) - Variante conceptual
 
 skinparam classAttributeIconSize 0
+hide empty members
 
 interface IElementoMenu {
-    + getPrecio(): Double
+    + obtenerPrecio(): decimal
 }
 
 abstract class Producto implements IElementoMenu {
-    - Producto: String
-    - nombre: String
-    - precioBase: Double
-    + getPrecio(): Double
+    # nombre: String
+    # precio: decimal
+    + obtenerNombre(): String
+    + obtenerPrecio(): decimal
+    + cambiarPrecio(nuevoPrecio: decimal): void
 }
 
 class ProductoEnvasado extends Producto {
+    - fechaElaboracion: Date
     - fechaVencimiento: Date
-    + getPrecio(): Double
 }
 
 interface IElaborable {
@@ -23,21 +26,22 @@ interface IElaborable {
 }
 
 class ProductoPreparado extends Producto implements IElaborable {
-    - tiempoPreparacion: Integer
-    + getPrecio(): Double
+    - tiempoPreparacion: int
     + iniciarPreparacion(): void
 }
 
 class Combo implements IElementoMenu {
     - nombre: String
-    - descuentoAplicado: Double
-    + getPrecio(): Double
+    - precio: decimal
+    + obtenerNombre(): String
+    + obtenerPrecio(): decimal
 }
 
 class ItemPedido {
-    - cantidad: Integer
+    - cantidad: int
+    - precioUnitario: decimal
     - elemento: IElementoMenu
-    + calcularSubtotal(): Double
+    + calcularSubtotal(): decimal
 }
 
 class Cocina {
@@ -46,5 +50,15 @@ class Cocina {
 
 ItemPedido --> IElementoMenu
 Cocina ..> IElaborable
+
+note as Alcance
+  Variante conceptual, no integrada al diagrama
+  de clases final. IElementoMenu, IElaborable y
+  Cocina no existen en el modelo final: alli
+  ItemPedido referencia a Producto o a Combo y
+  iniciarPreparacion() solo la declara
+  ProductoPreparado. Ver la matriz de
+  correspondencia en el anexo LSP.
+end note
 
 @enduml
