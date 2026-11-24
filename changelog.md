@@ -90,6 +90,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#322](https://github.com/eloeyhe/SistemaPedidos/issues/322)
   PR: [#323](https://github.com/eloeyhe/SistemaPedidos/pull/323) - @santimarM (Coordinador y DevOps)
 
+- [fix/rc9-readme-minimalista] fix: dejo el README en formato minimalista con datos del proyecto, integrantes e índices (RC9)
+  Issue: [#324](https://github.com/eloeyhe/SistemaPedidos/issues/324)
+  PR: [#326](https://github.com/eloeyhe/SistemaPedidos/pull/326) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added
