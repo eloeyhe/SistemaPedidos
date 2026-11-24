@@ -1,5 +1,7 @@
 # Principio de Inversión de Dependencias (DIP)
 
+> **Alcance:** este anexo presenta una **arquitectura propuesta (variante conceptual) no integrada** al diagrama de clases final (`06-clases-diagrama-final.puml`). `ServicioTomarPedido`, `IElementoMenu`, `IRepositorioPedidos`, `ICatalogoMenu` e `IPublicadorComandasCocina` no son clases ni contratos exigidos por esta entrega: en el modelo final, el CU1 lo resuelve `ServicioPedidos`, que envía el pedido a `PantallaCocina` y usa `ProcesadorPago`. La sección [Correspondencia con el diagrama de clases final](#correspondencia-con-el-diagrama-de-clases-final) relaciona cada elemento con el modelo entregado.
+
 ## Propósito y Tipo del Principio SOLID
 El Principio de Inversión de Dependencias (DIP) es un principio de diseño estructural y arquitectónico. Su propósito establece que los módulos de alto nivel (la lógica de negocio central) no deben depender de los módulos de bajo nivel (detalles de infraestructura, bases de datos o UI). Ambos deben depender de abstracciones (interfaces o clases abstractas). Además, las abstracciones no deben depender de los detalles, sino que los detalles deben depender de las abstracciones.
 
@@ -35,3 +37,20 @@ El diagrama muestra la resolución de las dependencias a través de inyección e
 El beneficio inmediato y cuantificable de aplicar DIP mediante la Inyección de Dependencias es la mejora en la **testabilidad**. Al depender de interfaces (`IRepositorioPedidos` e `IPublicadorComandasCocina`) en lugar de clases de infraestructura concretas, el diseño facilita la creación de **Mocks** o **Stubs** (objetos simulados en memoria) de estos repositorios. 
 
 Esto permite probar de forma aislada la lógica de negocio del `ServicioTomarPedido`, sin depender de una base de datos real o de hardware físico. Por ejemplo, si el servicio implementara la validación de pedidos vacíos o el cálculo del total, estos comportamientos podrían validarse rápidamente mediante pruebas unitarias. La cobertura final y el éxito de estas pruebas dependerán, naturalmente, de los casos concretos que el equipo de desarrollo decida implementar.
+
+
+## Correspondencia con el diagrama de clases final
+
+La solución DIP es una **arquitectura propuesta**, no una clase ni un contrato exigido por esta entrega. El diagrama de clases final (`06-clases-diagrama-final.puml`) resuelve el CU1 con `ServicioPedidos`, que depende directamente de `PantallaCocina` y `ProcesadorPago`.
+
+| Elemento de la variante DIP | Equivalente en el diagrama de clases final | Observación |
+|---|---|---|
+| `ServicioTomarPedido` | `ServicioPedidos` | Único servicio de aplicación del modelo final. |
+| `ServicioTomarPedido.ejecutar(datosPedido)` | Operaciones del CU1 en `ServicioPedidos` (`iniciarNuevoPedido()`, `seleccionarProducto(...)`, `seleccionarCombo(...)`, `seleccionarMedioPago(...)`, etc.) | Ver la secuencia del CU1. |
+| `IElementoMenu` (`obtenerNombre()`, `obtenerPrecio()`) | `Producto` y `Combo`, con las mismas operaciones | Sin interfaz común. |
+| `IRepositorioPedidos.guardar(pedido)` | Atributo `ServicioPedidos.pedidos: List<Pedido>` | La persistencia no se modela en esta entrega. |
+| `ICatalogoMenu.buscarPorId(id)` | Sin equivalente | `Producto` y `Combo` llegan como parámetros de `seleccionarProducto(...)` y `seleccionarCombo(...)`. |
+| `IPublicadorComandasCocina.publicarComanda(pedido)` | `PantallaCocina.enviarCabeceraPedido(...)`, `PantallaCocina.enviarDetallePedido(...)` y `PantallaCocina.informarPedidoConfirmado(...)` | Envío automático a cocina (RF2). |
+| Inyección por constructor | Sin equivalente en el modelo final | La variante del patrón Builder aplica el mismo criterio al inyectar `IPedidoBuilder` en `ServicioPedidos`. |
+
+Adoptar esta arquitectura implicaría agregar los puertos al diagrama final y actualizar las secuencias del CU1 que hoy usan `PantallaCocina` directamente.
