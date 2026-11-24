@@ -82,6 +82,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   Issue: [#318](https://github.com/eloeyhe/SistemaPedidos/issues/318)
   PR: [#319](https://github.com/eloeyhe/SistemaPedidos/pull/319) - @santimarM (Coordinador y DevOps)
 
+- [fix/rc21-rc22-cu03-introduccion] fix: dejo bloqueada la cancelación de pedidos LISTO o ENTREGADO sin devolución manual y marco el pago QR como extensión futura (RC21, RC22)
+  Issue: [#322](https://github.com/eloeyhe/SistemaPedidos/issues/322)
+  PR: [#323](https://github.com/eloeyhe/SistemaPedidos/pull/323) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added
