@@ -4,6 +4,100 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [Segundo Parcial] - 2026-11-21
+
+### Added
+
+- [feature/esp-patron-estructural-add-patron-decorator] Aplico patrón Decorator al cálculo de precios con personalizaciones
+  Issue: [#283](https://github.com/eloeyhe/SistemaPedidos/issues/283)
+  Issue: [#284](https://github.com/eloeyhe/SistemaPedidos/issues/284)
+  Issue: [#285](https://github.com/eloeyhe/SistemaPedidos/issues/285)
+  Issue: [#286](https://github.com/eloeyhe/SistemaPedidos/issues/286)
+  Issue: [#287](https://github.com/eloeyhe/SistemaPedidos/issues/287)
+  Issue: [#288](https://github.com/eloeyhe/SistemaPedidos/issues/288)
+  PR: [#289](https://github.com/eloeyhe/SistemaPedidos/pull/289) - @nachovelesquen7-rgb (Especialista en Patrón de Diseño Estructural)
+
+- [feature/esp-patron-comportamiento-add-patron-state] [Patrón de comportamiento] aplico patrón State en Pedido
+  Issue: [#299](https://github.com/eloeyhe/SistemaPedidos/issues/299)
+  Issue: [#300](https://github.com/eloeyhe/SistemaPedidos/issues/300)
+  Issue: [#301](https://github.com/eloeyhe/SistemaPedidos/issues/301)
+  Issue: [#302](https://github.com/eloeyhe/SistemaPedidos/issues/302)
+  Issue: [#303](https://github.com/eloeyhe/SistemaPedidos/issues/303)
+  Issue: [#304](https://github.com/eloeyhe/SistemaPedidos/issues/304)
+  PR: [#306](https://github.com/eloeyhe/SistemaPedidos/pull/306) - @eloeyhe (Especialista en Patrón de Diseño de Comportamiento)
+
+- [feature/esp-patron-creacional-add-patron-builder] Aplico patrón Builder a la construcción de Pedido
+  Issue: [#291](https://github.com/eloeyhe/SistemaPedidos/issues/291)
+  Issue: [#292](https://github.com/eloeyhe/SistemaPedidos/issues/292)
+  Issue: [#293](https://github.com/eloeyhe/SistemaPedidos/issues/293)
+  Issue: [#294](https://github.com/eloeyhe/SistemaPedidos/issues/294)
+  Issue: [#295](https://github.com/eloeyhe/SistemaPedidos/issues/295)
+  Issue: [#296](https://github.com/eloeyhe/SistemaPedidos/issues/296)
+  Issue: [#297](https://github.com/eloeyhe/SistemaPedidos/issues/297)
+  PR: [#298](https://github.com/eloeyhe/SistemaPedidos/pull/298) - @Leandro2107 (Especialista en Patrón de Diseño Creacional)
+
+- [feature/coord-devops-update-docs] Actualizo README, índices y plantillas de PR para el Segundo Parcial y documento las code reviews
+  Issue: [#277](https://github.com/eloeyhe/SistemaPedidos/issues/277)
+  Issue: [#278](https://github.com/eloeyhe/SistemaPedidos/issues/278)
+  Issue: [#279](https://github.com/eloeyhe/SistemaPedidos/issues/279)
+  Issue: [#280](https://github.com/eloeyhe/SistemaPedidos/issues/280)
+  PR: [#290](https://github.com/eloeyhe/SistemaPedidos/pull/290) - @santimarM (Coordinador y DevOps)
+
+### Changed
+
+- [backport/release-actividad-obligatoria-4] Backport release/actividad-obligatoria-4 hacia develop
+  PR: [#274](https://github.com/eloeyhe/SistemaPedidos/pull/274) - @santimarM (Coordinador y DevOps)
+
+### Fixed
+
+- [fix/coord-devops-estructura-parte-1] fix: ajusto nombres de archivos a la estructura de la Parte 1 y abro la sección del Segundo Parcial en el changelog
+  Issue: [#275](https://github.com/eloeyhe/SistemaPedidos/issues/275)
+  PR: [#276](https://github.com/eloeyhe/SistemaPedidos/pull/276) - @santimarM (Coordinador y DevOps)
+
+- [fix/coord-devops-numeracion-escenarios] fix: renumero los escenarios de casos de uso del 01 al 05 según la estructura de la Parte 1
+  Issue: [#282](https://github.com/eloeyhe/SistemaPedidos/issues/282)
+  PR: [#281](https://github.com/eloeyhe/SistemaPedidos/pull/281) - @santimarM (Coordinador y DevOps)
+
+- [fix/coord-devops-registro-reviews] fix: ordeno el registro de code reviews y completo el estado final de la PR #306
+  Issue: [#307](https://github.com/eloeyhe/SistemaPedidos/issues/307)
+  PR: [#308](https://github.com/eloeyhe/SistemaPedidos/pull/308) - @santimarM (Coordinador y DevOps)
+
+- [fix/esp-patron-estructural-plantilla-anexo] fix: corrijo Propósito y Tipo del anexo de Decorator y actualizo el título de la PR #289
+  Issue: [#309](https://github.com/eloeyhe/SistemaPedidos/issues/309)
+  PR: [#310](https://github.com/eloeyhe/SistemaPedidos/pull/310) - @nachovelesquen7-rgb (Especialista en Patrón de Diseño Estructural)
+
+- [fix/rc9-rc13-rc16-readme-crc] fix: reduzco el README y completo las tarjetas CRC de ProductoPreparado, ProductoEnvasado, Combo y Usuario (RC9, RC13, RC14, RC15, RC16)
+  Issue: [#312](https://github.com/eloeyhe/SistemaPedidos/issues/312)
+  PR: [#313](https://github.com/eloeyhe/SistemaPedidos/pull/313) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc1-rc2-rc10-patron-builder] fix: ubico PedidoBuilder en el paquete de Pedido, documento la copia de ítems y el alcance de la variante Builder (RC1, RC2, RC10)
+  Issue: [#314](https://github.com/eloeyhe/SistemaPedidos/issues/314)
+  PR: [#315](https://github.com/eloeyhe/SistemaPedidos/pull/315) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc3-patron-decorator] fix: completo la inicialización del componente decorado en Decorator (RC3)
+  Issue: [#316](https://github.com/eloeyhe/SistemaPedidos/issues/316)
+  PR: [#317](https://github.com/eloeyhe/SistemaPedidos/pull/317) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc4-rc8-rc11-patron-state] fix: completo inicialización, autorización, historial y contratos del patrón State (RC4, RC5, RC6, RC7, RC8, RC11)
+  Issue: [#318](https://github.com/eloeyhe/SistemaPedidos/issues/318)
+  PR: [#319](https://github.com/eloeyhe/SistemaPedidos/pull/319) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc17-rc20-principios-solid] fix: alineo los principios SOLID con el diagrama de clases final y documento sus variantes (RC17, RC18, RC19, RC20)
+  Issue: [#320](https://github.com/eloeyhe/SistemaPedidos/issues/320)
+  PR: [#321](https://github.com/eloeyhe/SistemaPedidos/pull/321) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc21-rc22-cu03-introduccion] fix: dejo bloqueada la cancelación de pedidos LISTO o ENTREGADO sin devolución manual y marco el pago QR como extensión futura (RC21, RC22)
+  Issue: [#322](https://github.com/eloeyhe/SistemaPedidos/issues/322)
+  PR: [#323](https://github.com/eloeyhe/SistemaPedidos/pull/323) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc9-readme-minimalista] fix: dejo el README en formato minimalista con datos del proyecto, integrantes e índices (RC9)
+  Issue: [#324](https://github.com/eloeyhe/SistemaPedidos/issues/324)
+  PR: [#326](https://github.com/eloeyhe/SistemaPedidos/pull/326) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc23-rc24-variantes-state-decorator] fix: marco State y Decorator como variantes de diseño no integradas y documento su correspondencia con el diagrama de clases final (RC23, RC24)
+  Issue: [#325](https://github.com/eloeyhe/SistemaPedidos/issues/325)
+  PR: [#327](https://github.com/eloeyhe/SistemaPedidos/pull/327) - @santimarM (Coordinador y DevOps)
+
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 
 ### Added

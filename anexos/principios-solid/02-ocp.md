@@ -1,5 +1,7 @@
 # Principio Abierto/Cerrado (OCP)
 
+> **Alcance:** este anexo presenta una **variante conceptual no integrada** al diagrama de clases final (`06-clases-diagrama-final.puml`). En ese modelo el medio de pago es el enum `MetodoPago` (EFECTIVO, TRANSFERENCIA), que valida y procesa `ProcesadorPago`; las estrategias de pago y de descuento son extensiones futuras. La sección [Correspondencia con el diagrama de clases final](#correspondencia-con-el-diagrama-de-clases-final) relaciona cada elemento con el modelo entregado.
+
 ## Propósito y Tipo del Principio SOLID
 El Principio Abierto/Cerrado (Open/Closed Principle) es un principio de diseño fundamental que establece que las entidades de software (clases, módulos, funciones) deben estar **abiertas para su extensión, pero cerradas para su modificación**. Su propósito principal es permitir que el sistema incorpore nuevos comportamientos o características en el futuro sin riesgo de introducir errores o alterar el código existente que ya ha sido probado y está en funcionamiento.
 
@@ -28,3 +30,19 @@ El diagrama UML asociado demuestra la aplicación del patrón **Strategy** para 
 
 ## Validación mediante Tests
 Para garantizar que el sistema cumple verdaderamente con el OCP y prevenir regresiones futuras, el diseño propuesto permite la incorporación de **pruebas unitarias aisladas**. Al testear las lógicas concretas instanciando directamente `PagoEfectivo`, `PagoTransferencia`, `DescuentoSocio` y `DescuentoPromocional` (como implementaciones de sus respectivas interfaces), se demuestra a nivel de código que es posible agregar y validar nuevas reglas de negocio de forma independiente, sin necesidad de instanciar o modificar las clases base `Pago` o `Pedido`.
+
+
+## Correspondencia con el diagrama de clases final
+
+La aplicación de OCP es una **variante conceptual**. El diagrama de clases final (`06-clases-diagrama-final.puml`) no usa estrategias: el medio de pago es un valor del enum `MetodoPago`, que valida y procesa `ProcesadorPago`, como exige RF8 para el alcance actual.
+
+| Elemento de la variante OCP | Equivalente en el diagrama de clases final | Observación |
+|---|---|---|
+| `Pago.registrarPago()` | `Pago.registrarCobro(medioPago, monto)` | |
+| `IEstrategiaPago.procesarCobro(monto)` | `ProcesadorPago.procesarCobro(medioPago, monto)` y `ProcesadorPago.validarMedioPago(medioPago)` | Un único procesador para los dos medios vigentes. |
+| `PagoEfectivo`, `PagoTransferencia` | Valores `EFECTIVO` y `TRANSFERENCIA` de `MetodoPago` | Únicos medios del MVP (RF8). |
+| `PagoQR` | Sin equivalente | **Extensión futura**, fuera del alcance actual (RF8 excluye QR y tarjetas). |
+| `Pedido.calcularTotal()` | `Pedido.obtenerTotal()` | |
+| `IEstrategiaDescuento`, `DescuentoSocio`, `DescuentoPromocional` | Sin equivalente | **Extensión futura**: los requisitos actuales no definen descuentos. |
+
+Integrar la variante implicaría reemplazar `MetodoPago` por las estrategias y actualizar `ProcesadorPago`, el CU1, el CU2 y sus secuencias.

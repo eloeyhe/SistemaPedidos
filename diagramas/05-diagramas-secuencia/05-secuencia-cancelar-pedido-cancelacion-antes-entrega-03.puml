@@ -13,7 +13,8 @@ participant "AuditoriaPedido:auditoria" as auditoria
 
 note over servicio, pedido
     La cancelacion conserva el pedido y sus pagos.
-    Cualquier devolucion manual se gestiona fuera de este flujo.
+    No registra cobros ni devoluciones: el sistema no
+    modela devoluciones por cancelacion.
 end note
 
 alt iniciador es UsuarioMostrador
@@ -116,11 +117,11 @@ else estadoActual == EN_PREPARACION
     end
 
 else estadoActual == LISTO or estadoActual == ENTREGADO
-    servicio --> pantalla : cancelacionAutomaticaNoPermitida
+    servicio --> pantalla : cancelacionBloqueada
     alt iniciador es UsuarioMostrador
-        pantalla --> UsuarioMostrador : informarDevolucionManualFueraDeEsteFlujo
+        pantalla --> UsuarioMostrador : mensajeCancelacionBloqueada
     else iniciador es UsuarioEncargado
-        pantalla --> UsuarioEncargado : informarDevolucionManualFueraDeEsteFlujo
+        pantalla --> UsuarioEncargado : mensajeCancelacionBloqueada
     end
 else estadoActual no permite cancelacion
     servicio --> pantalla : cancelacionNoPermitida

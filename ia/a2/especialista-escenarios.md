@@ -51,10 +51,10 @@ Se generaron cinco archivos individuales dentro de:
 Los archivos corresponden a:
 
 - `03-tomar-pedido-registro-pedido-01.md`
-- `03-modificar-pedido-modificacion-recibido-01.md`
-- `03-cancelar-pedido-cancelacion-antes-entrega-01.md`
-- `03-cambiar-estado-pedido-avance-preparacion-01.md`
-- `03-consultar-pedidos-activos-prioridad-urgentes-01.md`
+- `03-modificar-pedido-modificacion-recibido-02.md`
+- `03-cancelar-pedido-cancelacion-antes-entrega-03.md`
+- `03-cambiar-estado-pedido-avance-preparacion-04.md`
+- `03-consultar-pedidos-activos-prioridad-urgentes-05.md`
 
 También se creó el índice:
 

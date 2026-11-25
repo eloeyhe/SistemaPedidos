@@ -1,0 +1,224 @@
+@startuml 01-patron-comportamiento-state
+scale max 3800 width
+title Patrón de Comportamiento State - Ciclo de Vida de Pedido - Variante de diseño
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+hide empty members
+
+class ServicioPedidos <<control>> {
+  - pedidos: List<Pedido>
+  - ultimoNumeroPedido: int
+  + solicitarCambioEstado(numeroPedido: int, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + solicitarAutorizacion(numeroPedido: int): boolean
+  + cancelarPedido(numeroPedido: int, motivo: String, actor: Usuario): boolean
+  + cancelarPedido(numeroPedido: int, motivo: String, actor: Usuario, autorizante: UsuarioEncargado): boolean
+  + buscarPedido(numeroOReferencia: String): Pedido
+  + consultarEstado(numeroPedido: int): EstadoPedido
+}
+
+class Pedido {
+  - fechaHora: DateTime
+  - numeroPedido: int
+  - referenciaRetiro: String
+  - estadoActual: IEstadoPedido
+  - prioritario: boolean
+  - total: decimal
+  + Pedido()
+  + obtenerEstado(): EstadoPedido
+  + establecerEstado(nuevoEstado: IEstadoPedido): void
+  + validarTransicion(nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(nuevoEstado: EstadoPedido): void
+  + cambiarEstado(nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(motivo: String): void
+  + cancelarPedido(motivo: String, actor: Usuario): void
+}
+
+interface IEstadoPedido {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+class EstadoRecibido {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+class EstadoEnPreparacion {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+class EstadoListo {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+class EstadoEntregado {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+class EstadoCancelado {
+  + validarTransicion(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): boolean
+  + cambiarEstado(pedido: Pedido, nuevoEstado: EstadoPedido, actor: Usuario): void
+  + cancelarPedido(pedido: Pedido, motivo: String, actor: Usuario): void
+  + obtenerEstado(): EstadoPedido
+}
+
+enum EstadoPedido {
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+abstract class Usuario {
+  # nombre: String
+  # usuario: String
+  # passwordHash: String
+  # activo: boolean
+  + autentificar(usuario: String, password: String): boolean
+  + {abstract} puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
+}
+
+class UsuarioMostrador {
+  - numeroCaja: int
+  + puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
+}
+
+class UsuarioCocina {
+  - estacionTrabajo: String
+  + puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
+}
+
+class UsuarioEncargado {
+  - claveSupervision: String
+  + autorizarCancelacion(): boolean
+  + solicitarClaveSupervision(numeroPedido: int): boolean
+  + validarClaveSupervision(clave: String): boolean
+  + puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
+}
+
+class HistorialCambioPedido {
+  - campo: String
+  - valorAnterior: String
+  - valorNuevo: String
+  - fechaHora: DateTime
+  + registrarCambioEstado(pedido: Pedido, estadoAnterior: EstadoPedido, estadoNuevo: EstadoPedido, actor: Usuario): boolean
+}
+
+class AuditoriaPedido {
+  - accion: String
+  - detalles: String
+  - motivo: String
+  - fechaHora: DateTime
+  + registrarAccion(pedido: Pedido, usuario: Usuario, accion: String, fechaHora: DateTime): void
+  + registrarAccion(pedido: Pedido, usuario: Usuario, autorizante: UsuarioEncargado, accion: String, fechaHora: DateTime): void
+  + registrarDetalles(motivo: String, estadoAnterior: EstadoPedido, estadoNuevo: EstadoPedido): void
+}
+
+ServicioPedidos "1" --> "0..*" Pedido : gestiona y solicita operaciones
+ServicioPedidos ..> EstadoPedido : envía estado destino
+ServicioPedidos ..> Usuario : identifica al actor
+ServicioPedidos ..> UsuarioEncargado : valida la clave de supervisión
+ServicioPedidos ..> HistorialCambioPedido : registra cambios de estado
+ServicioPedidos ..> AuditoriaPedido : registra cancelaciones
+
+Pedido "1" o--> "1" IEstadoPedido : estado actual
+Pedido ..> EstadoRecibido : <<create>>
+Pedido ..> EstadoPedido : expone estado compatible
+Pedido ..> Usuario : valida el actor
+Pedido "1" -- "0..*" HistorialCambioPedido : cambios
+Pedido "1" -- "0..*" AuditoriaPedido : auditoria
+
+IEstadoPedido ..> Pedido : actualiza estado en contexto
+IEstadoPedido ..> EstadoPedido : consulta o devuelve estado
+IEstadoPedido ..> Usuario : aplica restricciones por rol
+Usuario ..> EstadoPedido : autoriza el estado solicitado
+
+Usuario <|-- UsuarioMostrador
+Usuario <|-- UsuarioCocina
+Usuario <|-- UsuarioEncargado
+
+HistorialCambioPedido "0..*" --> "1" Usuario : actor
+AuditoriaPedido "0..*" --> "1" Usuario : responsable
+AuditoriaPedido "0..*" --> "0..1" UsuarioEncargado : autorizante
+
+EstadoRecibido ..|> IEstadoPedido
+EstadoEnPreparacion ..|> IEstadoPedido
+EstadoListo ..|> IEstadoPedido
+EstadoEntregado ..|> IEstadoPedido
+EstadoCancelado ..|> IEstadoPedido
+
+note as Alcance
+  <b>Alcance:</b> variante de diseño no integrada
+  al diagrama de clases final
+  (06-clases-diagrama-final.puml).
+  IEstadoPedido, los estados concretos y
+  estadoActual no existen en ese modelo.
+  Solo Usuario.puedeSolicitarEstado(...)
+  está integrada. La correspondencia se
+  documenta en el anexo del patrón.
+end note
+
+note right of Pedido
+  estadoActual es la única referencia
+  al estado vigente. EstadoPedido se
+  conserva como vista de compatibilidad
+  para el resto del sistema.
+
+  Inicialización: el constructor Pedido()
+  asigna estadoActual = new EstadoRecibido().
+  Todo pedido nace en RECIBIDO; la llamada
+  cambiarEstado(RECIBIDO) que hace el CU1 al
+  registrar el pedido solo confirma ese estado
+  y no provoca ninguna transición.
+end note
+
+note bottom of ServicioPedidos
+  Cambio de estado (CU4):
+  1. guarda estadoAnterior = pedido.obtenerEstado()
+  2. pedido.validarTransicion(nuevoEstado, actor)
+  3. si es válida: pedido.cambiarEstado(nuevoEstado, actor),
+     que delega en estadoActual
+  4. historial.registrarCambioEstado(pedido,
+     estadoAnterior, nuevoEstado, actor)
+  Si la transición es inválida no se registra nada.
+
+  Cancelación (CU3):
+  - RECIBIDO: cancelarPedido(numero, motivo, actor).
+  - EN_PREPARACION: requiere autorizante. Primero
+    solicitarAutorizacion(numero) y
+    UsuarioEncargado.validarClaveSupervision(clave);
+    solo si se autoriza invoca
+    cancelarPedido(numero, motivo, actor, autorizante).
+    Sin autorizante, la cancelación se rechaza
+    antes de delegar en Pedido.
+  - Al confirmar: auditoria.registrarAccion(...)
+    y auditoria.registrarDetalles(motivo,
+    estadoAnterior, CANCELADO).
+  Los estados concretos deciden si el estado admite
+  la cancelación; la autorización la valida el servicio.
+end note
+
+note bottom of Usuario
+  puedeSolicitarEstado(nuevoEstado) es redefinida
+  por cada rol y la invocan los estados concretos
+  desde validarTransicion(...):
+  - UsuarioCocina: EN_PREPARACION y LISTO
+  - UsuarioMostrador: ENTREGADO y CANCELADO
+  - UsuarioEncargado: CANCELADO
+end note
+
+@enduml
