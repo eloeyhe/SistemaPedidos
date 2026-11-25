@@ -86,18 +86,21 @@ package "Dominio" {
     # passwordHash: String
     # activo: boolean
     + autentificar(usuario: String, password: String): boolean
+    + {abstract} puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
   }
 
   class UsuarioMostrador {
     - numeroCaja: int
     + modificarPedido(pedido: Pedido): void
     + marcarComoEntregado(pedido: Pedido): void
+    + puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
   }
 
   class UsuarioCocina {
     - estacionTrabajo: String
     + iniciarPreparacion(pedido: Pedido): void
     + marcarPedidoListo(pedido: Pedido): void
+    + puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
   }
 
   class UsuarioEncargado {
@@ -105,6 +108,7 @@ package "Dominio" {
     + autorizarCancelacion(): boolean
     + solicitarClaveSupervision(numeroPedido: int): boolean
     + validarClaveSupervision(clave: String): boolean
+    + puedeSolicitarEstado(nuevoEstado: EstadoPedido): boolean
   }
 
   class Pedido {

@@ -4,7 +4,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
-## [Segundo Parcial]
+## [Segundo Parcial] - 2026-11-21
 
 ### Added
 
@@ -65,6 +65,38 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [fix/esp-patron-estructural-plantilla-anexo] fix: corrijo Propósito y Tipo del anexo de Decorator y actualizo el título de la PR #289
   Issue: [#309](https://github.com/eloeyhe/SistemaPedidos/issues/309)
   PR: [#310](https://github.com/eloeyhe/SistemaPedidos/pull/310) - @nachovelesquen7-rgb (Especialista en Patrón de Diseño Estructural)
+
+- [fix/rc9-rc13-rc16-readme-crc] fix: reduzco el README y completo las tarjetas CRC de ProductoPreparado, ProductoEnvasado, Combo y Usuario (RC9, RC13, RC14, RC15, RC16)
+  Issue: [#312](https://github.com/eloeyhe/SistemaPedidos/issues/312)
+  PR: [#313](https://github.com/eloeyhe/SistemaPedidos/pull/313) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc1-rc2-rc10-patron-builder] fix: ubico PedidoBuilder en el paquete de Pedido, documento la copia de ítems y el alcance de la variante Builder (RC1, RC2, RC10)
+  Issue: [#314](https://github.com/eloeyhe/SistemaPedidos/issues/314)
+  PR: [#315](https://github.com/eloeyhe/SistemaPedidos/pull/315) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc3-patron-decorator] fix: completo la inicialización del componente decorado en Decorator (RC3)
+  Issue: [#316](https://github.com/eloeyhe/SistemaPedidos/issues/316)
+  PR: [#317](https://github.com/eloeyhe/SistemaPedidos/pull/317) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc4-rc8-rc11-patron-state] fix: completo inicialización, autorización, historial y contratos del patrón State (RC4, RC5, RC6, RC7, RC8, RC11)
+  Issue: [#318](https://github.com/eloeyhe/SistemaPedidos/issues/318)
+  PR: [#319](https://github.com/eloeyhe/SistemaPedidos/pull/319) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc17-rc20-principios-solid] fix: alineo los principios SOLID con el diagrama de clases final y documento sus variantes (RC17, RC18, RC19, RC20)
+  Issue: [#320](https://github.com/eloeyhe/SistemaPedidos/issues/320)
+  PR: [#321](https://github.com/eloeyhe/SistemaPedidos/pull/321) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc21-rc22-cu03-introduccion] fix: dejo bloqueada la cancelación de pedidos LISTO o ENTREGADO sin devolución manual y marco el pago QR como extensión futura (RC21, RC22)
+  Issue: [#322](https://github.com/eloeyhe/SistemaPedidos/issues/322)
+  PR: [#323](https://github.com/eloeyhe/SistemaPedidos/pull/323) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc9-readme-minimalista] fix: dejo el README en formato minimalista con datos del proyecto, integrantes e índices (RC9)
+  Issue: [#324](https://github.com/eloeyhe/SistemaPedidos/issues/324)
+  PR: [#326](https://github.com/eloeyhe/SistemaPedidos/pull/326) - @santimarM (Coordinador y DevOps)
+
+- [fix/rc23-rc24-variantes-state-decorator] fix: marco State y Decorator como variantes de diseño no integradas y documento su correspondencia con el diagrama de clases final (RC23, RC24)
+  Issue: [#325](https://github.com/eloeyhe/SistemaPedidos/issues/325)
+  PR: [#327](https://github.com/eloeyhe/SistemaPedidos/pull/327) - @santimarM (Coordinador y DevOps)
 
 ## [Release Actividad Obligatoria N°4] - 2026-11-12
 

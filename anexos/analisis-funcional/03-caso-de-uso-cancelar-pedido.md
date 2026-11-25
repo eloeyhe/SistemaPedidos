@@ -28,7 +28,7 @@
 
 - **A1: Pedido en estado EN_PREPARACION.** El sistema solicita autorización del Encargado. Si la autorización es válida, permite continuar con el motivo y la confirmación de la cancelación.
 - **A2: Autorización denegada.** Si el Encargado no autoriza la operación o la clave de supervisión es incorrecta, el sistema rechaza la cancelación y mantiene el estado original del pedido.
-- **A3: Pedido en estado LISTO o ENTREGADO.** El sistema bloquea la cancelación automática e informa que la operación no está permitida.
+- **A3: Pedido en estado LISTO o ENTREGADO.** El sistema bloquea la cancelación, mantiene el estado original del pedido e informa que la operación no está permitida. El sistema no modela devoluciones de dinero: la cancelación de un pedido LISTO o ENTREGADO no está disponible en ningún flujo.
 - **A4: Cancelación no confirmada.** Si el usuario desiste de la operación, el sistema mantiene el estado original del pedido.
 - **A5: Pedido inexistente.** Si el sistema no encuentra el pedido solicitado, informa el error y finaliza la operación.
 - **A6: Pedido ya CANCELADO.** Si el pedido ya se encuentra cancelado, el sistema impide repetir la operación y conserva su estado definitivo.
@@ -39,7 +39,7 @@
 |---|---|---|
 | RF3 | **Seguimiento y visualización del estado del pedido.** El sistema debe permitir al personal visualizar sincronizadamente los pedidos activos y controlar su ciclo de vida mediante un único estado secuencial y restringido: *Recibido*, *En preparación*, *Listo*, *Entregado* y *Cancelado*, garantizando una única fuente de verdad para evitar duplicaciones. | Consulta el estado actual del pedido y registra su transición a CANCELADO cuando corresponde. |
 | RF5 | **Cancelación completa del pedido.** El sistema debe posibilitar la cancelación completa de un pedido activo antes de que sea entregado, asegurando que por razones de auditoría interna de caja el registro nunca se elimine físicamente de la base de datos y que pase de forma definitiva y permanente al estado *Cancelado*. | Cancela el pedido sin eliminarlo físicamente y conserva la información necesaria para auditoría. |
-| RF8 | **Registro de pago.** El sistema debe permitir asociar y registrar el cobro de cada pedido utilizando únicamente efectivo o transferencia bancaria (dejando fuera QR y tarjetas en esta fase); asimismo, si un pedido previamente pagado es modificado en estado *Recibido*, el sistema debe recalcular el total y permitir registrar el cobro o ajuste de la diferencia económica generada. | Conserva el pago original del pedido cancelado y sus movimientos para mantener su trazabilidad. La devolución automática no forma parte de este caso de uso. |
+| RF8 | **Registro de pago.** El sistema debe permitir asociar y registrar el cobro de cada pedido utilizando únicamente efectivo o transferencia bancaria (dejando fuera QR y tarjetas en esta fase); asimismo, si un pedido previamente pagado es modificado en estado *Recibido*, el sistema debe recalcular el total y permitir registrar el cobro o ajuste de la diferencia económica generada. | Conserva el pago original del pedido cancelado y sus movimientos para mantener su trazabilidad. La cancelación no registra cobros ni devoluciones, porque el sistema no modela devoluciones por cancelación. |
 
 ---
 
@@ -85,7 +85,7 @@
 
 - **¿El pedido está en estado EN_PREPARACION?**
   - **Sí:** el flujo se dirige a solicitar la autorización del Encargado.
-  - **No:** se rechaza la cancelación automática y finaliza el flujo.
+  - **No:** se bloquea la cancelación, el pedido mantiene su estado y finaliza el flujo.
 
 - **¿El Encargado autoriza la cancelación?**
   - **Sí:** el flujo continúa hacia la solicitud del motivo y la confirmación.
@@ -175,7 +175,7 @@ No se representa la destrucción explícita de objetos persistentes. El pedido, 
 
 **Justificación de la clase Pago:**
 
-La clase `Pago` se mantiene en el diagrama de clases porque representa el único pago original del pedido (multiplicidad `Pedido 1 — 1 Pago`), que debe conservarse incluso después de la cancelación para garantizar la trazabilidad y auditoría. Los ajustes y devoluciones se registran como movimientos de ese pago en `HistorialPago` (CU02); cualquier devolución por cancelación es manual y queda fuera de este flujo.
+La clase `Pago` se mantiene en el diagrama de clases porque representa el único pago original del pedido (multiplicidad `Pedido 1 — 1 Pago`), que debe conservarse incluso después de la cancelación para garantizar la trazabilidad y auditoría. Los ajustes y devoluciones se registran como movimientos de ese pago en `HistorialPago` (CU02); la cancelación no genera movimientos de pago, porque el sistema no modela devoluciones por cancelación.
 
 No participa directamente en el diagrama de secuencia porque el proceso de cancelación no contempla operaciones de cobro ni devolución.
 
@@ -305,8 +305,8 @@ No participa directamente en el diagrama de secuencia porque el proceso de cance
         SINO
 
             // Incluye los estados LISTO, ENTREGADO y CANCELADO.
-            // No se permite la cancelación automática.
-            // Las devoluciones manuales no forman parte de este CU.
+            // La cancelación queda bloqueada y el pedido mantiene su estado.
+            // El sistema no modela devoluciones por cancelación.
 
             Retornar "Cancelación no permitida"
 

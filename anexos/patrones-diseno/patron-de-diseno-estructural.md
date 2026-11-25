@@ -6,6 +6,8 @@
 **Patrón seleccionado:** Decorator (Decorador)  
 **Clasificación:** Patrón estructural GoF
 
+> **Alcance:** este anexo presenta una **variante de diseño no integrada** al diagrama de clases final (`06-clases-diagrama-final.puml`). `IElementoMenu`, `PrecioBaseHistorico`, `DecoradorElementoMenu` y `DecoradorPersonalizacion` no existen en ese modelo, que calcula el precio con `Producto.obtenerPrecio()`, `Combo.obtenerPrecio()` e `ItemPedido.calcularSubtotal(cantidad, precioBase, costosAdicionales)`. La sección [Correspondencia con el diagrama de clases final](#correspondencia-con-el-diagrama-de-clases-final) relaciona cada elemento de la variante con el modelo entregado.
+
 ---
 
 ## Patrones de Diseño Estructurales y su relación con SOLID
@@ -102,9 +104,9 @@ A partir de esta interfaz se incorporan los siguientes componentes:
 
 **PrecioBaseHistorico:** representa el precio base registrado para un ítem. Permite iniciar el cálculo sin consultar nuevamente el precio actual del catálogo.
 
-**DecoradorElementoMenu:** clase abstracta que implementa `IElementoMenu` y mantiene una referencia a otro elemento de la misma interfaz.
+**DecoradorElementoMenu:** clase abstracta que implementa `IElementoMenu` y mantiene una referencia protegida (`elemento`) a otro elemento de la misma interfaz. Su constructor protegido `DecoradorElementoMenu(elemento: IElementoMenu)` recibe el componente a decorar e inicializa esa referencia, que no puede quedar en `null`. Su `obtenerPrecio()` delega en `elemento.obtenerPrecio()`, de modo que cualquier decorador puede reenviar la llamada al componente envuelto.
 
-**DecoradorPersonalizacion:** clase concreta que hereda de `DecoradorElementoMenu` y agrega un costo adicional al precio del elemento envuelto.
+**DecoradorPersonalizacion:** clase concreta que hereda de `DecoradorElementoMenu` y agrega un costo adicional al precio del elemento envuelto. Su constructor `DecoradorPersonalizacion(elemento, costoAdicional)` invoca `super(elemento)` para que la clase abstracta inicialice el componente envuelto, y guarda `costoAdicional`. Redefine `obtenerPrecio()` como `super.obtenerPrecio() + costoAdicional`.
 
 La clase `ItemPedido` incorpora el método privado:
 
@@ -113,6 +115,24 @@ La clase `ItemPedido` incorpora el método privado:
 Este método construye la cadena de decoradores utilizando el precio base y los costos adicionales recibidos.
 
 La operación `calcularSubtotal()` mantiene su firma original y utiliza el resultado de la cadena para calcular el subtotal.
+
+### Correspondencia con el diagrama de clases final
+
+El patrón Decorator se presenta como una **variante de diseño**, no como un cambio ya integrado en los artefactos de la Parte 1. El diagrama de clases final (`06-clases-diagrama-final.puml`), los casos de uso, las secuencias y las tarjetas CRC conservan el cálculo original: `ItemPedido` recibe el precio base y la lista de costos adicionales, y los suma dentro de `calcularSubtotal(...)`.
+
+| Elemento de la variante Decorator | Equivalente en el diagrama de clases final | Observación |
+|---|---|---|
+| `IElementoMenu.obtenerPrecio(): decimal` | `Producto.obtenerPrecio(): decimal` y `Combo.obtenerPrecio(): decimal` | Sin interfaz común. Las dos clases ya tienen la misma firma, por lo que la variante solo agrega la realización. |
+| `Producto` y `Combo` implementan `IElementoMenu` | `Producto` (abstracta) y `Combo`, sin interfaz | Atributos y operaciones sin cambios. |
+| `PrecioBaseHistorico(precioBase)` y su `obtenerPrecio()` | `ItemPedido.precioUnitario: decimal` y `ItemPedido.conservarPrecioHistorico(precioBase: decimal)` | El modelo final guarda el precio histórico como atributo del ítem; la variante lo envuelve en un objeto para iniciar la cadena. |
+| `DecoradorElementoMenu` | Sin equivalente | Rol Decorator: solo existe en la variante. |
+| `DecoradorPersonalizacion(elemento, costoAdicional)` | `PersonalizacionItem.costoAdicional`, `PersonalizacionItem.calcularCosto()` y el parámetro `costosAdicionales: List<decimal>` de `calcularSubtotal(...)` | El modelo final suma los costos como una lista de importes; la variante crea un decorador por cada costo. |
+| `ItemPedido.construirElementoDecorado(precioBase, costosAdicionales): IElementoMenu` | Sin equivalente | Método privado nuevo de la variante. |
+| `ItemPedido.calcularSubtotal(cantidad, precioBase, costosAdicionales): decimal` | Misma firma | Cambia solo la implementación interna. |
+| `ItemPedido.recalcularPrecio(): decimal` | Misma firma | Cambia solo la implementación interna. |
+| `ItemPedido --> Producto` (0..1) e `ItemPedido --> Combo` (0..1), con restricción {xor} | Mismas asociaciones | Sin cambios. |
+
+Integrar la variante al modelo final implicaría agregar las cuatro clases nuevas y las realizaciones de `IElementoMenu` en `Producto` y `Combo` a `06-clases-diagrama-final.puml`, y crear sus tarjetas CRC. Las firmas públicas de `ItemPedido` no cambian, por lo que los casos de uso y las secuencias no se ven afectados.
 
 
 ## Estructura de Clases
@@ -131,7 +151,7 @@ La siguiente imagen representa la propuesta de aplicación del patrón Decorator
 |---|---|---|
 | Component | `IElementoMenu` | Define la operación común `obtenerPrecio()`. |
 | ConcreteComponent | `PrecioBaseHistorico` | Proporciona el precio base utilizado en el cálculo del pedido. |
-| Decorator | `DecoradorElementoMenu` | Mantiene la referencia al elemento que se está decorando. |
+| Decorator | `DecoradorElementoMenu` | Mantiene la referencia al elemento que se está decorando y la inicializa en su constructor protegido. |
 | ConcreteDecorator | `DecoradorPersonalizacion` | Suma un costo adicional al precio del elemento envuelto. |
 | Client | `ItemPedido` | Construye la cadena y obtiene el precio resultante. |
 
@@ -229,7 +249,7 @@ El proceso funciona de la siguiente manera:
 
 1. `ItemPedido` recibe el precio base, la cantidad y los costos adicionales.
 2. Se crea un objeto `PrecioBaseHistorico` que conserva el precio original del ítem.
-3. Por cada costo adicional, se crea un `DecoradorPersonalizacion` que envuelve al elemento anterior.
+3. Por cada costo adicional, se crea un `DecoradorPersonalizacion(elementoAnterior, costo)`. Su constructor invoca `super(elementoAnterior)`, y así `DecoradorElementoMenu` guarda en `elemento` el componente envuelto.
 4. Al ejecutar `obtenerPrecio()`, cada decorador suma su costo al precio del objeto envuelto.
 5. Finalmente, `ItemPedido` multiplica el precio unitario obtenido por la cantidad para calcular el subtotal.
 

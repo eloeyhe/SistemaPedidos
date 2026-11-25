@@ -7,3 +7,5 @@ Los principios SOLID son un conjunto de buenas prácticas aplicadas al diseño o
 - [Sustitucion de Liskov (LSP)](./03-lsp.md)
 - [Segregacion de interfaces (ISP)](./04-isp.md)
 - [Inversion de dependencias (DIP)](./05-dip.md)
+
+**Alcance:** los cinco anexos presentan **variantes conceptuales** que muestran cómo aplicar cada principio sobre el dominio del sistema; no forman parte del diagrama de clases final (`diagramas/01-diagrama-clases/06-clases-diagrama-final.puml`). Cada anexo incluye una sección "Correspondencia con el diagrama de clases final" que relaciona sus clases y operaciones con el modelo entregado.
